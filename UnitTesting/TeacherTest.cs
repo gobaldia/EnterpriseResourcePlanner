@@ -42,6 +42,18 @@ namespace UnitTesting
             this.CompareSubjects(actualSubjects, expectedSubjects);
         }
 
+        [TestMethod]
+        public void TeachersInstancesAreEqual()
+        {
+            string name = "Luis";
+            string lastName = "Suarez";
+            string documentNumber = "1234567-8";
+            Teacher firstTeacher = new Teacher(name, lastName, documentNumber);
+            Teacher secondTeacher = new Teacher(name, lastName, documentNumber);
+
+            Assert.IsTrue(firstTeacher.Equals(secondTeacher));
+        }
+
         #region Extra Methods
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
