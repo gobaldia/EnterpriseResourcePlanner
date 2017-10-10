@@ -11,5 +11,10 @@ namespace BusinessLogic.Entities
         protected string Name { get; set; }
         protected string LastName { get; set; }
         protected string Document { get; set; }
+
+        public virtual string GetFullName()
+        {
+            return string.Format("{0} {1}", this.Name, this.LastName);
+        }
     }
 }
