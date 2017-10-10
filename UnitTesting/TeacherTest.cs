@@ -89,7 +89,7 @@ namespace UnitTesting
         {
             string name = "Edinson";
             string lastName = "Cavani";
-            string document = "12345688";
+            string document = "12345678"; // Invalid format
 
             Teacher firstTeacher = new Teacher(name, lastName, document);
         }
