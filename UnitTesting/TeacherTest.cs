@@ -54,6 +54,23 @@ namespace UnitTesting
             Assert.IsTrue(firstTeacher.Equals(secondTeacher));
         }
 
+        [TestMethod]
+        public void TeachersInstancesAreNotEqual()
+        {
+            string name1 = "Edinson";
+            string lastName1 = "Cavani";
+            string document1 = "1234567-8";
+
+            string name2 = "Luis";
+            string lastName2 = "Suarez";
+            string document2 = "3216549-8";
+
+            Teacher firstTeacher = new Teacher(name1, lastName1, document1);
+            Teacher secondTeacher = new Teacher(name2, lastName2, document2);
+
+            Assert.IsFalse(firstTeacher.Equals(secondTeacher));
+        }
+
         #region Extra Methods
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
