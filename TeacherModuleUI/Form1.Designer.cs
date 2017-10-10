@@ -1,4 +1,4 @@
-﻿namespace UserInterface
+﻿namespace TeacherModuleUI
 {
     partial class Form1
     {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7CBF32AF-EC66-4541-8AB5-D28660606D22}</ProjectGuid>
+    <ProjectGuid>{DD137A57-F2C3-4E2C-952B-1F3B1D32CDB2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>UserInterface</RootNamespace>
-    <AssemblyName>UserInterface</AssemblyName>
+    <RootNamespace>TeacherModuleUI</RootNamespace>
+    <AssemblyName>TeacherModuleUI</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
