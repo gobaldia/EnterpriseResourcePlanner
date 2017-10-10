@@ -48,5 +48,10 @@ namespace BusinessLogic.Entities
         {
             return this.subjects;
         }
+
+        public override bool Equals(object obj)
+        {
+            return this.GetDocumentNumber().Equals(((Teacher)obj).GetDocumentNumber());
+        }
     }
 }
