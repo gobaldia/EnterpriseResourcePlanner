@@ -71,6 +71,18 @@ namespace UnitTesting
             Assert.IsFalse(firstTeacher.Equals(secondTeacher));
         }
 
+        [TestMethod]
+        public void GetFullNameCorrectly()
+        {
+            string name = "Edinson";
+            string lastName = "Cavani";
+            string document = "1234567-8";
+
+            Teacher firstTeacher = new Teacher(name, lastName, document);
+
+            Assert.AreEqual(name + " " + lastName, firstTeacher.GetFullName());
+        }
+
         #region Extra Methods
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
