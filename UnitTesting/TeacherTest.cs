@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic.Entities;
 using System.Collections.Generic;
+using DataAccess;
 
 namespace UnitTesting
 {
@@ -94,7 +95,20 @@ namespace UnitTesting
             Teacher firstTeacher = new Teacher(name, lastName, document);
         }
 
+        [TestMethod]
+        public void AddTeacherToTheSystem()
+        {
+            var systemData = SystemData.GetInstance;
+            var teachers = systemData.GetSystemTeachers();
+
+            Teacher newTeacher = new Teacher("Luis", "Suarez", "1234567-8");
+            teachers.Add(newTeacher);
+
+            Assert.IsNotNull(teachers.Find(x => x.GetDocumentNumber() == newTeacher.GetDocumentNumber()));
+        }
+
         #region Extra Methods
+        
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
             Assert.AreEqual(real.Count, toBeCompareWith.Count);
@@ -103,6 +117,8 @@ namespace UnitTesting
                 Assert.AreEqual(real[index], toBeCompareWith[index]);
             }
         }
+
+        
         #endregion
     }
 }
