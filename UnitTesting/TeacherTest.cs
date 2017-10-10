@@ -24,6 +24,24 @@ namespace UnitTesting
             this.CompareSubjects(actualSubjects, expectedSubjects);
         }
 
+        [TestMethod]
+        public void CreateTeacherWithParameters()
+        {
+            string expectedName = "Luis";
+            string expectedLastName = "Suarez";
+            string expectedDocumentNumber = "1234567-8";
+            List<Subject> expectedSubjects = new List<Subject>();
+
+            Teacher teacher = new Teacher(expectedName, expectedLastName, expectedDocumentNumber);
+
+            Assert.AreEqual(expectedName, teacher.GetName());
+            Assert.AreEqual(expectedLastName, teacher.GetLastName());
+            Assert.AreEqual(expectedDocumentNumber, teacher.GetDocumentNumber());
+
+            List<Subject> actualSubjects = teacher.GetSubjects();
+            this.CompareSubjects(actualSubjects, expectedSubjects);
+        }
+
         #region Extra Methods
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
