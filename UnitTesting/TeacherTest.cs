@@ -83,6 +83,17 @@ namespace UnitTesting
             Assert.AreEqual(string.Format("{0} {1}", name, lastName), firstTeacher.GetFullName());
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(FormatException), "Invalid document number format.")]
+        public void ThrowExceptionOnInvalidDocumentFormat()
+        {
+            string name = "Edinson";
+            string lastName = "Cavani";
+            string document = "12345688";
+
+            Teacher firstTeacher = new Teacher(name, lastName, document);
+        }
+
         #region Extra Methods
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
