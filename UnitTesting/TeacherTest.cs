@@ -99,16 +99,20 @@ namespace UnitTesting
         public void AddTeacherToTheSystem()
         {
             var systemData = SystemData.GetInstance;
-            var teachers = systemData.GetSystemTeachers();
+            var systemTeachers = systemData.GetSystemTeachers();
 
-            Teacher newTeacher = new Teacher("Luis", "Suarez", "1234567-8");
-            teachers.Add(newTeacher);
+            Teacher newTeacher = this.CreateRandomTeacher();
+            systemTeachers.Add(newTeacher);
 
-            Assert.IsNotNull(teachers.Find(x => x.GetDocumentNumber() == newTeacher.GetDocumentNumber()));
+            Assert.IsNotNull(this.FindTeacherOnSystem(newTeacher.GetDocumentNumber()));
         }
 
-        #region Extra Methods
-        
+        #region Extra Methods        
+        private string[] maleNames = new string[5] { "Alfred", "Tony", "Bart", "Peter", "Jhon" };
+        private string[] femaleNames = new string[5] { "Carol", "Jennifer", "Storm", "Leia", "Jessica" };
+        private string[] lastNames = new string[5] { "Richards", "Kovacs", "Wayne", "Johnes", "Stark" };
+        private string[] documents = new string[5] { "1234567-8", "3216549-8", "7418529-6", "9638527-4", "1596324-7" };
+
         private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
         {
             Assert.AreEqual(real.Count, toBeCompareWith.Count);
@@ -118,7 +122,40 @@ namespace UnitTesting
             }
         }
 
+        private Teacher FindTeacherOnSystem(string documentNumber)
+        {
+            return SystemData.GetInstance.GetSystemTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+        }
         
+        private Teacher CreateRandomTeacher()
+        {
+            Teacher newTeacher = new Teacher(this.GetRandomName(), this.GetRandomLastName(), this.GetRandomDocument());
+            return newTeacher;
+        }
+
+        private string GetRandomName()
+        {
+            Random randomNumber = new Random(DateTime.Now.Second);
+            string name = string.Empty;
+            if (randomNumber.Next(1, 2) == 1)
+                name = maleNames[randomNumber.Next(0, maleNames.Length - 1)];
+            else
+                name = femaleNames[randomNumber.Next(0, femaleNames.Length - 1)];
+
+            return name;
+        }
+
+        private string GetRandomLastName()
+        {
+            Random randomNumber = new Random(DateTime.Now.Second);
+            return lastNames[randomNumber.Next(0, lastNames.Length - 1)];
+        }
+
+        private string GetRandomDocument()
+        {
+            Random randomNumber = new Random(DateTime.Now.Second);
+            return documents[randomNumber.Next(0, documents.Length - 1)];
+        }
         #endregion
     }
 }
