@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLogic.Entities;
+using System.Collections.Generic;
 
 namespace UnitTesting
 {
