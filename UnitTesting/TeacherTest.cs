@@ -80,7 +80,7 @@ namespace UnitTesting
 
             Teacher firstTeacher = new Teacher(name, lastName, document);
 
-            Assert.AreEqual(name + " " + lastName, firstTeacher.GetFullName());
+            Assert.AreEqual(string.Format("{0} {1}", name, lastName), firstTeacher.GetFullName());
         }
 
         #region Extra Methods
