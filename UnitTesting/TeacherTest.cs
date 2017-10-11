@@ -124,7 +124,7 @@ namespace UnitTesting
             try
             {
                 SystemData systemData = this.GetNewSystemData();
-                List<Teacher> systemTeachers = systemData.GetTeachersw();
+                List<Teacher> systemTeachers = systemData.GetTeachers();
 
                 Teacher firstTeacher = this.CreateRandomTeacher();
                 Teacher secondTeacher = new Teacher(firstTeacher.GetName(), firstTeacher.GetLastName(), firstTeacher.GetDocumentNumber());
@@ -148,11 +148,11 @@ namespace UnitTesting
         {
             SystemData systemData = this.GetNewSystemData();
             List<Subject> systemSubjects = systemData.GetSubjects();
-            Subject aSubject = new Subject("Math", "ABC123");
+            Subject aSubject = new Subject(123456, "Math");
             systemSubjects.Add(aSubject);
 
             Teacher firstTeacher = this.CreateRandomTeacher();
-            Subject subjectToBeAdded = systemData.GetSubjectById("ABC123");
+            Subject subjectToBeAdded = systemData.GetSubjectByCode(123456);
             firstTeacher.AddSubjectToTeach(subjectToBeAdded);
 
             Assert.IsTrue(firstTeacher.GetSubjects().Count > 0);

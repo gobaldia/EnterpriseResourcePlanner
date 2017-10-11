@@ -36,11 +36,11 @@ namespace DataAccess
             this.subjects.Clear();
         }        
 
-        public List<Teacher> GetSystemTeachers()
+        public List<Teacher> GetTeachers()
         {
             return this.teachers;
         }
-        public List<Subject> GetSystemSubjects()
+        public List<Subject> GetSubjects()
         {
             return this.subjects;
         }
@@ -62,6 +62,10 @@ namespace DataAccess
         #endregion
 
         #region Student Methods
+        public Subject GetSubjectByCode(int subjectCode)
+        {
+            return this.subjects.Find(item => item.Code == subjectCode);
+        }
         #endregion
 
         #region Subject Methods

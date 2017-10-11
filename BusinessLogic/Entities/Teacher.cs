@@ -48,6 +48,10 @@ namespace BusinessLogic.Entities
         {
             return this.subjects;
         }
+        public void AddSubjectToTeach(Subject subjectToBeTeach)
+        {
+            this.subjects.Add(subjectToBeTeach);
+        }
 
         public override bool Equals(object obj)
         {
