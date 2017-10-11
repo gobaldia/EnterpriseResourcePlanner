@@ -110,7 +110,7 @@ namespace UnitTesting
         public void AddTeacherToSystem()
         {
             SystemData systemData = this.GetNewSystemData();
-            List<Teacher> systemTeachers = systemData.GetSystemTeachers();
+            List<Teacher> systemTeachers = systemData.GetTeachers();
 
             Teacher newTeacher = this.CreateRandomTeacher();
             systemTeachers.Add(newTeacher);
@@ -124,7 +124,7 @@ namespace UnitTesting
             try
             {
                 SystemData systemData = this.GetNewSystemData();
-                List<Teacher> systemTeachers = systemData.GetSystemTeachers();
+                List<Teacher> systemTeachers = systemData.GetTeachersw();
 
                 Teacher firstTeacher = this.CreateRandomTeacher();
                 Teacher secondTeacher = new Teacher(firstTeacher.GetName(), firstTeacher.GetLastName(), firstTeacher.GetDocumentNumber());
@@ -142,6 +142,22 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
+
+        [TestMethod]
+        public void AddSubjectToTeacher()
+        {
+            SystemData systemData = this.GetNewSystemData();
+            List<Subject> systemSubjects = systemData.GetSubjects();
+            Subject aSubject = new Subject("Math", "ABC123");
+            systemSubjects.Add(aSubject);
+
+            Teacher firstTeacher = this.CreateRandomTeacher();
+            Subject subjectToBeAdded = systemData.GetSubjectById("ABC123");
+            firstTeacher.AddSubjectToTeach(subjectToBeAdded);
+
+            Assert.IsTrue(firstTeacher.GetSubjects().Count > 0);
+        }
+
 
         #region Extra Methods        
         private SystemData GetNewSystemData()
@@ -166,7 +182,7 @@ namespace UnitTesting
 
         private Teacher FindTeacherOnSystem(string documentNumber)
         {
-            return SystemData.GetInstance.GetSystemTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+            return SystemData.GetInstance.GetTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
         }
 
         private Teacher CreateRandomTeacher()
