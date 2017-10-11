@@ -96,9 +96,9 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        public void AddTeacherToTheSystem()
+        public void AddTeacherToSystem()
         {
-            var systemData = SystemData.GetInstance;
+            var systemData = GetSystemData();
             var systemTeachers = systemData.GetSystemTeachers();
 
             Teacher newTeacher = this.CreateRandomTeacher();
@@ -107,7 +107,38 @@ namespace UnitTesting
             Assert.IsNotNull(this.FindTeacherOnSystem(newTeacher.GetDocumentNumber()));
         }
 
+        [TestMethod]
+        public void DoNotAllowToAddDuplicateTeacherToSystem()
+        {
+            try
+            {
+                SystemData systemData = this.GetSystemData();
+                List<Teacher> systemTeachers = systemData.GetSystemTeachers();
+
+                Teacher firstTeacher = this.CreateRandomTeacher();
+                Teacher secondTeacher = new Teacher(firstTeacher.GetName(), firstTeacher.GetLastName(), firstTeacher.GetDocumentNumber());
+
+                systemTeachers.Add(firstTeacher);
+                systemTeachers.Add(firstTeacher);
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Teacher already exists."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail();
+            }
+        }
+
         #region Extra Methods        
+        private SystemData GetSystemData()
+        {
+            SystemData.GetInstance.Reset();
+            return SystemData.GetInstance;
+        }
+
         private string[] maleNames = new string[5] { "Alfred", "Tony", "Bart", "Peter", "Jhon" };
         private string[] femaleNames = new string[5] { "Carol", "Jennifer", "Storm", "Leia", "Jessica" };
         private string[] lastNames = new string[5] { "Richards", "Kovacs", "Wayne", "Johnes", "Stark" };
@@ -126,7 +157,7 @@ namespace UnitTesting
         {
             return SystemData.GetInstance.GetSystemTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
         }
-        
+
         private Teacher CreateRandomTeacher()
         {
             Teacher newTeacher = new Teacher(this.GetRandomName(), this.GetRandomLastName(), this.GetRandomDocument());
