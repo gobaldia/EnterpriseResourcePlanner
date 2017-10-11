@@ -43,6 +43,7 @@
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Subject.cs" />
     <Compile Include="Entities\Teacher.cs" />
+    <Compile Include="Exceptions\CoreException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

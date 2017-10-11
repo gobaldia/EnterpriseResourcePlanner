@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic.Entities;
 using System.Collections.Generic;
 using DataAccess;
+using BusinessLogic.Exceptions;
 
 namespace UnitTesting
 {
@@ -118,8 +119,8 @@ namespace UnitTesting
                 Teacher firstTeacher = this.CreateRandomTeacher();
                 Teacher secondTeacher = new Teacher(firstTeacher.GetName(), firstTeacher.GetLastName(), firstTeacher.GetDocumentNumber());
 
-                systemTeachers.Add(firstTeacher);
-                systemTeachers.Add(firstTeacher);
+                systemData.AddTeacher(firstTeacher);
+                systemData.AddTeacher(secondTeacher);
                 Assert.Fail();
             }
             catch (CoreException ex)
