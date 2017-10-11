@@ -47,8 +47,8 @@ namespace UnitTesting
         [TestMethod]
         public void TeachersInstancesAreEqual()
         {
-            string name = "Luis";
-            string lastName = "Suarez";
+            string name = this.GetRandomName();
+            string lastName = this.GetRandomLastName();
             string documentNumber = "1234567-8";
             Teacher firstTeacher = new Teacher(name, lastName, documentNumber);
             Teacher secondTeacher = new Teacher(name, lastName, documentNumber);
@@ -76,8 +76,8 @@ namespace UnitTesting
         [TestMethod]
         public void GetFullNameCorrectly()
         {
-            string name = "Edinson";
-            string lastName = "Cavani";
+            string name = this.GetRandomName();
+            string lastName = this.GetRandomLastName();
             string document = "1234567-8";
 
             Teacher firstTeacher = new Teacher(name, lastName, document);
@@ -89,8 +89,8 @@ namespace UnitTesting
         [ExpectedException(typeof(FormatException), "Invalid document number format.")]
         public void ThrowExceptionOnInvalidDocumentFormat()
         {
-            string name = "Edinson";
-            string lastName = "Cavani";
+            string name = this.GetRandomName();
+            string lastName = this.GetRandomLastName();
             string document = "12345678"; // Invalid format
 
             Teacher firstTeacher = new Teacher(name, lastName, document);
@@ -99,8 +99,8 @@ namespace UnitTesting
         [TestMethod]
         public void AddTeacherToSystem()
         {
-            var systemData = GetSystemData();
-            var systemTeachers = systemData.GetSystemTeachers();
+            SystemData systemData = this.GetNewSystemData();
+            List<Teacher> systemTeachers = systemData.GetSystemTeachers();
 
             Teacher newTeacher = this.CreateRandomTeacher();
             systemTeachers.Add(newTeacher);
@@ -113,7 +113,7 @@ namespace UnitTesting
         {
             try
             {
-                SystemData systemData = this.GetSystemData();
+                SystemData systemData = this.GetNewSystemData();
                 List<Teacher> systemTeachers = systemData.GetSystemTeachers();
 
                 Teacher firstTeacher = this.CreateRandomTeacher();
@@ -129,12 +129,12 @@ namespace UnitTesting
             }
             catch (Exception ex)
             {
-                Assert.Fail();
+                Assert.Fail(ex.Message);
             }
         }
 
         #region Extra Methods        
-        private SystemData GetSystemData()
+        private SystemData GetNewSystemData()
         {
             SystemData.GetInstance.Reset();
             return SystemData.GetInstance;
