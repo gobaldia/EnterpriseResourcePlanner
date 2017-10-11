@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace BusinessLogic.Entities
                 if (regex.IsMatch(value))
                     this._document = value;
                 else
-                    throw new FormatException(string.Format("Invalid document number format."));
+                    throw new CoreException("Invalid document number format.");
             }
         }
 

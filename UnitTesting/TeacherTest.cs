@@ -86,14 +86,24 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException), "Invalid document number format.")]
         public void ThrowExceptionOnInvalidDocumentFormat()
         {
-            string name = this.GetRandomName();
-            string lastName = this.GetRandomLastName();
-            string document = "12345678"; // Invalid format
+            try
+            {
+                string name = this.GetRandomName();
+                string lastName = this.GetRandomLastName();
+                string document = "12345678"; // Invalid format
 
-            Teacher firstTeacher = new Teacher(name, lastName, document);
+                Teacher firstTeacher = new Teacher(name, lastName, document);
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Invalid document number format."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
         }
 
         [TestMethod]
