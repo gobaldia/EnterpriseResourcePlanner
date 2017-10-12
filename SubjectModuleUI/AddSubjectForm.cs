@@ -36,7 +36,6 @@ namespace SubjectModuleUI
 
                 this.ClearAddSubjectForm();
                 this.ShowCorrectlyAddedSubjectMessage(code, name);
-                
             }
             else
             {
