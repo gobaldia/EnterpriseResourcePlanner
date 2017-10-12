@@ -45,14 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +77,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreGeneralization\CoreGeneralization.csproj">
+      <Project>{902D16BE-9EE7-4B6A-A522-5D25DA2D638B}</Project>
+      <Name>CoreGeneralization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
+      <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
+      <Name>FrameworkCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MainComponents\MainComponents.csproj">
+      <Project>{A99F88CA-AFF1-4F83-A0A0-615DC157FDFC}</Project>
+      <Name>MainComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeacherModuleUI\TeacherModuleUI.csproj">
+      <Project>{DD137A57-F2C3-4E2C-952B-1F3B1D32CDB2}</Project>
+      <Name>TeacherModuleUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

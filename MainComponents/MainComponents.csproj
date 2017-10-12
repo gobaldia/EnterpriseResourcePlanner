@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EBCEC232-59B2-4CBF-B253-BB6300280ECD}</ProjectGuid>
+    <ProjectGuid>{A99F88CA-AFF1-4F83-A0A0-615DC157FDFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessLogic</RootNamespace>
-    <AssemblyName>BusinessLogic</AssemblyName>
+    <RootNamespace>MainComponents</RootNamespace>
+    <AssemblyName>MainComponents</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Person.cs" />
-    <Compile Include="Entities\Subject.cs" />
-    <Compile Include="Entities\Teacher.cs" />
-    <Compile Include="Exceptions\CoreException.cs" />
+    <Compile Include="MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\CoreGeneralization\CoreGeneralization.csproj">
+      <Project>{902D16BE-9EE7-4B6A-A522-5D25DA2D638B}</Project>
+      <Name>CoreGeneralization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

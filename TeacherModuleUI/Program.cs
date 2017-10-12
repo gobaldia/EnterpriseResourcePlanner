@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TeacherModuleUI.AddTeacher;
 
 namespace TeacherModuleUI
 {
@@ -16,7 +17,7 @@ namespace TeacherModuleUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new AddTeacherForm());
         }
     }
 }
