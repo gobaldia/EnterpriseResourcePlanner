@@ -27,15 +27,23 @@ namespace SubjectModuleUI
             Subject subject = new Subject();
             if (int.TryParse(this.textBoxSubjectCode.Text, out code))
             {
-                name = this.textBoxSubjectName.Text;
-                subject.Code = code;
-                subject.Name = name;
+                if (!string.IsNullOrWhiteSpace(this.textBoxSubjectName.Text))
+                {
+                    subject.Code = code;
+                    name = this.textBoxSubjectName.Text;
+                    subject.Name = name;
 
-                var systemDataInstance = SystemData.GetInstance;
-                systemDataInstance.AddSubject(subject);
+                    var systemDataInstance = SystemData.GetInstance;
+                    systemDataInstance.AddSubject(subject);
 
-                this.ClearAddSubjectForm();
-                this.ShowCorrectlyAddedSubjectMessage(code, name);
+                    this.ClearAddSubjectForm();
+                    this.ShowCorrectlyAddedSubjectMessage(code, name);
+                }
+                else
+                {
+                    this.labelError.Visible = true;
+                    this.labelError.Text = "Subject's name must be a not empty string";
+                }
             }
             else
             {
