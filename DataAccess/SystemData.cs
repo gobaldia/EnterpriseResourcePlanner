@@ -32,6 +32,15 @@ namespace DataAccess
             return this.teachers;
         }
 
-        
+        public List<Subject> GetSystemSubjects()
+        {
+            return this.subjects;
+        }
+
+        public void Reset()
+        {
+            this.teachers.Clear();
+            this.subjects.Clear();
+        }
     }
 }
