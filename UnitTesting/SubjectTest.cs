@@ -61,10 +61,34 @@ namespace UnitTesting
             SystemData systemData = this.GetNewSystemData();
             List<Subject> systemSubjects = systemData.GetSystemSubjects();
 
-            Subject newTeacher = new Subject(1, "Logic");
-            systemSubjects.Add(newTeacher);
+            Subject newSubject = new Subject(1, "Logic");
+            systemSubjects.Add(newSubject);
 
-            Assert.IsNotNull(this.FindSubjectOnSystem(newTeacher.GetCode()));
+            Assert.IsNotNull(this.FindSubjectOnSystem(newSubject.GetCode()));
+        }
+
+        public void TryToAddSubjectThatAlreadyExistsToSystem()
+        {
+            try
+            {
+                SystemData systemData = this.GetNewSystemData();
+                List<Subject> systemSubjects = systemData.GetSystemSubjects();
+
+                Subject firstTeacher = new Subject(1, "Logic");
+                Subject secondTeacher = new Subject(1, "Logic");
+                systemSubjects.Add(firstTeacher);
+                systemSubjects.Add(secondTeacher);
+
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Subject already exists."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
         }
 
 
