@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic.Entities;
 using System.Collections.Generic;
+using DataAccess;
 
 namespace UnitTesting
 {
@@ -28,7 +29,7 @@ namespace UnitTesting
         public void CreateSubjectWithParameters()
         {
             int expectedCode = 100;
-            string expectedName = "Diseno de Aplicaciones";
+            string expectedName = "Logic";
             List<Student> expectedStudents = new List<Student>();
             List<Teacher> expectedTeachers = new List<Teacher>();
 
@@ -44,14 +45,26 @@ namespace UnitTesting
         public void SubjectInstancesAreEqual()
         {
             int expectedCode = 100;
-            string expectedName = "Diseno de Aplicaciones";
+            string expectedName = "Logic";
             List<Student> expectedStudents = new List<Student>();
             List<Teacher> expectedTeachers = new List<Teacher>();
 
-            Subject firstSubject = new Subject(100, "Diseno de Aplicaciones");
-            Subject secondSubject = new Subject(100, "Diseno de Aplicaciones");
+            Subject firstSubject = new Subject(100, "Logic");
+            Subject secondSubject = new Subject(100, "Logic");
 
             Assert.IsTrue(firstSubject.Equals(secondSubject));
+        }
+
+        [TestMethod]
+        public void AddSubjectToSystem()
+        {
+            SystemData systemData = this.GetNewSystemData();
+            List<Subject> systemSubjects = systemData.GetSystemSubjects();
+
+            Subject newTeacher = new Subject(1, "Logic");
+            systemSubjects.Add(newTeacher);
+
+            Assert.IsNotNull(this.FindSubjectOnSystem(newTeacher.GetCode()));
         }
 
 
@@ -64,6 +77,7 @@ namespace UnitTesting
                 Assert.AreEqual(real[index], toBeCompareWith[index]);
             }
         }
+
         private void CompareListsOfTeachers(List<Teacher> real, List<Teacher> toBeCompareWith)
         {
             Assert.AreEqual(real.Count, toBeCompareWith.Count);
@@ -71,6 +85,17 @@ namespace UnitTesting
             {
                 Assert.AreEqual(real[index], toBeCompareWith[index]);
             }
+        }
+
+        private SystemData GetNewSystemData()
+        {
+            SystemData.GetInstance.Reset();
+            return SystemData.GetInstance;
+        }
+
+        private Subject FindSubjectOnSystem(int code)
+        {
+            return SystemData.GetInstance.GetSystemSubjects().Find(x => x.GetCode() == code);
         }
         #endregion
     }
