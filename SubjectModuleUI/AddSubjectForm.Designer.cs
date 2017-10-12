@@ -34,6 +34,8 @@
             this.textBoxSubjectName = new System.Windows.Forms.TextBox();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelOk = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxSubjectCode
@@ -55,7 +57,7 @@
             // labelSubjectName
             // 
             this.labelSubjectName.AutoSize = true;
-            this.labelSubjectName.Location = new System.Drawing.Point(16, 49);
+            this.labelSubjectName.Location = new System.Drawing.Point(13, 49);
             this.labelSubjectName.Name = "labelSubjectName";
             this.labelSubjectName.Size = new System.Drawing.Size(35, 13);
             this.labelSubjectName.TabIndex = 2;
@@ -81,17 +83,38 @@
             // labelError
             // 
             this.labelError.AutoSize = true;
-            this.labelError.Location = new System.Drawing.Point(112, 131);
+            this.labelError.Location = new System.Drawing.Point(13, 74);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 5;
             this.labelError.Visible = false;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(115, 119);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // labelOk
+            // 
+            this.labelOk.AutoSize = true;
+            this.labelOk.Location = new System.Drawing.Point(13, 74);
+            this.labelOk.Name = "labelOk";
+            this.labelOk.Size = new System.Drawing.Size(0, 13);
+            this.labelOk.TabIndex = 7;
+            this.labelOk.Visible = false;
             // 
             // AddSubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.labelOk);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.textBoxSubjectName);
@@ -113,6 +136,8 @@
         private System.Windows.Forms.TextBox textBoxSubjectName;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelOk;
     }
 }
 

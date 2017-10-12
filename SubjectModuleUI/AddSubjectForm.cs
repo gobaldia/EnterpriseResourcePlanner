@@ -21,6 +21,7 @@ namespace SubjectModuleUI
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            this.labelError.Visible = false;
             int code;
             string name;
             Subject subject = new Subject();
@@ -30,14 +31,35 @@ namespace SubjectModuleUI
                 subject.Code = code;
                 subject.Name = name;
 
-                var systemDataInstance = SystemData.GetInstance.GetSystemSubjects();
-                systemDataInstance.Add(subject);
+                var systemDataInstance = SystemData.GetInstance;
+                systemDataInstance.AddSubject(subject);
 
+                this.ClearAddSubjectForm();
+                this.ShowCorrectlyAddedSubjectMessage(code, name);
+                
             }
             else
             {
-                // buscar excepcion
+                this.labelError.Visible = true;
+                this.labelError.Text = "Subject's code must be a number";
             }
+        }
+
+        private void ClearAddSubjectForm()
+        {
+            this.textBoxSubjectCode.Clear();
+            this.textBoxSubjectName.Clear();
+        }
+
+        private void ShowCorrectlyAddedSubjectMessage(int code, string name)
+        {
+            labelOk.Visible = true;
+            this.labelOk.Text = "Subject " + name + " with code " + code + " was correctly added";
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+
         }
 
         //private void buttonAdd_Click(object sender, EventArgs e)
