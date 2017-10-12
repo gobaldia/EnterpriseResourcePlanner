@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Entities;
+using BusinessLogic.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,23 @@ namespace DataAccess
         {
             this.teachers.Clear();
             this.subjects.Clear();
+        }
+
+        public void AddSubject(Subject newSubject)
+        {
+            if (this.IsSubjectInSystem(newSubject))
+            {
+                throw new CoreException("Subject already exists.");
+            }
+            else
+            {
+                this.subjects.Add(newSubject);
+            }
+        }
+
+        private bool IsSubjectInSystem(Subject subject)
+        {
+            return this.subjects.Exists(item => item.Equals(subject));
         }
     }
 }

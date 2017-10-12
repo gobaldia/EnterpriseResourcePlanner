@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic.Entities;
 using System.Collections.Generic;
 using DataAccess;
+using BusinessLogic.Exceptions;
 
 namespace UnitTesting
 {
@@ -62,11 +63,13 @@ namespace UnitTesting
             List<Subject> systemSubjects = systemData.GetSystemSubjects();
 
             Subject newSubject = new Subject(1, "Logic");
+            systemData.AddSubject(newSubject);
             systemSubjects.Add(newSubject);
 
             Assert.IsNotNull(this.FindSubjectOnSystem(newSubject.GetCode()));
         }
 
+        [TestMethod]
         public void TryToAddSubjectThatAlreadyExistsToSystem()
         {
             try
@@ -76,9 +79,9 @@ namespace UnitTesting
 
                 Subject firstTeacher = new Subject(1, "Logic");
                 Subject secondTeacher = new Subject(1, "Logic");
-                systemSubjects.Add(firstTeacher);
-                systemSubjects.Add(secondTeacher);
-
+                systemData.AddSubject(firstTeacher);
+                systemData.AddSubject(secondTeacher);
+                
                 Assert.Fail();
             }
             catch (CoreException ex)
