@@ -17,6 +17,14 @@ namespace DataAccess
         {
             this.teachers = new List<Teacher>();
             this.subjects = new List<Subject>();
+
+            //var subj1 = new Subject(123, "Math");
+            //var subj2 = new Subject(321, "Science");
+            //var subj3 = new Subject(555, "Apps Desing");
+
+            //this.subjects.Add(subj1);
+            //this.subjects.Add(subj2);
+            //this.subjects.Add(subj3);
         }
         public static SystemData GetInstance
         {
@@ -44,23 +52,7 @@ namespace DataAccess
         {
             return this.subjects;
         }
-
-        #region Teacher Methods
-        public void AddTeacher(Teacher newTeacher)
-        {
-            if (this.IsTeacherInSystem(newTeacher))
-                throw new CoreException("Teacher already exists.");
-
-            this.teachers.Add(newTeacher);
-        }
-
-
-        private bool IsTeacherInSystem(Teacher aTeacher)
-        {
-            return this.teachers.Exists(item => item.Equals(aTeacher));
-        }
-        #endregion
-
+        
         #region Student Methods
         public Subject GetSubjectByCode(int subjectCode)
         {

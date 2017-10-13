@@ -81,9 +81,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\CoreEntities.csproj">
+      <Project>{EBCEC232-59B2-4CBF-B253-BB6300280ECD}</Project>
+      <Name>CoreEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoreGeneralization\CoreGeneralization.csproj">
       <Project>{902D16BE-9EE7-4B6A-A522-5D25DA2D638B}</Project>
       <Name>CoreGeneralization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreLogic\CoreLogic.csproj">
+      <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
+      <Name>CoreLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
+      <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
+      <Name>FrameworkCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

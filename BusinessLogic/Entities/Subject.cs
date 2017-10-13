@@ -25,5 +25,10 @@ namespace BusinessLogic.Entities
             this.Name = name;
             this.Teachers = new List<Teacher>();
         }
+
+        public override string ToString()
+        {
+            return string.Format("Nombre: {0}, Codigo: {1}", this.Name, this.Code);
+        }
     }
 }

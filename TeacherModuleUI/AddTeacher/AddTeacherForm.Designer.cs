@@ -44,6 +44,7 @@
             this.labelSystemSubjects = new System.Windows.Forms.Label();
             this.labelSubjectsToBeTeach = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
+            this.labelSuccess = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelAddTeacherTitle
@@ -86,23 +87,29 @@
             // textBoxTeacherName
             // 
             this.textBoxTeacherName.Location = new System.Drawing.Point(454, 259);
+            this.textBoxTeacherName.MaxLength = 50;
             this.textBoxTeacherName.Name = "textBoxTeacherName";
             this.textBoxTeacherName.Size = new System.Drawing.Size(380, 38);
             this.textBoxTeacherName.TabIndex = 22;
+            this.textBoxTeacherName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cleanSuccessOn_KeyDown);
             // 
             // textBoxTeacherLastName
             // 
             this.textBoxTeacherLastName.Location = new System.Drawing.Point(454, 349);
+            this.textBoxTeacherLastName.MaxLength = 50;
             this.textBoxTeacherLastName.Name = "textBoxTeacherLastName";
             this.textBoxTeacherLastName.Size = new System.Drawing.Size(380, 38);
             this.textBoxTeacherLastName.TabIndex = 23;
+            this.textBoxTeacherLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cleanSuccessOn_KeyDown);
             // 
             // textBoxTeacherDocument
             // 
             this.textBoxTeacherDocument.Location = new System.Drawing.Point(454, 443);
+            this.textBoxTeacherDocument.MaxLength = 9;
             this.textBoxTeacherDocument.Name = "textBoxTeacherDocument";
             this.textBoxTeacherDocument.Size = new System.Drawing.Size(380, 38);
             this.textBoxTeacherDocument.TabIndex = 24;
+            this.textBoxTeacherDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cleanSuccessOn_KeyDown);
             // 
             // buttonAddTeacher
             // 
@@ -194,11 +201,22 @@
             this.labelError.Size = new System.Drawing.Size(0, 39);
             this.labelError.TabIndex = 33;
             // 
+            // labelSuccess
+            // 
+            this.labelSuccess.AutoSize = true;
+            this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.900001F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.labelSuccess.Location = new System.Drawing.Point(133, 1066);
+            this.labelSuccess.Name = "labelSuccess";
+            this.labelSuccess.Size = new System.Drawing.Size(0, 39);
+            this.labelSuccess.TabIndex = 34;
+            // 
             // AddTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.labelSuccess);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.labelSubjectsToBeTeach);
             this.Controls.Add(this.labelSystemSubjects);
@@ -240,5 +258,6 @@
         private System.Windows.Forms.Label labelSystemSubjects;
         private System.Windows.Forms.Label labelSubjectsToBeTeach;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Label labelSuccess;
     }
 }
