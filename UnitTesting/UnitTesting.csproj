@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+    <ProjectReference Include="..\BusinessLogic\CoreEntities.csproj">
       <Project>{a295d44d-4013-45d4-b20f-13a19ab6335a}</Project>
-      <Name>BusinessLogic</Name>
+      <Name>CoreEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{08c180d3-8604-45ff-94e0-af348e4163ae}</Project>
