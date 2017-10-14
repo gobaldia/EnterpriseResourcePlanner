@@ -91,6 +91,10 @@
       <Project>{A99F88CA-AFF1-4F83-A0A0-615DC157FDFC}</Project>
       <Name>MainComponents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SubjectModuleUI\SubjectModuleUI.csproj">
+      <Project>{F750F118-4F67-47C3-95B0-58B2F9215969}</Project>
+      <Name>SubjectModuleUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeacherModuleUI\TeacherModuleUI.csproj">
       <Project>{DD137A57-F2C3-4E2C-952B-1F3B1D32CDB2}</Project>
       <Name>TeacherModuleUI</Name>

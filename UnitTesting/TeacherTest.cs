@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessLogic.Entities;
 using System.Collections.Generic;
 using DataAccess;
-using BusinessLogic.Exceptions;
 using FrameworkCommon;
 using CoreLogic;
 using FrameworkCommon.MethodParameters;
+using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 
 namespace UnitTesting
 {

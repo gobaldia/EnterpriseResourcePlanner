@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Entities
+namespace CoreEntities.Entities
 {
     public class Subject
     {
         public int Code { get; set; }
         public string Name { get; set; }
+        public List<Student> Students { get; set; }
         public List<Teacher> Teachers { get; set; }
 
         public Subject()
         {
             this.Code = 0;
             this.Name = string.Empty;
+            this.Students = new List<Student>();
             this.Teachers = new List<Teacher>();
         }
 
@@ -23,12 +25,23 @@ namespace BusinessLogic.Entities
         {
             this.Code = code;
             this.Name = name;
+            this.Students = new List<Student>();
             this.Teachers = new List<Teacher>();
         }
 
-        public override string ToString()
+        public int GetCode()
         {
-            return string.Format("Nombre: {0}, Codigo: {1}", this.Name, this.Code);
+            return this.Code;
+        }
+
+        public string GetName()
+        {
+            return this.Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.GetCode() == (((Subject)obj).GetCode());
         }
     }
 }

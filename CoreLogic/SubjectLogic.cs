@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Entities;
+﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using DataAccess;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,23 @@ namespace CoreLogic
         public List<Subject> GetSubjects()
         {
             return this.systemSubjects;
+        }
+
+        public void AddSubject(Subject newSubject)
+        {
+            if (this.IsSubjectInSystem(newSubject))
+            {
+                throw new CoreException("Subject already exists.");
+            }
+            else
+            {
+                this.systemSubjects.Add(newSubject);
+            }
+        }
+
+        private bool IsSubjectInSystem(Subject subject)
+        {
+            return this.systemSubjects.Exists(item => item.Equals(subject));
         }
     }
 }

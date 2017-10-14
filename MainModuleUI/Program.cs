@@ -1,5 +1,7 @@
 ﻿using CoreGeneralization;
 using MainComponents;
+using SubjectModuleUI;
+using SubjectModuleUI.AddSubject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,7 @@ namespace MainModuleUI
             MainModule mainModule = new MainModule();
             
             mainModule.AddModule(CreateTeacherModule());
-            //mainModule.AddModule(CreateStudentsModule());
+            mainModule.AddModule(CreateSubjectsModule());
 
             Application.Run(new MainForm(mainModule));
         }
@@ -41,6 +43,16 @@ namespace MainModuleUI
             teacherActions.Add(addAction);
 
             return new TeacherModule(teacherActions);
+        }
+
+        private static Module CreateSubjectsModule()
+        {
+            List<IAction> SubjectActions = new List<IAction>();
+
+            IAction addAction = new AddSubjectAction();
+            SubjectActions.Add(addAction);
+
+            return new SubjectModule(SubjectActions);
         }
     }
 }

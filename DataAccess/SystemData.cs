@@ -1,5 +1,5 @@
-﻿using BusinessLogic.Entities;
-using BusinessLogic.Exceptions;
+﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,9 @@ namespace DataAccess
 {
     public class SystemData
     {
+        private List<Teacher> teachers;
+        private List<Subject> subjects;
+
         #region Singleton
         // Variable estática para la instancia, se necesita utilizar una función lambda ya que el constructor es privado.
         private static readonly Lazy<SystemData> instance = new Lazy<SystemData>(() => new SystemData());
@@ -35,9 +38,6 @@ namespace DataAccess
         }
         #endregion
 
-        private List<Teacher> teachers;
-        private List<Subject> subjects;
-
         public void Reset()
         {
             this.teachers.Clear();
@@ -54,16 +54,14 @@ namespace DataAccess
         }
         
         #region Student Methods
+        
+        #endregion
+
+        #region Subject Methods
         public Subject GetSubjectByCode(int subjectCode)
         {
             return this.subjects.Find(item => item.Code == subjectCode);
         }
-        #endregion
-
-        #region Subject Methods
-        #endregion
-
-        #region Subject Methods
         #endregion
     }
 }

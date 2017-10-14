@@ -81,8 +81,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\CoreEntities.csproj">
-      <Project>{EBCEC232-59B2-4CBF-B253-BB6300280ECD}</Project>
+    <ProjectReference Include="..\CoreEntities\CoreEntities.csproj">
+      <Project>{A1601F7B-A76E-4047-92C2-187D0DDB58D6}</Project>
       <Name>CoreEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoreGeneralization\CoreGeneralization.csproj">

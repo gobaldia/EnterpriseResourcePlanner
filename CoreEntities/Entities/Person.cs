@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Exceptions;
+﻿using CoreEntities.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Entities
+namespace CoreEntities.Entities
 {
     public abstract class Person
     {
