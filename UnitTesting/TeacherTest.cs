@@ -167,7 +167,7 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        public void FindTeacherById()
+        public void FindTeacherByDocumentNumber()
         {
             SystemData.GetInstance.Reset();
 
@@ -179,6 +179,29 @@ namespace UnitTesting
             
             Teacher teacherFound = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
             Assert.IsNotNull(teacherFound);
+        }
+
+        [TestMethod]
+        public void DeleteTeacherByDocumentNumber()
+        {
+            try
+            {
+                SystemData.GetInstance.Reset();
+
+                string documentNumber = "1234567-8";
+                Teacher firstTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
+
+                var firtTeacherInput = new AddTeacherInput { aTeacher = firstTeacher };
+                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firtTeacherInput);
+
+                ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacherByDocumentNumber(documentNumber);
+
+                Assert.IsTrue(true);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
         }
 
         #region Extra Methods
