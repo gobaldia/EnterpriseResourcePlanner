@@ -27,6 +27,7 @@ namespace SubjectModuleUI.DeleteSubject
             this.comboBoxSelectSubjectToDelete.DataSource = datasource;
             this.comboBoxSelectSubjectToDelete.DisplayMember = "Name";
             this.comboBoxSelectSubjectToDelete.ValueMember = "Code";
+            this.comboBoxSelectSubjectToDelete.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void buttonDeleteSubject_Click(object sender, EventArgs e)
@@ -37,7 +38,6 @@ namespace SubjectModuleUI.DeleteSubject
                 ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(selectedSubject.Code);
                 this.labelActionResult.Text = "Subject " + selectedSubject.Name + " was succesfully deleted";
                 this.labelActionResult.Visible = true;
-                FillSubjectsComboBox();
             }
             catch(Exception ex)
             {
@@ -45,6 +45,11 @@ namespace SubjectModuleUI.DeleteSubject
                 this.labelActionResult.Visible = true;
             }
             
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

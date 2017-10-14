@@ -33,6 +33,7 @@
             this.labelSelectSubjectToDelete = new System.Windows.Forms.Label();
             this.buttonDeleteSubject = new System.Windows.Forms.Button();
             this.labelActionResult = new System.Windows.Forms.Label();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelDeleteSubjectTitle
@@ -81,11 +82,22 @@
             this.labelActionResult.TabIndex = 4;
             this.labelActionResult.Visible = false;
             // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(16, 152);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
             // DeleteSubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelActionResult);
             this.Controls.Add(this.buttonDeleteSubject);
             this.Controls.Add(this.labelSelectSubjectToDelete);
@@ -105,5 +117,6 @@
         private System.Windows.Forms.Label labelSelectSubjectToDelete;
         private System.Windows.Forms.Button buttonDeleteSubject;
         private System.Windows.Forms.Label labelActionResult;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }
