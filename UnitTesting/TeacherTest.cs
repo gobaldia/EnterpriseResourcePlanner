@@ -182,7 +182,7 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        public void DeleteTeacherByDocumentNumber()
+        public void DeleteTeacher()
         {
             try
             {
@@ -196,7 +196,7 @@ namespace UnitTesting
 
                 ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacher);
 
-                Assert.IsTrue(true);
+                Assert.IsNull(this.FindTeacherOnSystem(teacher.GetDocumentNumber()));
             }
             catch (Exception ex)
             {
