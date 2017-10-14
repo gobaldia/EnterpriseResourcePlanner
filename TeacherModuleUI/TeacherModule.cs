@@ -13,7 +13,7 @@ namespace TeacherModuleUI
         {
             base.actions = newActions;
             base.name = "Teacher";
-            base.description = "Description Teachers";
+            base.description = "Teachers management";
         }
 
         public override string GetName()

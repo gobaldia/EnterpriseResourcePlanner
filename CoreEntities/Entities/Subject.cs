@@ -41,7 +41,7 @@ namespace CoreEntities.Entities
 
         public override bool Equals(object obj)
         {
-            return this.GetCode() == (((Subject)obj).GetCode());
+            return this.GetCode().Equals(((Subject)obj).GetCode());
         }
     }
 }

@@ -73,5 +73,10 @@ namespace MainModuleUI
         {
             input.Action.Call();
         }
+
+        private void buttonInitialiceData_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

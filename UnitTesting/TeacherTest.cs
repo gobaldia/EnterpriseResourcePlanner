@@ -7,6 +7,7 @@ using CoreLogic;
 using FrameworkCommon.MethodParameters;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using UnitTesting.Utilities;
 
 namespace UnitTesting
 {
@@ -26,7 +27,7 @@ namespace UnitTesting
             Assert.AreEqual(expectedName, teacher.GetName());
             Assert.AreEqual(expectedLastName, teacher.GetLastName());
 
-            this.CompareSubjects(actualSubjects, expectedSubjects);
+            Assert.IsTrue(Utility.CompareLists(actualSubjects, expectedSubjects));
         }
 
         [TestMethod]
@@ -44,14 +45,14 @@ namespace UnitTesting
             Assert.AreEqual(expectedDocumentNumber, teacher.GetDocumentNumber());
 
             List<Subject> actualSubjects = teacher.GetSubjects();
-            this.CompareSubjects(actualSubjects, expectedSubjects);
+            Assert.IsTrue(Utility.CompareLists(actualSubjects, expectedSubjects));            
         }
 
         [TestMethod]
         public void TeachersInstancesAreEqual()
         {
-            string name = this.GetRandomName();
-            string lastName = this.GetRandomLastName();
+            string name = Utility.GetRandomName();
+            string lastName = Utility.GetRandomLastName();
             string documentNumber = "1234567-8";
             Teacher firstTeacher = new Teacher(name, lastName, documentNumber);
             Teacher secondTeacher = new Teacher(name, lastName, documentNumber);
@@ -79,8 +80,8 @@ namespace UnitTesting
         [TestMethod]
         public void GetFullNameCorrectly()
         {
-            string name = this.GetRandomName();
-            string lastName = this.GetRandomLastName();
+            string name = Utility.GetRandomName();
+            string lastName = Utility.GetRandomLastName();
             string document = "1234567-8";
 
             Teacher firstTeacher = new Teacher(name, lastName, document);
@@ -93,8 +94,8 @@ namespace UnitTesting
         {
             try
             {
-                string name = this.GetRandomName();
-                string lastName = this.GetRandomLastName();
+                string name = Utility.GetRandomName();
+                string lastName = Utility.GetRandomLastName();
                 string document = "12345678"; // Invalid format
 
                 Teacher firstTeacher = new Teacher(name, lastName, document);
@@ -151,44 +152,37 @@ namespace UnitTesting
         [TestMethod]
         public void AddSubjectToTeacher()
         {
-            //SystemData.GetInstance.Reset();
+            SystemData.GetInstance.Reset();
 
-            //List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
-            //Subject aSubject = new Subject(123456, "Math");
-            //systemSubjects.Add(aSubject);
+            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            Subject aSubject = new Subject(123456, "Math");
+            systemSubjects.Add(aSubject);
 
-            //Teacher newTeacher = this.CreateRandomTeacher();
-            //Subject subjectToBeAdded = SystemData.GetInstance.GetSubjectByCode(123456);
+            Teacher newTeacher = this.CreateRandomTeacher();
+            Subject subjectToBeAdded = SystemData.GetInstance.GetSubjectByCode(123456);
 
-            //var input = new AddSubjectsToTeacherInput { subjectsToTeach = newTeacher };
-            //ClassFactory.GetOrCreate<TeacherLogic>().AddSubjectToTeach(input);
+            newTeacher.AddSubjectToTeach(subjectToBeAdded);
 
-            //Assert.IsTrue(firstTeacher.GetSubjects().Count > 0);
-            Assert.IsTrue(true);
+            Assert.IsTrue(newTeacher.GetSubjects().Count > 0);
         }
 
-
-        #region Extra Methods        
-        private SystemData GetNewSystemData()
+        [TestMethod]
+        public void FindTeacherById()
         {
             SystemData.GetInstance.Reset();
-            return SystemData.GetInstance;
+
+            string documentNumber = "1234567-8";
+            Teacher firstTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
+
+            var firtTeacherInput = new AddTeacherInput { aTeacher = firstTeacher };
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firtTeacherInput);
+            
+            Teacher teacherFound = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(string documentNumber);
+
+            Assert.IsNotNull(teacherFound);
         }
 
-        private string[] maleNames = new string[5] { "Alfred", "Tony", "Bart", "Peter", "Jhon" };
-        private string[] femaleNames = new string[5] { "Carol", "Jennifer", "Storm", "Leia", "Jessica" };
-        private string[] lastNames = new string[5] { "Richards", "Kovacs", "Wayne", "Johnes", "Stark" };
-        private string[] documents = new string[5] { "1234567-8", "3216549-8", "7418529-6", "9638527-4", "1596324-7" };
-
-        private void CompareSubjects(List<Subject> real, List<Subject> toBeCompareWith)
-        {
-            Assert.AreEqual(real.Count, toBeCompareWith.Count);
-            for (var index = 0; index < real.Count; index++)
-            {
-                Assert.AreEqual(real[index], toBeCompareWith[index]);
-            }
-        }
-
+        #region Extra Methods
         private Teacher FindTeacherOnSystem(string documentNumber)
         {
             return SystemData.GetInstance.GetTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
@@ -196,32 +190,8 @@ namespace UnitTesting
 
         private Teacher CreateRandomTeacher()
         {
-            Teacher newTeacher = new Teacher(this.GetRandomName(), this.GetRandomLastName(), this.GetRandomDocument());
+            Teacher newTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), Utility.GetRandomDocument());
             return newTeacher;
-        }
-
-        private string GetRandomName()
-        {
-            Random randomNumber = new Random(DateTime.Now.Second);
-            string name = string.Empty;
-            if (randomNumber.Next(1, 2) == 1)
-                name = maleNames[randomNumber.Next(0, maleNames.Length - 1)];
-            else
-                name = femaleNames[randomNumber.Next(0, femaleNames.Length - 1)];
-
-            return name;
-        }
-
-        private string GetRandomLastName()
-        {
-            Random randomNumber = new Random(DateTime.Now.Second);
-            return lastNames[randomNumber.Next(0, lastNames.Length - 1)];
-        }
-
-        private string GetRandomDocument()
-        {
-            Random randomNumber = new Random(DateTime.Now.Second);
-            return documents[randomNumber.Next(0, documents.Length - 1)];
         }
         #endregion
     }
