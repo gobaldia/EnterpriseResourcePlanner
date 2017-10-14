@@ -89,6 +89,77 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void ModifySubjectName()
+        {
+            string expectedName = "Programming";
+            Subject subject = new Subject(1, "Logic");
+            subject.Name = expectedName;
+
+            Assert.AreEqual(expectedName, subject.Name);
+        }
+
+        [TestMethod]
+        public void ModifySubjectCode()
+        {
+            int expectedCode = 100;
+            Subject subject = new Subject(1, "Logic");
+            subject.Code = expectedCode;
+
+            Assert.AreEqual(expectedCode, subject.Code);
+        }
+
+        [TestMethod]
+        public void AddNewStudentToSubject()
+        {
+            Subject subject = new Subject(1, "Logic");
+            Student student = new Student("1234567-8", "Jose", "Lopez", 123456);
+            subject.AddStudent(student);
+            Assert.IsNotNull(FindStudentByDocument(student.Document));
+
+        }
+
+        [TestMethod]
+        public void AddNewTeacherToSubject()
+        {
+            Subject subject = new Subject(1, "Logic");
+            Teacher teacher = new Teacher("Juan", "Perez", "1234567-8");
+            subject.AddTeacher(teacher);
+            Assert.IsNotNull(FindTeacherByDocument(teacher.GetDocumentNumber()));
+        }
+
+        [TestMethod]
+        public void ThrowExceptionWhenTryToAddAnAlreadyExistentStudentToSubject()
+        {
+            try
+            {
+                Subject subject = new Subject(1, "Logic");
+                Student student = new Student("1234567-8", "Jose", "Lopez", 123456);
+                subject.AddStudent(student);
+                subject.AddStudent(student);
+            }
+            catch(CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("This student is already enrolled to this subject."));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowExceptionWhenTryToAddAnAlreadyExistentTeacherToSubject()
+        {
+            try
+            {
+                Subject subject = new Subject(1, "Logic");
+                Teacher teacher = new Teacher("Juan", "Perez", "1234567-8");
+                subject.AddTeacher(teacher);
+                subject.AddTeacher(teacher);
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("This teacher is already enrolled to this subject."));
+            }
+        }
+
         #region Extra Methods
         private void CompareListsOfStudents(List<Student> real, List<Student> toBeCompareWith)
         {
