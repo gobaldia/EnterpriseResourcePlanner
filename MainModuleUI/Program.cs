@@ -2,6 +2,7 @@
 using MainComponents;
 using SubjectModuleUI;
 using SubjectModuleUI.AddSubject;
+using SubjectModuleUI.DeleteSubject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +51,9 @@ namespace MainModuleUI
             List<IAction> SubjectActions = new List<IAction>();
 
             IAction addAction = new AddSubjectAction();
+            IAction deleteAction = new DeleteSubjectAction();
             SubjectActions.Add(addAction);
+            SubjectActions.Add(deleteAction);
 
             return new SubjectModule(SubjectActions);
         }
