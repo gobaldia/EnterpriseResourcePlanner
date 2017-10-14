@@ -52,9 +52,19 @@
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddSubject\AddSubjectAction.cs" />
+    <Compile Include="ModifySubject\ModifySubjectAction.cs" />
+    <Compile Include="ModifySubject\ModifySubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifySubject\ModifySubjectForm.Designer.cs">
+      <DependentUpon>ModifySubjectForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubjectModule.cs" />
+    <EmbeddedResource Include="ModifySubject\ModifySubjectForm.resx">
+      <DependentUpon>ModifySubjectForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -95,5 +105,6 @@
       <Name>FrameworkCommon</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
