@@ -150,7 +150,7 @@ namespace UnitTesting
             try
             {
                 Subject subject = new Subject(1, "Logic");
-                Teacher teacher = new Teacher("Juan", "Perez", "1234567-8");
+                Teacher teacher = new Teacher("Juan", "Perez", "1234567-9");
                 subject.AddTeacher(teacher);
                 subject.AddTeacher(teacher);
             }
