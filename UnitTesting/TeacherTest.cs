@@ -189,12 +189,12 @@ namespace UnitTesting
                 SystemData.GetInstance.Reset();
 
                 string documentNumber = "1234567-8";
-                Teacher firstTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
+                Teacher teacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
 
-                var firtTeacherInput = new AddTeacherInput { aTeacher = firstTeacher };
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firtTeacherInput);
+                var teacherInput = new AddTeacherInput { aTeacher = teacher };
+                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacherInput);
 
-                ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacherByDocumentNumber(documentNumber);
+                ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacher);
 
                 Assert.IsTrue(true);
             }

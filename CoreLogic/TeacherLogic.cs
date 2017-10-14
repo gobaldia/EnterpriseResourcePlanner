@@ -27,6 +27,11 @@ namespace CoreLogic
             return this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
         }
 
+        public void DeleteTeacher(Teacher teacherToDelete)
+        {
+            this.systemTeachers.Remove(teacherToDelete);
+        }
+
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {
