@@ -113,9 +113,9 @@ namespace UnitTesting
         public void AddNewStudentToSubject()
         {
             Subject subject = new Subject(1, "Logic");
-            Student student = new Student("1234567-8", "Jose", "Lopez", 123456);
+            Student student = new Student("Jose", "Lopez", "1234567-8", 123456);
             subject.AddStudent(student);
-            Assert.IsNotNull(FindStudentByDocument(student.Document));
+            Assert.IsNotNull(FindStudentByDocument(subject.Students, student.GetDocumentNumber()));
 
         }
 
@@ -125,7 +125,7 @@ namespace UnitTesting
             Subject subject = new Subject(1, "Logic");
             Teacher teacher = new Teacher("Juan", "Perez", "1234567-8");
             subject.AddTeacher(teacher);
-            Assert.IsNotNull(FindTeacherByDocument(teacher.GetDocumentNumber()));
+            Assert.IsNotNull(FindTeacherByDocument(subject.Teachers, teacher.GetDocumentNumber()));
         }
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace UnitTesting
             try
             {
                 Subject subject = new Subject(1, "Logic");
-                Student student = new Student("1234567-8", "Jose", "Lopez", 123456);
+                Student student = new Student("Jose", "Lopez", "1234567-8", 123456);
                 subject.AddStudent(student);
                 subject.AddStudent(student);
             }
@@ -188,6 +188,16 @@ namespace UnitTesting
         private Subject FindSubjectOnSystem(int code)
         {
             return SystemData.GetInstance.GetSubjects().Find(x => x.GetCode() == code);
+        }
+
+        private Student FindStudentByDocument(List<Student> students, string document)
+        {
+            return students.Find(s => s.GetDocumentNumber() == document);
+        }
+
+        private Teacher FindTeacherByDocument(List<Teacher> teachers, string document)
+        {
+            return teachers.Find(t => t.GetDocumentNumber() == document);
         }
         #endregion
     }

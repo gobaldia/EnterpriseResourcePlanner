@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreEntities.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,9 +40,33 @@ namespace CoreEntities.Entities
             return this.Name;
         }
 
+        public void AddStudent(Student student)
+        {
+            if (!SubjectAlreadyHasThisStudent(student))
+            {
+                this.Students.Add(student);
+            }
+            else
+            {
+                throw new CoreException("This student is already enrolled to this subject.");
+            }
+        }
+
+        public void AddTeacher(Teacher teacher)
+        {
+            this.Teachers.Add(teacher);
+        }
+
         public override bool Equals(object obj)
         {
             return this.GetCode() == (((Subject)obj).GetCode());
         }
+
+        #region Private Methods
+        private bool SubjectAlreadyHasThisStudent(Student student)
+        {
+            return this.Students.Find(s => s.GetDocumentNumber() == student.GetDocumentNumber()) != null;
+        }
+        #endregion
     }
 }
