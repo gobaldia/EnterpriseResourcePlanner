@@ -1,4 +1,5 @@
 ﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using CoreLogic;
 using FrameworkCommon;
 using System;
@@ -30,6 +31,26 @@ namespace SubjectModuleUI.ModifySubject
             this.comboBoxSelectSubjectToModify.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
+        private void FillSubjectTeachersListBox(int subjectCode)
+        {
+            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            var subject = subjects.Find(s => s.Code == subjectCode);
+            var datasource = subject.Teachers;
+            this.listBoxSubjectTeachers.DataSource = datasource;
+            this.listBoxSubjectTeachers.DisplayMember = "Name";
+            //this.listBoxSubjectTeachers.ValueMember = "Document";
+        }
+
+        private void FillSystemTeachersListBox(int subjectCode)
+        {
+            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
+            //var subject = subjects.Find(s => s.Code == subjectCode);
+            var datasource = teachers;
+            this.listBoxSystemTeachers.DataSource = datasource;
+            this.listBoxSystemTeachers.DisplayMember = "Name";
+            //this.listBoxSubjectTeachers.ValueMember = "Document";
+        }
+
         private void buttonCancelModifySubject_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -41,14 +62,14 @@ namespace SubjectModuleUI.ModifySubject
             var selected = (Subject)combo.SelectedItem;
             this.textBoxCodeModifySubject.Text = selected.GetCode().ToString();
             this.textBoxNameModifySubject.Text = selected.GetName();
+            FillSubjectTeachersListBox(selected.Code);
+            FillSystemTeachersListBox(selected.Code);
         }
 
         private void buttonModifySubject_Click(object sender, EventArgs e)
         {
             this.labelError.Visible = false;
-            int originalCode;
-            var selected = this.comboBoxSelectSubjectToModify.SelectedValue.ToString();
-            int.TryParse(selected, out originalCode);
+            int originalCode = GetCodeOfSubjectToBeModified();
             int code;
             string name;
             Subject subject = new Subject();
@@ -61,11 +82,6 @@ namespace SubjectModuleUI.ModifySubject
                     subject.Name = name;
 
                     ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalCode, subject);
-
-                    //var algo = ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode()
-
-                    //this.ClearAddSubjectForm();
-                    //this.ShowCorrectlyAddedSubjectMessage(code, name);
                 }
                 else
                 {
@@ -78,6 +94,21 @@ namespace SubjectModuleUI.ModifySubject
                 this.labelError.Visible = true;
                 this.labelError.Text = "Subject's code must be a number";
             }
+        }
+
+        public int GetCodeOfSubjectToBeModified()
+        {
+            int originalCode;
+            var selected = this.comboBoxSelectSubjectToModify.SelectedValue.ToString();
+            try
+            {
+                int.TryParse(selected, out originalCode);
+            }
+            catch
+            {
+                throw new CoreException("Subject's code must be a number");
+            }
+            return originalCode;
         }
     }
 }

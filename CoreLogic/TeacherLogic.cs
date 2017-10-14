@@ -27,6 +27,11 @@ namespace CoreLogic
         {
             return this.systemTeachers.Exists(item => item.Equals(aTeacher));
         }
+
+        public object GetTeachers()
+        {
+            return this.systemTeachers;
+        }
         #endregion
     }
 }
