@@ -36,11 +36,12 @@
             this.labelError = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelOk = new System.Windows.Forms.Label();
+            this.labelAddSubjectTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxSubjectCode
             // 
-            this.textBoxSubjectCode.Location = new System.Drawing.Point(90, 12);
+            this.textBoxSubjectCode.Location = new System.Drawing.Point(90, 80);
             this.textBoxSubjectCode.Name = "textBoxSubjectCode";
             this.textBoxSubjectCode.Size = new System.Drawing.Size(100, 20);
             this.textBoxSubjectCode.TabIndex = 0;
@@ -48,7 +49,7 @@
             // labelSubjectCode
             // 
             this.labelSubjectCode.AutoSize = true;
-            this.labelSubjectCode.Location = new System.Drawing.Point(13, 18);
+            this.labelSubjectCode.Location = new System.Drawing.Point(13, 86);
             this.labelSubjectCode.Name = "labelSubjectCode";
             this.labelSubjectCode.Size = new System.Drawing.Size(32, 13);
             this.labelSubjectCode.TabIndex = 1;
@@ -57,7 +58,7 @@
             // labelSubjectName
             // 
             this.labelSubjectName.AutoSize = true;
-            this.labelSubjectName.Location = new System.Drawing.Point(13, 49);
+            this.labelSubjectName.Location = new System.Drawing.Point(13, 117);
             this.labelSubjectName.Name = "labelSubjectName";
             this.labelSubjectName.Size = new System.Drawing.Size(35, 13);
             this.labelSubjectName.TabIndex = 2;
@@ -65,7 +66,7 @@
             // 
             // textBoxSubjectName
             // 
-            this.textBoxSubjectName.Location = new System.Drawing.Point(90, 46);
+            this.textBoxSubjectName.Location = new System.Drawing.Point(90, 114);
             this.textBoxSubjectName.MaxLength = 50;
             this.textBoxSubjectName.Name = "textBoxSubjectName";
             this.textBoxSubjectName.Size = new System.Drawing.Size(100, 20);
@@ -73,7 +74,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(115, 89);
+            this.buttonAdd.Location = new System.Drawing.Point(115, 169);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 4;
@@ -84,7 +85,7 @@
             // labelError
             // 
             this.labelError.AutoSize = true;
-            this.labelError.Location = new System.Drawing.Point(13, 74);
+            this.labelError.Location = new System.Drawing.Point(12, 154);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 5;
@@ -92,7 +93,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(115, 119);
+            this.buttonCancel.Location = new System.Drawing.Point(115, 199);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -103,17 +104,28 @@
             // labelOk
             // 
             this.labelOk.AutoSize = true;
-            this.labelOk.Location = new System.Drawing.Point(13, 74);
+            this.labelOk.Location = new System.Drawing.Point(13, 154);
             this.labelOk.Name = "labelOk";
             this.labelOk.Size = new System.Drawing.Size(0, 13);
             this.labelOk.TabIndex = 7;
             this.labelOk.Visible = false;
+            // 
+            // labelAddSubjectTitle
+            // 
+            this.labelAddSubjectTitle.AutoSize = true;
+            this.labelAddSubjectTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAddSubjectTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelAddSubjectTitle.Name = "labelAddSubjectTitle";
+            this.labelAddSubjectTitle.Size = new System.Drawing.Size(172, 23);
+            this.labelAddSubjectTitle.TabIndex = 8;
+            this.labelAddSubjectTitle.Text = "Add new Subject";
             // 
             // AddSubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.labelAddSubjectTitle);
             this.Controls.Add(this.labelOk);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelError);
@@ -139,6 +151,7 @@
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelOk;
+        private System.Windows.Forms.Label labelAddSubjectTitle;
     }
 }
 
