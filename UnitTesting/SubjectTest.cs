@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CoreEntities.Entities;
 using System.Collections.Generic;
+using CoreEntities.Entities;
 using DataAccess;
 using CoreEntities.Exceptions;
 
