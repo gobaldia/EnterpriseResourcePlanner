@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Entities;
+﻿using CoreEntities.Entities;
 using DataAccess;
 using System;
 using System.Collections.Generic;

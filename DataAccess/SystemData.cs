@@ -1,5 +1,5 @@
-﻿using BusinessLogic.Entities;
-using BusinessLogic.Exceptions;
+﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

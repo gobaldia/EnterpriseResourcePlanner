@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessLogic.Entities;
+using CoreEntities.Entities;
 using System.Collections.Generic;
 using DataAccess;
-using BusinessLogic.Exceptions;
+using CoreEntities.Exceptions;
 
 namespace UnitTesting
 {
@@ -81,7 +81,7 @@ namespace UnitTesting
                 Subject secondTeacher = new Subject(1, "Logic");
                 systemData.AddSubject(firstTeacher);
                 systemData.AddSubject(secondTeacher);
-                
+
                 Assert.Fail();
             }
             catch (CoreException ex)
