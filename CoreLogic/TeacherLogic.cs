@@ -22,6 +22,11 @@ namespace CoreLogic
             this.systemTeachers.Add(input.aTeacher);
         }
 
+        public Teacher GetTeacherByDocumentNumber(string documentNumber)
+        {
+            return this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+        }
+
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {

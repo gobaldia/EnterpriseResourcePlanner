@@ -177,8 +177,7 @@ namespace UnitTesting
             var firtTeacherInput = new AddTeacherInput { aTeacher = firstTeacher };
             ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firtTeacherInput);
             
-            Teacher teacherFound = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(string documentNumber);
-
+            Teacher teacherFound = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
             Assert.IsNotNull(teacherFound);
         }
 
