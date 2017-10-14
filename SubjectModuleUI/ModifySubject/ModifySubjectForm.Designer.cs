@@ -29,12 +29,15 @@
         private void InitializeComponent()
         {
             this.labelModifySubjectTitle = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSelectSubjectToModify = new System.Windows.Forms.ComboBox();
             this.labelSelectSubjectToModify = new System.Windows.Forms.Label();
             this.textBoxNameModifySubject = new System.Windows.Forms.TextBox();
             this.textBoxCodeModifySubject = new System.Windows.Forms.TextBox();
             this.labelCodeModifySubject = new System.Windows.Forms.Label();
             this.labelNameModifySubject = new System.Windows.Forms.Label();
+            this.buttonModifySubject = new System.Windows.Forms.Button();
+            this.buttonCancelModifySubject = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelModifySubjectTitle
@@ -47,13 +50,14 @@
             this.labelModifySubjectTitle.TabIndex = 0;
             this.labelModifySubjectTitle.Text = "Modify Subject";
             // 
-            // comboBox1
+            // comboBoxSelectSubjectToModify
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(16, 68);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
+            this.comboBoxSelectSubjectToModify.FormattingEnabled = true;
+            this.comboBoxSelectSubjectToModify.Location = new System.Drawing.Point(16, 68);
+            this.comboBoxSelectSubjectToModify.Name = "comboBoxSelectSubjectToModify";
+            this.comboBoxSelectSubjectToModify.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSelectSubjectToModify.TabIndex = 1;
+            this.comboBoxSelectSubjectToModify.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectSubjectToModify_SelectedIndexChanged);
             // 
             // labelSelectSubjectToModify
             // 
@@ -70,7 +74,6 @@
             this.textBoxNameModifySubject.Name = "textBoxNameModifySubject";
             this.textBoxNameModifySubject.Size = new System.Drawing.Size(100, 20);
             this.textBoxNameModifySubject.TabIndex = 3;
-            this.textBoxNameModifySubject.Visible = false;
             // 
             // textBoxCodeModifySubject
             // 
@@ -78,7 +81,6 @@
             this.textBoxCodeModifySubject.Name = "textBoxCodeModifySubject";
             this.textBoxCodeModifySubject.Size = new System.Drawing.Size(100, 20);
             this.textBoxCodeModifySubject.TabIndex = 4;
-            this.textBoxCodeModifySubject.Visible = false;
             // 
             // labelCodeModifySubject
             // 
@@ -88,7 +90,6 @@
             this.labelCodeModifySubject.Size = new System.Drawing.Size(32, 13);
             this.labelCodeModifySubject.TabIndex = 5;
             this.labelCodeModifySubject.Text = "Code";
-            this.labelCodeModifySubject.Visible = false;
             // 
             // labelNameModifySubject
             // 
@@ -98,19 +99,50 @@
             this.labelNameModifySubject.Size = new System.Drawing.Size(35, 13);
             this.labelNameModifySubject.TabIndex = 6;
             this.labelNameModifySubject.Text = "Name";
-            this.labelNameModifySubject.Visible = false;
+            // 
+            // buttonModifySubject
+            // 
+            this.buttonModifySubject.Location = new System.Drawing.Point(377, 357);
+            this.buttonModifySubject.Name = "buttonModifySubject";
+            this.buttonModifySubject.Size = new System.Drawing.Size(75, 23);
+            this.buttonModifySubject.TabIndex = 7;
+            this.buttonModifySubject.Text = "Modify";
+            this.buttonModifySubject.UseVisualStyleBackColor = true;
+            this.buttonModifySubject.Click += new System.EventHandler(this.buttonModifySubject_Click);
+            // 
+            // buttonCancelModifySubject
+            // 
+            this.buttonCancelModifySubject.Location = new System.Drawing.Point(377, 387);
+            this.buttonCancelModifySubject.Name = "buttonCancelModifySubject";
+            this.buttonCancelModifySubject.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancelModifySubject.TabIndex = 8;
+            this.buttonCancelModifySubject.Text = "Cancel";
+            this.buttonCancelModifySubject.UseVisualStyleBackColor = true;
+            this.buttonCancelModifySubject.Click += new System.EventHandler(this.buttonCancelModifySubject_Click);
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Location = new System.Drawing.Point(16, 322);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.TabIndex = 9;
+            this.labelError.Visible = false;
             // 
             // ModifySubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 442);
+            this.Controls.Add(this.labelError);
+            this.Controls.Add(this.buttonCancelModifySubject);
+            this.Controls.Add(this.buttonModifySubject);
             this.Controls.Add(this.labelNameModifySubject);
             this.Controls.Add(this.labelCodeModifySubject);
             this.Controls.Add(this.textBoxCodeModifySubject);
             this.Controls.Add(this.textBoxNameModifySubject);
             this.Controls.Add(this.labelSelectSubjectToModify);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxSelectSubjectToModify);
             this.Controls.Add(this.labelModifySubjectTitle);
             this.Name = "ModifySubjectForm";
             this.Text = "ModifySubjectForm";
@@ -122,11 +154,14 @@
         #endregion
 
         private System.Windows.Forms.Label labelModifySubjectTitle;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxSelectSubjectToModify;
         private System.Windows.Forms.Label labelSelectSubjectToModify;
         private System.Windows.Forms.TextBox textBoxNameModifySubject;
         private System.Windows.Forms.TextBox textBoxCodeModifySubject;
         private System.Windows.Forms.Label labelCodeModifySubject;
         private System.Windows.Forms.Label labelNameModifySubject;
+        private System.Windows.Forms.Button buttonModifySubject;
+        private System.Windows.Forms.Button buttonCancelModifySubject;
+        private System.Windows.Forms.Label labelError;
     }
 }

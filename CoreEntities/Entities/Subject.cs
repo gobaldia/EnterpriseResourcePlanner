@@ -30,11 +30,20 @@ namespace CoreEntities.Entities
             this.Teachers = new List<Teacher>();
         }
 
+        public void SetCode(int code)
+        {
+            this.Code = code;
+        }
+
         public int GetCode()
         {
             return this.Code;
         }
 
+        public void SetName(string name)
+        {
+            this.Name = name;
+        }
         public string GetName()
         {
             return this.Name;

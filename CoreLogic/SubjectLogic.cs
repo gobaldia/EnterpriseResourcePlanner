@@ -30,6 +30,13 @@ namespace CoreLogic
             }
         }
 
+        public void ModifySubjectByCode(int code, Subject newSubjectValues)
+        {
+            var subjectIndexToModify = this.systemSubjects.FindIndex(s => s.Code == code);
+            this.systemSubjects[subjectIndexToModify].SetCode(newSubjectValues.Code);
+            this.systemSubjects[subjectIndexToModify].SetName(newSubjectValues.Name);
+        }
+
         private bool IsSubjectInSystem(Subject subject)
         {
             return this.systemSubjects.Exists(item => item.Equals(subject));

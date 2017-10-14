@@ -94,7 +94,7 @@ namespace UnitTesting
         {
             string expectedName = "Programming";
             Subject subject = new Subject(1, "Logic");
-            subject.Name = expectedName;
+            subject.SetName(expectedName);
 
             Assert.AreEqual(expectedName, subject.Name);
         }
@@ -104,7 +104,7 @@ namespace UnitTesting
         {
             int expectedCode = 100;
             Subject subject = new Subject(1, "Logic");
-            subject.Code = expectedCode;
+            subject.SetCode(expectedCode);
 
             Assert.AreEqual(expectedCode, subject.Code);
         }
