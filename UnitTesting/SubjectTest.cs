@@ -96,7 +96,7 @@ namespace UnitTesting
             Subject subject = new Subject(1000, "Logic");
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
             ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(1000);
-            Assert.IsNull(this.FindSubjectOnSystem(subject.GetCode()));
+            Assert.IsNull(this.FindSubjectOnSystem(1000));
         }
 
         [TestMethod]
@@ -107,6 +107,7 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
             ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(subject.GetCode());
             Subject anotherSubject = new Subject(1000, "Logic");
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(anotherSubject);
             Assert.IsNotNull(this.FindSubjectOnSystem(anotherSubject.GetCode()));
         }
 
