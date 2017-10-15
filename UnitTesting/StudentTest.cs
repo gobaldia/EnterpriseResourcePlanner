@@ -182,6 +182,20 @@ namespace UnitTesting
             Assert.IsNotNull(StudentFound);
         }
 
+        [TestMethod]
+        public void SetStudentForPickUpVehicle()
+        {
+            SystemData.GetInstance.Reset();
+
+            string documentNumber = "1234567-8";
+            Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+
+            Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
+            studentFound.SetPickUpService(true);
+
+            Assert.IsNotNull(studentFound.GetPickUpService());
+        }
 
 
         #region Extra methods
