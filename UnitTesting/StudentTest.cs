@@ -252,6 +252,33 @@ namespace UnitTesting
             Assert.IsTrue(studentFound.GetLocation().Equals(location));
         }
 
+        [TestMethod]
+        public void ModifyStudentName()
+        {
+            SystemData.GetInstance.Reset();
+
+            Student newStudent = new Student("Rodigo", Utility.GetRandomLastName(), "1234567-8");
+            var addInput = new AddStudentInput
+            {
+                Name = newStudent.GetName(),
+                LastName = newStudent.GetLastName(),
+                DocumentNumber = newStudent.GetDocumentNumber()
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(addInput);
+
+            ModifyStudentInput modifyInput = new ModifyStudentInput();
+            modifyInput.NewName = "Santiago";
+            modifyInput.StudentCode = 1;
+            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+
+            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByCode(modifyInput.StudentCode);
+
+            Assert.AreEqual(modifiedStudent.GetName(), modifyInput.NewName);
+        }
+
+
+
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
