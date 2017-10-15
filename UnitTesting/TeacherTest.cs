@@ -204,6 +204,30 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void RemoveSubjectFromTeacher()
+        {
+            SystemData.GetInstance.Reset();
+
+            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            Subject subject1 = new Subject(123456, "Math");
+            Subject subject2 = new Subject(654321, "Physics");
+            systemSubjects.Add(subject1);
+            systemSubjects.Add(subject1);
+
+            Teacher newTeacher = this.CreateRandomTeacher();
+            Subject subjectToBeAdded1 = SystemData.GetInstance.GetSubjectByCode(123456);
+            Subject subjectToBeAdded2 = SystemData.GetInstance.GetSubjectByCode(123456);
+            
+            newTeacher.AddSubjectToTeach(subjectToBeAdded1);
+            newTeacher.AddSubjectToTeach(subjectToBeAdded1);
+
+            newTeacher.RemoveSubject(subjectToBeAdded1);
+            List<Subject> teacherSubjects = newTeacher.GetSubjects();
+
+            Assert.IsFalse(teacherSubjects.Exists(item => item.Equals(subjectToBeAdded1)));
+        }
+
         #region Extra Methods
         private Teacher FindTeacherOnSystem(string documentNumber)
         {
