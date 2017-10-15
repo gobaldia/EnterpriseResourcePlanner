@@ -59,6 +59,13 @@
       <DependentUpon>DeleteTeacherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DeleteTeacher\DeleteTeacherAction.cs" />
+    <Compile Include="ListTeachers\ListOfTeachersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListTeachers\ListOfTeachersForm.Designer.cs">
+      <DependentUpon>ListOfTeachersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListTeachers\ListTeachersAction.cs" />
     <Compile Include="ModifyTeacher\ModifyTeacherAction.cs" />
     <Compile Include="ModifyTeacher\ModifyTeacherForm.cs">
       <SubType>Form</SubType>
@@ -74,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteTeacher\DeleteTeacherForm.resx">
       <DependentUpon>DeleteTeacherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListTeachers\ListOfTeachersForm.resx">
+      <DependentUpon>ListOfTeachersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyTeacher\ModifyTeacherForm.resx">
       <DependentUpon>ModifyTeacherForm.cs</DependentUpon>

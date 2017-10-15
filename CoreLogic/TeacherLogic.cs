@@ -48,12 +48,16 @@ namespace CoreLogic
                 throw new CoreException("No modifications have been made.");
         }
 
+        public List<Teacher> GetAllTeachers()
+        {
+            return this.systemTeachers;
+        }
+
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {
             return this.systemTeachers.Exists(item => item.Equals(aTeacher));
         }
-
         private bool SubjectExitsOnTeacher(Subject aSubject, Teacher aTeacher)
         {
             return aTeacher.GetSubjects().Exists(item => item.Equals(aSubject));

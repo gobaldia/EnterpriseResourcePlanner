@@ -44,6 +44,7 @@ namespace CoreEntities.Entities
         {
             base.LastName = newLastName;
         }
+
         public List<Subject> GetSubjects()
         {
             return this.subjects;
@@ -65,9 +66,16 @@ namespace CoreEntities.Entities
             }
         }
 
+        public override string ToString()
+        {
+            return string.Format("Full name: {0}, Document number: {1}", GetFullName(), GetDocumentNumber());
+        }
         public override bool Equals(object obj)
         {
-            return this.GetDocumentNumber().Equals(((Teacher)obj).GetDocumentNumber());
+            if(obj is Teacher)
+                return this.GetDocumentNumber().Equals(((Teacher)obj).GetDocumentNumber());
+            else
+                return false;
         }
     }
 }
