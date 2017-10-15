@@ -290,7 +290,7 @@ namespace UnitTesting
 
             Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
 
-            Assert.AreEqual(Utility.CompareLists(modifiedTeacher.GetSubjects, input.NewSubjects);
+            Assert.IsTrue(Utility.CompareLists(modifiedTeacher.GetSubjects(), input.NewSubjects));
         }
 
         #region Extra Methods
