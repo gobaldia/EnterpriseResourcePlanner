@@ -268,10 +268,10 @@ namespace UnitTesting
 
             ModifyStudentInput modifyInput = new ModifyStudentInput();
             modifyInput.NewName = "Santiago";
-            modifyInput.StudentCode = 1;
+            modifyInput.StudentNumber = 1;
             ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
 
-            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByCode(modifyInput.StudentCode);
+            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
 
             Assert.AreEqual(modifiedStudent.GetName(), modifyInput.NewName);
         }

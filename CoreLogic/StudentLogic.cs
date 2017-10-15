@@ -37,6 +37,23 @@ namespace CoreLogic
             return studentFound;
         }
 
+        public void ModifyStudent(ModifyStudentInput input)
+        {
+            Student studentToModify = GetStudentByNumber(input.StudentNumber);
+
+            bool nameWasModified = ModifyName(studentToModify, input.NewName);
+            
+        }
+
+        public Student GetStudentByNumber(int studentNumber)
+        {
+            Student studentFound = this.systemStudents.Find(item => item.GetStudentNumber().Equals(studentNumber));
+            if (studentFound == null)
+                throw new CoreException("Student not found.");
+
+            return studentFound;
+        }
+
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
@@ -49,6 +66,16 @@ namespace CoreLogic
                 foreach (Subject subject in subjectsToAdd)
                     aStudent.AddSubjectToStudent(subject);
             }
+        }
+        private bool ModifyName(Student studentToModify, string newName)
+        {
+            bool wasModifed = false;
+            if (!studentToModify.GetName().Equals(newName))
+            {
+                studentToModify.SetName(newName);
+                wasModifed = true;
+            }
+            return wasModifed;
         }
         #endregion
     }

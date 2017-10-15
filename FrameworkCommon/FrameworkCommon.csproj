@@ -46,6 +46,7 @@
     <Compile Include="MethodParameters\AddStudentInput.cs" />
     <Compile Include="MethodParameters\AddSubjectToTeachInput.cs" />
     <Compile Include="MethodParameters\MenuMethodInput.cs" />
+    <Compile Include="MethodParameters\ModifyStudentInput.cs" />
     <Compile Include="MethodParameters\ModifyTeacherInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
