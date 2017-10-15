@@ -52,11 +52,21 @@
     <Compile Include="AddTeacher\AddTeacherForm.Designer.cs">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeleteTeacher\DeleteTeacherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteTeacher\DeleteTeacherForm.Designer.cs">
+      <DependentUpon>DeleteTeacherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteTeacher\DeleteTeacherAction.cs" />
     <Compile Include="TeacherModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddTeacher\AddTeacherForm.resx">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteTeacher\DeleteTeacherForm.resx">
+      <DependentUpon>DeleteTeacherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

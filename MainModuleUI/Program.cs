@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TeacherModuleUI;
 using TeacherModuleUI.AddTeacher;
+using TeacherModuleUI.DeleteTeacher;
 
 namespace MainModuleUI
 {
@@ -40,7 +41,9 @@ namespace MainModuleUI
             List<IAction> teacherActions = new List<IAction>();
 
             IAction addAction = new AddTeacherAction();
+            IAction deleteAction = new DeleteTeacherAction();
             teacherActions.Add(addAction);
+            teacherActions.Add(deleteAction);
 
             return new TeacherModule(teacherActions);
         }

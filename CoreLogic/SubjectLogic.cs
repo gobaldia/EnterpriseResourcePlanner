@@ -15,7 +15,7 @@ namespace CoreLogic
 
         public List<Subject> GetSubjects()
         {
-            return this.systemSubjects;
+            return systemSubjects;
         }
 
         public void AddSubject(Subject newSubject)

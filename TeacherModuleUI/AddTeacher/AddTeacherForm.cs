@@ -41,11 +41,11 @@ namespace TeacherModuleUI.AddTeacher
 
                     ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(new AddTeacherInput { aTeacher = newTeacher });
                     this.CleanForm();
-                    this.labelSuccess.Text = "Teacher registered with success.";
+                    this.labelSuccess.Text = Constants.SUCCESS_TEACHERREGISTRATION; ;
                 }
                 else
                 {
-                    this.labelError.Text = "You must fill all fields.";
+                    this.labelError.Text = Constants.ERROR_ALL_FIELDS_REQUIRED;
                 }
             }
             catch (CoreException ex)
@@ -54,7 +54,7 @@ namespace TeacherModuleUI.AddTeacher
             }
             catch (Exception)
             {
-                this.labelError.Text = "Unexpected error.";
+                this.labelError.Text = Constants.ERROR_UNEXPECTED;
                 //TODO: Try log the error somewhere.
             }
         }
@@ -90,9 +90,9 @@ namespace TeacherModuleUI.AddTeacher
         private void LoadFormData()
         {
             List<Subject> subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
-            for (int index = 0; index < subjects.Count; index++)
+            foreach (Subject subject in subjects)
             {
-                this.listBoxSystemSubjects.Items.Add(subjects[index]);
+                this.listBoxSystemSubjects.Items.Add(subject);
             }
         }
         private void SetDefaultWindowsSize()
@@ -105,6 +105,7 @@ namespace TeacherModuleUI.AddTeacher
             this.labelError.Text = string.Empty;
             this.textBoxTeacherName.Text = string.Empty;
             this.textBoxTeacherLastName.Text = string.Empty;
+            this.textBoxTeacherDocument.Text = string.Empty;
             this.ResetListBoxes();
             this.LoadFormData();
         }

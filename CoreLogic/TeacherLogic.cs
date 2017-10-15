@@ -23,8 +23,12 @@ namespace CoreLogic
         }
 
         public Teacher GetTeacherByDocumentNumber(string documentNumber)
-        {
-            return this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+        {   
+            Teacher teacherFound = this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            if (teacherFound == null)
+                throw new CoreException("No teacher found.");
+
+            return teacherFound;
         }
 
         public void DeleteTeacher(Teacher teacherToDelete)

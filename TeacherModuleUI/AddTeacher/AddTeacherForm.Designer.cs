@@ -37,7 +37,6 @@
             this.textBoxTeacherDocument = new System.Windows.Forms.TextBox();
             this.buttonAddTeacher = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.listBoxSystemSubjects = new System.Windows.Forms.ListBox();
             this.listBoxTeacherSubjects = new System.Windows.Forms.ListBox();
             this.buttonAddSubjectToTeacher = new System.Windows.Forms.Button();
             this.buttonRemoveSubjectFromTeacher = new System.Windows.Forms.Button();
@@ -45,6 +44,7 @@
             this.labelSubjectsToBeTeach = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.labelSuccess = new System.Windows.Forms.Label();
+            this.listBoxSystemSubjects = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // labelAddTeacherTitle
@@ -131,15 +131,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // listBoxSystemSubjects
-            // 
-            this.listBoxSystemSubjects.FormattingEnabled = true;
-            this.listBoxSystemSubjects.ItemHeight = 31;
-            this.listBoxSystemSubjects.Location = new System.Drawing.Point(140, 636);
-            this.listBoxSystemSubjects.Name = "listBoxSystemSubjects";
-            this.listBoxSystemSubjects.Size = new System.Drawing.Size(694, 252);
-            this.listBoxSystemSubjects.TabIndex = 27;
-            // 
             // listBoxTeacherSubjects
             // 
             this.listBoxTeacherSubjects.FormattingEnabled = true;
@@ -211,11 +202,21 @@
             this.labelSuccess.Size = new System.Drawing.Size(0, 39);
             this.labelSuccess.TabIndex = 34;
             // 
+            // listBoxSystemSubjects
+            // 
+            this.listBoxSystemSubjects.FormattingEnabled = true;
+            this.listBoxSystemSubjects.ItemHeight = 31;
+            this.listBoxSystemSubjects.Location = new System.Drawing.Point(140, 636);
+            this.listBoxSystemSubjects.Name = "listBoxSystemSubjects";
+            this.listBoxSystemSubjects.Size = new System.Drawing.Size(694, 252);
+            this.listBoxSystemSubjects.TabIndex = 35;
+            // 
             // AddTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.listBoxSystemSubjects);
             this.Controls.Add(this.labelSuccess);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.labelSubjectsToBeTeach);
@@ -223,7 +224,6 @@
             this.Controls.Add(this.buttonRemoveSubjectFromTeacher);
             this.Controls.Add(this.buttonAddSubjectToTeacher);
             this.Controls.Add(this.listBoxTeacherSubjects);
-            this.Controls.Add(this.listBoxSystemSubjects);
             this.Controls.Add(this.labelAddTeacherTitle);
             this.Controls.Add(this.labelTeacherName);
             this.Controls.Add(this.labelTeacherLastName);
@@ -251,7 +251,6 @@
         private System.Windows.Forms.TextBox textBoxTeacherDocument;
         private System.Windows.Forms.Button buttonAddTeacher;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.ListBox listBoxSystemSubjects;
         private System.Windows.Forms.ListBox listBoxTeacherSubjects;
         private System.Windows.Forms.Button buttonAddSubjectToTeacher;
         private System.Windows.Forms.Button buttonRemoveSubjectFromTeacher;
@@ -259,5 +258,6 @@
         private System.Windows.Forms.Label labelSubjectsToBeTeach;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Label labelSuccess;
+        private System.Windows.Forms.ListBox listBoxSystemSubjects;
     }
 }

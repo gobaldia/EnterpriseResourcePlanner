@@ -31,6 +31,7 @@
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.labelMainModuleTitle = new System.Windows.Forms.Label();
             this.buttonInitialiceData = new System.Windows.Forms.Button();
+            this.labelDataGenerated = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -54,7 +55,7 @@
             // 
             // buttonInitialiceData
             // 
-            this.buttonInitialiceData.Location = new System.Drawing.Point(1336, 867);
+            this.buttonInitialiceData.Location = new System.Drawing.Point(1277, 856);
             this.buttonInitialiceData.Name = "buttonInitialiceData";
             this.buttonInitialiceData.Size = new System.Drawing.Size(477, 61);
             this.buttonInitialiceData.TabIndex = 2;
@@ -62,11 +63,24 @@
             this.buttonInitialiceData.UseVisualStyleBackColor = true;
             this.buttonInitialiceData.Click += new System.EventHandler(this.buttonInitialiceData_Click);
             // 
+            // labelDataGenerated
+            // 
+            this.labelDataGenerated.AutoSize = true;
+            this.labelDataGenerated.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.900001F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDataGenerated.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.labelDataGenerated.Location = new System.Drawing.Point(1494, 937);
+            this.labelDataGenerated.Name = "labelDataGenerated";
+            this.labelDataGenerated.Size = new System.Drawing.Size(260, 39);
+            this.labelDataGenerated.TabIndex = 3;
+            this.labelDataGenerated.Text = "Data generated.";
+            this.labelDataGenerated.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1900, 1000);
+            this.Controls.Add(this.labelDataGenerated);
             this.Controls.Add(this.buttonInitialiceData);
             this.Controls.Add(this.labelMainModuleTitle);
             this.Controls.Add(this.mainMenuStrip);
@@ -83,6 +97,7 @@
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.Label labelMainModuleTitle;
         private System.Windows.Forms.Button buttonInitialiceData;
+        private System.Windows.Forms.Label labelDataGenerated;
     }
 }
 

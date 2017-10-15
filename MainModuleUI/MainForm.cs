@@ -1,4 +1,7 @@
-﻿using FrameworkCommon.MethodParameters;
+﻿using CoreEntities.Entities;
+using CoreLogic;
+using FrameworkCommon;
+using FrameworkCommon.MethodParameters;
 using MainComponents;
 using System;
 using System.Collections.Generic;
@@ -76,7 +79,22 @@ namespace MainModuleUI
 
         private void buttonInitialiceData_Click(object sender, EventArgs e)
         {
+            Subject subject1 = new Subject(1234, "Maths");
+            Subject subject2 = new Subject(5678, "Physics");
+            Subject subject3 = new Subject(9101, "Chemistry");
+            Subject subject4 = new Subject(8529, "History");
+            Subject subject5 = new Subject(6547, "Geography");
+            Subject subject6 = new Subject(0002, "Algorithms");
 
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject1);
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject2);
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject3);
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject4);
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject5);
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject6);
+
+            this.buttonInitialiceData.Enabled = false;
+            this.labelDataGenerated.Visible = true;
         }
     }
 }

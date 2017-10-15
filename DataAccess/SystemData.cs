@@ -60,7 +60,7 @@ namespace DataAccess
         #region Subject Methods
         public Subject GetSubjectByCode(int subjectCode)
         {
-            return this.subjects.Find(item => item.Code == subjectCode);
+            return this.subjects.Find(item => item.GetCode() == subjectCode);
         }
         #endregion
     }
