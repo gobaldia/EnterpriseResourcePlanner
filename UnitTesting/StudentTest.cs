@@ -1,4 +1,5 @@
 ﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,39 @@ namespace UnitTesting
             Student secondStudent = new Student(name2, lastName2, document2);
 
             Assert.IsFalse(firstStudent.Equals(secondStudent));
+        }
+
+        [TestMethod]
+        public void GetFullNameCorrectly()
+        {
+            string name = Utility.GetRandomName();
+            string lastName = Utility.GetRandomLastName();
+            string document = "1234567-8";
+
+            Student firstStudent = new Student(name, lastName, document);
+
+            Assert.AreEqual(string.Format("{0} {1}", name, lastName), firstStudent.GetFullName());
+        }
+
+        [TestMethod]
+        public void ThrowExceptionOnInvalidDocumentFormat()
+        {
+            try
+            {
+                string name = Utility.GetRandomName();
+                string lastName = Utility.GetRandomLastName();
+                string document = "12345678"; // Invalid format
+
+                Student firstStudent = new Student(name, lastName, document);
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Invalid document number format."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
         }
     }
 }
