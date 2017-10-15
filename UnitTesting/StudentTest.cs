@@ -298,6 +298,52 @@ namespace UnitTesting
             Assert.AreEqual(modifiedStudent.GetLastName(), modifyInput.NewLastName);
         }
 
+        [TestMethod]
+        public void ModifyStudentSubjects()
+        {
+            SystemData.GetInstance.Reset();
+
+            #region Add subjects to the system
+            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            Subject subject1 = new Subject(1234, "Math");
+            Subject subject2 = new Subject(3216, "Physics");
+            Subject subject3 = new Subject(7418, "Chemistry");
+            Subject subject4 = new Subject(9632, "History");
+            systemSubjects.Add(subject1);
+            systemSubjects.Add(subject2);
+            systemSubjects.Add(subject3);
+            systemSubjects.Add(subject4);
+            #endregion
+
+            #region Add students with subjects to the system
+            List<Subject> studentSubjects = new List<Subject>();
+            studentSubjects.Add(subject1);
+            studentSubjects.Add(subject2);
+            studentSubjects.Add(subject3);
+            var input = new AddStudentInput
+            {
+                DocumentNumber = "1234567-8",
+                Name = Utility.GetRandomName(),
+                LastName = Utility.GetRandomLastName(),
+                Subjects = studentSubjects
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            #endregion
+
+            List<Subject> newSubjects = new List<Subject>();
+            newSubjects.Add(subject1);
+            newSubjects.Add(subject2);
+            newSubjects.Add(subject4);
+
+            var modifyInput = new ModifyStudentInput();
+            modifyInput.NewSubjects = newSubjects;
+            modifyInput.StudentNumber = 1;
+            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+
+            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(1);
+
+            Assert.IsTrue(Utility.CompareLists(modifiedStudent.GetSubjects(), input.NewSubjects));
+        }
 
         #region Extra methods
         private Student CreateRandomStudent()
