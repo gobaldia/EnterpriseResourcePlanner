@@ -45,6 +45,9 @@ namespace CoreLogic
             bool lastNameWasModified = ModifyLastName(studentToModify, input.NewLastName);
             bool subjectsWereModified = ModifySubjects(studentToModify, input.NewSubjects);
 
+            studentToModify.SetPickUpService(input.HavePickupService);
+            bool locationHaveChange = ModifyLocation(studentToModify, input.NewLocation);
+
             if (!nameWasModified && !lastNameWasModified && !subjectsWereModified)
                 throw new CoreException("No modifications have been made.");
         }
@@ -105,6 +108,38 @@ namespace CoreLogic
         private bool CheckIfSubjectsHaveChange(List<Subject> newSubjects, List<Subject> studentSubjects)
         {
             return newSubjects != null && !newSubjects.SequenceEqual(studentSubjects);
+        }
+        private bool ModifyLocation(Student studentToModify, Location newLocation)
+        {
+            bool locationWasModified = false;
+
+            if (LocationsAreDifferent(studentToModify, newLocation))
+            {
+                studentToModify.SetLocation(newLocation);
+                locationWasModified = true;
+            }
+
+            return locationWasModified;
+        }
+        private bool LocationsAreDifferent(Student studentToModify, Location newLocation)
+        {
+            bool result = false;
+
+            if (newLocation == null && studentToModify.GetLocation() != null)
+                result = true;
+            else if (newLocation != null && studentToModify.GetLocation() == null)
+                result = true;
+            else if (BothLocationNotNull(studentToModify, newLocation) &&
+                !newLocation.Equals(studentToModify.GetLocation()))
+            {
+                result = true;
+            }   
+
+            return result;
+        }        
+        private bool BothLocationNotNull(Student studentToModify, Location newLocation)
+        {
+            return newLocation != null && studentToModify.GetLocation() != null;
         }
         #endregion
     }

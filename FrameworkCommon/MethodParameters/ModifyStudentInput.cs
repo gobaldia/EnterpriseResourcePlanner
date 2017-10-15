@@ -13,5 +13,7 @@ namespace FrameworkCommon.MethodParameters
         public string NewName { get; set; }
         public string NewLastName { get; set; }
         public List<Subject> NewSubjects { get; set; }
+        public Location NewLocation { get; set; }
+        public bool HavePickupService { get; set; } = false;
     }
 }
