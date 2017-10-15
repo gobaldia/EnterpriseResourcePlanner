@@ -56,6 +56,10 @@ namespace CoreEntities.Entities
         {
             return this.subjects;
         }
+        public static int GetNextStudentNumber()
+        {
+            return studentsCount + 1;
+        }
 
         public void AddSubjectToStudent(Subject newSubject)
         {

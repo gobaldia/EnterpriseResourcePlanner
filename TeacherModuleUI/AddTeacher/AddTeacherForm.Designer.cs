@@ -234,7 +234,7 @@
             this.Controls.Add(this.buttonAddTeacher);
             this.Controls.Add(this.buttonCancel);
             this.Name = "AddTeacherForm";
-            this.Text = "AddTeacherForm";
+            this.Text = "Add Teacher";
             this.ResumeLayout(false);
             this.PerformLayout();
 

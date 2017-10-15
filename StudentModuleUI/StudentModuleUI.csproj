@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B217582-D885-40EF-B5FB-2E3413D3DE4C}</ProjectGuid>
+    <ProjectGuid>{A04FA460-E035-40AD-B796-B886705180A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MainModuleUI</RootNamespace>
-    <AssemblyName>MainModuleUI</AssemblyName>
+    <RootNamespace>StudentModuleUI</RootNamespace>
+    <AssemblyName>StudentModuleUI</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,16 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="AddStudent\AddStudentAction.cs" />
+    <Compile Include="AddStudent\AddStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="AddStudent\AddStudentForm.Designer.cs">
+      <DependentUpon>AddStudentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="StudentModule.cs" />
+    <EmbeddedResource Include="AddStudent\AddStudentForm.resx">
+      <DependentUpon>AddStudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,22 +96,6 @@
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
       <Name>FrameworkCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MainComponents\MainComponents.csproj">
-      <Project>{A99F88CA-AFF1-4F83-A0A0-615DC157FDFC}</Project>
-      <Name>MainComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StudentModuleUI\StudentModuleUI.csproj">
-      <Project>{A04FA460-E035-40AD-B796-B886705180A1}</Project>
-      <Name>StudentModuleUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SubjectModuleUI\SubjectModuleUI.csproj">
-      <Project>{F750F118-4F67-47C3-95B0-58B2F9215969}</Project>
-      <Name>SubjectModuleUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeacherModuleUI\TeacherModuleUI.csproj">
-      <Project>{DD137A57-F2C3-4E2C-952B-1F3B1D32CDB2}</Project>
-      <Name>TeacherModuleUI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -95,7 +95,7 @@
             this.Controls.Add(this.listBoxTeacherSubjects);
             this.Controls.Add(this.labelListOfTeacherTitle);
             this.Name = "ListOfTeachersForm";
-            this.Text = "ListOfTeachersForm";
+            this.Text = "List of Teachers";
             this.ResumeLayout(false);
             this.PerformLayout();
 

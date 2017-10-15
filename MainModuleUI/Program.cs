@@ -1,5 +1,7 @@
 ﻿using CoreGeneralization;
 using MainComponents;
+using StudentModuleUI;
+using StudentModuleUI.AddStudent;
 using SubjectModuleUI;
 using SubjectModuleUI.AddSubject;
 using System;
@@ -33,6 +35,7 @@ namespace MainModuleUI
             MainModule mainModule = new MainModule();
             
             mainModule.AddModule(CreateTeacherModule());
+            mainModule.AddModule(CreateStudentModule());
             mainModule.AddModule(CreateSubjectsModule());
 
             Application.Run(new MainForm(mainModule));
@@ -52,6 +55,16 @@ namespace MainModuleUI
             teacherActions.Add(listAction);
 
             return new TeacherModule(teacherActions);
+        }
+
+        private static Module CreateStudentModule()
+        {
+            List<IAction> studentActions = new List<IAction>();
+
+            IAction addAction = new AddStudentAction();
+            studentActions.Add(addAction);
+
+            return new StudentModule(studentActions);
         }
 
         private static Module CreateSubjectsModule()

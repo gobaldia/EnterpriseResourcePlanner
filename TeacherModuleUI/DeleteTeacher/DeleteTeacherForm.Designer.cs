@@ -198,7 +198,7 @@
             this.Controls.Add(this.buttonDeleteTeacher);
             this.Controls.Add(this.buttonCancel);
             this.Name = "DeleteTeacherForm";
-            this.Text = "DeleteTeacher";
+            this.Text = "Delete Teacher";
             this.ResumeLayout(false);
             this.PerformLayout();
 
