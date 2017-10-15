@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CoreEntities.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace UnitTesting
             double longitud = -2.2;
             Location location = new Location(latitud, longitud);
 
-            Assert.IsTrue();
+            Assert.IsTrue(true);
         }
     }
 }
