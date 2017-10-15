@@ -116,8 +116,7 @@ namespace UnitTesting
             SystemData.GetInstance.Reset();
 
             Teacher newTeacher = this.CreateRandomTeacher();
-            var input = new AddTeacherInput { aTeacher = newTeacher };
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(input);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
 
             Assert.IsNotNull(this.FindTeacherOnSystem(newTeacher.GetDocumentNumber()));
         }
@@ -173,9 +172,7 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Teacher firstTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-
-            var firtTeacherInput = new AddTeacherInput { aTeacher = firstTeacher };
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firtTeacherInput);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firstTeacher);
             
             Teacher teacherFound = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
             Assert.IsNotNull(teacherFound);
@@ -226,6 +223,24 @@ namespace UnitTesting
             List<Subject> teacherSubjects = newTeacher.GetSubjects();
 
             Assert.IsFalse(teacherSubjects.Exists(item => item.Equals(subjectToBeAdded1)));
+        }
+
+        [TestMethod]
+        public void ModifyTeacherName()
+        {
+            SystemData.GetInstance.Reset();
+
+            Teacher newTeacher = new Teacher("Rodigo", Utility.GetRandomLastName(), "1234567-8");
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+
+            ModifyTeacherInput input = new ModifyTeacherInput();
+            input.NewName = "Santiago";
+            input.DocumentNumber = "1234567-8";
+            ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+
+            Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
+
+            Assert.AreEqual(modifiedTeacher.GetName().Equals(input.NewName));
         }
 
         #region Extra Methods

@@ -14,12 +14,12 @@ namespace CoreLogic
     {
         private List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
 
-        public void AddTeacher(AddTeacherInput input)
+        public void AddTeacher(Teacher newTeacher)
         {
-            if (this.IsTeacherInSystem(input.aTeacher))
+            if (this.IsTeacherInSystem(newTeacher))
                 throw new CoreException("Teacher already exists.");
 
-            this.systemTeachers.Add(input.aTeacher);
+            this.systemTeachers.Add(newTeacher);
         }
 
         public Teacher GetTeacherByDocumentNumber(string documentNumber)
