@@ -56,5 +56,13 @@ namespace CoreEntities.Entities
         {
             return this.subjects;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Student)
+                return this.GetDocumentNumber().Equals(((Student)obj).GetDocumentNumber());
+            else
+                return false;
+        }
     }
 }
