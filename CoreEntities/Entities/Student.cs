@@ -57,6 +57,11 @@ namespace CoreEntities.Entities
             return this.subjects;
         }
 
+        public void AddSubjectToStudent(Subject newSubject)
+        {
+            this.subjects.Add(newSubject);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Student)
