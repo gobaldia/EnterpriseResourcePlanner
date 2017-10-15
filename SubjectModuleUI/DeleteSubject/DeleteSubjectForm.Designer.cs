@@ -34,6 +34,7 @@
             this.buttonDeleteSubject = new System.Windows.Forms.Button();
             this.labelActionResult = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelDeleteSubjectTitle
@@ -53,6 +54,7 @@
             this.comboBoxSelectSubjectToDelete.Name = "comboBoxSelectSubjectToDelete";
             this.comboBoxSelectSubjectToDelete.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSelectSubjectToDelete.TabIndex = 1;
+            this.comboBoxSelectSubjectToDelete.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectSubjectToDelete_SelectedIndexChanged);
             // 
             // labelSelectSubjectToDelete
             // 
@@ -65,7 +67,8 @@
             // 
             // buttonDeleteSubject
             // 
-            this.buttonDeleteSubject.Location = new System.Drawing.Point(16, 123);
+            this.buttonDeleteSubject.Enabled = false;
+            this.buttonDeleteSubject.Location = new System.Drawing.Point(19, 189);
             this.buttonDeleteSubject.Name = "buttonDeleteSubject";
             this.buttonDeleteSubject.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteSubject.TabIndex = 3;
@@ -84,7 +87,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(16, 152);
+            this.buttonCancel.Location = new System.Drawing.Point(19, 218);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -92,11 +95,23 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(16, 107);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 16);
+            this.labelError.TabIndex = 6;
+            this.labelError.Visible = false;
+            // 
             // DeleteSubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(574, 277);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelActionResult);
             this.Controls.Add(this.buttonDeleteSubject);
@@ -118,5 +133,6 @@
         private System.Windows.Forms.Button buttonDeleteSubject;
         private System.Windows.Forms.Label labelActionResult;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelError;
     }
 }

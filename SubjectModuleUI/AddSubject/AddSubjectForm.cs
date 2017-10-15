@@ -66,44 +66,7 @@ namespace SubjectModuleUI.AddSubject
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-
+            this.Dispose();
         }
-
-        //private void buttonAdd_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        AgregarASistema();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.labelError.Visible = true;
-        //        this.labelError.Text = ex.Message;
-        //    }
-        //    var code = textBoxSubjectCode.Text;
-
-        //}
-
-
-        //private void AgregarASistema()
-        //{
-        //    if(Valida())
-        //    {
-        //        haceLaMagia();
-        //    }
-
-        //}
-
-        //private bool Valida()
-        //{
-        //    if(estaEnSistema)
-        //    {
-        //        throw new Exception("Ya exista");
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
     }
 }

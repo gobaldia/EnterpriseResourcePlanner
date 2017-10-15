@@ -22,7 +22,7 @@ namespace CoreLogic
 
             AddStudentSubjects(newStudent, input.Subjects);
 
-            if(input.Location != null)
+            if (input.Location != null)
             {
                 newStudent.SetPickUpService(true);
                 newStudent.SetLocation(input.Location);
@@ -62,6 +62,11 @@ namespace CoreLogic
                 throw new CoreException("Student not found.");
 
             return studentFound;
+        }
+
+        public List<Student> GetStudents()
+        {
+            return this.systemStudents;
         }
 
         #region Utility methods
@@ -136,10 +141,10 @@ namespace CoreLogic
                 !newLocation.Equals(studentToModify.GetLocation()))
             {
                 result = true;
-            }   
+            }
 
             return result;
-        }        
+        }
         private bool BothLocationNotNull(Student studentToModify, Location newLocation)
         {
             return newLocation != null && studentToModify.GetLocation() != null;
