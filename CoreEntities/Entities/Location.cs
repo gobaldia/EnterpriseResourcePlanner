@@ -1,36 +1,52 @@
-﻿using System;
+﻿using CoreEntities.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CoreEntities.Entities
 {
     public class Location
     {
-        private decimal latitud;
-        private decimal longitud;
+        private Regex latitudRegex = new Regex("^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$");
+        private Regex longitudRegex = new Regex("^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$");
+        private double latitud;
+        private double longitud;
 
-        public Location(decimal latitudToBeSet, decimal longitudToBeSet)
+        public Location(double latitudToBeSet, double longitudToBeSet)
         {
+            if (!latitudRegex.IsMatch(latitudToBeSet.ToString()))
+                throw new CoreException("Invalid latitud format.");
+
+            if (!longitudRegex.IsMatch(longitudToBeSet.ToString()))
+                throw new CoreException("Invalid longitud format.");
+
             this.latitud = latitudToBeSet;
             this.longitud = longitudToBeSet;
         }
 
-        public decimal GetLatitud()
+        public double GetLatitud()
         {
             return this.latitud;
         }
-        public decimal GetLongitud()
+        public double GetLongitud()
         {
             return this.longitud;
         }
-        public void SetLatitud(decimal latitudToBeSet)
+        public void SetLatitud(double latitudToBeSet)
         {
+            if (!latitudRegex.IsMatch(latitudToBeSet.ToString()))
+                throw new CoreException("Invalid latitud format.");
+
             this.latitud = latitudToBeSet;
         }
-        public void SetLongitud(decimal longitudToBeSet)
+        public void SetLongitud(double longitudToBeSet)
         {
+            if (!longitudRegex.IsMatch(longitudToBeSet.ToString()))
+                throw new CoreException("Invalid longitud format.");
+
             this.longitud = longitudToBeSet;
         }
 

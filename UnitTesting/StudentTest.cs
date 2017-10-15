@@ -207,15 +207,13 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
 
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
-            decimal latitud = 1.2M;
-            decimal longitud = 2.2M;
+            double latitud = 1.2;
+            double longitud = 2.2;
             Location location = new Location(latitud, longitud);
             studentFound.SetLocation(location);
 
             Assert.IsTrue(studentFound.GetLocation().Equals(location));
         }
-
-
 
         #region Extra methods
         private Student CreateRandomStudent()

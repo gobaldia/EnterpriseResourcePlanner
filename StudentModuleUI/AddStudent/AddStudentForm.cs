@@ -41,6 +41,21 @@ namespace StudentModuleUI.AddStudent
             this.Dispose();
         }
 
+        private void radioButtonPickUp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonYesPickUp.Checked)
+            {
+                textBoxLatitud.Enabled = true;
+                textBoxLongitud.Enabled = true;
+            }
+            else
+            {
+                textBoxLatitud.Text = string.Empty;
+                textBoxLongitud.Text = string.Empty;
+                textBoxLatitud.Enabled = false;
+                textBoxLongitud.Enabled = false;
+            }
+        }
 
         #region Utility methods
         private void SetDefaultWindowsSize()
@@ -57,6 +72,6 @@ namespace StudentModuleUI.AddStudent
                 this.listBoxSystemSubjects.Items.Add(subject);
             }
         }
-        #endregion
+        #endregion        
     }
 }

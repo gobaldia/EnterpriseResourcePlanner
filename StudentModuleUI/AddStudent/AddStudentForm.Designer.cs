@@ -47,13 +47,23 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelStudentNumber = new System.Windows.Forms.Label();
             this.textBoxStudentNumber = new System.Windows.Forms.TextBox();
+            this.radioButtonYesPickUp = new System.Windows.Forms.RadioButton();
+            this.radioButtonNoPickUp = new System.Windows.Forms.RadioButton();
+            this.labelPickupService = new System.Windows.Forms.Label();
+            this.labelLocation = new System.Windows.Forms.Label();
+            this.textBoxLatitud = new System.Windows.Forms.TextBox();
+            this.textBoxLongitud = new System.Windows.Forms.TextBox();
+            this.labelLatitud = new System.Windows.Forms.Label();
+            this.labelLongitud = new System.Windows.Forms.Label();
+            this.groupBoxPickUpServiceRadioButtons = new System.Windows.Forms.GroupBox();
+            this.groupBoxPickUpServiceRadioButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxSystemSubjects
             // 
             this.listBoxSystemSubjects.FormattingEnabled = true;
             this.listBoxSystemSubjects.ItemHeight = 31;
-            this.listBoxSystemSubjects.Location = new System.Drawing.Point(163, 611);
+            this.listBoxSystemSubjects.Location = new System.Drawing.Point(163, 681);
             this.listBoxSystemSubjects.Name = "listBoxSystemSubjects";
             this.listBoxSystemSubjects.Size = new System.Drawing.Size(694, 252);
             this.listBoxSystemSubjects.TabIndex = 52;
@@ -82,7 +92,7 @@
             // 
             this.labelSubjectsToBeAdded.AutoSize = true;
             this.labelSubjectsToBeAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSubjectsToBeAdded.Location = new System.Drawing.Point(1070, 565);
+            this.labelSubjectsToBeAdded.Location = new System.Drawing.Point(1070, 635);
             this.labelSubjectsToBeAdded.Name = "labelSubjectsToBeAdded";
             this.labelSubjectsToBeAdded.Size = new System.Drawing.Size(300, 36);
             this.labelSubjectsToBeAdded.TabIndex = 49;
@@ -92,7 +102,7 @@
             // 
             this.labelSystemSubjects.AutoSize = true;
             this.labelSystemSubjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSystemSubjects.Location = new System.Drawing.Point(160, 565);
+            this.labelSystemSubjects.Location = new System.Drawing.Point(160, 635);
             this.labelSystemSubjects.Name = "labelSystemSubjects";
             this.labelSystemSubjects.Size = new System.Drawing.Size(271, 36);
             this.labelSystemSubjects.TabIndex = 48;
@@ -101,7 +111,7 @@
             // buttonRemoveSubjectFromStudent
             // 
             this.buttonRemoveSubjectFromStudent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRemoveSubjectFromStudent.Location = new System.Drawing.Point(917, 756);
+            this.buttonRemoveSubjectFromStudent.Location = new System.Drawing.Point(917, 826);
             this.buttonRemoveSubjectFromStudent.Name = "buttonRemoveSubjectFromStudent";
             this.buttonRemoveSubjectFromStudent.Size = new System.Drawing.Size(100, 50);
             this.buttonRemoveSubjectFromStudent.TabIndex = 47;
@@ -112,7 +122,7 @@
             // buttonAddSubjectToStudent
             // 
             this.buttonAddSubjectToStudent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddSubjectToStudent.Location = new System.Drawing.Point(917, 668);
+            this.buttonAddSubjectToStudent.Location = new System.Drawing.Point(917, 738);
             this.buttonAddSubjectToStudent.Name = "buttonAddSubjectToStudent";
             this.buttonAddSubjectToStudent.Size = new System.Drawing.Size(100, 50);
             this.buttonAddSubjectToStudent.TabIndex = 46;
@@ -124,7 +134,7 @@
             // 
             this.listBoxStudentSubjects.FormattingEnabled = true;
             this.listBoxStudentSubjects.ItemHeight = 31;
-            this.listBoxStudentSubjects.Location = new System.Drawing.Point(1067, 611);
+            this.listBoxStudentSubjects.Location = new System.Drawing.Point(1067, 681);
             this.listBoxStudentSubjects.Name = "listBoxStudentSubjects";
             this.listBoxStudentSubjects.Size = new System.Drawing.Size(694, 252);
             this.listBoxStudentSubjects.TabIndex = 45;
@@ -228,11 +238,106 @@
             this.textBoxStudentNumber.Size = new System.Drawing.Size(380, 38);
             this.textBoxStudentNumber.TabIndex = 54;
             // 
+            // radioButtonYesPickUp
+            // 
+            this.radioButtonYesPickUp.AutoSize = true;
+            this.radioButtonYesPickUp.Location = new System.Drawing.Point(45, 20);
+            this.radioButtonYesPickUp.Name = "radioButtonYesPickUp";
+            this.radioButtonYesPickUp.Size = new System.Drawing.Size(101, 36);
+            this.radioButtonYesPickUp.TabIndex = 55;
+            this.radioButtonYesPickUp.Text = "Yes";
+            this.radioButtonYesPickUp.UseVisualStyleBackColor = true;
+            this.radioButtonYesPickUp.CheckedChanged += new System.EventHandler(this.radioButtonPickUp_CheckedChanged);
+            // 
+            // radioButtonNoPickUp
+            // 
+            this.radioButtonNoPickUp.AutoSize = true;
+            this.radioButtonNoPickUp.Checked = true;
+            this.radioButtonNoPickUp.Location = new System.Drawing.Point(162, 20);
+            this.radioButtonNoPickUp.Name = "radioButtonNoPickUp";
+            this.radioButtonNoPickUp.Size = new System.Drawing.Size(88, 36);
+            this.radioButtonNoPickUp.TabIndex = 56;
+            this.radioButtonNoPickUp.TabStop = true;
+            this.radioButtonNoPickUp.Text = "No";
+            this.radioButtonNoPickUp.UseVisualStyleBackColor = true;
+            this.radioButtonNoPickUp.CheckedChanged += new System.EventHandler(this.radioButtonPickUp_CheckedChanged);
+            // 
+            // labelPickupService
+            // 
+            this.labelPickupService.AutoSize = true;
+            this.labelPickupService.Location = new System.Drawing.Point(1076, 223);
+            this.labelPickupService.Name = "labelPickupService";
+            this.labelPickupService.Size = new System.Drawing.Size(284, 32);
+            this.labelPickupService.TabIndex = 57;
+            this.labelPickupService.Text = "Have pickup service?";
+            // 
+            // labelLocation
+            // 
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Location = new System.Drawing.Point(1076, 367);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(264, 32);
+            this.labelLocation.TabIndex = 58;
+            this.labelLocation.Text = "Pickup coordinates:";
+            // 
+            // textBoxLatitud
+            // 
+            this.textBoxLatitud.Enabled = false;
+            this.textBoxLatitud.Location = new System.Drawing.Point(1276, 430);
+            this.textBoxLatitud.MaxLength = 10;
+            this.textBoxLatitud.Name = "textBoxLatitud";
+            this.textBoxLatitud.Size = new System.Drawing.Size(253, 38);
+            this.textBoxLatitud.TabIndex = 59;
+            // 
+            // textBoxLongitud
+            // 
+            this.textBoxLongitud.Enabled = false;
+            this.textBoxLongitud.Location = new System.Drawing.Point(1276, 494);
+            this.textBoxLongitud.MaxLength = 10;
+            this.textBoxLongitud.Name = "textBoxLongitud";
+            this.textBoxLongitud.Size = new System.Drawing.Size(253, 38);
+            this.textBoxLongitud.TabIndex = 60;
+            // 
+            // labelLatitud
+            // 
+            this.labelLatitud.AutoSize = true;
+            this.labelLatitud.Location = new System.Drawing.Point(1153, 436);
+            this.labelLatitud.Name = "labelLatitud";
+            this.labelLatitud.Size = new System.Drawing.Size(110, 32);
+            this.labelLatitud.TabIndex = 61;
+            this.labelLatitud.Text = "Latitud:";
+            // 
+            // labelLongitud
+            // 
+            this.labelLongitud.AutoSize = true;
+            this.labelLongitud.Location = new System.Drawing.Point(1129, 500);
+            this.labelLongitud.Name = "labelLongitud";
+            this.labelLongitud.Size = new System.Drawing.Size(134, 32);
+            this.labelLongitud.TabIndex = 62;
+            this.labelLongitud.Text = "Longitud:";
+            // 
+            // groupBoxPickUpServiceRadioButtons
+            // 
+            this.groupBoxPickUpServiceRadioButtons.Controls.Add(this.radioButtonYesPickUp);
+            this.groupBoxPickUpServiceRadioButtons.Controls.Add(this.radioButtonNoPickUp);
+            this.groupBoxPickUpServiceRadioButtons.Location = new System.Drawing.Point(1122, 258);
+            this.groupBoxPickUpServiceRadioButtons.Name = "groupBoxPickUpServiceRadioButtons";
+            this.groupBoxPickUpServiceRadioButtons.Size = new System.Drawing.Size(325, 104);
+            this.groupBoxPickUpServiceRadioButtons.TabIndex = 63;
+            this.groupBoxPickUpServiceRadioButtons.TabStop = false;
+            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.groupBoxPickUpServiceRadioButtons);
+            this.Controls.Add(this.labelLongitud);
+            this.Controls.Add(this.labelLatitud);
+            this.Controls.Add(this.textBoxLongitud);
+            this.Controls.Add(this.textBoxLatitud);
+            this.Controls.Add(this.labelLocation);
+            this.Controls.Add(this.labelPickupService);
             this.Controls.Add(this.textBoxStudentNumber);
             this.Controls.Add(this.labelStudentNumber);
             this.Controls.Add(this.listBoxSystemSubjects);
@@ -254,6 +359,8 @@
             this.Controls.Add(this.buttonCancel);
             this.Name = "AddStudentForm";
             this.Text = "Add Student";
+            this.groupBoxPickUpServiceRadioButtons.ResumeLayout(false);
+            this.groupBoxPickUpServiceRadioButtons.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +387,14 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelStudentNumber;
         private System.Windows.Forms.TextBox textBoxStudentNumber;
+        private System.Windows.Forms.RadioButton radioButtonYesPickUp;
+        private System.Windows.Forms.RadioButton radioButtonNoPickUp;
+        private System.Windows.Forms.Label labelPickupService;
+        private System.Windows.Forms.Label labelLocation;
+        private System.Windows.Forms.TextBox textBoxLatitud;
+        private System.Windows.Forms.TextBox textBoxLongitud;
+        private System.Windows.Forms.Label labelLatitud;
+        private System.Windows.Forms.Label labelLongitud;
+        private System.Windows.Forms.GroupBox groupBoxPickUpServiceRadioButtons;
     }
 }
