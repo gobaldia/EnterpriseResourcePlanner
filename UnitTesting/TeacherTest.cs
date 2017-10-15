@@ -257,6 +257,42 @@ namespace UnitTesting
             Assert.AreEqual(modifiedTeacher.GetLastName(), input.NewLastName);
         }
 
+        [TestMethod]
+        public void ModifyTeacherSubjects()
+        {
+            SystemData.GetInstance.Reset();
+
+            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            Subject subject1 = new Subject(1234, "Math");
+            Subject subject2 = new Subject(3216, "Physics");
+            Subject subject3 = new Subject(7418, "Chemistry");
+            Subject subject4 = new Subject(9632, "History");
+            systemSubjects.Add(subject1);
+            systemSubjects.Add(subject2);
+            systemSubjects.Add(subject3);
+            systemSubjects.Add(subject4);
+
+            Teacher newTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), "1234567-8");
+            newTeacher.AddSubjectToTeach(subject1);
+            newTeacher.AddSubjectToTeach(subject2);
+            newTeacher.AddSubjectToTeach(subject3);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+
+            List<Subject> newSubjects = new List<Subject>();
+            newSubjects.Add(subject1);
+            newSubjects.Add(subject2);
+            newSubjects.Add(subject4);
+
+            ModifyTeacherInput input = new ModifyTeacherInput();
+            input.NewSubjects = newSubjects;
+            input.DocumentNumber = "1234567-8";
+            ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+
+            Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
+
+            Assert.AreEqual(Utility.CompareLists(modifiedTeacher.GetSubjects, input.NewSubjects);
+        }
+
         #region Extra Methods
         private Teacher FindTeacherOnSystem(string documentNumber)
         {
@@ -268,6 +304,7 @@ namespace UnitTesting
             Teacher newTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), Utility.GetRandomDocument());
             return newTeacher;
         }
+        
         #endregion
     }
 }
