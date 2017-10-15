@@ -127,6 +127,33 @@ namespace UnitTesting
             Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
 
+        [TestMethod]
+        public void DoNotAllowToAddDuplicateStudentToSystem()
+        {
+            try
+            {
+                SystemData.GetInstance.Reset();
+
+                Student firstStudent = this.CreateRandomStudent();
+                Student secondStudent = new Student(firstStudent.GetName(), firstStudent.GetLastName(), firstStudent.GetDocumentNumber());
+
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(secondStudent);
+
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Student already exists."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
