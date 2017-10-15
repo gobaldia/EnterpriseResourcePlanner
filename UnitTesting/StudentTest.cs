@@ -342,7 +342,7 @@ namespace UnitTesting
 
             Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(1);
 
-            Assert.IsTrue(Utility.CompareLists(modifiedStudent.GetSubjects(), input.NewSubjects));
+            Assert.IsTrue(Utility.CompareLists(modifiedStudent.GetSubjects(), modifyInput.NewSubjects));
         }
 
         #region Extra methods

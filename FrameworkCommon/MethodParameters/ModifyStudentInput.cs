@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreEntities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace FrameworkCommon.MethodParameters
         public int StudentNumber { get; set; }
         public string NewName { get; set; }
         public string NewLastName { get; set; }
+        public List<Subject> NewSubjects { get; set; }
     }
 }
