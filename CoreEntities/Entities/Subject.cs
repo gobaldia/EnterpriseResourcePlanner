@@ -49,7 +49,7 @@ namespace CoreEntities.Entities
 
         public override string ToString()
         {
-            return string.Format("Code: {0}, Name: {1}", this.Code, this.Name);
+            return string.Format("{0} - {1}", this.Code, this.Name);
         }
 
         public override int GetHashCode()

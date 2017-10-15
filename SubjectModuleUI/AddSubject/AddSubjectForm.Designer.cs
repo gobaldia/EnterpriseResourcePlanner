@@ -74,7 +74,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(115, 169);
+            this.buttonAdd.Location = new System.Drawing.Point(115, 191);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(115, 199);
+            this.buttonCancel.Location = new System.Drawing.Point(115, 221);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -104,9 +104,11 @@
             // labelOk
             // 
             this.labelOk.AutoSize = true;
+            this.labelOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.labelOk.Location = new System.Drawing.Point(13, 154);
             this.labelOk.Name = "labelOk";
-            this.labelOk.Size = new System.Drawing.Size(0, 13);
+            this.labelOk.Size = new System.Drawing.Size(0, 16);
             this.labelOk.TabIndex = 7;
             this.labelOk.Visible = false;
             // 
@@ -124,7 +126,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(435, 307);
             this.Controls.Add(this.labelAddSubjectTitle);
             this.Controls.Add(this.labelOk);
             this.Controls.Add(this.buttonCancel);

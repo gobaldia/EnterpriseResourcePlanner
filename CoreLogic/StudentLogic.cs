@@ -37,6 +37,11 @@ namespace CoreLogic
             return studentFound;
         }
 
+        public List<Student> GetStudents()
+        {
+            return this.systemStudents;
+        }
+
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
