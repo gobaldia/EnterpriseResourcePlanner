@@ -36,10 +36,10 @@ namespace SubjectModuleUI.ModifySubject
         {
             var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
             var subject = subjects.Find(s => s.Code == subjectCode);
-            var teachers = subject.Teachers;
-            for (int index = 0; index < teachers.Count; index++)
+            var profesores = subject.Teachers;
+            for (int index = 0; index < profesores.Count; index++)
             {
-                this.listBoxSubjectTeachers.Items.Add(subjects[index]);
+                this.listBoxSubjectTeachers.Items.Add(profesores[index]);
             }
         }
 
