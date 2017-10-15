@@ -8,9 +8,12 @@ namespace CoreEntities.Entities
 {
     public class Student : Person
     {
+        #region Properties
         private static int studentsCount = 0;
         private List<Subject> subjects { get; set; }
         private int studentNumber { get; set; }
+        private bool havePickUpService { get; set; }
+        #endregion
 
         public Student()
         {
@@ -28,6 +31,7 @@ namespace CoreEntities.Entities
             this.subjects = new List<Subject>();
         }
 
+        #region Methods
         public string GetName()
         {
             return base.Name;
@@ -52,6 +56,14 @@ namespace CoreEntities.Entities
         {
             base.LastName = newLastName;
         }
+        public void SetPickUpService(bool pickup)
+        {
+            this.havePickUpService = pickup;
+        }
+        public bool HavePickUpService()
+        {
+            return this.havePickUpService;
+        }
         public List<Subject> GetSubjects()
         {
             return this.subjects;
@@ -60,6 +72,7 @@ namespace CoreEntities.Entities
         {
             return studentsCount + 1;
         }
+        #endregion
 
         public void AddSubjectToStudent(Subject newSubject)
         {

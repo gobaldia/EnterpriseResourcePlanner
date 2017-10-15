@@ -194,7 +194,7 @@ namespace UnitTesting
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             studentFound.SetPickUpService(true);
 
-            Assert.IsNotNull(studentFound.GetPickUpService());
+            Assert.IsNotNull(studentFound.HavePickUpService());
         }
 
 
