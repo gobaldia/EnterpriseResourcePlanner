@@ -197,6 +197,25 @@ namespace UnitTesting
             Assert.IsNotNull(studentFound.HavePickUpService());
         }
 
+        [TestMethod]
+        public void AddStudentCoordinates()
+        {
+            SystemData.GetInstance.Reset();
+
+            string documentNumber = "1234567-8";
+            Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+
+            Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
+            decimal latitud = 1.2M;
+            decimal longitud = 2.2M;
+            Location location = new Locations(latitud, longitud);
+            studentFound.SetLocation(location);
+
+            Assert.IsNotNull(studentFound.HavePickUpService());
+        }
+
+
 
         #region Extra methods
         private Student CreateRandomStudent()
