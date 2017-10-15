@@ -39,7 +39,7 @@ namespace TeacherModuleUI.AddTeacher
                     Teacher newTeacher = new Teacher(name, lastName, document);
                     this.AddSubjectsToTeacher(newTeacher);
 
-                    ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(new AddTeacherInput { aTeacher = newTeacher });
+                    ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHERREGISTRATION; ;
                 }

@@ -130,11 +130,9 @@ namespace UnitTesting
 
                 Teacher firstTeacher = this.CreateRandomTeacher();
                 Teacher secondTeacher = new Teacher(firstTeacher.GetName(), firstTeacher.GetLastName(), firstTeacher.GetDocumentNumber());
-
-                var firtTeacherInput = new AddTeacherInput { aTeacher = firstTeacher };
-                var secondTeacherInput = new AddTeacherInput { aTeacher = secondTeacher };
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firtTeacherInput);
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(secondTeacherInput);
+                
+                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firstTeacher);
+                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(secondTeacher);
 
                 Assert.Fail();
             }
@@ -188,9 +186,7 @@ namespace UnitTesting
                 string documentNumber = "1234567-8";
                 Teacher teacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
 
-                var teacherInput = new AddTeacherInput { aTeacher = teacher };
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacherInput);
-
+                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher);
                 ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacher);
 
                 Assert.IsNull(this.FindTeacherOnSystem(teacher.GetDocumentNumber()));
@@ -240,7 +236,7 @@ namespace UnitTesting
 
             Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
 
-            Assert.AreEqual(modifiedTeacher.GetName().Equals(input.NewName));
+            Assert.AreEqual(modifiedTeacher.GetName(), input.NewName);
         }
 
         #region Extra Methods

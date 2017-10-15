@@ -1,5 +1,4 @@
-﻿using CoreEntities.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace FrameworkCommon.MethodParameters
 {
-    public class AddTeacherInput
+    public class ModifyTeacherInput
     {
-        public Teacher aTeacher { get; set; }
+        public string NewName { get; set; }
+        public string DocumentNumber { get; set; }
     }
 }

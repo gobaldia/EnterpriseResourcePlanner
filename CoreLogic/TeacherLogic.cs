@@ -36,6 +36,13 @@ namespace CoreLogic
             this.systemTeachers.Remove(teacherToDelete);
         }
 
+        public void ModifyTeacher(ModifyTeacherInput input)
+        {            
+            Teacher teacherToModify = GetTeacherByDocumentNumber(input.DocumentNumber);
+
+            teacherToModify.SetName(input.NewName);
+        }
+
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {
