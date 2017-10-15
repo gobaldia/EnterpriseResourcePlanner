@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeacherModuleUI.AddTeacher;
 
-namespace TeacherModuleUI.AddTeacher
+namespace TeacherModuleUI.ModifyTeacher
 {
-    public class AddTeacherAction : IAction
+    public class ModifyTeacherAction : IAction
     {
         private string Name { get; set; }
 
-        public AddTeacherAction()
+        public ModifyTeacherAction()
         {
-            this.Name = "Add";
+            this.Name = "Modify";
         }
 
         public string GetName()
@@ -23,8 +22,8 @@ namespace TeacherModuleUI.AddTeacher
         }
         public void Call()
         {
-            AddTeacherForm addTeacherFormInstance = new AddTeacherForm();
-            addTeacherFormInstance.Show();
+            ModifyTeacherForm modifyTeacherFormInstance = new ModifyTeacherForm();
+            modifyTeacherFormInstance.Show();
         }
     }
 }

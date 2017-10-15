@@ -40,15 +40,12 @@ namespace CoreLogic
         {            
             Teacher teacherToModify = GetTeacherByDocumentNumber(input.DocumentNumber);
 
-            if(!teacherToModify.GetName().Equals(input.NewName))
-                teacherToModify.SetName(input.NewName);
-
-            if (!teacherToModify.GetLastName().Equals(input.NewLastName))
-                teacherToModify.SetLastName(input.NewLastName);
-
-            List<Subject> teacherSubjects = teacherToModify.GetSubjects();
-            if (this.AreSubjectsToModify(input.NewSubjects, teacherSubjects))
-                teacherToModify.ModifySubjects(input.NewSubjects);
+            bool nameWasModified = ModifyName(teacherToModify, input.NewName);
+            bool lastNameWasModified = ModifyLastName(teacherToModify, input.NewLastName);
+            bool subjectsWereModified = ModifySubjects(teacherToModify, input.NewSubjects);
+            
+            if (!nameWasModified && !lastNameWasModified && !subjectsWereModified)
+                throw new CoreException("No modifications have been made.");
         }
 
         #region Utilities
@@ -61,11 +58,42 @@ namespace CoreLogic
         {
             return aTeacher.GetSubjects().Exists(item => item.Equals(aSubject));
         }
-        private bool AreSubjectsToModify(List<Subject> newSubjects, List<Subject> teacherSubjects)
+        private bool ModifyName(Teacher teacherToModify, string newName)
+        {
+            bool wasModifed = false;
+            if (!teacherToModify.GetName().Equals(newName))
+            {
+                teacherToModify.SetName(newName);
+                wasModifed = true;
+            }
+            return wasModifed;
+        }
+        private bool ModifyLastName(Teacher teacherToModify, string newLastName)
+        {
+            bool wasModifed = false;
+            if (!teacherToModify.GetLastName().Equals(newLastName))
+            {
+                teacherToModify.SetLastName(newLastName);
+                wasModifed = true;
+            }
+            return wasModifed;
+        }
+        private bool ModifySubjects(Teacher teacherToModify, List<Subject> newSubjects)
+        {
+            bool wasModified = false;
+            List<Subject> teacherSubjects = teacherToModify.GetSubjects();
+            if (CheckIfSubjectsHaveChange(newSubjects, teacherSubjects))
+            {
+                teacherToModify.ModifySubjects(newSubjects);
+                wasModified = true;
+            }
+            return wasModified;
+        }
+        private bool CheckIfSubjectsHaveChange(List<Subject> newSubjects, List<Subject> teacherSubjects)
         {
             bool result = false;
 
-            if(newSubjects != null && !newSubjects.SequenceEqual(teacherSubjects))
+            if (newSubjects != null && !newSubjects.SequenceEqual(teacherSubjects))
             {
                 result = true;
             }

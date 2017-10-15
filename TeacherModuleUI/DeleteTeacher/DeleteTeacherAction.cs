@@ -13,7 +13,7 @@ namespace TeacherModuleUI.DeleteTeacher
 
         public DeleteTeacherAction()
         {
-            this.Name = "Delete Teacher";
+            this.Name = "Delete";
         }
 
         public string GetName()

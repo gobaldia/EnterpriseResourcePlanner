@@ -29,16 +29,28 @@ namespace TeacherModuleUI.DeleteTeacher
         }
         private void buttonDeleteTeacher_Click(object sender, EventArgs e)
         {
-            if(teacherToDelete != null)
+            try
             {
-                ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacherToDelete);
-                this.CleanForm();
-                this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
+                if (teacherToDelete != null)
+                {
+                    ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacherToDelete);
+                    this.CleanForm();
+                    this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
+                }
+                else
+                {
+                    labelError.Text = Constants.ERROR_NOTEACHERFOUND;
+                }
             }
-            else
+            catch(CoreException ex)
             {
-                labelError.Text = Constants.ERROR_NOTEACHERFOUND;
+                this.labelError.Text = ex.Message;
             }
+            catch (Exception)
+            {
+                this.labelError.Text = Constants.ERROR_UNEXPECTED;
+            }
+            
         }
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -62,13 +74,19 @@ namespace TeacherModuleUI.DeleteTeacher
                 this.teacherToDelete = null;
                 this.labelError.Text = ex.Message;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 this.teacherToDelete = null;
                 this.labelError.Text = Constants.ERROR_UNEXPECTED;
             }
         }
+        private void textBoxTeacherDocument_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.labelSuccess.Text = string.Empty;
+            this.labelError.Text = string.Empty;
+        }
 
+        #region Utility methods
         private void FillFormWithTeacherData()
         {
             this.textBoxTeacherName.Text = this.teacherToDelete.GetName();
@@ -94,11 +112,6 @@ namespace TeacherModuleUI.DeleteTeacher
             this.AutoScaleMode = AutoScaleMode.None;
             this.Size = new System.Drawing.Size(750, 550);
         }
-
-        private void textBoxTeacherDocument_KeyDown(object sender, KeyEventArgs e)
-        {
-            this.labelSuccess.Text = string.Empty;
-            this.labelError.Text = string.Empty;
-        }
+        #endregion
     }
 }

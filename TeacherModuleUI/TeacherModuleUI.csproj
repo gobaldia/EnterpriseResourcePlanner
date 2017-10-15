@@ -59,6 +59,13 @@
       <DependentUpon>DeleteTeacherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DeleteTeacher\DeleteTeacherAction.cs" />
+    <Compile Include="ModifyTeacher\ModifyTeacherAction.cs" />
+    <Compile Include="ModifyTeacher\ModifyTeacherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyTeacher\ModifyTeacherForm.Designer.cs">
+      <DependentUpon>ModifyTeacherForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TeacherModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +74,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteTeacher\DeleteTeacherForm.resx">
       <DependentUpon>DeleteTeacherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyTeacher\ModifyTeacherForm.resx">
+      <DependentUpon>ModifyTeacherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +112,10 @@
     <ProjectReference Include="..\CoreLogic\CoreLogic.csproj">
       <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
       <Name>CoreLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{02C77B64-E35F-4FC6-9BC9-337AC9E73420}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>

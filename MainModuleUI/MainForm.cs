@@ -93,6 +93,37 @@ namespace MainModuleUI
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject5);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject6);
 
+            Teacher teacher1 = new Teacher("Luis", "Suarez", "1234567-8");
+            teacher1.AddSubjectToTeach(subject1);
+            teacher1.AddSubjectToTeach(subject2);
+
+            Teacher teacher2 = new Teacher("Edinson", "Cavani", "3216548-5");
+            teacher2.AddSubjectToTeach(subject5);
+            teacher2.AddSubjectToTeach(subject2);
+            teacher2.AddSubjectToTeach(subject3);
+
+            Teacher teacher3 = new Teacher("Diego", "Godin", "8529631-3");
+            teacher3.AddSubjectToTeach(subject2);
+            teacher3.AddSubjectToTeach(subject4);
+            teacher3.AddSubjectToTeach(subject6);
+
+            Teacher teacher4 = new Teacher("Jose Maria", "Gimenez", "2365489-4");
+            Teacher teacher5 = new Teacher("Fernando", "Muslera", "3258746-3");
+            Teacher teacher6 = new Teacher("Palito", "Pereira", "9514786-9");
+            teacher6.AddSubjectToTeach(subject1);
+            teacher6.AddSubjectToTeach(subject2);
+            teacher6.AddSubjectToTeach(subject3);
+            teacher6.AddSubjectToTeach(subject4);
+            teacher6.AddSubjectToTeach(subject5);
+            teacher6.AddSubjectToTeach(subject6);
+
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher1);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher2);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher3);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher4);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher5);
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher6);
+
             this.buttonInitialiceData.Enabled = false;
             this.labelDataGenerated.Visible = true;
         }

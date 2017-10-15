@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TeacherModuleUI;
 using TeacherModuleUI.AddTeacher;
 using TeacherModuleUI.DeleteTeacher;
+using TeacherModuleUI.ModifyTeacher;
 
 namespace MainModuleUI
 {
@@ -42,8 +43,10 @@ namespace MainModuleUI
 
             IAction addAction = new AddTeacherAction();
             IAction deleteAction = new DeleteTeacherAction();
+            IAction modifyAction = new ModifyTeacherAction();
             teacherActions.Add(addAction);
             teacherActions.Add(deleteAction);
+            teacherActions.Add(modifyAction);
 
             return new TeacherModule(teacherActions);
         }

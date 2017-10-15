@@ -15,5 +15,6 @@ namespace FrameworkCommon
 
         public const string SUCCESS_TEACHERREGISTRATION = "Teacher registered with success.";
         public const string SUCCESS_TEACHER_DELETED = "Teacher deleted with success.";
+        public const string SUCCESS_TEACHER_MODIFICATION = "Teacher modification succcess.";
     }
 }
