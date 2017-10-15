@@ -159,6 +159,7 @@
             this.buttonAddTeacherToSubject.TabIndex = 12;
             this.buttonAddTeacherToSubject.Text = ">>";
             this.buttonAddTeacherToSubject.UseVisualStyleBackColor = true;
+            this.buttonAddTeacherToSubject.Click += new System.EventHandler(this.buttonAddTeacherToSubject_Click);
             // 
             // buttonDeleteTeacherToSubject
             // 

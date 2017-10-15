@@ -71,10 +71,20 @@ namespace CoreEntities.Entities
             return this.GetCode() == (((Subject)obj).GetCode());
         }
 
+        public override string ToString()
+        {
+            return this.Name;
+        }
+
         #region Private Methods
         private bool SubjectAlreadyHasThisStudent(Student student)
         {
             return this.Students.Find(s => s.GetDocumentNumber() == student.GetDocumentNumber()) != null;
+        }
+
+        public void SetTeachers(List<Teacher> teachers)
+        {
+            this.Teachers = teachers;
         }
         #endregion
     }

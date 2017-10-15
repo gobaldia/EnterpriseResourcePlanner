@@ -24,10 +24,11 @@ namespace SubjectModuleUI.ModifySubject
 
         private void FillSubjectsComboBox()
         {
-            var datasource = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
-            this.comboBoxSelectSubjectToModify.DataSource = datasource;
-            this.comboBoxSelectSubjectToModify.DisplayMember = "Name";
-            this.comboBoxSelectSubjectToModify.ValueMember = "Code";
+            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            for(int index = 0; index < subjects.Count(); index++)
+            {
+                this.comboBoxSelectSubjectToModify.Items.Add(subjects[index]);
+            }
             this.comboBoxSelectSubjectToModify.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -35,20 +36,20 @@ namespace SubjectModuleUI.ModifySubject
         {
             var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
             var subject = subjects.Find(s => s.Code == subjectCode);
-            var datasource = subject.Teachers;
-            this.listBoxSubjectTeachers.DataSource = datasource;
-            this.listBoxSubjectTeachers.DisplayMember = "Name";
-            //this.listBoxSubjectTeachers.ValueMember = "Document";
+            var teachers = subject.Teachers;
+            for (int index = 0; index < teachers.Count; index++)
+            {
+                this.listBoxSubjectTeachers.Items.Add(subjects[index]);
+            }
         }
 
         private void FillSystemTeachersListBox(int subjectCode)
         {
-            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
-            //var subject = subjects.Find(s => s.Code == subjectCode);
-            var datasource = teachers;
-            this.listBoxSystemTeachers.DataSource = datasource;
-            this.listBoxSystemTeachers.DisplayMember = "Name";
-            //this.listBoxSubjectTeachers.ValueMember = "Document";
+            List<Teacher> teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
+            for(int index = 0; index < teachers.Count(); index++)
+            {
+                this.listBoxSystemTeachers.Items.Add(teachers[index]);
+            }
         }
 
         private void buttonCancelModifySubject_Click(object sender, EventArgs e)
@@ -69,19 +70,25 @@ namespace SubjectModuleUI.ModifySubject
         private void buttonModifySubject_Click(object sender, EventArgs e)
         {
             this.labelError.Visible = false;
-            int originalCode = GetCodeOfSubjectToBeModified();
             int code;
             string name;
-            Subject subject = new Subject();
+            Subject newSubject = new Subject();
+            Subject originalSubject = (Subject) this.comboBoxSelectSubjectToModify.SelectedItem;
             if (int.TryParse(this.textBoxCodeModifySubject.Text, out code))
             {
                 if (!string.IsNullOrWhiteSpace(this.textBoxNameModifySubject.Text))
                 {
-                    subject.Code = code;
+                    newSubject.Code = code;
                     name = this.textBoxNameModifySubject.Text;
-                    subject.Name = name;
+                    newSubject.Name = name;
 
-                    ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalCode, subject);
+                    //separar este metodo
+                    List<Teacher> teachers = this.listBoxSubjectTeachers.Items.Cast<Teacher>().ToList();
+                    newSubject.SetTeachers(teachers);
+
+                    ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalSubject.Code, newSubject);
+
+                    var materias = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
                 }
                 else
                 {
@@ -96,19 +103,14 @@ namespace SubjectModuleUI.ModifySubject
             }
         }
 
-        public int GetCodeOfSubjectToBeModified()
+        private void buttonAddTeacherToSubject_Click(object sender, EventArgs e)
         {
-            int originalCode;
-            var selected = this.comboBoxSelectSubjectToModify.SelectedValue.ToString();
-            try
+            var selectedTeacher = this.listBoxSystemTeachers.SelectedItem;
+            if(selectedTeacher != null)
             {
-                int.TryParse(selected, out originalCode);
+                this.listBoxSubjectTeachers.Items.Add(selectedTeacher);
+                this.listBoxSystemTeachers.Items.Remove(selectedTeacher);
             }
-            catch
-            {
-                throw new CoreException("Subject's code must be a number");
-            }
-            return originalCode;
         }
     }
 }

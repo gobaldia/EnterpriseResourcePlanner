@@ -57,5 +57,10 @@ namespace CoreEntities.Entities
         {
             return this.GetDocumentNumber().Equals(((Teacher)obj).GetDocumentNumber());
         }
+
+        public override string ToString()
+        {
+            return this.GetFullName();
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace CoreLogic
             return this.systemTeachers.Exists(item => item.Equals(aTeacher));
         }
 
-        public object GetTeachers()
+        public List<Teacher> GetTeachers()
         {
             return this.systemTeachers;
         }
