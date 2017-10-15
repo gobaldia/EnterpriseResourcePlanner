@@ -209,10 +209,10 @@ namespace UnitTesting
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             decimal latitud = 1.2M;
             decimal longitud = 2.2M;
-            Location location = new Locations(latitud, longitud);
+            Location location = new Location(latitud, longitud);
             studentFound.SetLocation(location);
 
-            Assert.IsNotNull(studentFound.HavePickUpService());
+            Assert.IsTrue(studentFound.GetLocation().Equals(location));
         }
 
 

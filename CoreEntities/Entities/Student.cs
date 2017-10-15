@@ -13,6 +13,7 @@ namespace CoreEntities.Entities
         private List<Subject> subjects { get; set; }
         private int studentNumber { get; set; }
         private bool havePickUpService { get; set; }
+        private Location location { get; set; }
         #endregion
 
         public Student()
@@ -59,6 +60,14 @@ namespace CoreEntities.Entities
         public void SetPickUpService(bool pickup)
         {
             this.havePickUpService = pickup;
+        }
+        public void SetLocation(Location studentLocation)
+        {
+            this.location = studentLocation;
+        }
+        public Location GetLocation()
+        {
+            return this.location;
         }
         public bool HavePickUpService()
         {
