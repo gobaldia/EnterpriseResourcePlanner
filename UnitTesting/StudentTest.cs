@@ -152,7 +152,22 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void AddSubjectToStudent()
+        {
+            SystemData.GetInstance.Reset();
 
+            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            Subject aSubject = new Subject(123456, "Math");
+            systemSubjects.Add(aSubject);
+
+            Student newStudent = this.CreateRandomStudent();
+            Subject subjectToBeAdded = SystemData.GetInstance.GetSubjectByCode(123456);
+
+            newStudent.AddSubjectToStudent(subjectToBeAdded);
+
+            Assert.IsTrue(newStudent.GetSubjects().Count > 0);
+        }
 
         #region Extra methods
         private Student CreateRandomStudent()
