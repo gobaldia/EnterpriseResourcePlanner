@@ -26,7 +26,7 @@ namespace CoreLogic
         {   
             Teacher teacherFound = this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
             if (teacherFound == null)
-                throw new CoreException("No teacher found.");
+                throw new CoreException("Teacher not found.");
 
             return teacherFound;
         }

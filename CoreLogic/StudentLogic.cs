@@ -21,6 +21,15 @@ namespace CoreLogic
             this.systemStudents.Add(newStudent);
         }
 
+        public Student GetStudentByDocumentNumber(string documentNumber)
+        {
+            Student studentFound = this.systemStudents.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            if (studentFound == null)
+                throw new CoreException("Student not found.");
+
+            return studentFound;
+        }
+
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
