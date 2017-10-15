@@ -213,14 +213,14 @@ namespace UnitTesting
             Subject subject1 = new Subject(123456, "Math");
             Subject subject2 = new Subject(654321, "Physics");
             systemSubjects.Add(subject1);
-            systemSubjects.Add(subject1);
+            systemSubjects.Add(subject2);
 
             Teacher newTeacher = this.CreateRandomTeacher();
             Subject subjectToBeAdded1 = SystemData.GetInstance.GetSubjectByCode(123456);
-            Subject subjectToBeAdded2 = SystemData.GetInstance.GetSubjectByCode(123456);
+            Subject subjectToBeAdded2 = SystemData.GetInstance.GetSubjectByCode(654321);
             
             newTeacher.AddSubjectToTeach(subjectToBeAdded1);
-            newTeacher.AddSubjectToTeach(subjectToBeAdded1);
+            newTeacher.AddSubjectToTeach(subjectToBeAdded2);
 
             newTeacher.RemoveSubject(subjectToBeAdded1);
             List<Subject> teacherSubjects = newTeacher.GetSubjects();

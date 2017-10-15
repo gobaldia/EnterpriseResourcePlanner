@@ -52,6 +52,10 @@ namespace CoreEntities.Entities
         {
             this.subjects.Add(subjectToBeTeach);
         }
+        public void RemoveSubject(Subject subjectToRemove)
+        {
+            this.subjects.Remove(subjectToRemove);
+        }
 
         public override bool Equals(object obj)
         {
