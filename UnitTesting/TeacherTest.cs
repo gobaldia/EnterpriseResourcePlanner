@@ -304,7 +304,6 @@ namespace UnitTesting
             Teacher newTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), Utility.GetRandomDocument());
             return newTeacher;
         }
-        
         #endregion
     }
 }

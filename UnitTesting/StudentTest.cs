@@ -1,5 +1,6 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using CoreLogic;
 using DataAccess;
 using FrameworkCommon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -120,10 +121,22 @@ namespace UnitTesting
         {
             SystemData.GetInstance.Reset();
 
-            Teacher newTeacher = this.CreateRandomStudent();
+            Student newStudent = this.CreateRandomStudent();
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
 
             Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
+
+        #region Extra methods
+        private Student CreateRandomStudent()
+        {
+            Student newStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), Utility.GetRandomDocument());
+            return newStudent;
+        }
+        private Student FindStudentOnSystem(string documentNumber)
+        {
+            return SystemData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+        }
+        #endregion
     }
 }

@@ -11,6 +11,7 @@ namespace DataAccess
     public class SystemData
     {
         private List<Teacher> teachers;
+        private List<Student> students;
         private List<Subject> subjects;
 
         #region Singleton
@@ -20,14 +21,7 @@ namespace DataAccess
         {
             this.teachers = new List<Teacher>();
             this.subjects = new List<Subject>();
-
-            //var subj1 = new Subject(123, "Math");
-            //var subj2 = new Subject(321, "Science");
-            //var subj3 = new Subject(555, "Apps Desing");
-
-            //this.subjects.Add(subj1);
-            //this.subjects.Add(subj2);
-            //this.subjects.Add(subj3);
+            this.students = new List<Student>();
         }
         public static SystemData GetInstance
         {
@@ -42,6 +36,7 @@ namespace DataAccess
         {
             this.teachers.Clear();
             this.subjects.Clear();
+            this.students.Clear();
         }        
 
         public List<Teacher> GetTeachers()
@@ -52,10 +47,10 @@ namespace DataAccess
         {
             return this.subjects;
         }
-        
-        #region Student Methods
-        
-        #endregion
+        public List<Student> GetStudents()
+        {
+            return this.students;
+        }
 
         #region Subject Methods
         public Subject GetSubjectByCode(int subjectCode)
