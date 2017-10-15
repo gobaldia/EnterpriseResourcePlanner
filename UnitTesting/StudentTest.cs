@@ -61,5 +61,22 @@ namespace UnitTesting
 
             Assert.IsTrue(firstStudent.Equals(secondStudent));
         }
+
+        [TestMethod]
+        public void StudentsInstancesAreNotEqual()
+        {
+            string name1 = "Edinson";
+            string lastName1 = "Cavani";
+            string document1 = "1234567-8";
+
+            string name2 = "Luis";
+            string lastName2 = "Suarez";
+            string document2 = "3216549-8";
+
+            Student firstStudent = new Student(name1, lastName1, document1);
+            Student secondStudent = new Student(name2, lastName2, document2);
+
+            Assert.IsFalse(firstStudent.Equals(secondStudent));
+        }
     }
 }
