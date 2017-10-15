@@ -19,6 +19,7 @@ namespace SubjectModuleUI.ModifySubject
         public ModifySubjectForm()
         {
             InitializeComponent();
+            CheckIfIsThereAnySubjectInSystem();
             FillSubjectsComboBox();
         }
 
@@ -32,23 +33,37 @@ namespace SubjectModuleUI.ModifySubject
             this.comboBoxSelectSubjectToModify.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
+        private void CheckIfIsThereAnySubjectInSystem()
+        {
+            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            if (subjects.Count() == 0)
+            {
+                this.labelError.Text = "Currently there is not any subject in the system.";
+                this.labelError.Visible = true;
+            }
+        }
+
         private void FillSubjectTeachersListBox(int subjectCode)
         {
             var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
             var subject = subjects.Find(s => s.Code == subjectCode);
-            var profesores = subject.Teachers;
-            for (int index = 0; index < profesores.Count; index++)
+            var teachersThatTeachThisSubject = subject.Teachers;
+            for (int index = 0; index < teachersThatTeachThisSubject.Count; index++)
             {
-                this.listBoxSubjectTeachers.Items.Add(profesores[index]);
+                this.listBoxSubjectTeachers.Items.Add(teachersThatTeachThisSubject[index]);
             }
         }
 
         private void FillSystemTeachersListBox(int subjectCode)
         {
-            List<Teacher> teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
-            for(int index = 0; index < teachers.Count(); index++)
+            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
+            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            var subject = subjects.Find(s => s.Code == subjectCode);
+            var teachersOfThisSubject = subject.Teachers;
+            var teachersToAddToListBox = systemTeachers.Except(teachersOfThisSubject).ToList();
+            for (int index = 0; index < teachersToAddToListBox.Count(); index++)
             {
-                this.listBoxSystemTeachers.Items.Add(teachers[index]);
+                this.listBoxSystemTeachers.Items.Add(teachersToAddToListBox[index]);
             }
         }
 
@@ -59,12 +74,19 @@ namespace SubjectModuleUI.ModifySubject
 
         private void comboBoxSelectSubjectToModify_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.ClearListBoxes();
             var combo = (ComboBox)sender;
             var selected = (Subject)combo.SelectedItem;
             this.textBoxCodeModifySubject.Text = selected.GetCode().ToString();
             this.textBoxNameModifySubject.Text = selected.GetName();
             FillSubjectTeachersListBox(selected.Code);
             FillSystemTeachersListBox(selected.Code);
+        }
+
+        private void ClearListBoxes()
+        {
+            this.listBoxSystemTeachers.Items.Clear();
+            this.listBoxSubjectTeachers.Items.Clear();
         }
 
         private void buttonModifySubject_Click(object sender, EventArgs e)
@@ -110,6 +132,16 @@ namespace SubjectModuleUI.ModifySubject
             {
                 this.listBoxSubjectTeachers.Items.Add(selectedTeacher);
                 this.listBoxSystemTeachers.Items.Remove(selectedTeacher);
+            }
+        }
+
+        private void buttonDeleteTeacherToSubject_Click(object sender, EventArgs e)
+        {
+            var selectedTeacher = this.listBoxSubjectTeachers.SelectedItem;
+            if (selectedTeacher != null)
+            {
+                this.listBoxSystemTeachers.Items.Add(selectedTeacher);
+                this.listBoxSubjectTeachers.Items.Remove(selectedTeacher);
             }
         }
     }
