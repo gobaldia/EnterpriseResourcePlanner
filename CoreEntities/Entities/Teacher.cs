@@ -56,6 +56,14 @@ namespace CoreEntities.Entities
         {
             this.subjects.Remove(subjectToRemove);
         }
+        public void ModifySubjects(List<Subject> newSubjects)
+        {
+            this.subjects.Clear();
+            foreach (Subject subject in newSubjects)
+            {
+                this.subjects.Add(subject);
+            }
+        }
 
         public override bool Equals(object obj)
         {

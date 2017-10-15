@@ -45,12 +45,32 @@ namespace CoreLogic
 
             if (!teacherToModify.GetLastName().Equals(input.NewLastName))
                 teacherToModify.SetLastName(input.NewLastName);
+
+            List<Subject> teacherSubjects = teacherToModify.GetSubjects();
+            if (this.AreSubjectsToModify(input.NewSubjects, teacherSubjects))
+                teacherToModify.ModifySubjects(input.NewSubjects);
         }
 
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {
             return this.systemTeachers.Exists(item => item.Equals(aTeacher));
+        }
+
+        private bool SubjectExitsOnTeacher(Subject aSubject, Teacher aTeacher)
+        {
+            return aTeacher.GetSubjects().Exists(item => item.Equals(aSubject));
+        }
+        private bool AreSubjectsToModify(List<Subject> newSubjects, List<Subject> teacherSubjects)
+        {
+            bool result = false;
+
+            if(newSubjects != null && !newSubjects.SequenceEqual(teacherSubjects))
+            {
+                result = true;
+            }
+
+            return result;
         }
         #endregion
     }
