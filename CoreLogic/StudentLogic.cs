@@ -43,7 +43,8 @@ namespace CoreLogic
 
             bool nameWasModified = ModifyName(studentToModify, input.NewName);
             bool lastNameWasModified = ModifyLastName(studentToModify, input.NewLastName);
-            
+            bool subjectsWereModified = ModifySubjects(studentToModify, input.NewSubjects);
+
         }
 
         public Student GetStudentByNumber(int studentNumber)
@@ -87,6 +88,21 @@ namespace CoreLogic
                 wasModifed = true;
             }
             return wasModifed;
+        }
+        private bool ModifySubjects(Student studentToModify, List<Subject> newSubjects)
+        {
+            bool wasModified = false;
+            List<Subject> studentSubjects = studentToModify.GetSubjects();
+            if (CheckIfSubjectsHaveChange(newSubjects, studentSubjects))
+            {
+                studentToModify.ModifySubjects(newSubjects);
+                wasModified = true;
+            }
+            return wasModified;
+        }
+        private bool CheckIfSubjectsHaveChange(List<Subject> newSubjects, List<Subject> studentSubjects)
+        {
+            return newSubjects != null && !newSubjects.SequenceEqual(studentSubjects);
         }
         #endregion
     }

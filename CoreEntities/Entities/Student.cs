@@ -77,6 +77,14 @@ namespace CoreEntities.Entities
         {
             return this.subjects;
         }
+        public void ModifySubjects(List<Subject> newSubjects)
+        {
+            this.subjects.Clear();
+            foreach (Subject subject in newSubjects)
+            {
+                this.subjects.Add(subject);
+            }
+        }
         public static int GetNextStudentNumber()
         {
             return studentsCount + 1;

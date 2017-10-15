@@ -262,6 +262,7 @@ namespace UnitTesting
         {
             SystemData.GetInstance.Reset();
 
+            #region Add subjects to the system
             List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
             Subject subject1 = new Subject(1234, "Math");
             Subject subject2 = new Subject(3216, "Physics");
@@ -271,12 +272,15 @@ namespace UnitTesting
             systemSubjects.Add(subject2);
             systemSubjects.Add(subject3);
             systemSubjects.Add(subject4);
+            #endregion
 
+            #region Add teacher to the system
             Teacher newTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), "1234567-8");
             newTeacher.AddSubjectToTeach(subject1);
             newTeacher.AddSubjectToTeach(subject2);
             newTeacher.AddSubjectToTeach(subject3);
             ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+            #endregion
 
             List<Subject> newSubjects = new List<Subject>();
             newSubjects.Add(subject1);
