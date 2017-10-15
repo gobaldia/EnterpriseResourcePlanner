@@ -103,14 +103,19 @@ namespace SubjectModuleUI.ModifySubject
                     newSubject.Code = code;
                     name = this.textBoxNameModifySubject.Text;
                     newSubject.Name = name;
-
-                    //separar este metodo
+                    
                     List<Teacher> teachers = this.listBoxSubjectTeachers.Items.Cast<Teacher>().ToList();
                     newSubject.SetTeachers(teachers);
+
+                    List<Student> students = this.listBoxSubjectStudents.Items.Cast<Student>().ToList();
+                    newSubject.SetStudents(students);
 
                     ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalSubject.Code, newSubject);
 
                     var materias = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+
+                    this.labelSuccess.Text = "Subject was succesfully modified.";
+                    this.labelSuccess.Visible = true;
                 }
                 else
                 {
@@ -127,21 +132,31 @@ namespace SubjectModuleUI.ModifySubject
 
         private void buttonAddTeacherToSubject_Click(object sender, EventArgs e)
         {
-            var selectedTeacher = this.listBoxSystemTeachers.SelectedItem;
-            if(selectedTeacher != null)
-            {
-                this.listBoxSubjectTeachers.Items.Add(selectedTeacher);
-                this.listBoxSystemTeachers.Items.Remove(selectedTeacher);
-            }
+            this.MoveFromOneListBoxToAnother(this.listBoxSystemTeachers, this.listBoxSubjectTeachers);
         }
 
         private void buttonDeleteTeacherToSubject_Click(object sender, EventArgs e)
         {
-            var selectedTeacher = this.listBoxSubjectTeachers.SelectedItem;
-            if (selectedTeacher != null)
+            this.MoveFromOneListBoxToAnother(this.listBoxSubjectTeachers, this.listBoxSystemTeachers);
+        }
+
+        private void buttonAddStudentToSubject_Click(object sender, EventArgs e)
+        {
+            this.MoveFromOneListBoxToAnother(this.listBoxSystemStudents, this.listBoxSubjectStudents);
+        }
+
+        private void buttonDeleteStudentToSubject_Click(object sender, EventArgs e)
+        {
+            this.MoveFromOneListBoxToAnother(this.listBoxSubjectStudents, this.listBoxSystemStudents);
+        }
+
+        private void MoveFromOneListBoxToAnother(ListBox listBoxFrom, ListBox listBoxTo)
+        {
+            var selectedItemsToMove = listBoxFrom.SelectedItem;
+            if (selectedItemsToMove != null)
             {
-                this.listBoxSystemTeachers.Items.Add(selectedTeacher);
-                this.listBoxSubjectTeachers.Items.Remove(selectedTeacher);
+                listBoxTo.Items.Add(selectedItemsToMove);
+                listBoxFrom.Items.Remove(selectedItemsToMove);
             }
         }
     }

@@ -55,7 +55,14 @@ namespace CoreEntities.Entities
 
         public override bool Equals(object obj)
         {
-            return this.GetDocumentNumber().Equals(((Teacher)obj).GetDocumentNumber());
+            if(obj is Teacher)
+            {
+                return this.GetDocumentNumber().Equals(((Teacher)obj).GetDocumentNumber());
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override string ToString()

@@ -49,6 +49,16 @@ namespace CoreEntities.Entities
             return this.Name;
         }
 
+        public void SetTeachers(List<Teacher> teachers)
+        {
+            this.Teachers = teachers;
+        }
+
+        public void SetStudents(List<Student> students)
+        {
+            this.Students = students;
+        }
+
         public void AddStudent(Student student)
         {
             if (!SubjectAlreadyHasThisStudent(student))
@@ -80,11 +90,6 @@ namespace CoreEntities.Entities
         private bool SubjectAlreadyHasThisStudent(Student student)
         {
             return this.Students.Find(s => s.GetDocumentNumber() == student.GetDocumentNumber()) != null;
-        }
-
-        public void SetTeachers(List<Teacher> teachers)
-        {
-            this.Teachers = teachers;
         }
         #endregion
     }

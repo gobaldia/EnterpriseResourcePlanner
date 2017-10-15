@@ -104,7 +104,7 @@
       <Name>CoreLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
-      <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
+      <Project>{0d34b3c6-4f5a-469f-a793-77d5de2c9e5e}</Project>
       <Name>FrameworkCommon</Name>
     </ProjectReference>
   </ItemGroup>

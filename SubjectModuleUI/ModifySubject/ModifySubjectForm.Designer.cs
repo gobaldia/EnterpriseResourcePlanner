@@ -44,6 +44,13 @@
             this.buttonDeleteTeacherToSubject = new System.Windows.Forms.Button();
             this.labelAvailableTeachers = new System.Windows.Forms.Label();
             this.labelSubjectTeachers = new System.Windows.Forms.Label();
+            this.listBoxSystemStudents = new System.Windows.Forms.ListBox();
+            this.listBoxSubjectStudents = new System.Windows.Forms.ListBox();
+            this.labelAvailableStudents = new System.Windows.Forms.Label();
+            this.labelSubjectStudents = new System.Windows.Forms.Label();
+            this.buttonAddStudentToSubject = new System.Windows.Forms.Button();
+            this.buttonDeleteStudentToSubject = new System.Windows.Forms.Button();
+            this.labelSuccess = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelModifySubjectTitle
@@ -76,14 +83,14 @@
             // 
             // textBoxNameModifySubject
             // 
-            this.textBoxNameModifySubject.Location = new System.Drawing.Point(16, 188);
+            this.textBoxNameModifySubject.Location = new System.Drawing.Point(16, 181);
             this.textBoxNameModifySubject.Name = "textBoxNameModifySubject";
             this.textBoxNameModifySubject.Size = new System.Drawing.Size(100, 20);
             this.textBoxNameModifySubject.TabIndex = 3;
             // 
             // textBoxCodeModifySubject
             // 
-            this.textBoxCodeModifySubject.Location = new System.Drawing.Point(16, 130);
+            this.textBoxCodeModifySubject.Location = new System.Drawing.Point(16, 123);
             this.textBoxCodeModifySubject.Name = "textBoxCodeModifySubject";
             this.textBoxCodeModifySubject.Size = new System.Drawing.Size(100, 20);
             this.textBoxCodeModifySubject.TabIndex = 4;
@@ -91,7 +98,7 @@
             // labelCodeModifySubject
             // 
             this.labelCodeModifySubject.AutoSize = true;
-            this.labelCodeModifySubject.Location = new System.Drawing.Point(16, 111);
+            this.labelCodeModifySubject.Location = new System.Drawing.Point(16, 104);
             this.labelCodeModifySubject.Name = "labelCodeModifySubject";
             this.labelCodeModifySubject.Size = new System.Drawing.Size(32, 13);
             this.labelCodeModifySubject.TabIndex = 5;
@@ -100,7 +107,7 @@
             // labelNameModifySubject
             // 
             this.labelNameModifySubject.AutoSize = true;
-            this.labelNameModifySubject.Location = new System.Drawing.Point(16, 168);
+            this.labelNameModifySubject.Location = new System.Drawing.Point(16, 161);
             this.labelNameModifySubject.Name = "labelNameModifySubject";
             this.labelNameModifySubject.Size = new System.Drawing.Size(35, 13);
             this.labelNameModifySubject.TabIndex = 6;
@@ -108,7 +115,7 @@
             // 
             // buttonModifySubject
             // 
-            this.buttonModifySubject.Location = new System.Drawing.Point(385, 440);
+            this.buttonModifySubject.Location = new System.Drawing.Point(383, 493);
             this.buttonModifySubject.Name = "buttonModifySubject";
             this.buttonModifySubject.Size = new System.Drawing.Size(75, 23);
             this.buttonModifySubject.TabIndex = 7;
@@ -118,7 +125,7 @@
             // 
             // buttonCancelModifySubject
             // 
-            this.buttonCancelModifySubject.Location = new System.Drawing.Point(385, 470);
+            this.buttonCancelModifySubject.Location = new System.Drawing.Point(383, 523);
             this.buttonCancelModifySubject.Name = "buttonCancelModifySubject";
             this.buttonCancelModifySubject.Size = new System.Drawing.Size(75, 23);
             this.buttonCancelModifySubject.TabIndex = 8;
@@ -140,7 +147,7 @@
             // listBoxSystemTeachers
             // 
             this.listBoxSystemTeachers.FormattingEnabled = true;
-            this.listBoxSystemTeachers.Location = new System.Drawing.Point(19, 251);
+            this.listBoxSystemTeachers.Location = new System.Drawing.Point(18, 238);
             this.listBoxSystemTeachers.Name = "listBoxSystemTeachers";
             this.listBoxSystemTeachers.Size = new System.Drawing.Size(200, 95);
             this.listBoxSystemTeachers.TabIndex = 10;
@@ -148,14 +155,14 @@
             // listBoxSubjectTeachers
             // 
             this.listBoxSubjectTeachers.FormattingEnabled = true;
-            this.listBoxSubjectTeachers.Location = new System.Drawing.Point(347, 251);
+            this.listBoxSubjectTeachers.Location = new System.Drawing.Point(346, 238);
             this.listBoxSubjectTeachers.Name = "listBoxSubjectTeachers";
             this.listBoxSubjectTeachers.Size = new System.Drawing.Size(200, 95);
             this.listBoxSubjectTeachers.TabIndex = 11;
             // 
             // buttonAddTeacherToSubject
             // 
-            this.buttonAddTeacherToSubject.Location = new System.Drawing.Point(263, 277);
+            this.buttonAddTeacherToSubject.Location = new System.Drawing.Point(262, 264);
             this.buttonAddTeacherToSubject.Name = "buttonAddTeacherToSubject";
             this.buttonAddTeacherToSubject.Size = new System.Drawing.Size(38, 21);
             this.buttonAddTeacherToSubject.TabIndex = 12;
@@ -165,7 +172,7 @@
             // 
             // buttonDeleteTeacherToSubject
             // 
-            this.buttonDeleteTeacherToSubject.Location = new System.Drawing.Point(263, 304);
+            this.buttonDeleteTeacherToSubject.Location = new System.Drawing.Point(262, 291);
             this.buttonDeleteTeacherToSubject.Name = "buttonDeleteTeacherToSubject";
             this.buttonDeleteTeacherToSubject.Size = new System.Drawing.Size(38, 21);
             this.buttonDeleteTeacherToSubject.TabIndex = 13;
@@ -176,7 +183,7 @@
             // labelAvailableTeachers
             // 
             this.labelAvailableTeachers.AutoSize = true;
-            this.labelAvailableTeachers.Location = new System.Drawing.Point(16, 235);
+            this.labelAvailableTeachers.Location = new System.Drawing.Point(15, 222);
             this.labelAvailableTeachers.Name = "labelAvailableTeachers";
             this.labelAvailableTeachers.Size = new System.Drawing.Size(98, 13);
             this.labelAvailableTeachers.TabIndex = 14;
@@ -185,17 +192,88 @@
             // labelSubjectTeachers
             // 
             this.labelSubjectTeachers.AutoSize = true;
-            this.labelSubjectTeachers.Location = new System.Drawing.Point(347, 234);
+            this.labelSubjectTeachers.Location = new System.Drawing.Point(346, 221);
             this.labelSubjectTeachers.Name = "labelSubjectTeachers";
             this.labelSubjectTeachers.Size = new System.Drawing.Size(159, 13);
             this.labelSubjectTeachers.TabIndex = 15;
             this.labelSubjectTeachers.Text = "Current Teachers of this Subject";
             // 
+            // listBoxSystemStudents
+            // 
+            this.listBoxSystemStudents.FormattingEnabled = true;
+            this.listBoxSystemStudents.Location = new System.Drawing.Point(19, 376);
+            this.listBoxSystemStudents.Name = "listBoxSystemStudents";
+            this.listBoxSystemStudents.Size = new System.Drawing.Size(199, 95);
+            this.listBoxSystemStudents.TabIndex = 16;
+            // 
+            // listBoxSubjectStudents
+            // 
+            this.listBoxSubjectStudents.FormattingEnabled = true;
+            this.listBoxSubjectStudents.Location = new System.Drawing.Point(346, 376);
+            this.listBoxSubjectStudents.Name = "listBoxSubjectStudents";
+            this.listBoxSubjectStudents.Size = new System.Drawing.Size(200, 95);
+            this.listBoxSubjectStudents.TabIndex = 17;
+            // 
+            // labelAvailableStudents
+            // 
+            this.labelAvailableStudents.AutoSize = true;
+            this.labelAvailableStudents.Location = new System.Drawing.Point(19, 357);
+            this.labelAvailableStudents.Name = "labelAvailableStudents";
+            this.labelAvailableStudents.Size = new System.Drawing.Size(95, 13);
+            this.labelAvailableStudents.TabIndex = 18;
+            this.labelAvailableStudents.Text = "Available Students";
+            // 
+            // labelSubjectStudents
+            // 
+            this.labelSubjectStudents.AutoSize = true;
+            this.labelSubjectStudents.Location = new System.Drawing.Point(346, 357);
+            this.labelSubjectStudents.Name = "labelSubjectStudents";
+            this.labelSubjectStudents.Size = new System.Drawing.Size(156, 13);
+            this.labelSubjectStudents.TabIndex = 19;
+            this.labelSubjectStudents.Text = "Current Students of this Subject";
+            // 
+            // buttonAddStudentToSubject
+            // 
+            this.buttonAddStudentToSubject.Location = new System.Drawing.Point(262, 399);
+            this.buttonAddStudentToSubject.Name = "buttonAddStudentToSubject";
+            this.buttonAddStudentToSubject.Size = new System.Drawing.Size(38, 21);
+            this.buttonAddStudentToSubject.TabIndex = 20;
+            this.buttonAddStudentToSubject.Text = ">>";
+            this.buttonAddStudentToSubject.UseVisualStyleBackColor = true;
+            this.buttonAddStudentToSubject.Click += new System.EventHandler(this.buttonAddStudentToSubject_Click);
+            // 
+            // buttonDeleteStudentToSubject
+            // 
+            this.buttonDeleteStudentToSubject.Location = new System.Drawing.Point(262, 427);
+            this.buttonDeleteStudentToSubject.Name = "buttonDeleteStudentToSubject";
+            this.buttonDeleteStudentToSubject.Size = new System.Drawing.Size(38, 21);
+            this.buttonDeleteStudentToSubject.TabIndex = 21;
+            this.buttonDeleteStudentToSubject.Text = "<<";
+            this.buttonDeleteStudentToSubject.UseVisualStyleBackColor = true;
+            this.buttonDeleteStudentToSubject.Click += new System.EventHandler(this.buttonDeleteStudentToSubject_Click);
+            // 
+            // labelSuccess
+            // 
+            this.labelSuccess.AutoSize = true;
+            this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.labelSuccess.Location = new System.Drawing.Point(222, 111);
+            this.labelSuccess.Name = "labelSuccess";
+            this.labelSuccess.Size = new System.Drawing.Size(0, 16);
+            this.labelSuccess.TabIndex = 22;
+            // 
             // ModifySubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 507);
+            this.ClientSize = new System.Drawing.Size(581, 568);
+            this.Controls.Add(this.labelSuccess);
+            this.Controls.Add(this.buttonDeleteStudentToSubject);
+            this.Controls.Add(this.buttonAddStudentToSubject);
+            this.Controls.Add(this.labelSubjectStudents);
+            this.Controls.Add(this.labelAvailableStudents);
+            this.Controls.Add(this.listBoxSubjectStudents);
+            this.Controls.Add(this.listBoxSystemStudents);
             this.Controls.Add(this.labelSubjectTeachers);
             this.Controls.Add(this.labelAvailableTeachers);
             this.Controls.Add(this.buttonDeleteTeacherToSubject);
@@ -237,5 +315,12 @@
         private System.Windows.Forms.Button buttonDeleteTeacherToSubject;
         private System.Windows.Forms.Label labelAvailableTeachers;
         private System.Windows.Forms.Label labelSubjectTeachers;
+        private System.Windows.Forms.ListBox listBoxSystemStudents;
+        private System.Windows.Forms.ListBox listBoxSubjectStudents;
+        private System.Windows.Forms.Label labelAvailableStudents;
+        private System.Windows.Forms.Label labelSubjectStudents;
+        private System.Windows.Forms.Button buttonAddStudentToSubject;
+        private System.Windows.Forms.Button buttonDeleteStudentToSubject;
+        private System.Windows.Forms.Label labelSuccess;
     }
 }
