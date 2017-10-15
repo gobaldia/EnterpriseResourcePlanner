@@ -49,5 +49,17 @@ namespace UnitTesting
             List<Subject> actualSubjects = student.GetSubjects();
             Assert.IsTrue(Utility.CompareLists(actualSubjects, expectedSubjects));
         }
+
+        [TestMethod]
+        public void StudentsInstancesAreEqual()
+        {
+            string name = Utility.GetRandomName();
+            string lastName = Utility.GetRandomLastName();
+            string documentNumber = "1234567-8";
+            Student firstStudent = new Student(name, lastName, documentNumber);
+            Student secondStudent = new Student(name, lastName, documentNumber);
+
+            Assert.IsTrue(firstStudent.Equals(secondStudent));
+        }
     }
 }
