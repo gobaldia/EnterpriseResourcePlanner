@@ -345,6 +345,58 @@ namespace UnitTesting
             Assert.IsTrue(Utility.CompareLists(modifiedStudent.GetSubjects(), modifyInput.NewSubjects));
         }
 
+        [TestMethod]
+        public void ShowErrorIfNoModifications()
+        {
+            try
+            {
+                SystemData.GetInstance.Reset();
+
+                #region Add subjects to the system
+                List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+                Subject subject1 = new Subject(1234, "Math");
+                Subject subject2 = new Subject(3216, "Physics");
+                systemSubjects.Add(subject1);
+                systemSubjects.Add(subject2);
+                #endregion
+
+                #region Add students with subjects to the system
+                List<Subject> studentSubjects = new List<Subject>();
+                studentSubjects.Add(subject1);
+                studentSubjects.Add(subject2);
+                var input = new AddStudentInput
+                {
+                    DocumentNumber = "1234567-8",
+                    Name = Utility.GetRandomName(),
+                    LastName = Utility.GetRandomLastName(),
+                    Subjects = studentSubjects
+                };
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+                #endregion
+
+                List<Subject> newSubjects = new List<Subject>();
+                newSubjects.Add(subject1);
+                newSubjects.Add(subject2);
+
+                var modifyInput = new ModifyStudentInput();
+                modifyInput.NewSubjects = newSubjects;
+                modifyInput.NewName = input.Name;
+                modifyInput.NewLastName = input.LastName;
+                modifyInput.StudentNumber = 1;
+                ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+
+                Assert.Fail();
+            }
+            catch(CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals(""));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
