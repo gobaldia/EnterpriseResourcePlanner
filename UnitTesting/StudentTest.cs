@@ -346,6 +346,33 @@ namespace UnitTesting
         }
 
         [TestMethod]
+        public void ModifyStudentLocation()
+        {
+            SystemData.GetInstance.Reset();
+
+            #region Add students with subjects to the system
+            var input = new AddStudentInput
+            {
+                DocumentNumber = "1234567-8",
+                Name = Utility.GetRandomName(),
+                LastName = Utility.GetRandomLastName(),
+                Location = new Location(10.00, 15.1)
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            #endregion
+
+            Location newStudentLocation = new Location(2.1, 5.6);
+            var modifyInput = new ModifyStudentInput();
+            modifyInput.NewLocation = newStudentLocation;
+            modifyInput.StudentNumber = 1;
+            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+
+            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(1);
+
+            Assert.IsTrue(modifiedStudent.GetLocation().Equals(newStudentLocation));
+        }
+
+        [TestMethod]
         public void ShowErrorIfNoModifications()
         {
             try
