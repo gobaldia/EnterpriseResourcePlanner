@@ -42,5 +42,26 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
+
+        [TestMethod]
+        public void ThrowInvalidFormatWhenTrySetInvalidLongitud()
+        {
+            try
+            {
+                double latitud = 22;
+                double longitud = -222.25556;
+                Location location = new Location(latitud, longitud);
+
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Invalid longitud format."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
     }
 }
