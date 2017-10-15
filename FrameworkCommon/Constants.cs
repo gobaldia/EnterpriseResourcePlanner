@@ -21,5 +21,6 @@ namespace FrameworkCommon
         public const string ERROR_SUBJECTS_REQUIRED = "At least one subject required.";
         public const string ERROR_VALIDCOORDENATES_REQUIRED = "Valid coordenates are required.";
         public const string SUCCESS_STUDENT_REGISTRATION = "Student registered with success.";
+        public const string SUCCESS_STUDENT_MODIFICATION = "Student succesfully modified.";
     }
 }

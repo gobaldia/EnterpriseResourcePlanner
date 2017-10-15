@@ -25,15 +25,6 @@ namespace TeacherModuleUI.ModifyTeacher
             LoadDocumentNumberComboBox();
         }
 
-        private void LoadDocumentNumberComboBox()
-        {
-            List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
-            foreach(Teacher teacher in systemTeachers)
-            {
-                this.comboBoxTeachersDocuments.Items.Add(teacher.GetDocumentNumber());
-            }
-        }
-
         private void buttonAddSubjectToTeacher_Click(object sender, EventArgs e)
         {
             var selectedSubject = this.listBoxSystemSubjects.SelectedItem;
@@ -152,6 +143,14 @@ namespace TeacherModuleUI.ModifyTeacher
         {
             this.AutoScaleMode = AutoScaleMode.None;
             this.Size = new System.Drawing.Size(750, 550);
+        }
+        private void LoadDocumentNumberComboBox()
+        {
+            List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
+            foreach (Teacher teacher in systemTeachers)
+            {
+                this.comboBoxTeachersDocuments.Items.Add(teacher.GetDocumentNumber());
+            }
         }
         private List<Subject> GetSubjectsThatAreNotInTeacher(List<Subject> teacherSubjects)
         {

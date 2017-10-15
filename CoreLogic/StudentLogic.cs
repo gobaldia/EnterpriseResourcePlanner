@@ -23,7 +23,10 @@ namespace CoreLogic
             AddStudentSubjects(newStudent, input.Subjects);
 
             if(input.Location != null)
+            {
+                newStudent.SetPickUpService(true);
                 newStudent.SetLocation(input.Location);
+            }
 
             this.systemStudents.Add(newStudent);
         }
@@ -48,7 +51,7 @@ namespace CoreLogic
             studentToModify.SetPickUpService(input.HavePickupService);
             bool locationHaveChange = ModifyLocation(studentToModify, input.NewLocation);
 
-            if (!nameWasModified && !lastNameWasModified && !subjectsWereModified)
+            if (!nameWasModified && !lastNameWasModified && !subjectsWereModified && !locationHaveChange)
                 throw new CoreException("No modifications have been made.");
         }
 

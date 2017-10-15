@@ -52,11 +52,21 @@
     <Compile Include="AddStudent\AddStudentForm.Designer.cs">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModifyStudent\ModifyStudentAction.cs" />
+    <Compile Include="ModifyStudent\ModifyStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyStudent\ModifyStudentForm.Designer.cs">
+      <DependentUpon>ModifyStudentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentModule.cs" />
     <EmbeddedResource Include="AddStudent\AddStudentForm.resx">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyStudent\ModifyStudentForm.resx">
+      <DependentUpon>ModifyStudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,6 +102,10 @@
     <ProjectReference Include="..\CoreLogic\CoreLogic.csproj">
       <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
       <Name>CoreLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{02C77B64-E35F-4FC6-9BC9-337AC9E73420}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>

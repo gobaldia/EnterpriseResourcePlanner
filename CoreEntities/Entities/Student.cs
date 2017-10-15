@@ -12,20 +12,20 @@ namespace CoreEntities.Entities
         private static int studentsCount = 0;
         private List<Subject> subjects { get; set; }
         private int studentNumber { get; set; }
-        private bool havePickUpService { get; set; }
+        private bool havePickUpService { get; set; } = false;
         private Location location { get; set; }
         #endregion
 
         public Student()
         {
-            this.studentNumber = ++studentNumber;
+            this.studentNumber = ++studentsCount;
             base.Name = string.Empty;
             base.LastName = string.Empty;
             this.subjects = new List<Subject>();
         }
         public Student(string name, string lastName, string documentNumber)
         {
-            this.studentNumber = ++studentNumber;
+            this.studentNumber = ++studentsCount;
             this.Name = name;
             this.LastName = lastName;
             this.Document = documentNumber;

@@ -79,20 +79,23 @@ namespace MainModuleUI
 
         private void buttonInitialiceData_Click(object sender, EventArgs e)
         {
+            #region Create and add subjects to the system
             Subject subject1 = new Subject(1234, "Maths");
             Subject subject2 = new Subject(5678, "Physics");
             Subject subject3 = new Subject(9101, "Chemistry");
             Subject subject4 = new Subject(8529, "History");
             Subject subject5 = new Subject(6547, "Geography");
             Subject subject6 = new Subject(0002, "Algorithms");
-
+          
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject1);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject2);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject3);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject4);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject5);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject6);
+            #endregion
 
+            #region Create and add teachers to the system
             Teacher teacher1 = new Teacher("Luis", "Suarez", "1234567-8");
             teacher1.AddSubjectToTeach(subject1);
             teacher1.AddSubjectToTeach(subject2);
@@ -123,6 +126,77 @@ namespace MainModuleUI
             ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher4);
             ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher5);
             ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher6);
+            #endregion
+
+            #region Create packs of subjects
+            List<Subject> packOfSubjects1 = new List<Subject>();
+            packOfSubjects1.Add(subject1);
+            packOfSubjects1.Add(subject3);
+            packOfSubjects1.Add(subject4);
+            List<Subject> packOfSubjects2 = new List<Subject>();
+            packOfSubjects2.Add(subject6);
+            List<Subject> packOfSubjects3 = new List<Subject>();
+            packOfSubjects3.Add(subject1);
+            packOfSubjects3.Add(subject2);
+            packOfSubjects3.Add(subject3);
+            packOfSubjects3.Add(subject4);
+            packOfSubjects3.Add(subject5);
+            packOfSubjects3.Add(subject6);
+            List<Subject> packOfSubjects4 = new List<Subject>();
+            packOfSubjects4.Add(subject6);
+            packOfSubjects4.Add(subject4);
+            #endregion
+
+            #region Add students to the system
+            var inputStudent1 = new AddStudentInput
+            {
+                DocumentNumber = "5555555-8",
+                Name = "Claudia",
+                LastName = "Fernandez",
+                Location = new Location(-42.214568, 1.557),
+                Subjects = packOfSubjects1
+            };
+
+            var inputStudent2 = new AddStudentInput
+            {
+                DocumentNumber = "4444444-3",
+                Name = "Gaston",
+                LastName = "Silva",
+                Location = new Location(1.214568, -170.123456),
+                Subjects = packOfSubjects2
+            };
+
+            var inputStudent3 = new AddStudentInput
+            {
+                Name = "Gallo",
+                LastName = "Claudio",
+                DocumentNumber = "3333333-8",
+                Subjects = packOfSubjects1
+            };
+
+            var inputStudent4 = new AddStudentInput
+            {
+                Name = "Elon",
+                LastName = "Musk",
+                DocumentNumber = "4545456-5",
+                Subjects = packOfSubjects4
+            };
+
+            var inputStudent5 = new AddStudentInput
+            {
+                Name = "Mark",
+                LastName = "Zuckerberg",
+                DocumentNumber = "9999987-1",
+                Location = new Location(-3.555568, 55.557),
+                Subjects = packOfSubjects3
+            };
+
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent1);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent2);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent3);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent4);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent5);
+            #endregion
 
             this.buttonInitialiceData.Enabled = false;
             this.labelDataGenerated.Visible = true;
