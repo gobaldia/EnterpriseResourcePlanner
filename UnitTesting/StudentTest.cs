@@ -1,5 +1,7 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using DataAccess;
+using FrameworkCommon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -111,6 +113,17 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void AddStudentToSystem()
+        {
+            SystemData.GetInstance.Reset();
+
+            Teacher newTeacher = this.CreateRandomStudent();
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+
+            Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
     }
 }
