@@ -10,5 +10,6 @@ namespace FrameworkCommon.MethodParameters
     {
         public int StudentNumber { get; set; }
         public string NewName { get; set; }
+        public string NewLastName { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace CoreLogic
             Student studentToModify = GetStudentByNumber(input.StudentNumber);
 
             bool nameWasModified = ModifyName(studentToModify, input.NewName);
+            bool lastNameWasModified = ModifyLastName(studentToModify, input.NewLastName);
             
         }
 
@@ -73,6 +74,16 @@ namespace CoreLogic
             if (!studentToModify.GetName().Equals(newName))
             {
                 studentToModify.SetName(newName);
+                wasModifed = true;
+            }
+            return wasModifed;
+        }
+        private bool ModifyLastName(Student studentToModify, string newLastName)
+        {
+            bool wasModifed = false;
+            if (!studentToModify.GetLastName().Equals(newLastName))
+            {
+                studentToModify.SetLastName(newLastName);
                 wasModifed = true;
             }
             return wasModifed;
