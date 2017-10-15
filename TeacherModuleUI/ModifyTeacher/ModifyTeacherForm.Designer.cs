@@ -110,7 +110,7 @@
             this.textBoxTeacherName.MaxLength = 50;
             this.textBoxTeacherName.Name = "textBoxTeacherName";
             this.textBoxTeacherName.Size = new System.Drawing.Size(472, 38);
-            this.textBoxTeacherName.TabIndex = 58;
+            this.textBoxTeacherName.TabIndex = 2;
             this.textBoxTeacherName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxTeacherLastName
@@ -119,7 +119,7 @@
             this.textBoxTeacherLastName.MaxLength = 50;
             this.textBoxTeacherLastName.Name = "textBoxTeacherLastName";
             this.textBoxTeacherLastName.Size = new System.Drawing.Size(472, 38);
-            this.textBoxTeacherLastName.TabIndex = 59;
+            this.textBoxTeacherLastName.TabIndex = 3;
             this.textBoxTeacherLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // buttonModifyTeacher
@@ -209,7 +209,7 @@
             this.comboBoxTeachersDocuments.Location = new System.Drawing.Point(477, 235);
             this.comboBoxTeachersDocuments.Name = "comboBoxTeachersDocuments";
             this.comboBoxTeachersDocuments.Size = new System.Drawing.Size(472, 39);
-            this.comboBoxTeachersDocuments.TabIndex = 75;
+            this.comboBoxTeachersDocuments.TabIndex = 1;
             this.comboBoxTeachersDocuments.SelectedIndexChanged += new System.EventHandler(this.comboBoxTeachersDocuments_SelectedIndexChanged);
             // 
             // ModifyTeacherForm

@@ -90,7 +90,7 @@
             this.textBoxTeacherName.MaxLength = 50;
             this.textBoxTeacherName.Name = "textBoxTeacherName";
             this.textBoxTeacherName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxTeacherName.TabIndex = 22;
+            this.textBoxTeacherName.TabIndex = 1;
             this.textBoxTeacherName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cleanSuccessOn_KeyDown);
             // 
             // textBoxTeacherLastName
@@ -99,7 +99,7 @@
             this.textBoxTeacherLastName.MaxLength = 50;
             this.textBoxTeacherLastName.Name = "textBoxTeacherLastName";
             this.textBoxTeacherLastName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxTeacherLastName.TabIndex = 23;
+            this.textBoxTeacherLastName.TabIndex = 2;
             this.textBoxTeacherLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cleanSuccessOn_KeyDown);
             // 
             // textBoxTeacherDocument
@@ -108,7 +108,7 @@
             this.textBoxTeacherDocument.MaxLength = 9;
             this.textBoxTeacherDocument.Name = "textBoxTeacherDocument";
             this.textBoxTeacherDocument.Size = new System.Drawing.Size(380, 38);
-            this.textBoxTeacherDocument.TabIndex = 24;
+            this.textBoxTeacherDocument.TabIndex = 3;
             this.textBoxTeacherDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cleanSuccessOn_KeyDown);
             // 
             // buttonAddTeacher

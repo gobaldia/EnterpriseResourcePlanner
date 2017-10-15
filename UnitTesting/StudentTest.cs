@@ -3,6 +3,7 @@ using CoreEntities.Exceptions;
 using CoreLogic;
 using DataAccess;
 using FrameworkCommon;
+using FrameworkCommon.MethodParameters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -122,7 +123,11 @@ namespace UnitTesting
             SystemData.GetInstance.Reset();
 
             Student newStudent = this.CreateRandomStudent();
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+            var input = new AddStudentInput();
+            input.Name = newStudent.GetName();
+            input.LastName = newStudent.GetLastName();
+            input.DocumentNumber = newStudent.GetDocumentNumber();
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
 
             Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
@@ -135,10 +140,23 @@ namespace UnitTesting
                 SystemData.GetInstance.Reset();
 
                 Student firstStudent = this.CreateRandomStudent();
-                Student secondStudent = new Student(firstStudent.GetName(), firstStudent.GetLastName(), firstStudent.GetDocumentNumber());
+                var firstInput = new AddStudentInput
+                {
+                    Name = firstStudent.GetName(),
+                    LastName = firstStudent.GetLastName(),
+                    DocumentNumber = firstStudent.GetDocumentNumber()
+                };
 
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(secondStudent);
+                Student secondStudent = new Student(firstStudent.GetName(), firstStudent.GetLastName(), firstStudent.GetDocumentNumber());
+                var secondInput = new AddStudentInput
+                {
+                    Name = firstStudent.GetName(),
+                    LastName = firstStudent.GetLastName(),
+                    DocumentNumber = firstStudent.GetDocumentNumber()
+                };
+
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstInput);
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(secondInput);
 
                 Assert.Fail();
             }
@@ -176,7 +194,14 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+            var input = new AddStudentInput
+            {
+                DocumentNumber = documentNumber,
+                Name = firstStudent.GetName(),
+                LastName = firstStudent.GetLastName()
+            };
+
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
 
             Student StudentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             Assert.IsNotNull(StudentFound);
@@ -189,7 +214,13 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+            var input = new AddStudentInput
+            {
+                DocumentNumber = documentNumber,
+                Name = firstStudent.GetName(),
+                LastName = firstStudent.GetLastName()
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
 
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             studentFound.SetPickUpService(true);
@@ -204,7 +235,13 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+            var input = new AddStudentInput
+            {
+                DocumentNumber = documentNumber,
+                Name = firstStudent.GetName(),
+                LastName = firstStudent.GetLastName()
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
 
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             double latitud = 1.2;

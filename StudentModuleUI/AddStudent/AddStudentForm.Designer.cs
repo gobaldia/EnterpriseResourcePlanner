@@ -94,9 +94,9 @@
             this.labelSubjectsToBeAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSubjectsToBeAdded.Location = new System.Drawing.Point(1070, 635);
             this.labelSubjectsToBeAdded.Name = "labelSubjectsToBeAdded";
-            this.labelSubjectsToBeAdded.Size = new System.Drawing.Size(300, 36);
+            this.labelSubjectsToBeAdded.Size = new System.Drawing.Size(259, 36);
             this.labelSubjectsToBeAdded.TabIndex = 49;
-            this.labelSubjectsToBeAdded.Text = "Subjects to be teach: ";
+            this.labelSubjectsToBeAdded.Text = "Subjects to study: ";
             // 
             // labelSystemSubjects
             // 
@@ -182,7 +182,8 @@
             this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxName.TabIndex = 40;
+            this.textBoxName.TabIndex = 2;
+            this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxLastName
             // 
@@ -190,7 +191,8 @@
             this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxLastName.TabIndex = 41;
+            this.textBoxLastName.TabIndex = 3;
+            this.textBoxLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxDocument
             // 
@@ -198,7 +200,8 @@
             this.textBoxDocument.MaxLength = 9;
             this.textBoxDocument.Name = "textBoxDocument";
             this.textBoxDocument.Size = new System.Drawing.Size(380, 38);
-            this.textBoxDocument.TabIndex = 42;
+            this.textBoxDocument.TabIndex = 1;
+            this.textBoxDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // buttonAddStudent
             // 
@@ -241,7 +244,7 @@
             // radioButtonYesPickUp
             // 
             this.radioButtonYesPickUp.AutoSize = true;
-            this.radioButtonYesPickUp.Location = new System.Drawing.Point(45, 20);
+            this.radioButtonYesPickUp.Location = new System.Drawing.Point(45, 26);
             this.radioButtonYesPickUp.Name = "radioButtonYesPickUp";
             this.radioButtonYesPickUp.Size = new System.Drawing.Size(101, 36);
             this.radioButtonYesPickUp.TabIndex = 55;
@@ -253,7 +256,7 @@
             // 
             this.radioButtonNoPickUp.AutoSize = true;
             this.radioButtonNoPickUp.Checked = true;
-            this.radioButtonNoPickUp.Location = new System.Drawing.Point(162, 20);
+            this.radioButtonNoPickUp.Location = new System.Drawing.Point(162, 27);
             this.radioButtonNoPickUp.Name = "radioButtonNoPickUp";
             this.radioButtonNoPickUp.Size = new System.Drawing.Size(88, 36);
             this.radioButtonNoPickUp.TabIndex = 56;
@@ -287,7 +290,8 @@
             this.textBoxLatitud.MaxLength = 10;
             this.textBoxLatitud.Name = "textBoxLatitud";
             this.textBoxLatitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLatitud.TabIndex = 59;
+            this.textBoxLatitud.TabIndex = 4;
+            this.textBoxLatitud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxLongitud
             // 
@@ -296,7 +300,8 @@
             this.textBoxLongitud.MaxLength = 10;
             this.textBoxLongitud.Name = "textBoxLongitud";
             this.textBoxLongitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLongitud.TabIndex = 60;
+            this.textBoxLongitud.TabIndex = 5;
+            this.textBoxLongitud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // labelLatitud
             // 
@@ -320,9 +325,9 @@
             // 
             this.groupBoxPickUpServiceRadioButtons.Controls.Add(this.radioButtonYesPickUp);
             this.groupBoxPickUpServiceRadioButtons.Controls.Add(this.radioButtonNoPickUp);
-            this.groupBoxPickUpServiceRadioButtons.Location = new System.Drawing.Point(1122, 258);
+            this.groupBoxPickUpServiceRadioButtons.Location = new System.Drawing.Point(1135, 268);
             this.groupBoxPickUpServiceRadioButtons.Name = "groupBoxPickUpServiceRadioButtons";
-            this.groupBoxPickUpServiceRadioButtons.Size = new System.Drawing.Size(325, 104);
+            this.groupBoxPickUpServiceRadioButtons.Size = new System.Drawing.Size(325, 75);
             this.groupBoxPickUpServiceRadioButtons.TabIndex = 63;
             this.groupBoxPickUpServiceRadioButtons.TabStop = false;
             // 

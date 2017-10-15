@@ -1,6 +1,7 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using DataAccess;
+using FrameworkCommon.MethodParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,16 @@ namespace CoreLogic
     {
         private List<Student> systemStudents = SystemData.GetInstance.GetStudents();
 
-        public void AddStudent(Student newStudent)
+        public void AddStudent(AddStudentInput input)
         {
+            Student newStudent = new Student(input.Name, input.LastName, input.DocumentNumber);
             if (this.IsStudentInSystem(newStudent))
                 throw new CoreException("Student already exists.");
+
+            AddStudentSubjects(newStudent, input.Subjects);
+
+            if(input.Location != null)
+                newStudent.SetLocation(input.Location);
 
             this.systemStudents.Add(newStudent);
         }
@@ -34,6 +41,14 @@ namespace CoreLogic
         private bool IsStudentInSystem(Student aStudent)
         {
             return this.systemStudents.Exists(item => item.Equals(aStudent));
+        }
+        private void AddStudentSubjects(Student aStudent, List<Subject> subjectsToAdd)
+        {
+            if (subjectsToAdd != null)
+            {
+                foreach (Subject subject in subjectsToAdd)
+                    aStudent.AddSubjectToStudent(subject);
+            }
         }
         #endregion
     }

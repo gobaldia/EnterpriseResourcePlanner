@@ -175,7 +175,7 @@
             this.textBoxTeacherDocument.MaxLength = 9;
             this.textBoxTeacherDocument.Name = "textBoxTeacherDocument";
             this.textBoxTeacherDocument.Size = new System.Drawing.Size(380, 38);
-            this.textBoxTeacherDocument.TabIndex = 54;
+            this.textBoxTeacherDocument.TabIndex = 1;
             this.textBoxTeacherDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxTeacherDocument_KeyDown);
             // 
             // DeleteTeacherForm
