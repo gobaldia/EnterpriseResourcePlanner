@@ -40,7 +40,11 @@ namespace CoreLogic
         {            
             Teacher teacherToModify = GetTeacherByDocumentNumber(input.DocumentNumber);
 
-            teacherToModify.SetName(input.NewName);
+            if(!teacherToModify.GetName().Equals(input.NewName))
+                teacherToModify.SetName(input.NewName);
+
+            if (!teacherToModify.GetLastName().Equals(input.NewLastName))
+                teacherToModify.SetLastName(input.NewLastName);
         }
 
         #region Utilities

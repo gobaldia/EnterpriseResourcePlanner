@@ -254,7 +254,7 @@ namespace UnitTesting
 
             Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
 
-            Assert.AreEqual(modifiedTeacher.GetLastName(), input.NewName);
+            Assert.AreEqual(modifiedTeacher.GetLastName(), input.NewLastName);
         }
 
         #region Extra Methods
