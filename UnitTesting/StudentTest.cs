@@ -272,11 +272,31 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
 
             Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
-
             Assert.AreEqual(modifiedStudent.GetName(), modifyInput.NewName);
         }
 
+        [TestMethod]
+        public void ModifyStudentLastName()
+        {
+            SystemData.GetInstance.Reset();
 
+            Student newStudent = new Student(Utility.GetRandomName(), "de Leon", "1234567-8");
+            var addInput = new AddStudentInput
+            {
+                Name = newStudent.GetName(),
+                LastName = newStudent.GetLastName(),
+                DocumentNumber = newStudent.GetDocumentNumber()
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(addInput);
+
+            ModifyStudentInput modifyInput = new ModifyStudentInput();
+            modifyInput.NewLastName = "Diaz";
+            modifyInput.StudentNumber = 1;
+            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+
+            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
+            Assert.AreEqual(modifiedStudent.GetLastName(), modifyInput.NewLastName);
+        }
 
 
         #region Extra methods
