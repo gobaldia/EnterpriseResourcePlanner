@@ -239,6 +239,24 @@ namespace UnitTesting
             Assert.AreEqual(modifiedTeacher.GetName(), input.NewName);
         }
 
+        [TestMethod]
+        public void ModifyTeacherLastName()
+        {
+            SystemData.GetInstance.Reset();
+
+            Teacher newTeacher = new Teacher("de Leon", Utility.GetRandomLastName(), "1234567-8");
+            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+
+            ModifyTeacherInput input = new ModifyTeacherInput();
+            input.NewLastName = "Diaz";
+            input.DocumentNumber = "1234567-8";
+            ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+
+            Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
+
+            Assert.AreEqual(modifiedTeacher.GetName(), input.NewName);
+        }
+
         #region Extra Methods
         private Teacher FindTeacherOnSystem(string documentNumber)
         {
