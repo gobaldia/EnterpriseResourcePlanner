@@ -34,5 +34,11 @@ namespace CoreLogic
         {
             return this.systemSubjects.Exists(item => item.Equals(subject));
         }
+
+        public void DeleteSubjectByCode(int code)
+        {
+            var subjectToDelete = this.systemSubjects.Find(s => s.Code == code);
+            this.systemSubjects.Remove(subjectToDelete);
+        }
     }
 }
