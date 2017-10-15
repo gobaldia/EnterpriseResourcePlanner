@@ -45,6 +45,8 @@ namespace CoreLogic
             bool lastNameWasModified = ModifyLastName(studentToModify, input.NewLastName);
             bool subjectsWereModified = ModifySubjects(studentToModify, input.NewSubjects);
 
+            if (!nameWasModified && !lastNameWasModified && !subjectsWereModified)
+                throw new CoreException("No modifications have been made.");
         }
 
         public Student GetStudentByNumber(int studentNumber)
