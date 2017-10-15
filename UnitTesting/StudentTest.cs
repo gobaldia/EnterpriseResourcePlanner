@@ -169,6 +169,21 @@ namespace UnitTesting
             Assert.IsTrue(newStudent.GetSubjects().Count > 0);
         }
 
+        [TestMethod]
+        public void FindStudentByDocumentNumber()
+        {
+            SystemData.GetInstance.Reset();
+
+            string documentNumber = "1234567-8";
+            Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+
+            Student StudentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
+            Assert.IsNotNull(StudentFound);
+        }
+
+
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
