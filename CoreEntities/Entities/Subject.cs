@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreEntities.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,14 +30,50 @@ namespace CoreEntities.Entities
             this.Teachers = new List<Teacher>();
         }
 
+        public void SetCode(int code)
+        {
+            this.Code = code;
+        }
+
         public int GetCode()
         {
             return this.Code;
         }
 
+        public void SetName(string name)
+        {
+            this.Name = name;
+        }
         public string GetName()
         {
             return this.Name;
+        }
+
+        public void SetTeachers(List<Teacher> teachers)
+        {
+            this.Teachers = teachers;
+        }
+
+        public void SetStudents(List<Student> students)
+        {
+            this.Students = students;
+        }
+
+        public void AddStudent(Student student)
+        {
+            if (!SubjectAlreadyHasThisStudent(student))
+            {
+                this.Students.Add(student);
+            }
+            else
+            {
+                throw new CoreException("This student is already enrolled to this subject.");
+            }
+        }
+
+        public void AddTeacher(Teacher teacher)
+        {
+            this.Teachers.Add(teacher);
         }
 
         public override bool Equals(object obj)
@@ -55,6 +92,13 @@ namespace CoreEntities.Entities
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }        
+
+        #region Private Methods
+        private bool SubjectAlreadyHasThisStudent(Student student)
+        {
+            return this.Students.Find(s => s.GetDocumentNumber() == student.GetDocumentNumber()) != null;
         }
+        #endregion
     }
 }

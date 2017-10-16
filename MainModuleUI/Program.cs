@@ -6,6 +6,7 @@ using StudentModuleUI.ModifyStudent;
 using SubjectModuleUI;
 using SubjectModuleUI.AddSubject;
 using SubjectModuleUI.DeleteSubject;
+using SubjectModuleUI.ModifySubject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace MainModuleUI
             
             mainModule.AddModule(CreateTeacherModule());
             mainModule.AddModule(CreateStudentModule());
-            mainModule.AddModule(CreateSubjectsModule());
+            mainModule.AddModule(CreateSubjectModule());
 
             Application.Run(new MainForm(mainModule));
         }
@@ -71,14 +72,16 @@ namespace MainModuleUI
             return new StudentModule(studentActions);
         }
 
-        private static Module CreateSubjectsModule()
+        private static Module CreateSubjectModule()
         {
             List<IAction> SubjectActions = new List<IAction>();
 
             IAction addAction = new AddSubjectAction();
             IAction deleteAction = new DeleteSubjectAction();
+            IAction modifyAction = new ModifySubjectAction();
             SubjectActions.Add(addAction);
             SubjectActions.Add(deleteAction);
+            SubjectActions.Add(modifyAction);
 
             return new SubjectModule(SubjectActions);
         }
