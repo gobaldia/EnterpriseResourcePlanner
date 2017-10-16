@@ -179,7 +179,7 @@ namespace UnitTesting
 
             Vehicle vehicleOne = new Vehicle("SBA1234", 10);
             Vehicle vehicleTwo = new Vehicle("SBA5678", 15);
-            Vehicle vehicleThree = new Vehicle("SBA9012", 5);
+            Vehicle vehicleThree = new Vehicle("SBA9012", 20);
 
             ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleOne);
             ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleTwo);
