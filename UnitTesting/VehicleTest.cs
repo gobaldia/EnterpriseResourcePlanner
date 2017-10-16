@@ -43,5 +43,29 @@ namespace UnitTesting
 
             Assert.IsTrue(true);
         }
+
+        public void VehicleInstancesAreEqual()
+        {
+            string registration = "SBA1234";
+            int capacity = 10;
+
+            Vehicle firstVehicle = new Vehicle(registration, capacity);
+            Vehicle secondVehicle = new Vehicle(registration, capacity);
+
+            Assert.IsTrue(firstVehicle.Equals(secondVehicle));
+        }
+
+        [TestMethod]
+        public void StudentsInstancesAreNotEqual()
+        {
+            string registrationOne = "SBA1234";
+            string registrationTwo = "AAA1024";
+            int capacity = 10;
+
+            Vehicle firstVehicle = new Vehicle(registrationOne, capacity);
+            Vehicle secondVehicle = new Vehicle(registrationTwo, capacity);
+
+            Assert.IsFalse(firstVehicle.Equals(secondVehicle));
+        }
     }
 }
