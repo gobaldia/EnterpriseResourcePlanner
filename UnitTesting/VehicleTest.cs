@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
 using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 
 namespace UnitTesting
 {
@@ -39,11 +40,25 @@ namespace UnitTesting
             var expectedRegistration = "SBA0122";
             var expectedCapacity = 0;
 
-            Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
+            try
+            {
+                Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
+                Assert.Fail();
+            }
+            catch(CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Vehicle's capacity should be greater than 0."));
+            }
+            catch(Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+            
 
             Assert.IsTrue(true);
         }
 
+        [TestMethod]
         public void VehicleInstancesAreEqual()
         {
             string registration = "SBA1234";
@@ -56,7 +71,7 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        public void StudentsInstancesAreNotEqual()
+        public void VehicleInstancesAreNotEqual()
         {
             string registrationOne = "SBA1234";
             string registrationTwo = "AAA1024";
