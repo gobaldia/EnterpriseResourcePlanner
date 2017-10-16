@@ -161,5 +161,33 @@ namespace UnitTesting
 
             Assert.AreEqual(modifiedVehicle.GetCapacity(), input.NewCapacity);
         }
+
+        [TestMethod]
+        public void ListVehiclesWhenTheresNoVehiclesInSystem()
+        {
+            SystemData.GetInstance.Reset();
+
+            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+
+            Assert.IsTrue(vehicles.Count == 0);
+        }
+
+        [TestMethod]
+        public void ListVehiclesWhereTheresVehiclesInSystem()
+        {
+            SystemData.GetInstance.Reset();
+
+            Vehicle vehicleOne = new Vehicle("SBA1234", 10);
+            Vehicle vehicleTwo = new Vehicle("SBA5678", 15);
+            Vehicle vehicleThree = new Vehicle("SBA9012", 5);
+
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleOne);
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleTwo);
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleThree);
+
+            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+
+            Assert.IsTrue(vehicles.Count > 0);
+        }
     }
 }
