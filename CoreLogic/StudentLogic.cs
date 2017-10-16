@@ -69,6 +69,12 @@ namespace CoreLogic
             return this.systemStudents;
         }
 
+        public void DeleteStudent(int studentNumber)
+        {
+            Student studentToRemove = GetStudentByNumber(studentNumber);
+            this.systemStudents.Remove(studentToRemove);
+        }
+
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
