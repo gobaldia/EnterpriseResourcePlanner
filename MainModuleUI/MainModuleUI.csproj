@@ -111,6 +111,10 @@
       <Project>{DD137A57-F2C3-4E2C-952B-1F3B1D32CDB2}</Project>
       <Name>TeacherModuleUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VehicleModuleUI\VehicleModuleUI.csproj">
+      <Project>{47fbb223-2be4-4288-8e20-5b00c0314b33}</Project>
+      <Name>VehicleModuleUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

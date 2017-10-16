@@ -5,11 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VehicleSubjectUI.AddVehicle
+namespace VehicleModuleUI.AddVehicle
 {
     public class AddVehicleAction : IAction
     {
         private string Name { get; set; }
+
+        public AddVehicleAction()
+        {
+            this.Name = "Add";
+        }
+
         public void Call()
         {
             AddVehicleForm addVehicleForm = new AddVehicleForm();

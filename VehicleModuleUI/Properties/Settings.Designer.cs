@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VehicleSubjectUI.Properties
+namespace VehicleModuleUI.Properties
 {
 
 
