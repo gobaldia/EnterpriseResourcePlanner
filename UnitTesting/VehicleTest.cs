@@ -39,7 +39,6 @@ namespace UnitTesting
         {
             var expectedRegistration = "SBA0122";
             var expectedCapacity = 0;
-
             try
             {
                 Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
@@ -53,9 +52,26 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
-            
+        }
 
-            Assert.IsTrue(true);
+        [TestMethod]
+        public void CreateVehicleWithMalformedRegistration()
+        {
+            var expectedRegistration = "123";
+            var expectedCapacity = 10;
+            try
+            {
+                Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
+                Assert.Fail();
+            }
+            catch(CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format XXX1234 (3 letters followed by 4 numbers)."));
+            }
+            catch(Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
         }
 
         [TestMethod]
