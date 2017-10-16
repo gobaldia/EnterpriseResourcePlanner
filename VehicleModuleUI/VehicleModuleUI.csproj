@@ -60,6 +60,13 @@
     <Compile Include="DeleteVehicle\DeleteVehicleForm.Designer.cs">
       <DependentUpon>DeleteVehicleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListVehicles\ListVehiclesAction.cs" />
+    <Compile Include="ListVehicles\ListVehiclesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListVehicles\ListVehiclesForm.Designer.cs">
+      <DependentUpon>ListVehiclesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifyVehicle\ModifyVehicleAction.cs" />
     <Compile Include="ModifyVehicle\ModifyVehicleForm.cs">
       <SubType>Form</SubType>
@@ -75,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteVehicle\DeleteVehicleForm.resx">
       <DependentUpon>DeleteVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListVehicles\ListVehiclesForm.resx">
+      <DependentUpon>ListVehiclesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyVehicle\ModifyVehicleForm.resx">
       <DependentUpon>ModifyVehicleForm.cs</DependentUpon>

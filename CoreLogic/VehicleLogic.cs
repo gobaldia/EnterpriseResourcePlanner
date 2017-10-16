@@ -24,6 +24,8 @@ namespace CoreLogic
 
         public List<Vehicle> GetVehicles()
         {
+            if (this.systemVehicles.Count == 0)
+                throw new CoreException("Currently there is not any subject in the system.");
             return this.systemVehicles;
         }
 

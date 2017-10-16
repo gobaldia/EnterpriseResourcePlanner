@@ -34,6 +34,11 @@ namespace CoreEntities.Entities
             this.Capacity = capacity;
         }
 
+        public string GetFullToString()
+        {
+            return string.Format("{0} - Capacity: {1}", GetRegistration(), GetCapacity());
+        }
+
         public override bool Equals(object obj)
         {
             if(obj is Vehicle)
@@ -59,6 +64,11 @@ namespace CoreEntities.Entities
         public int GetCapacity()
         {
             return this.Capacity;
+        }
+
+        public string GetRegistration()
+        {
+            return this.Registration;
         }
     }
 }

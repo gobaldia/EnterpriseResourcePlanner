@@ -20,7 +20,6 @@ namespace VehicleModuleUI.ModifyVehicle
         public ModifyVehicleForm()
         {
             InitializeComponent();
-            CheckIfIsThereAnyVehicleInSystem();
             FillVehiclesComboBox();
         }
 
@@ -36,12 +35,20 @@ namespace VehicleModuleUI.ModifyVehicle
 
         private void FillVehiclesComboBox()
         {
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
-            for (int index = 0; index < vehicles.Count; index++)
+            try
             {
-                this.comboBoxSelectVehicleToModify.Items.Add(vehicles[index]);
+                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+                for (int index = 0; index < vehicles.Count; index++)
+                {
+                    this.comboBoxSelectVehicleToModify.Items.Add(vehicles[index]);
+                }
+                this.comboBoxSelectVehicleToModify.DropDownStyle = ComboBoxStyle.DropDownList;
             }
-            this.comboBoxSelectVehicleToModify.DropDownStyle = ComboBoxStyle.DropDownList;
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
         }
 
         private void comboBoxSelectVehicleToModify_SelectedIndexChanged(object sender, EventArgs e)
