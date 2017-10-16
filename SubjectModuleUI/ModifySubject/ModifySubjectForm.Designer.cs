@@ -93,7 +93,7 @@
             this.textBoxCodeModifySubject.Location = new System.Drawing.Point(16, 123);
             this.textBoxCodeModifySubject.Name = "textBoxCodeModifySubject";
             this.textBoxCodeModifySubject.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCodeModifySubject.TabIndex = 4;
+            this.textBoxCodeModifySubject.TabIndex = 2;
             // 
             // labelCodeModifySubject
             // 
@@ -118,7 +118,7 @@
             this.buttonModifySubject.Location = new System.Drawing.Point(383, 493);
             this.buttonModifySubject.Name = "buttonModifySubject";
             this.buttonModifySubject.Size = new System.Drawing.Size(75, 23);
-            this.buttonModifySubject.TabIndex = 7;
+            this.buttonModifySubject.TabIndex = 12;
             this.buttonModifySubject.Text = "Modify";
             this.buttonModifySubject.UseVisualStyleBackColor = true;
             this.buttonModifySubject.Click += new System.EventHandler(this.buttonModifySubject_Click);
@@ -128,7 +128,7 @@
             this.buttonCancelModifySubject.Location = new System.Drawing.Point(383, 523);
             this.buttonCancelModifySubject.Name = "buttonCancelModifySubject";
             this.buttonCancelModifySubject.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancelModifySubject.TabIndex = 8;
+            this.buttonCancelModifySubject.TabIndex = 13;
             this.buttonCancelModifySubject.Text = "Cancel";
             this.buttonCancelModifySubject.UseVisualStyleBackColor = true;
             this.buttonCancelModifySubject.Click += new System.EventHandler(this.buttonCancelModifySubject_Click);
@@ -150,7 +150,7 @@
             this.listBoxSystemTeachers.Location = new System.Drawing.Point(18, 238);
             this.listBoxSystemTeachers.Name = "listBoxSystemTeachers";
             this.listBoxSystemTeachers.Size = new System.Drawing.Size(200, 95);
-            this.listBoxSystemTeachers.TabIndex = 10;
+            this.listBoxSystemTeachers.TabIndex = 4;
             // 
             // listBoxSubjectTeachers
             // 
@@ -158,14 +158,14 @@
             this.listBoxSubjectTeachers.Location = new System.Drawing.Point(346, 238);
             this.listBoxSubjectTeachers.Name = "listBoxSubjectTeachers";
             this.listBoxSubjectTeachers.Size = new System.Drawing.Size(200, 95);
-            this.listBoxSubjectTeachers.TabIndex = 11;
+            this.listBoxSubjectTeachers.TabIndex = 5;
             // 
             // buttonAddTeacherToSubject
             // 
             this.buttonAddTeacherToSubject.Location = new System.Drawing.Point(262, 264);
             this.buttonAddTeacherToSubject.Name = "buttonAddTeacherToSubject";
             this.buttonAddTeacherToSubject.Size = new System.Drawing.Size(38, 21);
-            this.buttonAddTeacherToSubject.TabIndex = 12;
+            this.buttonAddTeacherToSubject.TabIndex = 6;
             this.buttonAddTeacherToSubject.Text = ">>";
             this.buttonAddTeacherToSubject.UseVisualStyleBackColor = true;
             this.buttonAddTeacherToSubject.Click += new System.EventHandler(this.buttonAddTeacherToSubject_Click);
@@ -175,7 +175,7 @@
             this.buttonDeleteTeacherToSubject.Location = new System.Drawing.Point(262, 291);
             this.buttonDeleteTeacherToSubject.Name = "buttonDeleteTeacherToSubject";
             this.buttonDeleteTeacherToSubject.Size = new System.Drawing.Size(38, 21);
-            this.buttonDeleteTeacherToSubject.TabIndex = 13;
+            this.buttonDeleteTeacherToSubject.TabIndex = 7;
             this.buttonDeleteTeacherToSubject.Text = "<<";
             this.buttonDeleteTeacherToSubject.UseVisualStyleBackColor = true;
             this.buttonDeleteTeacherToSubject.Click += new System.EventHandler(this.buttonDeleteTeacherToSubject_Click);
@@ -204,7 +204,7 @@
             this.listBoxSystemStudents.Location = new System.Drawing.Point(19, 376);
             this.listBoxSystemStudents.Name = "listBoxSystemStudents";
             this.listBoxSystemStudents.Size = new System.Drawing.Size(199, 95);
-            this.listBoxSystemStudents.TabIndex = 16;
+            this.listBoxSystemStudents.TabIndex = 8;
             // 
             // listBoxSubjectStudents
             // 
@@ -212,7 +212,7 @@
             this.listBoxSubjectStudents.Location = new System.Drawing.Point(346, 376);
             this.listBoxSubjectStudents.Name = "listBoxSubjectStudents";
             this.listBoxSubjectStudents.Size = new System.Drawing.Size(200, 95);
-            this.listBoxSubjectStudents.TabIndex = 17;
+            this.listBoxSubjectStudents.TabIndex = 9;
             // 
             // labelAvailableStudents
             // 
@@ -237,7 +237,7 @@
             this.buttonAddStudentToSubject.Location = new System.Drawing.Point(262, 399);
             this.buttonAddStudentToSubject.Name = "buttonAddStudentToSubject";
             this.buttonAddStudentToSubject.Size = new System.Drawing.Size(38, 21);
-            this.buttonAddStudentToSubject.TabIndex = 20;
+            this.buttonAddStudentToSubject.TabIndex = 10;
             this.buttonAddStudentToSubject.Text = ">>";
             this.buttonAddStudentToSubject.UseVisualStyleBackColor = true;
             this.buttonAddStudentToSubject.Click += new System.EventHandler(this.buttonAddStudentToSubject_Click);
@@ -247,7 +247,7 @@
             this.buttonDeleteStudentToSubject.Location = new System.Drawing.Point(262, 427);
             this.buttonDeleteStudentToSubject.Name = "buttonDeleteStudentToSubject";
             this.buttonDeleteStudentToSubject.Size = new System.Drawing.Size(38, 21);
-            this.buttonDeleteStudentToSubject.TabIndex = 21;
+            this.buttonDeleteStudentToSubject.TabIndex = 11;
             this.buttonDeleteStudentToSubject.Text = "<<";
             this.buttonDeleteStudentToSubject.UseVisualStyleBackColor = true;
             this.buttonDeleteStudentToSubject.Click += new System.EventHandler(this.buttonDeleteStudentToSubject_Click);

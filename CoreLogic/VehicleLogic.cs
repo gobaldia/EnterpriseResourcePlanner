@@ -21,9 +21,30 @@ namespace CoreLogic
             this.systemVehicles.Add(newVehicle);
         }
 
+        public List<Vehicle> GetVehicles()
+        {
+            return this.systemVehicles;
+        }
+
         private bool IsVehicleInSystem(Vehicle aVehicle)
         {
             return this.systemVehicles.Exists(item => item.Equals(aVehicle));
+        }
+
+        public void DeleteVehicle(Vehicle vehicleToDelete)
+        {
+            if(this.systemVehicles.Count == 0)
+            {
+                throw new CoreException("Currently there is not any vehicle in the system.");
+            }
+            else if (!IsVehicleInSystem(vehicleToDelete))
+            {
+                throw new CoreException("This vehicle is not in the sytem.");
+            }
+            else
+            {
+                this.systemVehicles.Remove(vehicleToDelete);
+            }
         }
     }
 }

@@ -71,7 +71,7 @@
             this.buttonDeleteSubject.Location = new System.Drawing.Point(19, 189);
             this.buttonDeleteSubject.Name = "buttonDeleteSubject";
             this.buttonDeleteSubject.Size = new System.Drawing.Size(75, 23);
-            this.buttonDeleteSubject.TabIndex = 3;
+            this.buttonDeleteSubject.TabIndex = 2;
             this.buttonDeleteSubject.Text = "Delete";
             this.buttonDeleteSubject.UseVisualStyleBackColor = true;
             this.buttonDeleteSubject.Click += new System.EventHandler(this.buttonDeleteSubject_Click);
@@ -90,7 +90,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(19, 218);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);

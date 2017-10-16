@@ -7,6 +7,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using DataAccess;
+using FrameworkCommon;
+using CoreLogic;
 
 namespace UnitTesting
 {
@@ -66,7 +69,7 @@ namespace UnitTesting
             }
             catch(CoreException ex)
             {
-                Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format XXX1234 (3 letters followed by 4 numbers)."));
+                Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format ABC1234."));
             }
             catch(Exception ex)
             {
@@ -97,6 +100,33 @@ namespace UnitTesting
             Vehicle secondVehicle = new Vehicle(registrationTwo, capacity);
 
             Assert.IsFalse(firstVehicle.Equals(secondVehicle));
+        }
+
+        [TestMethod]
+        public void DeleteVehicle()
+        {
+            try
+            {
+                SystemData.GetInstance.Reset();
+
+                string registration = "SBA1234";
+                int capacity = 10;
+                Vehicle vehicle = new Vehicle(registration, capacity);
+
+                ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle);
+                ClassFactory.GetOrCreate<VehicleLogic>().DeleteVehicle(vehicle);
+
+                Assert.IsNull(this.FindVehicleOnSystem(vehicle.Registration));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+        private object FindVehicleOnSystem(string registration)
+        {
+            return SystemData.GetInstance.GetVehicles().Find(v => v.Registration.Equals(registration));
         }
     }
 }

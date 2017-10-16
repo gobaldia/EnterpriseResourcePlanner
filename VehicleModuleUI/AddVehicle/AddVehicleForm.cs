@@ -32,7 +32,7 @@ namespace VehicleModuleUI.AddVehicle
                 Vehicle vehicle = new Vehicle(registration, capacity);
                 ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle);
                 this.labelSuccess.Visible = true;
-                this.labelSuccess.Text = "The vehicle was successfully added.";
+                this.labelSuccess.Text = "Vehicle " + vehicle + " was successfully added.";
             }
             catch(CoreException ex)
             {

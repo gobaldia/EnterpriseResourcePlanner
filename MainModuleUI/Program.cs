@@ -19,6 +19,7 @@ using TeacherModuleUI.ListTeachers;
 using TeacherModuleUI.ModifyTeacher;
 using VehicleModuleUI;
 using VehicleModuleUI.AddVehicle;
+using VehicleModuleUI.DeleteVehicle;
 
 namespace MainModuleUI
 {
@@ -94,7 +95,9 @@ namespace MainModuleUI
             List<IAction> VehicleActions = new List<IAction>();
 
             IAction addAction = new AddVehicleAction();
+            IAction deleteAction = new DeleteVehicleAction();
             VehicleActions.Add(addAction);
+            VehicleActions.Add(deleteAction);
 
             return new VehicleModule(VehicleActions);
         }
