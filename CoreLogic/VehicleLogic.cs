@@ -25,5 +25,10 @@ namespace CoreLogic
         {
             return this.systemVehicles.Exists(item => item.Equals(aVehicle));
         }
+
+        public void DeleteVehicle(Vehicle vehicleToDelete)
+        {
+            this.systemVehicles.Remove(vehicleToDelete);
+        }
     }
 }

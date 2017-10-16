@@ -69,7 +69,7 @@ namespace UnitTesting
             }
             catch(CoreException ex)
             {
-                Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format XXX1234 (3 letters followed by 4 numbers)."));
+                Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format ABC1234."));
             }
             catch(Exception ex)
             {
@@ -122,6 +122,11 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        private object FindVehicleOnSystem(string registration)
+        {
+            return SystemData.GetInstance.GetVehicles().Find(v => v.Registration.Equals(registration));
         }
     }
 }
