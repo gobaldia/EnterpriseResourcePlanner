@@ -44,7 +44,11 @@ namespace CoreEntities.Entities
             {
                 return false;
             }
-            
+        }
+
+        public override string ToString()
+        {
+            return this.Registration;
         }
     }
 }
