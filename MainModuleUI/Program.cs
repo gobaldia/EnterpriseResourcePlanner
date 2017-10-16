@@ -20,6 +20,7 @@ using TeacherModuleUI.ModifyTeacher;
 using VehicleModuleUI;
 using VehicleModuleUI.AddVehicle;
 using VehicleModuleUI.DeleteVehicle;
+using VehicleModuleUI.ModifyVehicle;
 
 namespace MainModuleUI
 {
@@ -96,8 +97,10 @@ namespace MainModuleUI
 
             IAction addAction = new AddVehicleAction();
             IAction deleteAction = new DeleteVehicleAction();
+            IAction modifyAction = new ModifyVehicleAction();
             VehicleActions.Add(addAction);
             VehicleActions.Add(deleteAction);
+            VehicleActions.Add(modifyAction);
 
             return new VehicleModule(VehicleActions);
         }
