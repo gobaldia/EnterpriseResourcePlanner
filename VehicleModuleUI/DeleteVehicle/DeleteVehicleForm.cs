@@ -57,8 +57,7 @@ namespace VehicleModuleUI.DeleteVehicle
                 {
                     var selectedVehicle = this.comboBoxSelectVehicleToDelete.SelectedItem as Vehicle;
                     ClassFactory.GetOrCreate<VehicleLogic>().DeleteVehicle(selectedVehicle);
-                    this.labelSuccess.Text = "Vehicle " + selectedVehicle + " was succesfully deleted.";
-                    this.labelSuccess.Visible = true;
+                    this.ShowMessageVehicleWasDeleted(selectedVehicle);
                     this.ReloadComboBoxSelectVehicleToDelete();
                 }
             }
@@ -72,6 +71,12 @@ namespace VehicleModuleUI.DeleteVehicle
                 this.labelError.Text = ex.Message;
                 this.labelError.Visible = true;
             }
+        }
+
+        private void ShowMessageVehicleWasDeleted(Vehicle selectedVehicle)
+        {
+            this.labelSuccess.Text = "Vehicle " + selectedVehicle + " was succesfully deleted.";
+            this.labelSuccess.Visible = true;
         }
 
         private bool UserConfirmsThatWantToDeleteVehicle()

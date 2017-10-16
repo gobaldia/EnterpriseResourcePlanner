@@ -83,7 +83,7 @@
             0});
             this.numericUpDownCapacity.Name = "numericUpDownCapacity";
             this.numericUpDownCapacity.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownCapacity.TabIndex = 4;
+            this.numericUpDownCapacity.TabIndex = 2;
             this.numericUpDownCapacity.Value = new decimal(new int[] {
             1,
             0,
@@ -95,7 +95,7 @@
             this.buttonAdd.Location = new System.Drawing.Point(17, 222);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdd.TabIndex = 5;
+            this.buttonAdd.TabIndex = 3;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -105,7 +105,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(17, 252);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.TabIndex = 4;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -137,7 +137,7 @@
             this.textBoxRegistration.Location = new System.Drawing.Point(17, 76);
             this.textBoxRegistration.Name = "textBoxRegistration";
             this.textBoxRegistration.Size = new System.Drawing.Size(100, 20);
-            this.textBoxRegistration.TabIndex = 9;
+            this.textBoxRegistration.TabIndex = 1;
             // 
             // AddVehicleForm
             // 
