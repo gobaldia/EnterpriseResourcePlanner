@@ -189,5 +189,43 @@ namespace UnitTesting
 
             Assert.IsTrue(vehicles.Count > 0);
         }
+
+        public void GetTheStudentThatIsClosestToTheShool()
+        {
+            SystemData.GetInstance.Reset();
+
+            AddStudentInput studentOne = new AddStudentInput();
+            studentOne.DocumentNumber = "1234567-1";
+            studentOne.Name = "John";
+            studentOne.Location = new Location(1.00000, 1.000000);
+
+            AddStudentInput studentTwo = new AddStudentInput();
+            studentTwo.DocumentNumber = "1234567-2";
+            studentTwo.Name = "George";
+            studentTwo.Location = new Location(2.00000, 2.000000);
+
+            AddStudentInput studentThree = new AddStudentInput();
+            studentThree.DocumentNumber = "1234567-3";
+            studentThree.Name = "Paul";
+            studentThree.Location = new Location(3.00000, 3.000000);
+
+            AddStudentInput studentFour = new AddStudentInput();
+            studentFour.DocumentNumber = "1234567-4";
+            studentFour.Name = "Ringo";
+            studentFour.Location = new Location(20.00000, 20.000000);
+
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
+
+            var studentsToAssignToVehicles = SystemData.GetInstance.GetStudentsToAssignToVehicles()
+            while (!IsEmpty(studentsToAssignToVehicles))
+            {
+                var nextStudentToAssign = studentsToAssignToVehicles.Head();
+                Assert.AreEqual(studentOne, nextStudentToAssign);
+                studentsToAssignToVehicles.Dequeue();
+            }
+        }
     }
 }
