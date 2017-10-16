@@ -128,5 +128,36 @@ namespace UnitTesting
         {
             return SystemData.GetInstance.GetVehicles().Find(v => v.Registration.Equals(registration));
         }
+
+        public void ModifyVehicle()
+        {
+            string originalRegistration = "SBA1234";
+            int originalCapacity = 10;
+            Vehicle vehicle = new Vehicle(originalRegistration, originalCapacity);
+            
+            string expectedRegistration = "AAA1234";
+            int expectedCapacity = 20;
+            vehicle.SetRegistration(expectedRegistration);
+            vehicle.SetCapacity(expectedCapacity);
+
+            Assert.AreEqual(expectedRegistration, vehicle.Registration);
+            Assert.AreEqual(expectedCapacity, vehicle.Capacity);
+        }
+
+        public void ModifyVehicleCapacityInSyste()
+        {
+            SystemData.GetInstance.Reset();
+
+            Vehicle newVehicle = new Vehicle("SBA1234", 10);
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(newVehicle);
+
+            ModifyVehicleInput input = new ModifyVehicleInput();
+            input.NewCapacity = 20;
+            ClassFactory.GetOrCreate<VehicleLogic>().ModifyVehicle(input);
+
+            Vehicle modifiedVehicle = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicleByRegistration("SBA1234");
+
+            Assert.AreEqual(modifiedVehicle.GetCapacity(), input.NewCapacity);
+        }
     }
 }
