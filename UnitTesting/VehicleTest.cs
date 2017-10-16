@@ -10,6 +10,7 @@ using CoreEntities.Exceptions;
 using DataAccess;
 using FrameworkCommon;
 using CoreLogic;
+using FrameworkCommon.MethodParameters;
 
 namespace UnitTesting
 {
@@ -129,22 +130,22 @@ namespace UnitTesting
             return SystemData.GetInstance.GetVehicles().Find(v => v.Registration.Equals(registration));
         }
 
+        [TestMethod]
         public void ModifyVehicle()
         {
-            string originalRegistration = "SBA1234";
+            string registration = "SBA1234";
             int originalCapacity = 10;
-            Vehicle vehicle = new Vehicle(originalRegistration, originalCapacity);
+            Vehicle vehicle = new Vehicle(registration, originalCapacity);
             
             string expectedRegistration = "AAA1234";
             int expectedCapacity = 20;
-            vehicle.SetRegistration(expectedRegistration);
             vehicle.SetCapacity(expectedCapacity);
 
-            Assert.AreEqual(expectedRegistration, vehicle.Registration);
             Assert.AreEqual(expectedCapacity, vehicle.Capacity);
         }
 
-        public void ModifyVehicleCapacityInSyste()
+        [TestMethod]
+        public void ModifyVehicleCapacityInSystem()
         {
             SystemData.GetInstance.Reset();
 
@@ -152,6 +153,7 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(newVehicle);
 
             ModifyVehicleInput input = new ModifyVehicleInput();
+            input.Registration = "SBA1234";
             input.NewCapacity = 20;
             ClassFactory.GetOrCreate<VehicleLogic>().ModifyVehicle(input);
 

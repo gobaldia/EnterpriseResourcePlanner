@@ -50,5 +50,15 @@ namespace CoreEntities.Entities
         {
             return this.Registration;
         }
+
+        public void SetCapacity(int capacity)
+        {
+            this.Capacity = capacity;
+        }
+
+        public int GetCapacity()
+        {
+            return this.Capacity;
+        }
     }
 }
