@@ -17,10 +17,10 @@ namespace CoreEntities.Entities
 
         public Location(double latitudToBeSet, double longitudToBeSet)
         {
-            if (!latitudRegex.IsMatch(latitudToBeSet.ToString()))
+            if (!latitudRegex.IsMatch(latitudToBeSet.ToString("#.######").Replace(",", ".")))
                 throw new CoreException("Invalid latitud format.");
 
-            if (!longitudRegex.IsMatch(longitudToBeSet.ToString()))
+            if (!longitudRegex.IsMatch(longitudToBeSet.ToString().Replace(",", ".")))
                 throw new CoreException("Invalid longitud format.");
 
             this.latitud = latitudToBeSet;

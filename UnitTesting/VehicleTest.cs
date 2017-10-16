@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
+using CoreEntities.Entities;
 
 namespace UnitTesting
 {
     [TestClass]
-    class VehicleTest
+    public class VehicleTest
     {
         [TestMethod]
         public void CreateVehicleWithParameters()
@@ -28,8 +29,8 @@ namespace UnitTesting
         {
             Vehicle vehicle = new Vehicle();
 
-            Assert.AreEqual(expectedRegistration, "AAA0000");
-            Assert.AreEqual(expectedCapacity, 1);
+            Assert.AreEqual("AAA0000", vehicle.Registration);
+            Assert.AreEqual(1, vehicle.Capacity);
         }
 
         [TestMethod]
