@@ -19,28 +19,26 @@ namespace VehicleModuleUI.DeleteVehicle
         public DeleteVehicleForm()
         {
             InitializeComponent();
-            CheckIfIsThereAnyVehicleInSystem();
             FillVehiclesComboBox();
-        }
-
-        private void CheckIfIsThereAnyVehicleInSystem()
-        {
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
-            if (vehicles.Count() == 0)
-            {
-                this.labelError.Text = "Currently there is not any subject in the system.";
-                this.labelError.Visible = true;
-            }
         }
 
         private void FillVehiclesComboBox()
         {
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
-            for(int index = 0; index < vehicles.Count; index++)
+            try
             {
-                this.comboBoxSelectVehicleToDelete.Items.Add(vehicles[index]);
+                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+                for (int index = 0; index < vehicles.Count; index++)
+                {
+                    this.comboBoxSelectVehicleToDelete.Items.Add(vehicles[index]);
+                }
+                this.comboBoxSelectVehicleToDelete.DropDownStyle = ComboBoxStyle.DropDownList;
             }
-            this.comboBoxSelectVehicleToDelete.DropDownStyle = ComboBoxStyle.DropDownList;
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+            
         }
 
         private void comboBoxSelectVehicleToDelete_SelectedIndexChanged(object sender, EventArgs e)
