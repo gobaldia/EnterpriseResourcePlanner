@@ -14,5 +14,6 @@ namespace FrameworkCommon.MethodParameters
         public string Name { get; set; }
         public string LastName { get; set; }
         public Location Location { get; set; }
+        public bool havePickUpService { get; set; } = false;
     }
 }
