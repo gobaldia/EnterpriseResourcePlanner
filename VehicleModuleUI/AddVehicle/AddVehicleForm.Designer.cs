@@ -71,11 +71,6 @@
             // numericUpDownCapacity
             // 
             this.numericUpDownCapacity.Location = new System.Drawing.Point(17, 138);
-            this.numericUpDownCapacity.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             this.numericUpDownCapacity.Minimum = new decimal(new int[] {
             1,
             0,

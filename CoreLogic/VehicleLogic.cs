@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FrameworkCommon.MethodParameters;
 
 namespace CoreLogic
 {
@@ -44,6 +45,33 @@ namespace CoreLogic
             else
             {
                 this.systemVehicles.Remove(vehicleToDelete);
+            }
+        }
+
+        public void ModifyVehicle(ModifyVehicleInput input)
+        {
+            Vehicle vehicleToModify = GetVehicleByRegistration(input.Registration);
+
+            if(input.NewCapacity > 0)
+            {
+                vehicleToModify.SetCapacity(input.NewCapacity);
+            }
+            else
+            {
+                throw new CoreException("Capacity should be greater than 0.");
+            }
+        }
+
+        public Vehicle GetVehicleByRegistration(string registration)
+        {
+            Vehicle vehicleFound = this.systemVehicles.Find(v => v.Registration.Equals(registration));
+            if (vehicleFound == null)
+            {
+                throw new CoreException("Vehicle not found.");
+            }
+            else
+            {
+                return vehicleFound;
             }
         }
     }
