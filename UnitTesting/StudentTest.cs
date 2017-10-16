@@ -427,6 +427,33 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void DeleteStudent()
+        {
+            try
+            {
+                SystemData.GetInstance.Reset();
+                string documentNumber = "1234567-8";
+
+                int nextStudentNumber = Student.GetNextStudentNumber();
+                var input = new AddStudentInput
+                {
+                    Name = Utility.GetRandomName(),
+                    LastName = Utility.GetRandomLastName(),
+                    DocumentNumber = documentNumber
+                };
+
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+                ClassFactory.GetOrCreate<StudentLogic>().DeleteStudent(nextStudentNumber);
+
+                Assert.IsNull(this.FindStudentOnSystem(documentNumber));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #region Extra methods
         private Student CreateRandomStudent()
         {

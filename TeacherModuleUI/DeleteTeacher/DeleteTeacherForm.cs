@@ -50,7 +50,6 @@ namespace TeacherModuleUI.DeleteTeacher
             {
                 this.labelError.Text = Constants.ERROR_UNEXPECTED;
             }
-            
         }
         private void buttonSearch_Click(object sender, EventArgs e)
         {

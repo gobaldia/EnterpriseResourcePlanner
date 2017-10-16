@@ -52,6 +52,13 @@
     <Compile Include="AddStudent\AddStudentForm.Designer.cs">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeleteStudent\DeleteStudentAction.cs" />
+    <Compile Include="DeleteStudent\DeleteStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteStudent\DeleteStudentForm.Designer.cs">
+      <DependentUpon>DeleteStudentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifyStudent\ModifyStudentAction.cs" />
     <Compile Include="ModifyStudent\ModifyStudentForm.cs">
       <SubType>Form</SubType>
@@ -64,6 +71,9 @@
     <Compile Include="StudentModule.cs" />
     <EmbeddedResource Include="AddStudent\AddStudentForm.resx">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteStudent\DeleteStudentForm.resx">
+      <DependentUpon>DeleteStudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyStudent\ModifyStudentForm.resx">
       <DependentUpon>ModifyStudentForm.cs</DependentUpon>
