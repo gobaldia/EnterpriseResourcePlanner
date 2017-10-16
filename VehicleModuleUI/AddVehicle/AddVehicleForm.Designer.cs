@@ -31,13 +31,13 @@
             this.labelAddVehicleTitle = new System.Windows.Forms.Label();
             this.labelRegistration = new System.Windows.Forms.Label();
             this.labelCapacity = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownCapacity = new System.Windows.Forms.NumericUpDown();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
             this.labelSuccess = new System.Windows.Forms.Label();
             this.textBoxRegistration = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).BeginInit();
             this.SuspendLayout();
             // 
             // labelAddVehicleTitle
@@ -68,23 +68,23 @@
             this.labelCapacity.TabIndex = 2;
             this.labelCapacity.Text = "Capacity";
             // 
-            // numericUpDown1
+            // numericUpDownCapacity
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(17, 138);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericUpDownCapacity.Location = new System.Drawing.Point(17, 138);
+            this.numericUpDownCapacity.Maximum = new decimal(new int[] {
             50,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.numericUpDownCapacity.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 4;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericUpDownCapacity.Name = "numericUpDownCapacity";
+            this.numericUpDownCapacity.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownCapacity.TabIndex = 4;
+            this.numericUpDownCapacity.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -98,6 +98,7 @@
             this.buttonAdd.TabIndex = 5;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonCancel
             // 
@@ -107,6 +108,7 @@
             this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // labelError
             // 
@@ -117,6 +119,7 @@
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 7;
+            this.labelError.Visible = false;
             // 
             // labelSuccess
             // 
@@ -127,6 +130,7 @@
             this.labelSuccess.Name = "labelSuccess";
             this.labelSuccess.Size = new System.Drawing.Size(0, 16);
             this.labelSuccess.TabIndex = 8;
+            this.labelSuccess.Visible = false;
             // 
             // textBoxRegistration
             // 
@@ -145,13 +149,13 @@
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDownCapacity);
             this.Controls.Add(this.labelCapacity);
             this.Controls.Add(this.labelRegistration);
             this.Controls.Add(this.labelAddVehicleTitle);
             this.Name = "AddVehicleForm";
             this.Text = "AddVehicleForm";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,7 +166,7 @@
         private System.Windows.Forms.Label labelAddVehicleTitle;
         private System.Windows.Forms.Label labelRegistration;
         private System.Windows.Forms.Label labelCapacity;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownCapacity;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelError;

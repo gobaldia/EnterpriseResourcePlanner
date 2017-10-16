@@ -10,7 +10,7 @@ namespace CoreEntities.Entities
 {
     public class Vehicle
     {
-        private Regex registrationRegex = new Regex("^[A-Za-z]{3}[0-9]{4}$");
+        private Regex registrationRegex = new Regex("^[A-Z]{3}[0-9]{4}$");
         public string Registration { get; set; }
         public int Capacity { get; set; }
 
@@ -28,7 +28,7 @@ namespace CoreEntities.Entities
             }
             if (!registrationRegex.IsMatch(registration))
             {
-                throw new CoreException("Vehicle's registration should have the format XXX1234 (3 letters followed by 4 numbers).");
+                throw new CoreException("Vehicle's registration should have the format ABC1234.");
             }
             this.Registration = registration;
             this.Capacity = capacity;

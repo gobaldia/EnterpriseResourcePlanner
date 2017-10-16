@@ -56,6 +56,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VehicleModule.cs" />
+    <EmbeddedResource Include="AddVehicle\AddVehicleForm.resx">
+      <DependentUpon>AddVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -79,9 +82,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreEntities\CoreEntities.csproj">
+      <Project>{a1601f7b-a76e-4047-92c2-187d0ddb58d6}</Project>
+      <Name>CoreEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoreGeneralization\CoreGeneralization.csproj">
       <Project>{902d16be-9ee7-4b6a-a522-5d25da2d638b}</Project>
       <Name>CoreGeneralization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreLogic\CoreLogic.csproj">
+      <Project>{3c985488-c876-43bf-bedc-9c150ae718c9}</Project>
+      <Name>CoreLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
+      <Project>{0d34b3c6-4f5a-469f-a793-77d5de2c9e5e}</Project>
+      <Name>FrameworkCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
