@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CoreEntities.Entities
 {
     public class Vehicle
     {
+        private Regex registrationRegex = new Regex("^[A-Za-z]{3}[0-9]{4}$");
         public string Registration { get; set; }
         public int Capacity { get; set; }
 
@@ -23,6 +25,10 @@ namespace CoreEntities.Entities
             if(capacity <= 0)
             {
                 throw new CoreException("Vehicle's capacity should be greater than 0.");
+            }
+            if (!registrationRegex.IsMatch(registration))
+            {
+                throw new CoreException("Vehicle's registration should have the format XXX1234 (3 letters followed by 4 numbers).");
             }
             this.Registration = registration;
             this.Capacity = capacity;
