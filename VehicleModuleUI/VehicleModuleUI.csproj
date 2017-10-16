@@ -76,6 +76,9 @@
     <EmbeddedResource Include="DeleteVehicle\DeleteVehicleForm.resx">
       <DependentUpon>DeleteVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModifyVehicle\ModifyVehicleForm.resx">
+      <DependentUpon>ModifyVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

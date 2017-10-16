@@ -46,6 +46,7 @@ namespace VehicleModuleUI.DeleteVehicle
         private void comboBoxSelectVehicleToDelete_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.labelError.Visible = false;
+            this.labelSuccess.Visible = false;
             this.buttonDelete.Enabled = true;
         }
 
