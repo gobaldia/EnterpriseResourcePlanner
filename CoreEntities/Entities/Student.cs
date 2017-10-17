@@ -95,13 +95,16 @@ namespace CoreEntities.Entities
         {
             this.subjects.Add(newSubject);
         }
-
         public override bool Equals(object obj)
         {
             if (obj is Student)
                 return this.GetDocumentNumber().Equals(((Student)obj).GetDocumentNumber());
             else
                 return false;
+        }
+        public override string ToString()
+        {
+            return string.Format("Full name: {0}, Student number: {1}", this.GetFullName(), this.GetStudentNumber());
         }
     }
 }

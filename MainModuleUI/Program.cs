@@ -3,6 +3,7 @@ using MainComponents;
 using StudentModuleUI;
 using StudentModuleUI.AddStudent;
 using StudentModuleUI.DeleteStudent;
+using StudentModuleUI.ListStudents;
 using StudentModuleUI.ModifyStudent;
 using SubjectModuleUI;
 using SubjectModuleUI.AddSubject;
@@ -74,9 +75,11 @@ namespace MainModuleUI
             IAction addAction = new AddStudentAction();
             IAction modifyAction = new ModifyStudentAction();
             IAction deleteAction = new DeleteStudentAction();
+            IAction listAction = new ListStudentsAction();
             studentActions.Add(addAction);
             studentActions.Add(modifyAction);
             studentActions.Add(deleteAction);
+            studentActions.Add(listAction);
 
             return new StudentModule(studentActions);
         }
