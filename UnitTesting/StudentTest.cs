@@ -180,7 +180,7 @@ namespace UnitTesting
             systemSubjects.Add(aSubject);
 
             Student newStudent = this.CreateRandomStudent();
-            Subject subjectToBeAdded = SystemData.GetInstance.GetSubjectByCode(123456);
+            Subject subjectToBeAdded = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(123456);
 
             newStudent.AddSubjectToStudent(subjectToBeAdded);
 

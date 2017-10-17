@@ -59,5 +59,10 @@ namespace CoreLogic
                 this.systemSubjects.Remove(subjectToDelete);
             }
         }
+        
+        public Subject GetSubjectByCode(int subjectCode)
+        {
+            return this.systemSubjects.Find(item => item.GetCode() == subjectCode);
+        }
     }
 }

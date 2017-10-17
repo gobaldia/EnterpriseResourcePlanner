@@ -59,12 +59,5 @@ namespace DataAccess
         {
             return this.vehicles;
         }
-
-        #region Subject Methods
-        public Subject GetSubjectByCode(int subjectCode)
-        {
-            return this.subjects.Find(item => item.GetCode() == subjectCode);
-        }
-        #endregion
     }
 }

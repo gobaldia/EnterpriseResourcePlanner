@@ -156,7 +156,7 @@ namespace UnitTesting
             systemSubjects.Add(aSubject);
 
             Teacher newTeacher = this.CreateRandomTeacher();
-            Subject subjectToBeAdded = SystemData.GetInstance.GetSubjectByCode(123456);
+            Subject subjectToBeAdded = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(123456);
 
             newTeacher.AddSubjectToTeach(subjectToBeAdded);
 
@@ -209,8 +209,8 @@ namespace UnitTesting
             systemSubjects.Add(subject2);
 
             Teacher newTeacher = this.CreateRandomTeacher();
-            Subject subjectToBeAdded1 = SystemData.GetInstance.GetSubjectByCode(123456);
-            Subject subjectToBeAdded2 = SystemData.GetInstance.GetSubjectByCode(654321);
+            Subject subjectToBeAdded1 = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(123456);
+            Subject subjectToBeAdded2 = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(654321);
             
             newTeacher.AddSubjectToTeach(subjectToBeAdded1);
             newTeacher.AddSubjectToTeach(subjectToBeAdded2);
