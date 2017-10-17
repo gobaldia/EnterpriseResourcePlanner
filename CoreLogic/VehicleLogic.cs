@@ -89,8 +89,8 @@ namespace CoreLogic
                 Tuple<Student, double> elementToAddToStudentsThatWillUseVehiclesWithDistancesToSchool = new Tuple<Student, double>(student, distanceToSchool);
                 studentsThatWillUseVehiclesWithDistancesToSchool.Add(elementToAddToStudentsThatWillUseVehiclesWithDistancesToSchool);
             }
-            studentsThatWillUseVehiclesWithDistancesToSchool.OrderBy(x => x.Item2).ToList();
-            return studentsThatWillUseVehiclesWithDistancesToSchool;
+            var studentsThatWillUseVehiclesWithDistancesToSchoolOrderder = studentsThatWillUseVehiclesWithDistancesToSchool.OrderBy(x => x.Item2).ToList();
+            return studentsThatWillUseVehiclesWithDistancesToSchoolOrderder;
         }
 
         private double CalculateDistanceToSchool(Student student)
@@ -120,23 +120,17 @@ namespace CoreLogic
             var vehicleIndex = 0;
             while (studentsQuantity > 0)
             {
-                // https://stackoverflow.com/questions/1042087/how-to-select-values-within-a-provided-index-range-from-a-list-using-linq
-                // aqui deberia tomar los alumnos entre un rango para agregarlo a la tupla
                 Vehicle vehicle = vehicles[vehicleIndex];
-                int sk = studentsToUseVehicles.Count - studentsQuantity;
-                int ta = vehicle.Capacity;
-                List<Student> students = studentsToUseVehicles.Skip(sk).Take(ta).Select(x => x.Item1).ToList();
+                int studentsAlreadyAssignedToAVehicle = studentsToUseVehicles.Count - studentsQuantity;
+                int currentVehicleCapacity = vehicle.Capacity;
+                List<Student> students = studentsToUseVehicles.Skip(studentsAlreadyAssignedToAVehicle).Take(currentVehicleCapacity).Select(x => x.Item1).ToList();
                 Tuple<Vehicle, List<Student>> elementToAdd = new Tuple<Vehicle, List<Student>>(vehicle, students);
                 vehiclesToShow.Add(elementToAdd);
                 studentsQuantity -= vehicles[vehicleIndex].Capacity;
                 if(vehicleIndex == vehiclesQuantity - 1)
-                {
                     vehicleIndex = 0;
-                }
                 else
-                {
                     vehicleIndex++;
-                }
             }
             return vehiclesToShow;
         }
