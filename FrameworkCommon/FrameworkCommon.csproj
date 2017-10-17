@@ -44,7 +44,6 @@
     <Compile Include="ClassFactory.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="MethodParameters\AddStudentInput.cs" />
-    <Compile Include="MethodParameters\AddSubjectToTeachInput.cs" />
     <Compile Include="MethodParameters\MenuMethodInput.cs" />
     <Compile Include="MethodParameters\ModifyStudentInput.cs" />
     <Compile Include="MethodParameters\ModifyTeacherInput.cs" />
