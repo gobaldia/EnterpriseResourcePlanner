@@ -44,7 +44,7 @@
             // 
             this.labelAddVehicleTitle.AutoSize = true;
             this.labelAddVehicleTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAddVehicleTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelAddVehicleTitle.Location = new System.Drawing.Point(58, 18);
             this.labelAddVehicleTitle.Name = "labelAddVehicleTitle";
             this.labelAddVehicleTitle.Size = new System.Drawing.Size(168, 23);
             this.labelAddVehicleTitle.TabIndex = 0;
@@ -53,7 +53,7 @@
             // labelRegistration
             // 
             this.labelRegistration.AutoSize = true;
-            this.labelRegistration.Location = new System.Drawing.Point(17, 59);
+            this.labelRegistration.Location = new System.Drawing.Point(62, 78);
             this.labelRegistration.Name = "labelRegistration";
             this.labelRegistration.Size = new System.Drawing.Size(63, 13);
             this.labelRegistration.TabIndex = 1;
@@ -62,7 +62,7 @@
             // labelCapacity
             // 
             this.labelCapacity.AutoSize = true;
-            this.labelCapacity.Location = new System.Drawing.Point(17, 121);
+            this.labelCapacity.Location = new System.Drawing.Point(62, 140);
             this.labelCapacity.Name = "labelCapacity";
             this.labelCapacity.Size = new System.Drawing.Size(48, 13);
             this.labelCapacity.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             // numericUpDownCapacity
             // 
-            this.numericUpDownCapacity.Location = new System.Drawing.Point(17, 138);
+            this.numericUpDownCapacity.Location = new System.Drawing.Point(62, 157);
             this.numericUpDownCapacity.Minimum = new decimal(new int[] {
             1,
             0,
@@ -87,7 +87,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(17, 222);
+            this.buttonAdd.Location = new System.Drawing.Point(310, 261);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 3;
@@ -97,7 +97,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(17, 252);
+            this.buttonCancel.Location = new System.Drawing.Point(199, 261);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -129,7 +129,7 @@
             // 
             // textBoxRegistration
             // 
-            this.textBoxRegistration.Location = new System.Drawing.Point(17, 76);
+            this.textBoxRegistration.Location = new System.Drawing.Point(62, 95);
             this.textBoxRegistration.Name = "textBoxRegistration";
             this.textBoxRegistration.Size = new System.Drawing.Size(100, 20);
             this.textBoxRegistration.TabIndex = 1;

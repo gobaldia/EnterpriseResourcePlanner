@@ -41,7 +41,7 @@
             // 
             // textBoxSubjectCode
             // 
-            this.textBoxSubjectCode.Location = new System.Drawing.Point(90, 80);
+            this.textBoxSubjectCode.Location = new System.Drawing.Point(160, 79);
             this.textBoxSubjectCode.Name = "textBoxSubjectCode";
             this.textBoxSubjectCode.Size = new System.Drawing.Size(100, 20);
             this.textBoxSubjectCode.TabIndex = 0;
@@ -49,7 +49,7 @@
             // labelSubjectCode
             // 
             this.labelSubjectCode.AutoSize = true;
-            this.labelSubjectCode.Location = new System.Drawing.Point(13, 86);
+            this.labelSubjectCode.Location = new System.Drawing.Point(83, 85);
             this.labelSubjectCode.Name = "labelSubjectCode";
             this.labelSubjectCode.Size = new System.Drawing.Size(32, 13);
             this.labelSubjectCode.TabIndex = 1;
@@ -58,7 +58,7 @@
             // labelSubjectName
             // 
             this.labelSubjectName.AutoSize = true;
-            this.labelSubjectName.Location = new System.Drawing.Point(13, 117);
+            this.labelSubjectName.Location = new System.Drawing.Point(83, 116);
             this.labelSubjectName.Name = "labelSubjectName";
             this.labelSubjectName.Size = new System.Drawing.Size(35, 13);
             this.labelSubjectName.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // textBoxSubjectName
             // 
-            this.textBoxSubjectName.Location = new System.Drawing.Point(90, 114);
+            this.textBoxSubjectName.Location = new System.Drawing.Point(160, 113);
             this.textBoxSubjectName.MaxLength = 50;
             this.textBoxSubjectName.Name = "textBoxSubjectName";
             this.textBoxSubjectName.Size = new System.Drawing.Size(100, 20);
@@ -74,7 +74,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(115, 191);
+            this.buttonAdd.Location = new System.Drawing.Point(380, 221);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(115, 221);
+            this.buttonCancel.Location = new System.Drawing.Point(261, 221);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -116,7 +116,7 @@
             // 
             this.labelAddSubjectTitle.AutoSize = true;
             this.labelAddSubjectTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAddSubjectTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelAddSubjectTitle.Location = new System.Drawing.Point(76, 9);
             this.labelAddSubjectTitle.Name = "labelAddSubjectTitle";
             this.labelAddSubjectTitle.Size = new System.Drawing.Size(172, 23);
             this.labelAddSubjectTitle.TabIndex = 8;
@@ -126,7 +126,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 307);
+            this.ClientSize = new System.Drawing.Size(514, 315);
             this.Controls.Add(this.labelAddSubjectTitle);
             this.Controls.Add(this.labelOk);
             this.Controls.Add(this.buttonCancel);

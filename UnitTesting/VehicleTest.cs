@@ -165,15 +165,27 @@ namespace UnitTesting
         [TestMethod]
         public void ListVehiclesWhenTheresNoVehiclesInSystem()
         {
-            SystemData.GetInstance.Reset();
+            try
+            {
+                SystemData.GetInstance.Reset();
 
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
 
-            Assert.IsTrue(vehicles.Count == 0);
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Currently there is not any vehicle in the system."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+            
         }
 
         [TestMethod]
-        public void ListVehiclesWhereTheresVehiclesInSystem()
+        public void ListVehicles()
         {
             SystemData.GetInstance.Reset();
 
@@ -189,5 +201,83 @@ namespace UnitTesting
 
             Assert.IsTrue(vehicles.Count > 0);
         }
+
+        [TestMethod]
+        private void TestStudentsOrderedByDistanceToSchool()
+        {
+            SystemData.GetInstance.Reset();
+
+            AddStudentInput studentOne = new AddStudentInput();
+            studentOne.DocumentNumber = "1234567-1";
+            studentOne.Name = "John";
+            studentOne.Location = new Location(2.00000, 2.000000);
+            studentOne.havePickUpService = true;
+
+            AddStudentInput studentTwo = new AddStudentInput();
+            studentTwo.DocumentNumber = "1234567-2";
+            studentTwo.Name = "George";
+            studentTwo.Location = new Location(1.00000, 1.000000);
+            studentTwo.havePickUpService = true;
+
+            AddStudentInput studentThree = new AddStudentInput();
+            studentThree.DocumentNumber = "1234567-3";
+            studentThree.Name = "Paul";
+            studentThree.Location = new Location(3.00000, 3.000000);
+
+            AddStudentInput studentFour = new AddStudentInput();
+            studentFour.DocumentNumber = "1234567-4";
+            studentFour.Name = "Ringo";
+            studentFour.Location = new Location(20.00000, 20.000000);
+            studentFour.havePickUpService = true;
+
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
+
+            var studentsOrderedByDistanceToSchool = ClassFactory.GetOrCreate<VehicleLogic>().StudentsOrderedByDistanceToSchool();
+
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentTwo);
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentOne);
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentThree);
+        }
+
+        /*public void GetTheStudentThatIsClosestToTheShool()
+        {
+            SystemData.GetInstance.Reset();
+
+            AddStudentInput studentOne = new AddStudentInput();
+            studentOne.DocumentNumber = "1234567-1";
+            studentOne.Name = "John";
+            studentOne.Location = new Location(1.00000, 1.000000);
+
+            AddStudentInput studentTwo = new AddStudentInput();
+            studentTwo.DocumentNumber = "1234567-2";
+            studentTwo.Name = "George";
+            studentTwo.Location = new Location(2.00000, 2.000000);
+
+            AddStudentInput studentThree = new AddStudentInput();
+            studentThree.DocumentNumber = "1234567-3";
+            studentThree.Name = "Paul";
+            studentThree.Location = new Location(3.00000, 3.000000);
+
+            AddStudentInput studentFour = new AddStudentInput();
+            studentFour.DocumentNumber = "1234567-4";
+            studentFour.Name = "Ringo";
+            studentFour.Location = new Location(20.00000, 20.000000);
+
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
+
+            var studentsToAssignToVehicles = SystemData.GetInstance.GetStudentsToAssignToVehicles()
+            while (!IsEmpty(studentsToAssignToVehicles))
+            {
+                var nextStudentToAssign = studentsToAssignToVehicles.Head();
+                Assert.AreEqual(studentOne, nextStudentToAssign);
+                studentsToAssignToVehicles.Dequeue();
+            }
+        }*/
     }
 }

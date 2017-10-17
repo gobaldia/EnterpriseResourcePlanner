@@ -44,7 +44,7 @@
             // 
             this.labelModifyVehicleTitle.AutoSize = true;
             this.labelModifyVehicleTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelModifyVehicleTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelModifyVehicleTitle.Location = new System.Drawing.Point(59, 34);
             this.labelModifyVehicleTitle.Name = "labelModifyVehicleTitle";
             this.labelModifyVehicleTitle.Size = new System.Drawing.Size(149, 23);
             this.labelModifyVehicleTitle.TabIndex = 0;
@@ -53,7 +53,7 @@
             // labelCapacity
             // 
             this.labelCapacity.AutoSize = true;
-            this.labelCapacity.Location = new System.Drawing.Point(9, 107);
+            this.labelCapacity.Location = new System.Drawing.Point(60, 154);
             this.labelCapacity.Name = "labelCapacity";
             this.labelCapacity.Size = new System.Drawing.Size(48, 13);
             this.labelCapacity.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // numericUpDownCapacity
             // 
-            this.numericUpDownCapacity.Location = new System.Drawing.Point(12, 123);
+            this.numericUpDownCapacity.Location = new System.Drawing.Point(63, 170);
             this.numericUpDownCapacity.Name = "numericUpDownCapacity";
             this.numericUpDownCapacity.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownCapacity.TabIndex = 2;
@@ -71,7 +71,7 @@
             this.labelSuccess.AutoSize = true;
             this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelSuccess.Location = new System.Drawing.Point(14, 157);
+            this.labelSuccess.Location = new System.Drawing.Point(60, 238);
             this.labelSuccess.Name = "labelSuccess";
             this.labelSuccess.Size = new System.Drawing.Size(0, 16);
             this.labelSuccess.TabIndex = 3;
@@ -82,7 +82,7 @@
             this.labelError.AutoSize = true;
             this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(14, 157);
+            this.labelError.Location = new System.Drawing.Point(60, 238);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 4;
@@ -91,7 +91,7 @@
             // buttonModify
             // 
             this.buttonModify.Enabled = false;
-            this.buttonModify.Location = new System.Drawing.Point(16, 173);
+            this.buttonModify.Location = new System.Drawing.Point(359, 326);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(75, 23);
             this.buttonModify.TabIndex = 3;
@@ -101,7 +101,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(16, 203);
+            this.buttonCancel.Location = new System.Drawing.Point(228, 326);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -112,7 +112,7 @@
             // comboBoxSelectVehicleToModify
             // 
             this.comboBoxSelectVehicleToModify.FormattingEnabled = true;
-            this.comboBoxSelectVehicleToModify.Location = new System.Drawing.Point(12, 73);
+            this.comboBoxSelectVehicleToModify.Location = new System.Drawing.Point(63, 114);
             this.comboBoxSelectVehicleToModify.Name = "comboBoxSelectVehicleToModify";
             this.comboBoxSelectVehicleToModify.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSelectVehicleToModify.TabIndex = 1;
@@ -121,7 +121,7 @@
             // labelSelectVehicleToModify
             // 
             this.labelSelectVehicleToModify.AutoSize = true;
-            this.labelSelectVehicleToModify.Location = new System.Drawing.Point(9, 57);
+            this.labelSelectVehicleToModify.Location = new System.Drawing.Point(60, 98);
             this.labelSelectVehicleToModify.Name = "labelSelectVehicleToModify";
             this.labelSelectVehicleToModify.Size = new System.Drawing.Size(121, 13);
             this.labelSelectVehicleToModify.TabIndex = 8;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 311);
+            this.ClientSize = new System.Drawing.Size(507, 418);
             this.Controls.Add(this.labelSelectVehicleToModify);
             this.Controls.Add(this.comboBoxSelectVehicleToModify);
             this.Controls.Add(this.buttonCancel);

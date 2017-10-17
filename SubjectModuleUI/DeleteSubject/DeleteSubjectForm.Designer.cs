@@ -41,7 +41,7 @@
             // 
             this.labelDeleteSubjectTitle.AutoSize = true;
             this.labelDeleteSubjectTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDeleteSubjectTitle.Location = new System.Drawing.Point(12, 9);
+            this.labelDeleteSubjectTitle.Location = new System.Drawing.Point(50, 9);
             this.labelDeleteSubjectTitle.Name = "labelDeleteSubjectTitle";
             this.labelDeleteSubjectTitle.Size = new System.Drawing.Size(150, 23);
             this.labelDeleteSubjectTitle.TabIndex = 0;
@@ -50,7 +50,7 @@
             // comboBoxSelectSubjectToDelete
             // 
             this.comboBoxSelectSubjectToDelete.FormattingEnabled = true;
-            this.comboBoxSelectSubjectToDelete.Location = new System.Drawing.Point(16, 71);
+            this.comboBoxSelectSubjectToDelete.Location = new System.Drawing.Point(51, 70);
             this.comboBoxSelectSubjectToDelete.Name = "comboBoxSelectSubjectToDelete";
             this.comboBoxSelectSubjectToDelete.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSelectSubjectToDelete.TabIndex = 1;
@@ -59,7 +59,7 @@
             // labelSelectSubjectToDelete
             // 
             this.labelSelectSubjectToDelete.AutoSize = true;
-            this.labelSelectSubjectToDelete.Location = new System.Drawing.Point(16, 52);
+            this.labelSelectSubjectToDelete.Location = new System.Drawing.Point(51, 51);
             this.labelSelectSubjectToDelete.Name = "labelSelectSubjectToDelete";
             this.labelSelectSubjectToDelete.Size = new System.Drawing.Size(118, 13);
             this.labelSelectSubjectToDelete.TabIndex = 2;
@@ -68,7 +68,7 @@
             // buttonDeleteSubject
             // 
             this.buttonDeleteSubject.Enabled = false;
-            this.buttonDeleteSubject.Location = new System.Drawing.Point(19, 189);
+            this.buttonDeleteSubject.Location = new System.Drawing.Point(382, 198);
             this.buttonDeleteSubject.Name = "buttonDeleteSubject";
             this.buttonDeleteSubject.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteSubject.TabIndex = 2;
@@ -87,7 +87,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(19, 218);
+            this.buttonCancel.Location = new System.Drawing.Point(256, 198);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 277);
+            this.ClientSize = new System.Drawing.Size(514, 315);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelActionResult);

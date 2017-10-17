@@ -18,6 +18,13 @@ namespace SubjectModuleUI.AddSubject
         public AddSubjectForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(500, 350);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

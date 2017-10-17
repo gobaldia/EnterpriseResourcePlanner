@@ -106,5 +106,10 @@ namespace CoreEntities.Entities
         {
             return string.Format("Full name: {0}, Student number: {1}", this.GetFullName(), this.GetStudentNumber());
         }
+
+        public string GetFullNameAndLocation()
+        {
+            return string.Format("{0}: {1}", this.GetFullName(), this.GetLocation());
+        }
     }
 }

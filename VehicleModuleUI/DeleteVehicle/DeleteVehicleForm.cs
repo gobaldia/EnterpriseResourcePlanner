@@ -19,7 +19,14 @@ namespace VehicleModuleUI.DeleteVehicle
         public DeleteVehicleForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
             FillVehiclesComboBox();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(500, 350);
         }
 
         private void FillVehiclesComboBox()
@@ -43,8 +50,7 @@ namespace VehicleModuleUI.DeleteVehicle
 
         private void comboBoxSelectVehicleToDelete_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.labelError.Visible = false;
-            this.labelSuccess.Visible = false;
+            HideAllResultLabels();
             this.buttonDelete.Enabled = true;
         }
 
@@ -58,6 +64,7 @@ namespace VehicleModuleUI.DeleteVehicle
                     ClassFactory.GetOrCreate<VehicleLogic>().DeleteVehicle(selectedVehicle);
                     this.ShowMessageVehicleWasDeleted(selectedVehicle);
                     this.ReloadComboBoxSelectVehicleToDelete();
+                    this.HideAllResultLabels();
                 }
             }
             catch (CoreException ex)
@@ -89,6 +96,12 @@ namespace VehicleModuleUI.DeleteVehicle
         {
             this.comboBoxSelectVehicleToDelete.Items.Clear();
             this.FillVehiclesComboBox();
+        }
+
+        private void HideAllResultLabels()
+        {
+            this.labelError.Visible = false;
+            this.labelSuccess.Visible = true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
