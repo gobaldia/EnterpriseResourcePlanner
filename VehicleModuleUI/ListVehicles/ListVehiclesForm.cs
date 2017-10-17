@@ -43,6 +43,11 @@ namespace VehicleModuleUI.ListVehicles
                 this.labelError.Visible = true;
                 this.labelError.Text = ex.Message;
             }
+            catch (Exception ex)
+            {
+                this.labelError.Visible = true;
+                this.labelError.Text = ex.Message;
+            }
             
         }
 
