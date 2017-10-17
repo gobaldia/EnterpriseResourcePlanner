@@ -35,7 +35,7 @@ namespace VehicleModuleUI.ListVehicles
                 var availableVehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
                 for (int index = 0; index < availableVehicles.Count; index++)
                 {
-                    this.listBoxAvailableVehicles.Items.Add(availableVehicles[0].GetFullToString());
+                    this.listBoxAvailableVehicles.Items.Add(availableVehicles[index].GetFullToString());
                 }
             }
             catch (CoreException ex)

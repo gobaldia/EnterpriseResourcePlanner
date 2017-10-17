@@ -86,7 +86,7 @@ namespace MainModuleUI
             Subject subject4 = new Subject(8529, "History");
             Subject subject5 = new Subject(6547, "Geography");
             Subject subject6 = new Subject(0002, "Algorithms");
-          
+
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject1);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject2);
             ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject3);
@@ -171,6 +171,7 @@ namespace MainModuleUI
                 Name = "Gallo",
                 LastName = "Claudio",
                 DocumentNumber = "3333333-8",
+                Location = new Location(12.214568, -17.123456),
                 Subjects = packOfSubjects1
             };
 
@@ -179,6 +180,7 @@ namespace MainModuleUI
                 Name = "Elon",
                 LastName = "Musk",
                 DocumentNumber = "4545456-5",
+                Location = new Location(62.214568, 1.123456),
                 Subjects = packOfSubjects4
             };
 
@@ -191,13 +193,70 @@ namespace MainModuleUI
                 Subjects = packOfSubjects3
             };
 
+            var inputStudent6 = new AddStudentInput
+            {
+                Name = "Bart",
+                LastName = "Simpson",
+                DocumentNumber = "9999987-2",
+                Location = new Location(-3.473568, 55.557123),
+                Subjects = packOfSubjects1
+            };
+
+            var inputStudent7 = new AddStudentInput
+            {
+                Name = "Lisa",
+                LastName = "Simpson",
+                DocumentNumber = "9999987-3",
+                Location = new Location(-3.473568, 55.557123),
+                Subjects = packOfSubjects3
+            };
+
+            var inputStudent8 = new AddStudentInput
+            {
+                Name = "Bob",
+                LastName = "Patiño",
+                DocumentNumber = "1999987-1",
+                Location = new Location(-31.235211, -55.557),
+                Subjects = packOfSubjects2
+            };
+
+            var inputStudent9 = new AddStudentInput
+            {
+                Name = "Helga",
+                LastName = "Pataki",
+                DocumentNumber = "9992387-1",
+                Location = new Location(-4.180324, -16.123456),
+                Subjects = packOfSubjects2
+            };
+
+            var inputStudent10 = new AddStudentInput
+            {
+                Name = "Bilbo",
+                LastName = "Bolson",
+                DocumentNumber = "1239987-1",
+                Location = new Location(-19.152412, 72.182342),
+                Subjects = packOfSubjects1
+            };
+
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent1);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent2);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent3);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent4);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent5);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent6);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent7);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent8);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent9);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent10);
             #endregion
 
+            #region Create and add vehicles to the system
+            Vehicle vehicleOne = new Vehicle("SBA0001", 4);
+            Vehicle vehicleTwo = new Vehicle("SBA1015", 5);
+
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleOne);
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleTwo);
+            #endregion
             this.buttonInitialiceData.Enabled = false;
             this.labelDataGenerated.Visible = true;
         }
