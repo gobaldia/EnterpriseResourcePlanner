@@ -87,6 +87,7 @@ namespace CoreLogic
                 var student = studentsThatWillUseVehicles[index];
                 var distanceToSchool = CalculateDistanceToSchool(student);
                 Tuple<Student, double> elementToAddToStudentsThatWillUseVehiclesWithDistancesToSchool = new Tuple<Student, double>(student, distanceToSchool);
+                studentsThatWillUseVehiclesWithDistancesToSchool.Add(elementToAddToStudentsThatWillUseVehiclesWithDistancesToSchool);
             }
             studentsThatWillUseVehiclesWithDistancesToSchool.OrderBy(x => x.Item2).ToList();
             return studentsThatWillUseVehiclesWithDistancesToSchool;
@@ -102,8 +103,32 @@ namespace CoreLogic
         public List<Vehicle> GetVehiclesOrderedByCapacity()
         {
             var systemVehicles = SystemData.GetInstance.GetVehicles();
-            var sortedVehicles = systemVehicles.OrderBy(v => v.Capacity).ToList();
+            var sortedVehicles = systemVehicles.OrderByDescending(v => v.Capacity).ToList();
             return sortedVehicles;
+        }
+
+        public List<Vehicle> GetVehiclesOrderedByCapacityConsideringStudentsNumber()
+        {
+            List<Vehicle> vehiclesToShow = new List<Vehicle>();
+            var studentsToUseVehicles = this.StudentsOrderedByDistanceToSchool();
+            var vehicles = this.GetVehiclesOrderedByCapacity();
+            var vehiclesQuantity = vehicles.Count;
+            var studentsQuantity = studentsToUseVehicles.Count;
+            var vehicleIndex = 0;
+            while (studentsQuantity > 0)
+            {
+                vehiclesToShow.Add(vehicles[vehicleIndex]);
+                studentsQuantity -= vehicles[vehicleIndex].Capacity;
+                if(vehicleIndex == vehiclesQuantity - 1)
+                {
+                    vehicleIndex = 0;
+                }
+                else
+                {
+                    vehicleIndex++;
+                }
+            }
+            return vehiclesToShow;
         }
 
         public double[,] GetAdjacencyMatrix(List<Tuple<Student, double>> students)

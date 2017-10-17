@@ -19,6 +19,7 @@ using TeacherModuleUI.ListTeachers;
 using TeacherModuleUI.ModifyTeacher;
 using VehicleModuleUI;
 using VehicleModuleUI.AddVehicle;
+using VehicleModuleUI.CalculateRoutes;
 using VehicleModuleUI.DeleteVehicle;
 using VehicleModuleUI.ListVehicles;
 using VehicleModuleUI.ModifyVehicle;
@@ -100,10 +101,12 @@ namespace MainModuleUI
             IAction deleteAction = new DeleteVehicleAction();
             IAction modifyAction = new ModifyVehicleAction();
             IAction listAction = new ListVehiclesAction();
+            IAction calculateRoutesAction = new CalculateRoutesAction();
             VehicleActions.Add(addAction);
             VehicleActions.Add(deleteAction);
             VehicleActions.Add(modifyAction);
             VehicleActions.Add(listAction);
+            VehicleActions.Add(calculateRoutesAction);
 
             return new VehicleModule(VehicleActions);
         }

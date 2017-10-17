@@ -53,6 +53,13 @@
     <Compile Include="AddVehicle\AddVehicleForm.Designer.cs">
       <DependentUpon>AddVehicleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalculateRoutes\CalculateRoutesAction.cs" />
+    <Compile Include="CalculateRoutes\CalculateRoutesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculateRoutes\CalculateRoutesForm.Designer.cs">
+      <DependentUpon>CalculateRoutesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeleteVehicle\DeleteVehicleAction.cs" />
     <Compile Include="DeleteVehicle\DeleteVehicleForm.cs">
       <SubType>Form</SubType>
@@ -79,6 +86,9 @@
     <Compile Include="VehicleModule.cs" />
     <EmbeddedResource Include="AddVehicle\AddVehicleForm.resx">
       <DependentUpon>AddVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalculateRoutes\CalculateRoutesForm.resx">
+      <DependentUpon>CalculateRoutesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteVehicle\DeleteVehicleForm.resx">
       <DependentUpon>DeleteVehicleForm.cs</DependentUpon>
