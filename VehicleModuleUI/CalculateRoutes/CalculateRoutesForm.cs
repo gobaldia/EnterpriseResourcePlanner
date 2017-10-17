@@ -1,4 +1,5 @@
 ﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using CoreLogic;
 using FrameworkCommon;
 using System;
@@ -23,10 +24,18 @@ namespace VehicleModuleUI.CalculateRoutes
 
         private void FillListBoxVehiclesOrderedByCapacity()
         {
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehiclesOrderedByCapacityConsideringStudentsNumber();
-            for (int index = 0; index < vehicles.Count; index++)
+            try
             {
-                this.listBoxVehiclesOrderedByCapacity.Items.Add(vehicles[index].Item1);
+                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+                for (int index = 0; index < vehicles.Count; index++)
+                {
+                    this.listBoxVehiclesOrderedByCapacity.Items.Add(vehicles[index].Item1);
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
             }
         }
 
@@ -46,6 +55,11 @@ namespace VehicleModuleUI.CalculateRoutes
             {
                 this.listBoxStudentsInVehicle.Items.Add(students[index].GetFullNameAndLocation());
             }
+        }
+
+        private void buttonBackToMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

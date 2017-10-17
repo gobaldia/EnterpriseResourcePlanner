@@ -33,6 +33,8 @@
             this.listBoxVehiclesOrderedByCapacity = new System.Windows.Forms.ListBox();
             this.listBoxStudentsInVehicle = new System.Windows.Forms.ListBox();
             this.labelStudentsInVehicle = new System.Windows.Forms.Label();
+            this.buttonBackToMainMenu = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelCalculateRoutesTitle
@@ -80,11 +82,34 @@
             this.labelStudentsInVehicle.TabIndex = 4;
             this.labelStudentsInVehicle.Text = "Students in Vehicle";
             // 
+            // buttonBackToMainMenu
+            // 
+            this.buttonBackToMainMenu.Location = new System.Drawing.Point(421, 433);
+            this.buttonBackToMainMenu.Name = "buttonBackToMainMenu";
+            this.buttonBackToMainMenu.Size = new System.Drawing.Size(110, 23);
+            this.buttonBackToMainMenu.TabIndex = 5;
+            this.buttonBackToMainMenu.Text = "Back to Main Menu";
+            this.buttonBackToMainMenu.UseVisualStyleBackColor = true;
+            this.buttonBackToMainMenu.Click += new System.EventHandler(this.buttonBackToMainMenu_Click);
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(20, 409);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 16);
+            this.labelError.TabIndex = 6;
+            this.labelError.Visible = false;
+            // 
             // CalculateRoutesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 497);
+            this.Controls.Add(this.labelError);
+            this.Controls.Add(this.buttonBackToMainMenu);
             this.Controls.Add(this.labelStudentsInVehicle);
             this.Controls.Add(this.listBoxStudentsInVehicle);
             this.Controls.Add(this.listBoxVehiclesOrderedByCapacity);
@@ -104,5 +129,7 @@
         private System.Windows.Forms.ListBox listBoxVehiclesOrderedByCapacity;
         private System.Windows.Forms.ListBox listBoxStudentsInVehicle;
         private System.Windows.Forms.Label labelStudentsInVehicle;
+        private System.Windows.Forms.Button buttonBackToMainMenu;
+        private System.Windows.Forms.Label labelError;
     }
 }

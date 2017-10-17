@@ -109,6 +109,9 @@ namespace CoreLogic
 
         public List<Tuple<Vehicle, List<Student>>> GetVehiclesOrderedByCapacityConsideringStudentsNumber()
         {
+            if (this.systemVehicles.Count == 0)
+                throw new CoreException("Currently there is not any vehicle in the system.");
+
             List<Tuple<Vehicle, List<Student>>> vehiclesToShow = new List<Tuple<Vehicle, List<Student>>>();
             var studentsToUseVehicles = this.StudentsOrderedByDistanceToSchool();
             var vehicles = this.GetVehiclesOrderedByCapacity();
