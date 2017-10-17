@@ -58,10 +58,6 @@ namespace CoreLogic
         {
             return this.systemTeachers.Exists(item => item.Equals(aTeacher));
         }
-        private bool SubjectExitsOnTeacher(Subject aSubject, Teacher aTeacher)
-        {
-            return aTeacher.GetSubjects().Exists(item => item.Equals(aSubject));
-        }
         private bool ModifyName(Teacher teacherToModify, string newName)
         {
             bool wasModifed = false;

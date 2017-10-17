@@ -11,6 +11,7 @@ using DataAccess;
 using FrameworkCommon;
 using CoreLogic;
 using FrameworkCommon.MethodParameters;
+using UnitTesting.Utilities;
 
 namespace UnitTesting
 {
@@ -203,7 +204,7 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        private void TestStudentsOrderedByDistanceToSchool()
+        public void TestStudentsOrderedByDistanceToSchool()
         {
             SystemData.GetInstance.Reset();
 
@@ -235,11 +236,77 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
 
+
+            Student studentToCompare1 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentOne.DocumentNumber);
+            Student studentToCompare2 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentTwo.DocumentNumber);
+            Student studentToCompare3 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentThree.DocumentNumber);
+            Student studentToCompare4 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentFour.DocumentNumber);
+
             var studentsOrderedByDistanceToSchool = ClassFactory.GetOrCreate<VehicleLogic>().StudentsOrderedByDistanceToSchool();
 
-            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentTwo);
-            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentOne);
-            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentThree);
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentToCompare2);
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[1].Item1, studentToCompare1);
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[2].Item1, studentToCompare3);
+            Assert.AreEqual(studentsOrderedByDistanceToSchool[3].Item1, studentToCompare4);
+        }
+
+        [TestMethod]
+        public void GetVehiclesOrderedByCapacityConsideringStudentsNumber()
+        {
+            SystemData.GetInstance.Reset();
+
+            #region Generate test data
+            Vehicle vehicle1 = new Vehicle("SBA0001", 1);
+            Vehicle vehicle2 = new Vehicle("SBA1015", 2);
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle1);
+            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle2);
+
+            var input1 = new AddStudentInput
+            {
+                DocumentNumber = "1234567-5",
+                Name = Utility.GetRandomName(),
+                LastName = Utility.GetRandomLastName(),
+                Location = new Location(10.00, 15.1)
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input1);
+
+            var input2 = new AddStudentInput
+            {
+                DocumentNumber = "1235567-8",
+                Name = Utility.GetRandomName(),
+                LastName = Utility.GetRandomLastName(),
+                Location = new Location(50.00, 22.1)
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input2);
+
+            var input3 = new AddStudentInput
+            {
+                DocumentNumber = "1266667-8",
+                Name = Utility.GetRandomName(),
+                LastName = Utility.GetRandomLastName(),
+                Location = new Location(-80.00, 5.1)
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input3);
+
+            var input4 = new AddStudentInput
+            {
+                DocumentNumber = "1234567-4",
+                Name = Utility.GetRandomName(),
+                LastName = Utility.GetRandomLastName(),
+                Location = new Location(-10.00, -15.1)
+            };
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input4);
+            #endregion
+
+            List<Tuple<Vehicle, List<Student>>> systemVehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+
+            Vehicle firstVehicle = systemVehicles[0].Item1;
+            Vehicle secondVehicle = systemVehicles[1].Item1;
+            Vehicle thirdVehicle = systemVehicles[2].Item1;
+
+            Assert.AreEqual(firstVehicle, vehicle2);
+            Assert.AreEqual(secondVehicle, vehicle1);
+            Assert.AreEqual(thirdVehicle, vehicle2);
         }
 
         /*public void GetTheStudentThatIsClosestToTheShool()

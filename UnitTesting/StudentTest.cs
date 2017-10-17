@@ -127,6 +127,8 @@ namespace UnitTesting
             input.Name = newStudent.GetName();
             input.LastName = newStudent.GetLastName();
             input.DocumentNumber = newStudent.GetDocumentNumber();
+            input.Subjects = new List<Subject>();
+            input.havePickUpService = false;
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
 
             Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));

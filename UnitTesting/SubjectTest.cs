@@ -132,6 +132,22 @@ namespace UnitTesting
         }
 
         [TestMethod]
+        public void ModifySubject()
+        {
+            SystemData.GetInstance.Reset();
+
+            int subjectCode = 1;
+            Subject subject = new Subject(subjectCode, "Logic");
+            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
+
+            subject.SetName("LogicModified");
+            ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(subjectCode, subject);
+
+            Subject modifiedSubject = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(subjectCode);
+            Assert.AreEqual(modifiedSubject.GetName(), "LogicModified");
+        }
+        
+        [TestMethod]
         public void AddNewStudentToSubject()
         {
             Subject subject = new Subject(1, "Logic");
@@ -208,7 +224,8 @@ namespace UnitTesting
 
         private Subject FindSubjectOnSystem(int code)
         {
-            return SystemData.GetInstance.GetSubjects().Find(x => x.GetCode() == code);
+            List<Subject> subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            return subjects.Find(x => x.GetCode() == code);
         }
 
         private Student FindStudentByDocument(List<Student> students, string document)
