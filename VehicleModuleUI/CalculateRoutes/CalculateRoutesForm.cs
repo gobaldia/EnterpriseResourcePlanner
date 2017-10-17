@@ -19,7 +19,14 @@ namespace VehicleModuleUI.CalculateRoutes
         public CalculateRoutesForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
             FillListBoxVehiclesOrderedByCapacity();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(750, 550);
         }
 
         private void FillListBoxVehiclesOrderedByCapacity()

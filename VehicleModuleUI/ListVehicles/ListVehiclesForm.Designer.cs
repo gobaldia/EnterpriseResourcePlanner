@@ -38,7 +38,7 @@
             // 
             this.labelListVehiclesTitle.AutoSize = true;
             this.labelListVehiclesTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelListVehiclesTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelListVehiclesTitle.Location = new System.Drawing.Point(55, 18);
             this.labelListVehiclesTitle.Name = "labelListVehiclesTitle";
             this.labelListVehiclesTitle.Size = new System.Drawing.Size(200, 24);
             this.labelListVehiclesTitle.TabIndex = 0;
@@ -47,14 +47,14 @@
             // listBoxAvailableVehicles
             // 
             this.listBoxAvailableVehicles.FormattingEnabled = true;
-            this.listBoxAvailableVehicles.Location = new System.Drawing.Point(16, 45);
+            this.listBoxAvailableVehicles.Location = new System.Drawing.Point(58, 55);
             this.listBoxAvailableVehicles.Name = "listBoxAvailableVehicles";
-            this.listBoxAvailableVehicles.Size = new System.Drawing.Size(197, 95);
+            this.listBoxAvailableVehicles.Size = new System.Drawing.Size(197, 225);
             this.listBoxAvailableVehicles.TabIndex = 1;
             // 
             // buttonBackToMainMenu
             // 
-            this.buttonBackToMainMenu.Location = new System.Drawing.Point(16, 192);
+            this.buttonBackToMainMenu.Location = new System.Drawing.Point(346, 408);
             this.buttonBackToMainMenu.Name = "buttonBackToMainMenu";
             this.buttonBackToMainMenu.Size = new System.Drawing.Size(120, 23);
             this.buttonBackToMainMenu.TabIndex = 2;
@@ -67,7 +67,7 @@
             this.labelError.AutoSize = true;
             this.labelError.Font = new System.Drawing.Font("Verdana", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(16, 173);
+            this.labelError.Location = new System.Drawing.Point(56, 316);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 351);
+            this.ClientSize = new System.Drawing.Size(564, 459);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonBackToMainMenu);
             this.Controls.Add(this.listBoxAvailableVehicles);

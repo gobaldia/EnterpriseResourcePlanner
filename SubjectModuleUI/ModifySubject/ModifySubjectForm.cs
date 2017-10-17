@@ -19,8 +19,15 @@ namespace SubjectModuleUI.ModifySubject
         public ModifySubjectForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
             CheckIfIsThereAnySubjectInSystem();
             FillSubjectsComboBox();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(750, 600);
         }
 
         private void FillSubjectsComboBox()

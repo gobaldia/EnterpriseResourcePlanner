@@ -41,7 +41,7 @@
             // 
             this.labelDeleteVehicleTitle.AutoSize = true;
             this.labelDeleteVehicleTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDeleteVehicleTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelDeleteVehicleTitle.Location = new System.Drawing.Point(43, 26);
             this.labelDeleteVehicleTitle.Name = "labelDeleteVehicleTitle";
             this.labelDeleteVehicleTitle.Size = new System.Drawing.Size(146, 23);
             this.labelDeleteVehicleTitle.TabIndex = 0;
@@ -50,7 +50,7 @@
             // labelSelectVehicleToDelete
             // 
             this.labelSelectVehicleToDelete.AutoSize = true;
-            this.labelSelectVehicleToDelete.Location = new System.Drawing.Point(17, 60);
+            this.labelSelectVehicleToDelete.Location = new System.Drawing.Point(44, 72);
             this.labelSelectVehicleToDelete.Name = "labelSelectVehicleToDelete";
             this.labelSelectVehicleToDelete.Size = new System.Drawing.Size(121, 13);
             this.labelSelectVehicleToDelete.TabIndex = 1;
@@ -59,7 +59,7 @@
             // comboBoxSelectVehicleToDelete
             // 
             this.comboBoxSelectVehicleToDelete.FormattingEnabled = true;
-            this.comboBoxSelectVehicleToDelete.Location = new System.Drawing.Point(20, 77);
+            this.comboBoxSelectVehicleToDelete.Location = new System.Drawing.Point(47, 89);
             this.comboBoxSelectVehicleToDelete.Name = "comboBoxSelectVehicleToDelete";
             this.comboBoxSelectVehicleToDelete.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSelectVehicleToDelete.TabIndex = 2;
@@ -68,7 +68,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(20, 152);
+            this.buttonDelete.Location = new System.Drawing.Point(367, 228);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 3;
@@ -78,7 +78,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(20, 182);
+            this.buttonCancel.Location = new System.Drawing.Point(234, 228);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -91,7 +91,7 @@
             this.labelError.AutoSize = true;
             this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(20, 133);
+            this.labelError.Location = new System.Drawing.Point(44, 170);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 5;
@@ -102,7 +102,7 @@
             this.labelSuccess.AutoSize = true;
             this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelSuccess.Location = new System.Drawing.Point(20, 132);
+            this.labelSuccess.Location = new System.Drawing.Point(44, 170);
             this.labelSuccess.Name = "labelSuccess";
             this.labelSuccess.Size = new System.Drawing.Size(0, 16);
             this.labelSuccess.TabIndex = 6;

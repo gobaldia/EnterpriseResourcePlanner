@@ -115,7 +115,7 @@
             // 
             // buttonModifySubject
             // 
-            this.buttonModifySubject.Location = new System.Drawing.Point(383, 493);
+            this.buttonModifySubject.Location = new System.Drawing.Point(471, 523);
             this.buttonModifySubject.Name = "buttonModifySubject";
             this.buttonModifySubject.Size = new System.Drawing.Size(75, 23);
             this.buttonModifySubject.TabIndex = 12;
@@ -125,7 +125,7 @@
             // 
             // buttonCancelModifySubject
             // 
-            this.buttonCancelModifySubject.Location = new System.Drawing.Point(383, 523);
+            this.buttonCancelModifySubject.Location = new System.Drawing.Point(346, 523);
             this.buttonCancelModifySubject.Name = "buttonCancelModifySubject";
             this.buttonCancelModifySubject.Size = new System.Drawing.Size(75, 23);
             this.buttonCancelModifySubject.TabIndex = 13;
