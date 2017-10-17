@@ -1,4 +1,5 @@
 ﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using CoreLogic;
 using FrameworkCommon;
 using System;
@@ -29,34 +30,50 @@ namespace SubjectModuleUI.AddSubject
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            this.labelOk.Visible = false;
             this.labelError.Visible = false;
-            int code;
-            string name;
-            Subject subject = new Subject();
-            if (int.TryParse(this.textBoxSubjectCode.Text, out code))
+            try
             {
-                if (!string.IsNullOrWhiteSpace(this.textBoxSubjectName.Text))
+                this.labelError.Visible = false;
+                int code;
+                string name;
+                Subject subject = new Subject();
+                if (int.TryParse(this.textBoxSubjectCode.Text, out code))
                 {
-                    subject.Code = code;
-                    name = this.textBoxSubjectName.Text;
-                    subject.Name = name;
+                    if (!string.IsNullOrWhiteSpace(this.textBoxSubjectName.Text))
+                    {
+                        subject.Code = code;
+                        name = this.textBoxSubjectName.Text;
+                        subject.Name = name;
 
-                    ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
+                        ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
 
-                    this.ClearAddSubjectForm();
-                    this.ShowCorrectlyAddedSubjectMessage(code, name);
+                        this.ClearAddSubjectForm();
+                        this.ShowCorrectlyAddedSubjectMessage(code, name);
+                    }
+                    else
+                    {
+                        this.labelError.Visible = true;
+                        this.labelError.Text = "Subject's name must be a not empty string";
+                    }
                 }
                 else
                 {
                     this.labelError.Visible = true;
-                    this.labelError.Text = "Subject's name must be a not empty string";
+                    this.labelError.Text = "Subject's code must be a number";
                 }
             }
-            else
+            catch (CoreException ex)
             {
+                this.labelError.Text = ex.Message;
                 this.labelError.Visible = true;
-                this.labelError.Text = "Subject's code must be a number";
             }
+            catch (Exception ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+            
         }
 
         private void ClearAddSubjectForm()

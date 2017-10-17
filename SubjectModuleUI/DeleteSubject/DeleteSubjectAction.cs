@@ -13,7 +13,7 @@ namespace SubjectModuleUI.DeleteSubject
 
         public DeleteSubjectAction()
         {
-            this.Name = "Delete Subject";
+            this.Name = "Delete";
         }
 
         public string GetName()

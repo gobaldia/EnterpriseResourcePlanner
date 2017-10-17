@@ -13,7 +13,7 @@ namespace SubjectModuleUI.ModifySubject
 
         public ModifySubjectAction()
         {
-            this.Name = "Modify Subject";
+            this.Name = "Modify";
         }
 
         public string GetName()

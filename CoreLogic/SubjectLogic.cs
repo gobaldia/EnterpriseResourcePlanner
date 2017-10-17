@@ -21,21 +21,22 @@ namespace CoreLogic
         public void AddSubject(Subject newSubject)
         {
             if (this.IsSubjectInSystem(newSubject))
-            {
                 throw new CoreException("Subject already exists.");
-            }
             else
-            {
                 this.systemSubjects.Add(newSubject);
-            }
         }
 
         public void ModifySubjectByCode(int code, Subject newSubjectValues)
         {
-            var subjectIndexToModify = this.systemSubjects.FindIndex(s => s.Code == code);
-            this.systemSubjects[subjectIndexToModify].SetCode(newSubjectValues.Code);
-            this.systemSubjects[subjectIndexToModify].SetName(newSubjectValues.Name);
-            this.systemSubjects[subjectIndexToModify].SetTeachers(newSubjectValues.Teachers);
+            if (newSubjectValues.Code != code && this.IsSubjectInSystemByCode(newSubjectValues.Code))
+                throw new CoreException("Subject already exists.");
+            else
+            {
+                var subjectIndexToModify = this.systemSubjects.FindIndex(s => s.Code == code);
+                this.systemSubjects[subjectIndexToModify].SetCode(newSubjectValues.Code);
+                this.systemSubjects[subjectIndexToModify].SetName(newSubjectValues.Name);
+                this.systemSubjects[subjectIndexToModify].SetTeachers(newSubjectValues.Teachers);
+            }
         }
 
         private bool IsSubjectInSystem(Subject subject)
@@ -43,10 +44,20 @@ namespace CoreLogic
             return this.systemSubjects.Exists(item => item.Equals(subject));
         }
 
+        private bool IsSubjectInSystemByCode(int code)
+        {
+            return this.systemSubjects.Exists(item => item.Code == code);
+        }
+
         public void DeleteSubjectByCode(int code)
         {
-            var subjectToDelete = this.systemSubjects.Find(s => s.Code == code);
-            this.systemSubjects.Remove(subjectToDelete);
+            if (!IsSubjectInSystemByCode(code))
+                throw new CoreException("This subject is not in system.");
+            else
+            {
+                var subjectToDelete = this.systemSubjects.Find(s => s.Code == code);
+                this.systemSubjects.Remove(subjectToDelete);
+            }
         }
     }
 }
