@@ -1,4 +1,5 @@
 ﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using CoreLogic;
 using FrameworkCommon;
 using System;
@@ -44,7 +45,12 @@ namespace SubjectModuleUI.DeleteSubject
                     this.ReloadComboBoxSelectSubjectToDelete();
                 }
             }
-            catch(Exception ex)
+            catch (CoreException ex)
+            {
+                this.labelActionResult.Text = ex.Message;
+                this.labelActionResult.Visible = true;
+            }
+            catch (Exception ex)
             {
                 this.labelActionResult.Text = ex.Message;
                 this.labelActionResult.Visible = true;

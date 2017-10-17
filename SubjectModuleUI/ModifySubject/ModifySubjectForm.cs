@@ -91,44 +91,75 @@ namespace SubjectModuleUI.ModifySubject
 
         private void buttonModifySubject_Click(object sender, EventArgs e)
         {
-            this.labelError.Visible = false;
-            int code;
-            string name;
-            Subject newSubject = new Subject();
-            Subject originalSubject = (Subject) this.comboBoxSelectSubjectToModify.SelectedItem;
-            if (int.TryParse(this.textBoxCodeModifySubject.Text, out code))
+            try
             {
-                if (!string.IsNullOrWhiteSpace(this.textBoxNameModifySubject.Text))
+                this.labelError.Visible = false;
+                int code;
+                string name;
+                Subject newSubject = new Subject();
+                Subject originalSubject = (Subject)this.comboBoxSelectSubjectToModify.SelectedItem;
+                if (int.TryParse(this.textBoxCodeModifySubject.Text, out code))
                 {
-                    newSubject.Code = code;
-                    name = this.textBoxNameModifySubject.Text;
-                    newSubject.Name = name;
-                    
-                    List<Teacher> teachers = this.listBoxSubjectTeachers.Items.Cast<Teacher>().ToList();
-                    newSubject.SetTeachers(teachers);
+                    if (!string.IsNullOrWhiteSpace(this.textBoxNameModifySubject.Text))
+                    {
+                        newSubject.Code = code;
+                        name = this.textBoxNameModifySubject.Text;
+                        newSubject.Name = name;
 
-                    List<Student> students = this.listBoxSubjectStudents.Items.Cast<Student>().ToList();
-                    newSubject.SetStudents(students);
+                        List<Teacher> teachers = this.listBoxSubjectTeachers.Items.Cast<Teacher>().ToList();
+                        newSubject.SetTeachers(teachers);
 
-                    ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalSubject.Code, newSubject);
+                        List<Student> students = this.listBoxSubjectStudents.Items.Cast<Student>().ToList();
+                        newSubject.SetStudents(students);
 
-                    var materias = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+                        ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalSubject.Code, newSubject);
 
-                    this.labelSuccess.Text = "Subject was succesfully modified.";
-                    this.labelSuccess.Visible = true;
+                        var materias = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+
+                        this.labelSuccess.Text = "Subject was succesfully modified.";
+                        this.labelSuccess.Visible = true;
+                    }
+                    else
+                    {
+                        this.labelError.Visible = true;
+                        this.labelError.Text = "Subject's name must be a not empty string";
+                    }
                 }
                 else
                 {
                     this.labelError.Visible = true;
-                    this.labelError.Text = "Subject's name must be a not empty string";
+                    this.labelError.Text = "Subject's code must be a number";
                 }
             }
-            else
+            catch (CoreException ex)
             {
                 this.labelError.Visible = true;
-                this.labelError.Text = "Subject's code must be a number";
+                this.labelError.Text = ex.Message;
             }
+            catch (Exception ex)
+            {
+                this.labelError.Visible = true;
+                this.labelError.Text = ex.Message;
+            }
+            this.ReloadComboBoxSelectSubjectToModify();
+            this.CleanFields();
         }
+
+        private void CleanFields()
+        {
+            this.textBoxCodeModifySubject.Clear();
+            this.textBoxNameModifySubject.Clear();
+            this.listBoxSystemTeachers.Items.Clear();
+            this.listBoxSubjectTeachers.Items.Clear();
+            this.listBoxSystemStudents.Items.Clear();
+            this.listBoxSubjectStudents.Items.Clear();
+        }
+
+        private void ReloadComboBoxSelectSubjectToModify()
+        {
+            this.comboBoxSelectSubjectToModify.Items.Clear();
+            this.FillSubjectsComboBox();
+    }
 
         private void buttonAddTeacherToSubject_Click(object sender, EventArgs e)
         {
