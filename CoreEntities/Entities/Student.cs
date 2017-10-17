@@ -103,5 +103,15 @@ namespace CoreEntities.Entities
             else
                 return false;
         }
+
+        public override string ToString()
+        {
+            return this.GetFullName();
+        }
+
+        public string GetFullNameAndLocation()
+        {
+            return string.Format("{0}: {1}", this.GetFullName(), this.GetLocation());
+        }
     }
 }

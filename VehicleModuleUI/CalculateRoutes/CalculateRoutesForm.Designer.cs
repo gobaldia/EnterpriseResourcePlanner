@@ -31,6 +31,8 @@
             this.labelCalculateRoutesTitle = new System.Windows.Forms.Label();
             this.labelExplainListBox = new System.Windows.Forms.Label();
             this.listBoxVehiclesOrderedByCapacity = new System.Windows.Forms.ListBox();
+            this.listBoxStudentsInVehicle = new System.Windows.Forms.ListBox();
+            this.labelStudentsInVehicle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelCalculateRoutesTitle
@@ -61,11 +63,30 @@
             this.listBoxVehiclesOrderedByCapacity.TabIndex = 2;
             this.listBoxVehiclesOrderedByCapacity.SelectedIndexChanged += new System.EventHandler(this.listBoxVehiclesOrderedByCapacity_SelectedIndexChanged);
             // 
+            // listBoxStudentsInVehicle
+            // 
+            this.listBoxStudentsInVehicle.FormattingEnabled = true;
+            this.listBoxStudentsInVehicle.Location = new System.Drawing.Point(231, 81);
+            this.listBoxStudentsInVehicle.Name = "listBoxStudentsInVehicle";
+            this.listBoxStudentsInVehicle.Size = new System.Drawing.Size(301, 264);
+            this.listBoxStudentsInVehicle.TabIndex = 3;
+            // 
+            // labelStudentsInVehicle
+            // 
+            this.labelStudentsInVehicle.AutoSize = true;
+            this.labelStudentsInVehicle.Location = new System.Drawing.Point(228, 64);
+            this.labelStudentsInVehicle.Name = "labelStudentsInVehicle";
+            this.labelStudentsInVehicle.Size = new System.Drawing.Size(98, 13);
+            this.labelStudentsInVehicle.TabIndex = 4;
+            this.labelStudentsInVehicle.Text = "Students in Vehicle";
+            // 
             // CalculateRoutesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 497);
+            this.Controls.Add(this.labelStudentsInVehicle);
+            this.Controls.Add(this.listBoxStudentsInVehicle);
             this.Controls.Add(this.listBoxVehiclesOrderedByCapacity);
             this.Controls.Add(this.labelExplainListBox);
             this.Controls.Add(this.labelCalculateRoutesTitle);
@@ -81,5 +102,7 @@
         private System.Windows.Forms.Label labelCalculateRoutesTitle;
         private System.Windows.Forms.Label labelExplainListBox;
         private System.Windows.Forms.ListBox listBoxVehiclesOrderedByCapacity;
+        private System.Windows.Forms.ListBox listBoxStudentsInVehicle;
+        private System.Windows.Forms.Label labelStudentsInVehicle;
     }
 }

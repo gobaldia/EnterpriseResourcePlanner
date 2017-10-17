@@ -107,9 +107,9 @@ namespace CoreLogic
             return sortedVehicles;
         }
 
-        public List<Vehicle> GetVehiclesOrderedByCapacityConsideringStudentsNumber()
+        public List<Tuple<Vehicle, List<Student>>> GetVehiclesOrderedByCapacityConsideringStudentsNumber()
         {
-            List<Vehicle> vehiclesToShow = new List<Vehicle>();
+            List<Tuple<Vehicle, List<Student>>> vehiclesToShow = new List<Tuple<Vehicle, List<Student>>>();
             var studentsToUseVehicles = this.StudentsOrderedByDistanceToSchool();
             var vehicles = this.GetVehiclesOrderedByCapacity();
             var vehiclesQuantity = vehicles.Count;
@@ -117,7 +117,14 @@ namespace CoreLogic
             var vehicleIndex = 0;
             while (studentsQuantity > 0)
             {
-                vehiclesToShow.Add(vehicles[vehicleIndex]);
+                // https://stackoverflow.com/questions/1042087/how-to-select-values-within-a-provided-index-range-from-a-list-using-linq
+                // aqui deberia tomar los alumnos entre un rango para agregarlo a la tupla
+                Vehicle vehicle = vehicles[vehicleIndex];
+                int sk = studentsToUseVehicles.Count - studentsQuantity;
+                int ta = vehicle.Capacity;
+                List<Student> students = studentsToUseVehicles.Skip(sk).Take(ta).Select(x => x.Item1).ToList();
+                Tuple<Vehicle, List<Student>> elementToAdd = new Tuple<Vehicle, List<Student>>(vehicle, students);
+                vehiclesToShow.Add(elementToAdd);
                 studentsQuantity -= vehicles[vehicleIndex].Capacity;
                 if(vehicleIndex == vehiclesQuantity - 1)
                 {
