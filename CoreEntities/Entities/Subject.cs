@@ -10,7 +10,7 @@ namespace CoreEntities.Entities
     public class Subject
     {
         #region Properties
-        public int ID { get; set; } // This id is used by EntityFramework.
+        public int SubjectOID { get; set; } // This id is used by EntityFramework.
         public int Code { get; set; }
         public string Name { get; set; }
         public virtual List<Student> Students { get; set; }

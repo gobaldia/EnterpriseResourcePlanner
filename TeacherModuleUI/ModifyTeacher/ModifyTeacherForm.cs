@@ -1,9 +1,11 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using DataAccess;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,7 +63,8 @@ namespace TeacherModuleUI.ModifyTeacher
                     input.DocumentNumber = document;
                     input.NewSubjects = GetSelectedSubjects();
 
-                    ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherLogicOperations();
+                    teacherOpertions.ModifyTeacher(input);
 
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_MODIFICATION;
@@ -96,7 +99,9 @@ namespace TeacherModuleUI.ModifyTeacher
                     CleanListBoxes();
 
                     string documentNumber = this.comboBoxTeachersDocuments.SelectedItem.ToString();
-                    Teacher teacherToModify = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
+
+                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherLogicOperations(); 
+                    Teacher teacherToModify = teacherOpertions.GetTeacherByDocumentNumber(documentNumber);
                     this.textBoxTeacherName.Text = teacherToModify.GetName();
                     this.textBoxTeacherLastName.Text = teacherToModify.GetLastName();
 
@@ -146,7 +151,8 @@ namespace TeacherModuleUI.ModifyTeacher
         }
         private void LoadDocumentNumberComboBox()
         {
-            List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
+            ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherLogicOperations();
+            List<Teacher> systemTeachers = teacherOpertions.GetAllTeachers();
             foreach (Teacher teacher in systemTeachers)
             {
                 this.comboBoxTeachersDocuments.Items.Add(teacher.GetDocumentNumber());

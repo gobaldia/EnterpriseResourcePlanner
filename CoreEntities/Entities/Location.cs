@@ -12,6 +12,7 @@ namespace CoreEntities.Entities
     {
         private Regex latitudRegex = new Regex("^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$");
         private Regex longitudRegex = new Regex("^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$");
+        public int LocationOID { get; set; }
         public double latitud;
         public double longitud;
 

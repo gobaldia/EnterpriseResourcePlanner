@@ -12,7 +12,7 @@ namespace CoreEntities.Entities
     {
         private Regex registrationRegex = new Regex("^[A-Z]{3}[0-9]{4}$");
 
-        public int ID { get; set; }// This id is used by EntityFramework.
+        public int VehicleOID { get; set; }// This id is used by EntityFramework.
         public string Registration { get; set; }
         public int Capacity { get; set; }
 

@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +36,8 @@ namespace TeacherModuleUI.ListTeachers
         #region Utility methods
         private void LoadTeacherListBox()
         {
-            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherLogicOperations();
+            List<Teacher> systemTeachers = teacherOperations.GetAllTeachers();
             foreach(Teacher teacher in systemTeachers)
             {
                 this.listBoxSystemTeachers.Items.Add(teacher);

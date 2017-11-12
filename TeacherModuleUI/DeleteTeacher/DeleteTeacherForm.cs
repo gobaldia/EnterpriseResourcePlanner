@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +35,8 @@ namespace TeacherModuleUI.DeleteTeacher
             {
                 if (teacherToDelete != null)
                 {
-                    ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacherToDelete);
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherLogicOperations();
+                    teacherOperations.DeleteTeacher(teacherToDelete);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
                 }
@@ -60,7 +63,8 @@ namespace TeacherModuleUI.DeleteTeacher
                 string documentNumber = this.textBoxTeacherDocument.Text;
                 if (!string.IsNullOrEmpty(documentNumber))
                 {
-                    this.teacherToDelete = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherLogicOperations();
+                    this.teacherToDelete = teacherOperations.GetTeacherByDocumentNumber(documentNumber);
                     this.FillFormWithTeacherData();
                 }
                 else

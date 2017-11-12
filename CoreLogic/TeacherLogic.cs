@@ -27,13 +27,12 @@ namespace CoreLogic
             if (this.IsTeacherInSystem(newTeacher))
                 throw new CoreException("Teacher already exists.");
 
-            //this.systemTeachers.Add(newTeacher);
             this.persistanceProvider.AddTeacher(newTeacher);
         }
 
         public Teacher GetTeacherByDocumentNumber(string documentNumber)
         {   
-            Teacher teacherFound = this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            Teacher teacherFound = this.persistanceProvider.GetTeacherByDocumentNumber(documentNumber);
             if (teacherFound == null)
                 throw new CoreException("Teacher not found.");
 
@@ -42,7 +41,7 @@ namespace CoreLogic
 
         public void DeleteTeacher(Teacher teacherToDelete)
         {
-            this.systemTeachers.Remove(teacherToDelete);
+            this.persistanceProvider.DeleteTeacher(teacherToDelete);
         }
 
         public void ModifyTeacher(ModifyTeacherInput input)
@@ -55,11 +54,13 @@ namespace CoreLogic
             
             if (!nameWasModified && !lastNameWasModified && !subjectsWereModified)
                 throw new CoreException("No modifications have been made.");
+
+            this.persistanceProvider.ModifyTeacher(teacherToModify);
         }
 
         public List<Teacher> GetAllTeachers()
         {
-            return this.systemTeachers;
+            return this.persistanceProvider.GetAllTeacher();
         }
 
         #region Utilities

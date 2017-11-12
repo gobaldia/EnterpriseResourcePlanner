@@ -12,7 +12,7 @@ namespace CoreEntities.Entities
     {
         private Regex regex = new Regex("^[0-9]{7}-[0-9]{1}$");
 
-        public int ID { get; set; } // This id is used by EntityFramework.
+        public int PersonOID { get; set; } // This id is used by EntityFramework.
         public string Name { get; set; }
         public string LastName { get; set; }
         private string _document;
