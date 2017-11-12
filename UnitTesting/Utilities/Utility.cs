@@ -22,7 +22,7 @@ namespace UnitTesting.Utilities
             bool result = real.Count == toBeCompareWith.Count;
             for (var index = 0; (index < real.Count || !result); index++)
             {
-                result = real[index].Equals(toBeCompareWith[index]);
+                result = real.ElementAt(index).Equals(toBeCompareWith.ElementAt(index));
             }
             return result;
         }

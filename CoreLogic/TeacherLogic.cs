@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using CoreLogic.Interfaces;
 using DataAccess;
+using DataContracts;
 using FrameworkCommon.MethodParameters;
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,23 @@ using System.Threading.Tasks;
 
 namespace CoreLogic
 {
-    public class TeacherLogic
+    public class TeacherLogic : ITeacherLogic
     {
         private List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
+        private ITeacherPersistance persistanceProvider;
+
+        public TeacherLogic(ITeacherPersistance provider)
+        {
+            this.persistanceProvider = provider;
+        }
 
         public void AddTeacher(Teacher newTeacher)
         {
             if (this.IsTeacherInSystem(newTeacher))
                 throw new CoreException("Teacher already exists.");
 
-            this.systemTeachers.Add(newTeacher);
+            //this.systemTeachers.Add(newTeacher);
+            this.persistanceProvider.AddTeacher(newTeacher);
         }
 
         public Teacher GetTeacherByDocumentNumber(string documentNumber)

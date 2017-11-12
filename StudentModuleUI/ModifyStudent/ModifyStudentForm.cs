@@ -189,7 +189,7 @@ namespace StudentModuleUI.ModifyStudent
         }
         private void LoadPickupServiceData(Student studentToModify)
         {
-            if (studentToModify.HavePickUpService())
+            if (studentToModify.HavePickUpService)
             {
                 this.radioButtonYesPickUp.Checked = true;
                 this.textBoxLatitud.Enabled = true;

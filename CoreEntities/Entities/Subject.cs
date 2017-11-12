@@ -9,10 +9,13 @@ namespace CoreEntities.Entities
 {
     public class Subject
     {
+        #region Properties
+        public int ID { get; set; } // This id is used by EntityFramework.
         public int Code { get; set; }
         public string Name { get; set; }
-        public List<Student> Students { get; set; }
-        public List<Teacher> Teachers { get; set; }
+        public virtual List<Student> Students { get; set; }
+        public virtual List<Teacher> Teachers { get; set; }
+        #endregion
 
         public Subject()
         {
@@ -97,7 +100,7 @@ namespace CoreEntities.Entities
         #region Private Methods
         private bool SubjectAlreadyHasThisStudent(Student student)
         {
-            return this.Students.Find(s => s.GetDocumentNumber() == student.GetDocumentNumber()) != null;
+            return this.Students.FirstOrDefault(s => s.GetDocumentNumber() == student.GetDocumentNumber()) != null;
         }
         #endregion
     }

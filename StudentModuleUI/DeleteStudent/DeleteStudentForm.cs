@@ -104,9 +104,9 @@ namespace StudentModuleUI.DeleteStudent
             textBoxDocument.Text = this.StudentToDelete.GetDocumentNumber();
             textBoxName.Text = this.StudentToDelete.GetName();
             textBoxLastName.Text = this.StudentToDelete.GetLastName();
-            radioButtonNoPickUp.Checked = !this.StudentToDelete.HavePickUpService();
-            radioButtonYesPickUp.Checked = this.StudentToDelete.HavePickUpService();
-            if (this.StudentToDelete.HavePickUpService())
+            radioButtonNoPickUp.Checked = !this.StudentToDelete.HavePickUpService;
+            radioButtonYesPickUp.Checked = this.StudentToDelete.HavePickUpService;
+            if (this.StudentToDelete.HavePickUpService)
             {
                 Location studentLocation = this.StudentToDelete.GetLocation();
                 textBoxLatitud.Text = studentLocation.GetLatitud().ToString();

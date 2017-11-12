@@ -11,10 +11,12 @@ namespace CoreEntities.Entities
     public abstract class Person
     {
         private Regex regex = new Regex("^[0-9]{7}-[0-9]{1}$");
-        protected string Name { get; set; }
-        protected string LastName { get; set; }
+
+        public int ID { get; set; } // This id is used by EntityFramework.
+        public string Name { get; set; }
+        public string LastName { get; set; }
         private string _document;
-        protected string Document
+        public string Document
         {
             get { return this._document; }
             set

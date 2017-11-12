@@ -227,7 +227,7 @@ namespace UnitTesting
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             studentFound.SetPickUpService(true);
 
-            Assert.IsTrue(studentFound.HavePickUpService());
+            Assert.IsTrue(studentFound.HavePickUpService);
         }
 
         [TestMethod]

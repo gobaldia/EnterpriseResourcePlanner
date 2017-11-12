@@ -57,7 +57,7 @@ namespace SubjectModuleUI.ModifySubject
             var teachersThatTeachThisSubject = subject.Teachers;
             for (int index = 0; index < teachersThatTeachThisSubject.Count; index++)
             {
-                this.listBoxSubjectTeachers.Items.Add(teachersThatTeachThisSubject[index]);
+                this.listBoxSubjectTeachers.Items.Add(teachersThatTeachThisSubject.ElementAt(index));
             }
         }
 

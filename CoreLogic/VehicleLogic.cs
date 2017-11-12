@@ -81,7 +81,7 @@ namespace CoreLogic
         {
             var systemStudents = SystemData.GetInstance.GetStudents();
             List<Tuple<Student, double>> studentsThatWillUseVehiclesWithDistancesToSchool = new List<Tuple<Student, double>>();
-            List<Student> studentsThatWillUseVehicles = systemStudents.FindAll(s => s.HavePickUpService());
+            List<Student> studentsThatWillUseVehicles = systemStudents.FindAll(s => s.HavePickUpService);
             for (int index = 0; index < studentsThatWillUseVehicles.Count; index++)
             {
                 var student = studentsThatWillUseVehicles[index];
