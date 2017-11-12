@@ -16,7 +16,7 @@ namespace UnitTesting
         {
             var expectedName = "Yoga";
             var expectedId = 1;
-            var expectedDate = new DateTime(2017, 17, 11, 10, 0, 0);
+            var expectedDate = "12/11/2017";
             var expectedCost = 100;
 
             Activity activity = new Activity();
@@ -36,7 +36,7 @@ namespace UnitTesting
         {
             var expectedName = "Yoga";
             var expectedId = 1;
-            var expectedDate = new DateTime(2017, 17, 11, 10, 0, 0);
+            var expectedDate = "12/11/2017";
             var expectedCost = 100;
 
             Activity activity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
@@ -45,6 +45,20 @@ namespace UnitTesting
             Assert.AreEqual(activity.Id, expectedId);
             Assert.AreEqual(activity.Date, expectedDate);
             Assert.AreEqual(activity.Cost, expectedCost);
+        }
+
+        [TestMethod]
+        public void ActivityInstancesAreEqual()
+        {
+            var expectedName = "Yoga";
+            var expectedId = 1;
+            var expectedDate = "12/11/2017";
+            var expectedCost = 100;
+
+            Activity firstActivity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
+            Activity secondActivity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
+
+            Assert.AreEqual(firstActivity, secondActivity);
         }
     }
 }
