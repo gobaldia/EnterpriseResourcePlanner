@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreEntities.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,10 +25,10 @@ namespace UnitTesting
             activity.Date = expectedDate;
             activity.Cost = expectedCost;
 
-            Assert.AreEqual(activity.Name = expectedName);
-            Assert.AreEqual(activity.Id = expectedId);
-            Assert.AreEqual(activity.Date = expectedDate);
-            Assert.AreEqual(activity.Cost = expectedCost);
+            Assert.AreEqual(activity.Name, expectedName);
+            Assert.AreEqual(activity.Id, expectedId);
+            Assert.AreEqual(activity.Date, expectedDate);
+            Assert.AreEqual(activity.Cost, expectedCost);
         }
 
         [TestMethod]
@@ -40,10 +41,10 @@ namespace UnitTesting
 
             Activity activity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
 
-            Assert.AreEqual(activity.Name = expectedName);
-            Assert.AreEqual(activity.Id = expectedId);
-            Assert.AreEqual(activity.Date = expectedDate);
-            Assert.AreEqual(activity.Cost = expectedCost);
+            Assert.AreEqual(activity.Name, expectedName);
+            Assert.AreEqual(activity.Id, expectedId);
+            Assert.AreEqual(activity.Date, expectedDate);
+            Assert.AreEqual(activity.Cost, expectedCost);
         }
     }
 }
