@@ -1,4 +1,6 @@
-﻿using CoreGeneralization;
+﻿using ActivityModuleUI;
+using ActivityModuleUI.AddActivity;
+using CoreGeneralization;
 using MainComponents;
 using StudentModuleUI;
 using StudentModuleUI.AddStudent;
@@ -46,6 +48,7 @@ namespace MainModuleUI
             mainModule.AddModule(CreateStudentModule());
             mainModule.AddModule(CreateSubjectModule());
             mainModule.AddModule(CreateVehicleModule());
+            mainModule.AddModule(CreateActivityModule());
 
             Application.Run(new MainForm(mainModule));
         }
@@ -112,6 +115,17 @@ namespace MainModuleUI
             VehicleActions.Add(calculateRoutesAction);
 
             return new VehicleModule(VehicleActions);
+        }
+
+        private static Module CreateActivityModule()
+        {
+            List<IAction> ActivityActions = new List<IAction>();
+
+            IAction addAction = new AddActivityAction();
+
+            ActivityActions.Add(addAction);
+
+            return new ActivityModule(ActivityActions);
         }
     }
 }
