@@ -106,6 +106,7 @@ namespace StudentModuleUI.AddStudent
             this.AutoScaleMode = AutoScaleMode.None;
             this.Size = new System.Drawing.Size(750, 550);
         }
+
         private void LoadFormInitialData()
         {
             this.textBoxStudentNumber.Text = Student.GetNextStudentNumber().ToString();

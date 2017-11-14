@@ -15,6 +15,13 @@ namespace ActivityModuleUI.AddActivity
         public AddActivityForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(750, 550);
         }
     }
 }

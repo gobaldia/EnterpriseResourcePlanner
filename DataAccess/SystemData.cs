@@ -14,6 +14,7 @@ namespace DataAccess
         private List<Student> students;
         private List<Subject> subjects;
         private List<Vehicle> vehicles;
+        private List<Activity> activities;
 
         #region Singleton
         // Variable estática para la instancia, se necesita utilizar una función lambda ya que el constructor es privado.
@@ -24,6 +25,7 @@ namespace DataAccess
             this.subjects = new List<Subject>();
             this.students = new List<Student>();
             this.vehicles = new List<Vehicle>();
+            this.activities = new List<Activity>();
         }
         public static SystemData GetInstance
         {
@@ -40,6 +42,7 @@ namespace DataAccess
             this.subjects.Clear();
             this.students.Clear();
             this.vehicles.Clear();
+            this.activities.Clear();
         }        
 
         public List<Teacher> GetTeachers()
@@ -58,6 +61,11 @@ namespace DataAccess
         public List<Vehicle> GetVehicles()
         {
             return this.vehicles;
+        }
+
+        public List<Activity> GetActivities()
+        {
+            return this.activities;
         }
     }
 }

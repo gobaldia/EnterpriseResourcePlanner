@@ -10,18 +10,18 @@ namespace CoreEntities.Entities
     {
         public string Name { get; set; }
         public int Id { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public int Cost { get; set; }
 
         public Activity()
         {
             this.Name = string.Empty;
             this.Id = 0;
-            this.Date = string.Empty;
+            this.Date = new DateTime(1970, 1, 1);
             this.Cost = 0;
         }
 
-        public Activity(string name, int id, string date, int cost)
+        public Activity(string name, int id, DateTime date, int cost)
         {
             this.Name = name;
             this.Id = id;
