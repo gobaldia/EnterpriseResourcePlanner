@@ -13,10 +13,12 @@ namespace CoreEntities.Entities
         public DateTime Date { get; set; }
         public int Cost { get; set; }
 
+        public static int activitiesCount = 0;
+
         public Activity()
         {
             this.Name = string.Empty;
-            this.Id = 0;
+            this.Id = activitiesCount++;
             this.Date = new DateTime(1970, 1, 1);
             this.Cost = 0;
         }

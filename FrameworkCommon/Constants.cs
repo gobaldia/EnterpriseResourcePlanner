@@ -24,5 +24,7 @@ namespace FrameworkCommon
         public const string SUCCESS_STUDENT_MODIFICATION = "Student succesfully modified.";
         public const string ERROR_INVALID_STUDENTNUMBER = "Invalid student number.";
         public const string ERROR_NOSTUDENTFOUND = "Student not found.";
+
+        public const string SUCCESS_ACTIVITY_REGISTRATION = "Activity was succesfully registered.";
     }
 }
