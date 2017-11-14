@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DataAccess;
+using FrameworkCommon;
+using CoreEntities.Exceptions;
 
 namespace UnitTesting
 {
@@ -60,5 +63,41 @@ namespace UnitTesting
 
             Assert.AreEqual(firstActivity, secondActivity);
         }
+
+        [TestMethod]
+        public void AddActivityToSystem()
+        {
+            SystemData.GetInstance.Reset();
+
+            Activity newActivity = new Activity("Yoga", 1, "13/11/2017", 100);
+
+            ClassFactory.GetOrCreate<ActivityLogic>().AddSubject(newActivity);
+
+            Assert.IsNotNull(this.FindActivityOnSystem(newActivity.Id));
+        }
+
+        [TestMethod]
+        public void TryToAddActivityThatAlreadyExistsToSystem()
+        {
+            try
+            {
+                Activity firstActivity = new Activity("Yoga", 1, "13/11/2017", 100);
+                Activity secondActivity = new Activity("Yoga", 1, "13/11/2017", 100);
+
+                ClassFactory.GetOrCreate<ActivityLogic>().AddSubject(firstActivity);
+                ClassFactory.GetOrCreate<ActivityLogic>().AddSubject(secondActivity);
+
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Activity already exists."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
     }
 }
