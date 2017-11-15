@@ -39,14 +39,12 @@ namespace UnitTesting
         public void CreateActivityWithParameters()
         {
             var expectedName = "Yoga";
-            var expectedId = 1;
             var expectedDate = new DateTime(2017, 11, 14);
             var expectedCost = 100;
 
-            Activity activity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
+            Activity activity = new Activity(expectedName, expectedDate, expectedCost);
 
             Assert.AreEqual(activity.Name, expectedName);
-            Assert.AreEqual(activity.Id, expectedId);
             Assert.AreEqual(activity.Date, expectedDate);
             Assert.AreEqual(activity.Cost, expectedCost);
         }
@@ -59,7 +57,7 @@ namespace UnitTesting
             var expectedCost = 100;
 
             Activity firstActivity = new Activity(expectedName, expectedDate, expectedCost);
-            Activity secondActivity = new Activity(expectedName, expectedDate, expectedCost);
+            Activity secondActivity = firstActivity;
 
             Assert.AreEqual(firstActivity, secondActivity);
         }
@@ -88,7 +86,7 @@ namespace UnitTesting
             try
             {
                 Activity firstActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
-                Activity secondActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
+                Activity secondActivity = firstActivity;
 
                 ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(firstActivity);
                 ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(secondActivity);
@@ -116,8 +114,8 @@ namespace UnitTesting
             activity.Name = "Yoga Reloaded";
             ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(activity.Id, activity);
 
-            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityByCode(activity.Id);
-            Assert.AreEqual(modifiedActivity.GetName(), "Yoga Reloaded");
+            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activity.Id);
+            Assert.AreEqual(modifiedActivity.Name, "Yoga Reloaded");
         }
 
         [TestMethod]
@@ -140,7 +138,7 @@ namespace UnitTesting
 
             ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(activity.Id, newActivity);
 
-            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityByCode(activity.Id);
+            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activity.Id);
 
             Assert.AreEqual(modifiedActivity.Students, students);
         }
