@@ -45,6 +45,8 @@
             this.buttonDeleteStudentFromActivity = new System.Windows.Forms.Button();
             this.buttonModify = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
+            this.labelSuccess = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownActivityCost)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,7 +152,7 @@
             // listBoxAvailableStudents
             // 
             this.listBoxAvailableStudents.FormattingEnabled = true;
-            this.listBoxAvailableStudents.Location = new System.Drawing.Point(63, 285);
+            this.listBoxAvailableStudents.Location = new System.Drawing.Point(60, 285);
             this.listBoxAvailableStudents.Name = "listBoxAvailableStudents";
             this.listBoxAvailableStudents.Size = new System.Drawing.Size(200, 95);
             this.listBoxAvailableStudents.TabIndex = 11;
@@ -165,21 +167,23 @@
             // 
             // buttonAddStudentToActivity
             // 
-            this.buttonAddStudentToActivity.Location = new System.Drawing.Point(303, 306);
+            this.buttonAddStudentToActivity.Location = new System.Drawing.Point(297, 308);
             this.buttonAddStudentToActivity.Name = "buttonAddStudentToActivity";
             this.buttonAddStudentToActivity.Size = new System.Drawing.Size(38, 21);
             this.buttonAddStudentToActivity.TabIndex = 13;
             this.buttonAddStudentToActivity.Text = ">>";
             this.buttonAddStudentToActivity.UseVisualStyleBackColor = true;
+            this.buttonAddStudentToActivity.Click += new System.EventHandler(this.buttonAddStudentToActivity_Click);
             // 
             // buttonDeleteStudentFromActivity
             // 
-            this.buttonDeleteStudentFromActivity.Location = new System.Drawing.Point(303, 334);
+            this.buttonDeleteStudentFromActivity.Location = new System.Drawing.Point(297, 336);
             this.buttonDeleteStudentFromActivity.Name = "buttonDeleteStudentFromActivity";
             this.buttonDeleteStudentFromActivity.Size = new System.Drawing.Size(38, 21);
             this.buttonDeleteStudentFromActivity.TabIndex = 14;
             this.buttonDeleteStudentFromActivity.Text = "<<";
             this.buttonDeleteStudentFromActivity.UseVisualStyleBackColor = true;
+            this.buttonDeleteStudentFromActivity.Click += new System.EventHandler(this.buttonDeleteStudentFromActivity_Click);
             // 
             // buttonModify
             // 
@@ -189,6 +193,7 @@
             this.buttonModify.TabIndex = 15;
             this.buttonModify.Text = "Modify";
             this.buttonModify.UseVisualStyleBackColor = true;
+            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
             // 
             // buttonCancel
             // 
@@ -200,11 +205,33 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(60, 401);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 16);
+            this.labelError.TabIndex = 17;
+            // 
+            // labelSuccess
+            // 
+            this.labelSuccess.AutoSize = true;
+            this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.labelSuccess.Location = new System.Drawing.Point(60, 400);
+            this.labelSuccess.Name = "labelSuccess";
+            this.labelSuccess.Size = new System.Drawing.Size(0, 16);
+            this.labelSuccess.TabIndex = 18;
+            // 
             // ModifyActivityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(646, 485);
+            this.Controls.Add(this.labelSuccess);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonModify);
             this.Controls.Add(this.buttonDeleteStudentFromActivity);
@@ -249,5 +276,7 @@
         private System.Windows.Forms.Button buttonDeleteStudentFromActivity;
         private System.Windows.Forms.Button buttonModify;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Label labelSuccess;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CoreEntities.Entities;
+using CoreEntities.Exceptions;
 using CoreLogic;
 using FrameworkCommon;
 using System;
@@ -76,6 +77,66 @@ namespace ActivityModuleUI.ModifyActivity
         {
             this.listBoxAvailableStudents.Items.Clear();
             this.listBoxAlreadyRegisteredStudents.Items.Clear();
+        }
+
+        private void buttonAddStudentToActivity_Click(object sender, EventArgs e)
+        {
+            this.MoveFromOneListBoxToAnother(this.listBoxAvailableStudents, this.listBoxAlreadyRegisteredStudents);
+        }
+
+        private void MoveFromOneListBoxToAnother(ListBox listBoxFrom, ListBox listBoxTo)
+        {
+            var selectedItemsToMove = listBoxFrom.SelectedItem;
+            if (selectedItemsToMove != null)
+            {
+                listBoxTo.Items.Add(selectedItemsToMove);
+                listBoxFrom.Items.Remove(selectedItemsToMove);
+            }
+        }
+
+        private void buttonDeleteStudentFromActivity_Click(object sender, EventArgs e)
+        {
+            this.MoveFromOneListBoxToAnother(this.listBoxAlreadyRegisteredStudents, this.listBoxAvailableStudents);
+        }
+
+        private void buttonModify_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.labelError.Visible = false;
+                var originalActivity = (Activity)this.comboBoxSelectActivityToModify.SelectedItem;
+                var newActivityValues = originalActivity;
+                newActivityValues.Name = this.textBoxActivityName.Text;
+                newActivityValues.Date = this.dateTimePickerActivityDate.Value;
+                newActivityValues.Cost = (int) this.numericUpDownActivityCost.Value;
+                newActivityValues.Students = this.listBoxAlreadyRegisteredStudents.Items.Cast<Student>().ToList();
+                ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(originalActivity.Id, newActivityValues);
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Visible = true;
+                this.labelError.Text = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                this.labelError.Visible = true;
+                this.labelError.Text = ex.Message;
+            }
+            this.ReloadComboBoxSelectActivitiesToModify();
+            this.CleanFields();
+        }
+
+        private void ReloadComboBoxSelectActivitiesToModify()
+        {
+            this.comboBoxSelectActivityToModify.Items.Clear();
+            this.FillActivitiesCombo();
+        }
+
+        private void CleanFields()
+        {
+            this.textBoxActivityName.Text = string.Empty;
+            this.numericUpDownActivityCost.Value = 0;
+            this.ClearListBoxes();
         }
     }
 }
