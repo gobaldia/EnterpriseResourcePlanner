@@ -35,21 +35,28 @@ namespace ActivityModuleUI.AddActivity
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            try
+            if (this.textBoxActivityName.Text == string.Empty)
             {
-                if (ValidateFormData())
-                {
-                    labelError.Text = string.Empty;
+                this.labelError.Text = Constants.ACTIVITY_NAME_EMPTY;
+                this.labelError.Visible = true;
+            }
+            else if (this.numericUpDownActivityCost.Value < 0)
+            {
+                this.labelError.Text = Constants.ACTIVITY_COST_NEGATIVE;
+                this.labelError.Visible = true;
+            }
+            else try
+            {
+                this.labelError.Visible = false;
 
-                    var activityToAdd = new Activity();
-                    activityToAdd.Name = this.textBoxActivityName.Text;
-                    activityToAdd.Cost = (int) this.numericUpDownActivityCost.Value;
-                    activityToAdd.Date = dateTimePickerActivityDate.Value;
+                var activityToAdd = new Activity();
+                activityToAdd.Name = this.textBoxActivityName.Text;
+                activityToAdd.Cost = (int) this.numericUpDownActivityCost.Value;
+                activityToAdd.Date = dateTimePickerActivityDate.Value;
 
-                    ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activityToAdd);
-                    this.CleanForm();
-                    this.labelSuccess.Text = Constants.SUCCESS_ACTIVITY_REGISTRATION;
-                }
+                ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activityToAdd);
+                this.CleanForm();
+                this.labelSuccess.Text = Constants.SUCCESS_ACTIVITY_REGISTRATION;
             }
             catch (CoreException ex)
             {
@@ -58,7 +65,6 @@ namespace ActivityModuleUI.AddActivity
             catch (Exception)
             {
                 this.labelError.Text = Constants.ERROR_UNEXPECTED;
-                //TODO: Try log the error somewhere.
             }
         }
 

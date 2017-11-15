@@ -26,5 +26,7 @@ namespace FrameworkCommon
         public const string ERROR_NOSTUDENTFOUND = "Student not found.";
 
         public const string SUCCESS_ACTIVITY_REGISTRATION = "Activity was succesfully registered.";
+        public const string ACTIVITY_NAME_EMPTY = "Activity's name should be not empty.";
+        public const string ACTIVITY_COST_NEGATIVE = "Activity's cost should be greater or equal than 0.";
     }
 }
