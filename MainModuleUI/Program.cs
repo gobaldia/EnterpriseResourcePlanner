@@ -1,5 +1,6 @@
 ﻿using ActivityModuleUI;
 using ActivityModuleUI.AddActivity;
+using ActivityModuleUI.ModifyActivity;
 using CoreGeneralization;
 using MainComponents;
 using StudentModuleUI;
@@ -122,8 +123,10 @@ namespace MainModuleUI
             List<IAction> ActivityActions = new List<IAction>();
 
             IAction addAction = new AddActivityAction();
+            IAction modifyAction = new ModifyActivityAction();
 
             ActivityActions.Add(addAction);
+            ActivityActions.Add(modifyAction);
 
             return new ActivityModule(ActivityActions);
         }

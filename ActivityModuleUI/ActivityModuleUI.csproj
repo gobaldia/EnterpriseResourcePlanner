@@ -61,6 +61,13 @@
       <DependentUpon>AddActivityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="ModifyActivity\ModifyActivityAction.cs" />
+    <Compile Include="ModifyActivity\ModifyActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyActivity\ModifyActivityForm.Designer.cs">
+      <DependentUpon>ModifyActivityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +77,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AddActivity\AddActivityForm.resx">
       <DependentUpon>AddActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyActivity\ModifyActivityForm.resx">
+      <DependentUpon>ModifyActivityForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
