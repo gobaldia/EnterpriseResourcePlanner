@@ -120,5 +120,30 @@ namespace UnitTesting
             Assert.AreEqual(modifiedActivity.GetName(), "Yoga Reloaded");
         }
 
+        [TestMethod]
+        public void AssignStudentsToActivity()
+        {
+            SystemData.GetInstance.Reset();
+
+            var activity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
+            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activity);
+
+            var firstStudent = new Student("Jon", "Bon Jovi", "1234567-8");
+            var secondStudent = new Student("Jim Morrison", "Varela", "1234567-9");
+
+            var students = new List<Student>();
+            students.Add(firstStudent);
+            students.Add(secondStudent);
+
+            var newActivity = new Activity(activity.Name, activity.Date, activity.Cost);
+            newActivity.Students = students;
+
+            ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(activity.Id, newActivity);
+
+            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityByCode(activity.Id);
+
+            Assert.AreEqual(modifiedActivity.Students, students);
+        }
+
     }
 }
