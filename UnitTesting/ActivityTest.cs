@@ -55,12 +55,11 @@ namespace UnitTesting
         public void ActivityInstancesAreEqual()
         {
             var expectedName = "Yoga";
-            var expectedId = 1;
             var expectedDate = new DateTime(2017, 11, 14);
             var expectedCost = 100;
 
-            Activity firstActivity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
-            Activity secondActivity = new Activity(expectedName, expectedId, expectedDate, expectedCost);
+            Activity firstActivity = new Activity(expectedName, expectedDate, expectedCost);
+            Activity secondActivity = new Activity(expectedName, expectedDate, expectedCost);
 
             Assert.AreEqual(firstActivity, secondActivity);
         }
@@ -70,7 +69,7 @@ namespace UnitTesting
         {
             SystemData.GetInstance.Reset();
 
-            Activity newActivity = new Activity("Yoga", 1, new DateTime(2017, 11, 14), 100);
+            Activity newActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
 
             ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(newActivity);
 
@@ -88,8 +87,8 @@ namespace UnitTesting
         {
             try
             {
-                Activity firstActivity = new Activity("Yoga", 1, new DateTime(2017, 11, 14), 100);
-                Activity secondActivity = new Activity("Yoga", 1, new DateTime(2017, 11, 14), 100);
+                Activity firstActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
+                Activity secondActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
 
                 ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(firstActivity);
                 ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(secondActivity);
@@ -104,6 +103,21 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void ModifyActivity()
+        {
+            SystemData.GetInstance.Reset();
+
+            var activity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
+            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activity);
+
+            activity.Name = "Yoga Reloaded";
+            ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(activity.Id, activity);
+
+            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityByCode(activity.Id);
+            Assert.AreEqual(modifiedActivity.GetName(), "Yoga Reloaded");
         }
 
     }
