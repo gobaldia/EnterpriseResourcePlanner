@@ -143,5 +143,40 @@ namespace UnitTesting
             Assert.AreEqual(modifiedActivity.Students, students);
         }
 
+        [TestMethod]
+        public void DeleteActivity()
+        {
+            SystemData.GetInstance.Reset();
+
+            var activity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
+            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activity);
+
+            ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(activity.Id);
+
+            var quantityOfActivities = ClassFactory.GetOrCreate<ActivityLogic>().GetActivities().Count();
+
+            Assert.IsTrue(quantityOfActivities == 0);
+        }
+
+        [TestMethod]
+        public void TryToDeleteActivityThatDoesntExists()
+        {
+            SystemData.GetInstance.Reset();
+
+            try
+            {
+                ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(activity.Id);
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("There's no activity with this id."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
     }
 }
