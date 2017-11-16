@@ -165,7 +165,7 @@ namespace UnitTesting
 
             try
             {
-                ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(activity.Id);
+                ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(1);
                 Assert.Fail();
             }
             catch (CoreException ex)

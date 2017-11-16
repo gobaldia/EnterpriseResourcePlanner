@@ -47,5 +47,13 @@ namespace CoreLogic
                 throw new CoreException("There's no activity with this id.");
             return activity.First();
         }
+
+        public void DeleteActivityById(int id)
+        {
+            var activityToDelete = this.systemActivities.Find(a => a.Id == id);
+            if (activityToDelete == null)
+                throw new CoreException("There's no activity with this id.");
+            this.systemActivities.Remove(activityToDelete);
+        }
     }
 }
