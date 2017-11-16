@@ -1,5 +1,6 @@
 ﻿using ActivityModuleUI;
 using ActivityModuleUI.AddActivity;
+using ActivityModuleUI.DeleteActivity;
 using ActivityModuleUI.ModifyActivity;
 using CoreGeneralization;
 using MainComponents;
@@ -124,9 +125,11 @@ namespace MainModuleUI
 
             IAction addAction = new AddActivityAction();
             IAction modifyAction = new ModifyActivityAction();
+            IAction deleteAction = new DeleteActivityAction();
 
             ActivityActions.Add(addAction);
             ActivityActions.Add(modifyAction);
+            ActivityActions.Add(deleteAction);
 
             return new ActivityModule(ActivityActions);
         }

@@ -47,6 +47,7 @@ namespace ActivityModuleUI.ModifyActivity
             this.numericUpDownActivityCost.Value = selected.Cost;
             FillAvailableStudentsListBox(selected.Id);
             FillRegisteredStudentsListBox(selected.Id);
+            this.buttonModify.Enabled = true;
         }
 
         private void FillAvailableStudentsListBox(int activityId)
