@@ -35,7 +35,7 @@ namespace TeacherModuleUI.DeleteTeacher
             {
                 if (teacherToDelete != null)
                 {
-                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherLogicOperations();
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
                     teacherOperations.DeleteTeacher(teacherToDelete);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
@@ -63,7 +63,7 @@ namespace TeacherModuleUI.DeleteTeacher
                 string documentNumber = this.textBoxTeacherDocument.Text;
                 if (!string.IsNullOrEmpty(documentNumber))
                 {
-                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherLogicOperations();
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
                     this.teacherToDelete = teacherOperations.GetTeacherByDocumentNumber(documentNumber);
                     this.FillFormWithTeacherData();
                 }
@@ -94,9 +94,18 @@ namespace TeacherModuleUI.DeleteTeacher
         {
             this.textBoxTeacherName.Text = this.teacherToDelete.GetName();
             this.textBoxTeacherLastName.Text = this.teacherToDelete.GetLastName();
-            foreach (var subject in this.teacherToDelete.GetSubjects())
+            List<Subject> teacherSubjects = this.teacherToDelete.GetSubjects();
+            this.LoadSubjects(teacherSubjects);
+            
+        }
+        private void LoadSubjects(List<Subject> subjectsToBeLoaded)
+        {
+            if(subjectsToBeLoaded?.Count > 0)
             {
-                this.listBoxTeacherSubjects.Items.Add(subject);
+                foreach (var subject in subjectsToBeLoaded)
+                {
+                    this.listBoxTeacherSubjects.Items.Add(subject);
+                }
             }
         }
         private void CleanForm(bool cleanTeacherDocumentNumber = false)

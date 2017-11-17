@@ -12,7 +12,7 @@ namespace DataContracts
         void AddTeacher(Teacher newTeacher);
         void ModifyTeacher(Teacher teacherToModify);
         void DeleteTeacher(Teacher teacherToModify);
-        List<Teacher> GetAllTeacher();
+        List<Teacher> GetTeachers();
         Teacher GetTeacherByDocumentNumber(string documentNumber);
     }
 }

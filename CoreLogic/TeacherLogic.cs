@@ -14,7 +14,6 @@ namespace CoreLogic
 {
     public class TeacherLogic : ITeacherLogic
     {
-        private List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
         private ITeacherPersistance persistanceProvider;
 
         public TeacherLogic(ITeacherPersistance provider)
@@ -58,15 +57,16 @@ namespace CoreLogic
             this.persistanceProvider.ModifyTeacher(teacherToModify);
         }
 
-        public List<Teacher> GetAllTeachers()
+        public List<Teacher> GetTeachers()
         {
-            return this.persistanceProvider.GetAllTeacher();
+            return this.persistanceProvider.GetTeachers();
         }
 
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {
-            return this.systemTeachers.Exists(item => item.Equals(aTeacher));
+            var systemTeachers = this.persistanceProvider.GetTeachers();
+            return systemTeachers.Exists(item => item.Equals(aTeacher));
         }
         private bool ModifyName(Teacher teacherToModify, string newName)
         {

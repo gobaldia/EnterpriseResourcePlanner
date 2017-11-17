@@ -59,7 +59,7 @@
     <Compile Include="DeleteSubject\DeleteSubjectForm.Designer.cs">
       <DependentUpon>DeleteSubjectForm.cs</DependentUpon>
     </Compile>
-	<Compile Include="ModifySubject\ModifySubjectAction.cs" />
+    <Compile Include="ModifySubject\ModifySubjectAction.cs" />
     <Compile Include="ModifySubject\ModifySubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,7 +75,7 @@
     <EmbeddedResource Include="DeleteSubject\DeleteSubjectForm.resx">
       <DependentUpon>DeleteSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
-	<EmbeddedResource Include="ModifySubject\ModifySubjectForm.resx">
+    <EmbeddedResource Include="ModifySubject\ModifySubjectForm.resx">
       <DependentUpon>ModifySubjectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -116,6 +116,10 @@
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0d34b3c6-4f5a-469f-a793-77d5de2c9e5e}</Project>
       <Name>FrameworkCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProviderManager\ProviderManager.csproj">
+      <Project>{FE0A814E-CF32-41E0-961E-9F7A5A3780D5}</Project>
+      <Name>ProviderManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

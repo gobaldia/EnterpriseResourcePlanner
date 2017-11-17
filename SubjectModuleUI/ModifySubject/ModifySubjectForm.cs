@@ -63,7 +63,7 @@ namespace SubjectModuleUI.ModifySubject
 
         private void FillSystemTeachersListBox(int subjectCode)
         {
-            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
+            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
             var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
             var subject = subjects.Find(s => s.Code == subjectCode);
             var teachersOfThisSubject = subject.Teachers;

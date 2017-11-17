@@ -13,7 +13,7 @@ namespace ProviderManager
     {
         private ITeacherLogic teachersLogic;
         //private List<Student> students;
-        //private List<Subject> subjects;
+        private ISubjectLogic subjectsLogic;
         //private List<Vehicle> vehicles;
 
         #region Singleton
@@ -23,7 +23,7 @@ namespace ProviderManager
         {
             this.teachersLogic = new TeacherLogic(new TeacherPersistance());
             //this.subjects = new List<Subject>();
-            //this.students = new List<Student>();
+            this.subjectsLogic = new SubjectLogic(new SubjectPersistance());
             //this.vehicles = new List<Vehicle>();
         }
         public static Provider GetInstance
@@ -35,9 +35,13 @@ namespace ProviderManager
         }
         #endregion
 
-        public ITeacherLogic GetTeacherLogicOperations()
+        public ITeacherLogic GetTeacherOperations()
         {
             return this.teachersLogic;
+        }
+        public ISubjectLogic GetSubjectOperations()
+        {
+            return this.subjectsLogic;
         }
     }
 }

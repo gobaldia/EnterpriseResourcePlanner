@@ -111,7 +111,7 @@ namespace SubjectModuleUI.DeleteSubject
         {
             bool isSubjectAssignedToATeacher = false;
             var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
+            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
             for(int index = 0; index < teachers.Count(); index++)
             {
                 var teacherSubjects = teachers[index].GetSubjects();

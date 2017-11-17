@@ -63,7 +63,7 @@ namespace TeacherModuleUI.ModifyTeacher
                     input.DocumentNumber = document;
                     input.NewSubjects = GetSelectedSubjects();
 
-                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherLogicOperations();
+                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations();
                     teacherOpertions.ModifyTeacher(input);
 
                     this.CleanForm();
@@ -100,7 +100,7 @@ namespace TeacherModuleUI.ModifyTeacher
 
                     string documentNumber = this.comboBoxTeachersDocuments.SelectedItem.ToString();
 
-                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherLogicOperations(); 
+                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations(); 
                     Teacher teacherToModify = teacherOpertions.GetTeacherByDocumentNumber(documentNumber);
                     this.textBoxTeacherName.Text = teacherToModify.GetName();
                     this.textBoxTeacherLastName.Text = teacherToModify.GetLastName();
@@ -151,8 +151,8 @@ namespace TeacherModuleUI.ModifyTeacher
         }
         private void LoadDocumentNumberComboBox()
         {
-            ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherLogicOperations();
-            List<Teacher> systemTeachers = teacherOpertions.GetAllTeachers();
+            ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations();
+            List<Teacher> systemTeachers = teacherOpertions.GetTeachers();
             foreach (Teacher teacher in systemTeachers)
             {
                 this.comboBoxTeachersDocuments.Items.Add(teacher.GetDocumentNumber());
@@ -160,8 +160,9 @@ namespace TeacherModuleUI.ModifyTeacher
         }
         private List<Subject> GetSubjectsThatAreNotInTeacher(List<Subject> teacherSubjects)
         {
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
-            return systemSubjects.Where(systemSubject => !teacherSubjects.Any(teacherSubject => systemSubject.Equals(teacherSubject))).ToList();
+            ISubjectLogic subjectsOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> systemSubjects = subjectsOperations.GetSubjects();
+            return systemSubjects?.Where(systemSubject => !teacherSubjects.Any(teacherSubject => systemSubject.Equals(teacherSubject))).ToList();
         }
         private List<Subject> GetSelectedSubjects()
         {

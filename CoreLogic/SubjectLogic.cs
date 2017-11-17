@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using CoreLogic.Interfaces;
 using DataAccess;
+using DataContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +11,23 @@ using System.Threading.Tasks;
 
 namespace CoreLogic
 {
-    public class SubjectLogic
+    public class SubjectLogic : ISubjectLogic
     {
         private List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+        private ISubjectPersistance persistanceProvider;
 
-        public List<Subject> GetSubjects()
+        public SubjectLogic(ISubjectPersistance provider)
         {
-            return systemSubjects;
+            this.persistanceProvider = provider;
         }
 
         public void AddSubject(Subject newSubject)
         {
             if (this.IsSubjectInSystem(newSubject))
                 throw new CoreException("Subject already exists.");
-            else
-                this.systemSubjects.Add(newSubject);
+
+            this.persistanceProvider.AddSubject(newSubject);
+            //this.systemSubjects.Add(newSubject);
         }
 
         public void ModifySubjectByCode(int code, Subject newSubjectValues)
@@ -39,16 +43,6 @@ namespace CoreLogic
             }
         }
 
-        private bool IsSubjectInSystem(Subject subject)
-        {
-            return this.systemSubjects.Exists(item => item.Equals(subject));
-        }
-
-        private bool IsSubjectInSystemByCode(int code)
-        {
-            return this.systemSubjects.Exists(item => item.Code == code);
-        }
-
         public void DeleteSubjectByCode(int code)
         {
             if (!IsSubjectInSystemByCode(code))
@@ -59,10 +53,26 @@ namespace CoreLogic
                 this.systemSubjects.Remove(subjectToDelete);
             }
         }
+
+        public List<Subject> GetSubjects()
+        {
+            return this.persistanceProvider.GetSubjects();//systemSubjects;
+        }
         
         public Subject GetSubjectByCode(int subjectCode)
         {
             return this.systemSubjects.Find(item => item.GetCode() == subjectCode);
+        }
+
+        private bool IsSubjectInSystem(Subject subject)
+        {
+            //return this.persistanceProvider.
+            return this.systemSubjects.Exists(item => item.Equals(subject));
+        }
+
+        private bool IsSubjectInSystemByCode(int code)
+        {
+            return this.systemSubjects.Exists(item => item.Code == code);
         }
     }
 }
