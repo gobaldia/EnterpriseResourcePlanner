@@ -26,7 +26,6 @@ namespace DataAccess
 
             modelBuilder.Entity<Teacher>().ToTable("Teachers");
             modelBuilder.Entity<Student>().ToTable("Students");
-            modelBuilder.Entity<Activity>().ToTable("Activities");
 
             //modelBuilder.Entity<Teacher>().Map(m =>
             //{

@@ -31,7 +31,16 @@ namespace DataAccess.Implementations
 
         public List<Activity> GetActivities()
         {
-            throw new NotImplementedException();
+            var activities = new List<Activity>();
+            using (Context context = new Context())
+            {
+                var query = from activity in context.activities
+                            select activity;
+
+                foreach (var activity in query)
+                    activities.Add(activity);
+            }
+            return activities;
         }
 
         public Activity GetActivityById(int id)

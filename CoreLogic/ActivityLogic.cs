@@ -51,7 +51,7 @@ namespace CoreLogic
             var activityToDelete = systemActivities.Find(a => a.Id == id);
             if (activityToDelete == null)
                 throw new CoreException("There's no activity with this id.");
-            systemActivities.Remove(activityToDelete);
+            this.persistanceProvider.DeleteActivity(activityToDelete);
         }
 
         public Activity GetActivityById(int id)
@@ -64,7 +64,7 @@ namespace CoreLogic
 
         public List<Activity> GetActivities()
         {
-            return systemActivities;
+            return this.persistanceProvider.GetActivities();
         }
 
         //public List<Activity> GetActivities()

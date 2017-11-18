@@ -26,8 +26,10 @@ namespace ActivityModuleUI.DeleteActivity
 
         private void FillActivitiesComboBox()
         {
-            var activities = ClassFactory.GetOrCreate<ActivityLogic>().GetActivities();
-            for(int index = 0; index < activities.Count(); index++)
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            List<Activity> activities = activityOperations.GetActivities();
+
+            for (int index = 0; index < activities.Count(); index++)
             {
                 this.comboBoxSelectActivityToDelete.Items.Add(activities[index]);
             }
