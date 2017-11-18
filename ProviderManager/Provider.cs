@@ -15,6 +15,7 @@ namespace ProviderManager
         //private List<Student> students;
         private ISubjectLogic subjectsLogic;
         //private List<Vehicle> vehicles;
+        private IActivityLogic activitiesLogic;
 
         #region Singleton
         // Variable estática para la instancia, se necesita utilizar una función lambda ya que el constructor es privado.
@@ -25,6 +26,7 @@ namespace ProviderManager
             //this.subjects = new List<Subject>();
             this.subjectsLogic = new SubjectLogic(new SubjectPersistance());
             //this.vehicles = new List<Vehicle>();
+            this.activitiesLogic = new ActivityLogic(new ActivityPersistance());
         }
         public static Provider GetInstance
         {
@@ -42,6 +44,11 @@ namespace ProviderManager
         public ISubjectLogic GetSubjectOperations()
         {
             return this.subjectsLogic;
+        }
+
+        public IActivityLogic GetActivityOperations()
+        {
+            return this.activitiesLogic;
         }
     }
 }

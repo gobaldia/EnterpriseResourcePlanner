@@ -8,11 +8,12 @@ namespace CoreEntities.Entities
 {
     public class Activity
     {
+        public int ActivityOID { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public int Cost { get; set; }
-        public List<Student> Students { get; set; }
+        public virtual List<Student> Students { get; set; }
 
         public static int activitiesCount = 0;
 
