@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +17,7 @@ using System.Windows.Forms;
 namespace SubjectModuleUI.DeleteSubject
 {
     public partial class DeleteSubjectForm : Form
-    {
+    {   
         public DeleteSubjectForm()
         {
             InitializeComponent();
@@ -31,11 +33,12 @@ namespace SubjectModuleUI.DeleteSubject
 
         private void FillSubjectsComboBox()
         {
-            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
+            
             for(int index = 0; index < subjects.Count; index++)
-            {
                 this.comboBoxSelectSubjectToDelete.Items.Add(subjects[index]);
-            }
+
             this.comboBoxSelectSubjectToDelete.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -46,6 +49,10 @@ namespace SubjectModuleUI.DeleteSubject
                 if(UserConfirmsThatWantToDeleteSubject())
                 {
                     var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
+
+                    ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+                    List<Subject> subjects = subjectOperations.GetSubjects();
+
                     ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(selectedSubject.Code);
                     this.labelActionResult.Text = "Subject " + selectedSubject + " was succesfully deleted.";
                     this.labelActionResult.Visible = true;
@@ -111,7 +118,7 @@ namespace SubjectModuleUI.DeleteSubject
         {
             bool isSubjectAssignedToATeacher = false;
             var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
+            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
             for(int index = 0; index < teachers.Count(); index++)
             {
                 var teacherSubjects = teachers[index].GetSubjects();

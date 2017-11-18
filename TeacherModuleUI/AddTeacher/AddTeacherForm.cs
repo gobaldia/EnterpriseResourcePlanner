@@ -1,8 +1,10 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +41,8 @@ namespace TeacherModuleUI.AddTeacher
                     Teacher newTeacher = new Teacher(name, lastName, document);
                     this.AddSubjectsToTeacher(newTeacher);
 
-                    ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+                    teacherOperations.AddTeacher(newTeacher);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHERREGISTRATION; ;
                 }
@@ -89,7 +92,8 @@ namespace TeacherModuleUI.AddTeacher
         #region Utility methods
         private void LoadFormData()
         {
-            List<Subject> subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
             foreach (Subject subject in subjects)
             {
                 this.listBoxSystemSubjects.Items.Add(subject);

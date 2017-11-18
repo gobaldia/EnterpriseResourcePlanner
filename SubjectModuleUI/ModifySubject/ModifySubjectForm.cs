@@ -57,13 +57,13 @@ namespace SubjectModuleUI.ModifySubject
             var teachersThatTeachThisSubject = subject.Teachers;
             for (int index = 0; index < teachersThatTeachThisSubject.Count; index++)
             {
-                this.listBoxSubjectTeachers.Items.Add(teachersThatTeachThisSubject[index]);
+                this.listBoxSubjectTeachers.Items.Add(teachersThatTeachThisSubject.ElementAt(index));
             }
         }
 
         private void FillSystemTeachersListBox(int subjectCode)
         {
-            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
+            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
             var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
             var subject = subjects.Find(s => s.Code == subjectCode);
             var teachersOfThisSubject = subject.Teachers;

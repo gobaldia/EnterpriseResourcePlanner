@@ -8,20 +8,20 @@ namespace CoreEntities.Entities
 {
     public class Teacher : Person
     {
-        private List<Subject> subjects { get; set; }
+        public virtual List<Subject> Subjects { get; set; }
 
         public Teacher()
         {
             base.Name = string.Empty;
             base.LastName = string.Empty;
-            this.subjects = new List<Subject>();
+            this.Subjects = new List<Subject>();
         }
         public Teacher(string name, string lastName, string documentNumber)
         {
             this.Name = name;
             this.LastName = lastName;
             this.Document = documentNumber;
-            this.subjects = new List<Subject>();
+            this.Subjects = new List<Subject>();
         }
 
         public string GetName()
@@ -47,22 +47,22 @@ namespace CoreEntities.Entities
 
         public List<Subject> GetSubjects()
         {
-            return this.subjects;
+            return this.Subjects;
         }
         public void AddSubjectToTeach(Subject subjectToBeTeach)
         {
-            this.subjects.Add(subjectToBeTeach);
+            this.Subjects.Add(subjectToBeTeach);
         }
         public void RemoveSubject(Subject subjectToRemove)
         {
-            this.subjects.Remove(subjectToRemove);
+            this.Subjects.Remove(subjectToRemove);
         }
         public void ModifySubjects(List<Subject> newSubjects)
         {
-            this.subjects.Clear();
+            this.Subjects.Clear();
             foreach (Subject subject in newSubjects)
             {
-                this.subjects.Add(subject);
+                this.Subjects.Add(subject);
             }
         }
 

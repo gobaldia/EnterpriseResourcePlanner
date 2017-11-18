@@ -10,26 +10,27 @@ namespace CoreEntities.Entities
     {
         #region Properties
         private static int studentsCount = 0;
-        private List<Subject> subjects { get; set; }
-        private int studentNumber { get; set; }
-        private bool havePickUpService { get; set; } = false;
-        private Location location { get; set; }
+
+        public virtual List<Subject> Subjects { get; set; }
+        public int StudentNumber { get; set; }
+        public bool HavePickUpService { get; set; } = false;
+        public virtual Location Location { get; set; }
         #endregion
 
         public Student()
         {
-            this.studentNumber = ++studentsCount;
+            this.StudentNumber = ++studentsCount;
             base.Name = string.Empty;
             base.LastName = string.Empty;
-            this.subjects = new List<Subject>();
+            this.Subjects = new List<Subject>();
         }
         public Student(string name, string lastName, string documentNumber)
         {
-            this.studentNumber = ++studentsCount;
+            this.StudentNumber = ++studentsCount;
             this.Name = name;
             this.LastName = lastName;
             this.Document = documentNumber;
-            this.subjects = new List<Subject>();
+            this.Subjects = new List<Subject>();
         }
 
         #region Methods
@@ -47,7 +48,7 @@ namespace CoreEntities.Entities
         }
         public int GetStudentNumber()
         {
-            return this.studentNumber;
+            return this.StudentNumber;
         }
         public void SetName(string newName)
         {
@@ -59,30 +60,26 @@ namespace CoreEntities.Entities
         }
         public void SetPickUpService(bool pickup)
         {
-            this.havePickUpService = pickup;
+            this.HavePickUpService = pickup;
         }
         public void SetLocation(Location studentLocation)
         {
-            this.location = studentLocation;
+            this.Location = studentLocation;
         }
         public Location GetLocation()
         {
-            return this.location;
-        }
-        public bool HavePickUpService()
-        {
-            return this.havePickUpService;
+            return this.Location;
         }
         public List<Subject> GetSubjects()
         {
-            return this.subjects;
+            return this.Subjects;
         }
         public void ModifySubjects(List<Subject> newSubjects)
         {
-            this.subjects.Clear();
+            this.Subjects.Clear();
             foreach (Subject subject in newSubjects)
             {
-                this.subjects.Add(subject);
+                this.Subjects.Add(subject);
             }
         }
         public static int GetNextStudentNumber()
@@ -93,7 +90,7 @@ namespace CoreEntities.Entities
 
         public void AddSubjectToStudent(Subject newSubject)
         {
-            this.subjects.Add(newSubject);
+            this.Subjects.Add(newSubject);
         }
         public override bool Equals(object obj)
         {

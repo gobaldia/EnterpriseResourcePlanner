@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ISubjectLogic.cs" />
+    <Compile Include="Interfaces\ITeacherLogic.cs" />
     <Compile Include="ActivityLogic.cs" />
     <Compile Include="StudentLogic.cs" />
     <Compile Include="SubjectLogic.cs" />
@@ -55,6 +57,10 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{02C77B64-E35F-4FC6-9BC9-337AC9E73420}</Project>
       <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataContracts\DataContracts.csproj">
+      <Project>{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}</Project>
+      <Name>DataContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>

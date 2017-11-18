@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using CoreLogic.Interfaces;
 using DataAccess;
+using DataContracts;
 using FrameworkCommon.MethodParameters;
 using System;
 using System.Collections.Generic;
@@ -10,21 +12,26 @@ using System.Threading.Tasks;
 
 namespace CoreLogic
 {
-    public class TeacherLogic
+    public class TeacherLogic : ITeacherLogic
     {
-        private List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
+        private ITeacherPersistance persistanceProvider;
+
+        public TeacherLogic(ITeacherPersistance provider)
+        {
+            this.persistanceProvider = provider;
+        }
 
         public void AddTeacher(Teacher newTeacher)
         {
             if (this.IsTeacherInSystem(newTeacher))
                 throw new CoreException("Teacher already exists.");
 
-            this.systemTeachers.Add(newTeacher);
+            this.persistanceProvider.AddTeacher(newTeacher);
         }
 
         public Teacher GetTeacherByDocumentNumber(string documentNumber)
         {   
-            Teacher teacherFound = this.systemTeachers.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            Teacher teacherFound = this.persistanceProvider.GetTeacherByDocumentNumber(documentNumber);
             if (teacherFound == null)
                 throw new CoreException("Teacher not found.");
 
@@ -33,7 +40,7 @@ namespace CoreLogic
 
         public void DeleteTeacher(Teacher teacherToDelete)
         {
-            this.systemTeachers.Remove(teacherToDelete);
+            this.persistanceProvider.DeleteTeacher(teacherToDelete);
         }
 
         public void ModifyTeacher(ModifyTeacherInput input)
@@ -46,17 +53,20 @@ namespace CoreLogic
             
             if (!nameWasModified && !lastNameWasModified && !subjectsWereModified)
                 throw new CoreException("No modifications have been made.");
+
+            this.persistanceProvider.ModifyTeacher(teacherToModify);
         }
 
-        public List<Teacher> GetAllTeachers()
+        public List<Teacher> GetTeachers()
         {
-            return this.systemTeachers;
+            return this.persistanceProvider.GetTeachers();
         }
 
         #region Utilities
         private bool IsTeacherInSystem(Teacher aTeacher)
         {
-            return this.systemTeachers.Exists(item => item.Equals(aTeacher));
+            var systemTeachers = this.persistanceProvider.GetTeachers();
+            return systemTeachers.Exists(item => item.Equals(aTeacher));
         }
         private bool ModifyName(Teacher teacherToModify, string newName)
         {

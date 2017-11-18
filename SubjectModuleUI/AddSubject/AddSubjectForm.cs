@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,10 +37,9 @@ namespace SubjectModuleUI.AddSubject
             try
             {
                 this.labelError.Visible = false;
-                int code;
                 string name;
                 Subject subject = new Subject();
-                if (int.TryParse(this.textBoxSubjectCode.Text, out code))
+                if (int.TryParse(this.textBoxSubjectCode.Text, out int code))
                 {
                     if (!string.IsNullOrWhiteSpace(this.textBoxSubjectName.Text))
                     {
@@ -46,7 +47,8 @@ namespace SubjectModuleUI.AddSubject
                         name = this.textBoxSubjectName.Text;
                         subject.Name = name;
 
-                        ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
+                        ISubjectLogic subjectsOperations = Provider.GetInstance.GetSubjectOperations();
+                        subjectsOperations.AddSubject(subject);
 
                         this.ClearAddSubjectForm();
                         this.ShowCorrectlyAddedSubjectMessage(code, name);
