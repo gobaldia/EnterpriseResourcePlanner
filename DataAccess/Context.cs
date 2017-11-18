@@ -20,7 +20,6 @@ namespace DataAccess
             modelBuilder.Entity<Subject>().HasKey(s => s.SubjectOID);
             modelBuilder.Entity<Person>().HasKey(p => p.PersonOID);
             modelBuilder.Entity<Vehicle>().HasKey(p => p.VehicleOID);
-            modelBuilder.Entity<Location>().HasKey(p => p.LocationOID);
 
             modelBuilder.Entity<Teacher>().ToTable("Teachers");
             modelBuilder.Entity<Student>().ToTable("Students");

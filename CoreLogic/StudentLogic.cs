@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using CoreLogic.Interfaces;
 using DataAccess;
+using DataContracts;
 using FrameworkCommon.MethodParameters;
 using System;
 using System.Collections.Generic;
@@ -10,25 +12,22 @@ using System.Threading.Tasks;
 
 namespace CoreLogic
 {
-    public class StudentLogic
+    public class StudentLogic : IStudentLogic
     {
         private List<Student> systemStudents = SystemData.GetInstance.GetStudents();
+        private IStudentPersistance persistanceProvider;
 
-        public void AddStudent(AddStudentInput input)
+        public StudentLogic(IStudentPersistance provider)
         {
-            Student newStudent = new Student(input.Name, input.LastName, input.DocumentNumber);
+            this.persistanceProvider = provider;
+        }
+
+        public void AddStudent(Student newStudent)
+        {
             if (this.IsStudentInSystem(newStudent))
                 throw new CoreException("Student already exists.");
 
-            AddStudentSubjects(newStudent, input.Subjects);
-
-            if (input.Location != null)
-            {
-                newStudent.SetPickUpService(true);
-                newStudent.SetLocation(input.Location);
-            }
-
-            this.systemStudents.Add(newStudent);
+            this.persistanceProvider.AddStudent(newStudent);
         }
 
         public Student GetStudentByDocumentNumber(string documentNumber)
@@ -57,7 +56,7 @@ namespace CoreLogic
 
         public Student GetStudentByNumber(int studentNumber)
         {
-            Student studentFound = this.systemStudents.Find(item => item.GetStudentNumber().Equals(studentNumber));
+            Student studentFound = this.persistanceProvider.GetStudentByNumber(studentNumber);
             if (studentFound == null)
                 throw new CoreException("Student not found.");
 
@@ -66,19 +65,24 @@ namespace CoreLogic
 
         public List<Student> GetStudents()
         {
-            return this.systemStudents;
+            return this.persistanceProvider.GetStudents();
         }
 
         public void DeleteStudent(int studentNumber)
         {
             Student studentToRemove = GetStudentByNumber(studentNumber);
-            this.systemStudents.Remove(studentToRemove);
+            this.persistanceProvider.DeleteStudent(studentToRemove);
+        }
+
+        public int GetNextStudentNumber()
+        {
+            return this.persistanceProvider.GetNextStudentNumber();
         }
 
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
-            return this.systemStudents.Exists(item => item.Equals(aStudent));
+            return this.persistanceProvider.IsStudentInSystem(aStudent.Document);
         }
         private void AddStudentSubjects(Student aStudent, List<Subject> subjectsToAdd)
         {
@@ -137,23 +141,7 @@ namespace CoreLogic
         }
         private bool LocationsAreDifferent(Student studentToModify, Location newLocation)
         {
-            bool result = false;
-
-            if (newLocation == null && studentToModify.GetLocation() != null)
-                result = true;
-            else if (newLocation != null && studentToModify.GetLocation() == null)
-                result = true;
-            else if (BothLocationNotNull(studentToModify, newLocation) &&
-                !newLocation.Equals(studentToModify.GetLocation()))
-            {
-                result = true;
-            }
-
-            return result;
-        }
-        private bool BothLocationNotNull(Student studentToModify, Location newLocation)
-        {
-            return newLocation != null && studentToModify.GetLocation() != null;
+            return !newLocation.Equals(studentToModify.GetLocation());
         }
         #endregion
     }

@@ -22,7 +22,7 @@ namespace UnitTesting
         {
             string expectedName = string.Empty;
             string expectedLastName = string.Empty;
-            int expectedStudentNumber = Student.GetNextStudentNumber();
+            int expectedStudentNumber = 1;
 
             Student student = new Student();
             List<Subject> expectedSubjects = new List<Subject>();
@@ -41,7 +41,7 @@ namespace UnitTesting
             string expectedName = "Luis";
             string expectedLastName = "Suarez";
             string expectedDocumentNumber = "1234567-8";
-            int expectedStudentNumber = Student.GetNextStudentNumber();
+            int expectedStudentNumber = 1;
             List<Subject> expectedSubjects = new List<Subject>();
 
             Student student = new Student(expectedName, expectedLastName, expectedDocumentNumber);
@@ -123,13 +123,10 @@ namespace UnitTesting
             SystemData.GetInstance.Reset();
 
             Student newStudent = this.CreateRandomStudent();
-            var input = new AddStudentInput();
-            input.Name = newStudent.GetName();
-            input.LastName = newStudent.GetLastName();
-            input.DocumentNumber = newStudent.GetDocumentNumber();
-            input.Subjects = new List<Subject>();
-            input.havePickUpService = false;
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            newStudent.Subjects = new List<Subject>();
+            newStudent.HavePickUpService = false;
+            newStudent.StudentNumber = 1;
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
 
             Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
@@ -142,23 +139,13 @@ namespace UnitTesting
                 SystemData.GetInstance.Reset();
 
                 Student firstStudent = this.CreateRandomStudent();
-                var firstInput = new AddStudentInput
-                {
-                    Name = firstStudent.GetName(),
-                    LastName = firstStudent.GetLastName(),
-                    DocumentNumber = firstStudent.GetDocumentNumber()
-                };
+                firstStudent.StudentNumber = 1;
 
                 Student secondStudent = new Student(firstStudent.GetName(), firstStudent.GetLastName(), firstStudent.GetDocumentNumber());
-                var secondInput = new AddStudentInput
-                {
-                    Name = firstStudent.GetName(),
-                    LastName = firstStudent.GetLastName(),
-                    DocumentNumber = firstStudent.GetDocumentNumber()
-                };
+                secondStudent.StudentNumber = 2;              
 
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstInput);
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(secondInput);
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(secondStudent);
 
                 Assert.Fail();
             }
@@ -196,14 +183,8 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            var input = new AddStudentInput
-            {
-                DocumentNumber = documentNumber,
-                Name = firstStudent.GetName(),
-                LastName = firstStudent.GetLastName()
-            };
-
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            firstStudent.StudentNumber = 1;
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
 
             Student StudentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             Assert.IsNotNull(StudentFound);
@@ -216,13 +197,7 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            var input = new AddStudentInput
-            {
-                DocumentNumber = documentNumber,
-                Name = firstStudent.GetName(),
-                LastName = firstStudent.GetLastName()
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
 
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             studentFound.SetPickUpService(true);
@@ -237,13 +212,7 @@ namespace UnitTesting
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            var input = new AddStudentInput
-            {
-                DocumentNumber = documentNumber,
-                Name = firstStudent.GetName(),
-                LastName = firstStudent.GetLastName()
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
 
             Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
             double latitud = 1.2;
@@ -258,15 +227,13 @@ namespace UnitTesting
         public void ModifyStudentName()
         {
             SystemData.GetInstance.Reset();
-            int nextStudentNumber = Student.GetNextStudentNumber();
-            
-            var addInput = new AddStudentInput
-            {
-                Name = "Rodigo",
-                LastName = Utility.GetRandomLastName(),
-                DocumentNumber = "1234567-8"
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(addInput);
+            int nextStudentNumber = 1;
+
+            var newStudent = new Student();
+            newStudent.Name = "Rodigo";
+            newStudent.LastName = Utility.GetRandomLastName();
+            newStudent.Document = "1234567-8";
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
 
             ModifyStudentInput modifyInput = new ModifyStudentInput();
             modifyInput.NewName = "Santiago";
@@ -281,15 +248,13 @@ namespace UnitTesting
         public void ModifyStudentLastName()
         {
             SystemData.GetInstance.Reset();
-            int nextStudentNumber = Student.GetNextStudentNumber();
+            int nextStudentNumber = 1;
 
-            var addInput = new AddStudentInput
-            {
-                Name = Utility.GetRandomName(),
-                LastName = "de Leon",
-                DocumentNumber = "1234567-8"
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(addInput);
+            var newStudent = new Student();
+            newStudent.Name = Utility.GetRandomName();
+            newStudent.LastName = "de Leon";
+            newStudent.Document = "1234567-8";
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
 
             ModifyStudentInput modifyInput = new ModifyStudentInput();
             modifyInput.NewLastName = "Diaz";
@@ -304,7 +269,7 @@ namespace UnitTesting
         public void ModifyStudentSubjects()
         {
             SystemData.GetInstance.Reset();
-            int nextStudentNumber = Student.GetNextStudentNumber();
+            int nextStudentNumber = 1;
 
             #region Add subjects to the system
             List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
@@ -323,14 +288,13 @@ namespace UnitTesting
             studentSubjects.Add(subject1);
             studentSubjects.Add(subject2);
             studentSubjects.Add(subject3);
-            var input = new AddStudentInput
-            {
-                DocumentNumber = "1234567-8",
-                Name = Utility.GetRandomName(),
-                LastName = Utility.GetRandomLastName(),
-                Subjects = studentSubjects
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+
+            var newStudent = new Student();
+            newStudent.Document = "1234567-8";
+            newStudent.Name = Utility.GetRandomName();
+            newStudent.LastName = Utility.GetRandomLastName();
+            newStudent.Subjects = studentSubjects;
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
             #endregion
 
             List<Subject> newSubjects = new List<Subject>();
@@ -352,17 +316,17 @@ namespace UnitTesting
         public void ModifyStudentLocation()
         {
             SystemData.GetInstance.Reset();
-            int nextStudentNumber = Student.GetNextStudentNumber();
+            int nextStudentNumber = 1;
 
             #region Add students with subjects to the system
-            var input = new AddStudentInput
+            var newStudent = new Student()
             {
-                DocumentNumber = "1234567-8",
+                Document = "1234567-8",
                 Name = Utility.GetRandomName(),
                 LastName = Utility.GetRandomLastName(),
                 Location = new Location(10.00, 15.1)
             };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
             #endregion
 
             Location newStudentLocation = new Location(2.1, 5.6);
@@ -382,7 +346,7 @@ namespace UnitTesting
             try
             {
                 SystemData.GetInstance.Reset();
-                int nextStudentNumber = Student.GetNextStudentNumber();
+                int nextStudentNumber = 1;
 
                 #region Add subjects to the system
                 List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
@@ -396,14 +360,14 @@ namespace UnitTesting
                 List<Subject> studentSubjects = new List<Subject>();
                 studentSubjects.Add(subject1);
                 studentSubjects.Add(subject2);
-                var input = new AddStudentInput
+                var newStudent = new Student
                 {
-                    DocumentNumber = "1234567-8",
+                    Document = "1234567-8",
                     Name = Utility.GetRandomName(),
                     LastName = Utility.GetRandomLastName(),
                     Subjects = studentSubjects
                 };
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
                 #endregion
 
                 List<Subject> newSubjects = new List<Subject>();
@@ -412,8 +376,8 @@ namespace UnitTesting
 
                 var modifyInput = new ModifyStudentInput();
                 modifyInput.NewSubjects = newSubjects;
-                modifyInput.NewName = input.Name;
-                modifyInput.NewLastName = input.LastName;
+                modifyInput.NewName = newStudent.Name;
+                modifyInput.NewLastName = newStudent.LastName;
                 modifyInput.StudentNumber = nextStudentNumber;
                 ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
 
@@ -437,15 +401,15 @@ namespace UnitTesting
                 SystemData.GetInstance.Reset();
                 string documentNumber = "1234567-8";
 
-                int nextStudentNumber = Student.GetNextStudentNumber();
-                var input = new AddStudentInput
+                int nextStudentNumber = 1;
+                var newStudent = new Student
                 {
                     Name = Utility.GetRandomName(),
                     LastName = Utility.GetRandomLastName(),
-                    DocumentNumber = documentNumber
+                    Document = documentNumber
                 };
 
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
+                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
                 ClassFactory.GetOrCreate<StudentLogic>().DeleteStudent(nextStudentNumber);
 
                 Assert.IsNull(this.FindStudentOnSystem(documentNumber));

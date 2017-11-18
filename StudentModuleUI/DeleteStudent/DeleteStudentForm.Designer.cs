@@ -51,8 +51,7 @@
             this.textBoxDocument = new System.Windows.Forms.TextBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonDeleteStudent = new System.Windows.Forms.Button();
-            this.textBoxStudentNumber = new System.Windows.Forms.TextBox();
-            this.buttonSearch = new System.Windows.Forms.Button();
+            this.comboBoxStudentsNumbers = new System.Windows.Forms.ComboBox();
             this.groupBoxPickUpServiceRadioButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -236,7 +235,7 @@
             this.textBoxName.Location = new System.Drawing.Point(477, 367);
             this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(380, 38);
+            this.textBoxName.Size = new System.Drawing.Size(598, 38);
             this.textBoxName.TabIndex = 3;
             // 
             // textBoxLastName
@@ -245,7 +244,7 @@
             this.textBoxLastName.Location = new System.Drawing.Point(477, 436);
             this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(380, 38);
+            this.textBoxLastName.Size = new System.Drawing.Size(598, 38);
             this.textBoxLastName.TabIndex = 4;
             // 
             // textBoxDocument
@@ -254,7 +253,7 @@
             this.textBoxDocument.Location = new System.Drawing.Point(477, 295);
             this.textBoxDocument.MaxLength = 9;
             this.textBoxDocument.Name = "textBoxDocument";
-            this.textBoxDocument.Size = new System.Drawing.Size(380, 38);
+            this.textBoxDocument.Size = new System.Drawing.Size(598, 38);
             this.textBoxDocument.TabIndex = 2;
             // 
             // buttonCancel
@@ -269,6 +268,7 @@
             // 
             // buttonDeleteStudent
             // 
+            this.buttonDeleteStudent.Enabled = false;
             this.buttonDeleteStudent.Location = new System.Drawing.Point(1496, 1041);
             this.buttonDeleteStudent.Name = "buttonDeleteStudent";
             this.buttonDeleteStudent.Size = new System.Drawing.Size(265, 60);
@@ -277,32 +277,22 @@
             this.buttonDeleteStudent.UseVisualStyleBackColor = true;
             this.buttonDeleteStudent.Click += new System.EventHandler(this.buttonDeleteStudent_Click);
             // 
-            // textBoxStudentNumber
+            // comboBoxStudentsNumbers
             // 
-            this.textBoxStudentNumber.Location = new System.Drawing.Point(477, 223);
-            this.textBoxStudentNumber.MaxLength = 9;
-            this.textBoxStudentNumber.Name = "textBoxStudentNumber";
-            this.textBoxStudentNumber.Size = new System.Drawing.Size(380, 38);
-            this.textBoxStudentNumber.TabIndex = 1;
-            this.textBoxStudentNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Location = new System.Drawing.Point(883, 219);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(216, 45);
-            this.buttonSearch.TabIndex = 117;
-            this.buttonSearch.Text = "Search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            this.comboBoxStudentsNumbers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStudentsNumbers.FormattingEnabled = true;
+            this.comboBoxStudentsNumbers.Location = new System.Drawing.Point(477, 223);
+            this.comboBoxStudentsNumbers.Name = "comboBoxStudentsNumbers";
+            this.comboBoxStudentsNumbers.Size = new System.Drawing.Size(598, 39);
+            this.comboBoxStudentsNumbers.TabIndex = 118;
+            this.comboBoxStudentsNumbers.SelectedIndexChanged += new System.EventHandler(this.OnStudenNumber_ComboIndexChange);
             // 
             // DeleteStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
-            this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.textBoxStudentNumber);
+            this.Controls.Add(this.comboBoxStudentsNumbers);
             this.Controls.Add(this.groupBoxPickUpServiceRadioButtons);
             this.Controls.Add(this.labelLongitud);
             this.Controls.Add(this.labelLatitud);
@@ -358,7 +348,6 @@
         private System.Windows.Forms.TextBox textBoxDocument;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonDeleteStudent;
-        private System.Windows.Forms.TextBox textBoxStudentNumber;
-        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.ComboBox comboBoxStudentsNumbers;
     }
 }

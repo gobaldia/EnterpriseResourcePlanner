@@ -2,17 +2,13 @@
 using CoreLogic.Interfaces;
 using DataAccess.Implementations;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProviderManager
 {
     public class Provider
     {
         private ITeacherLogic teachersLogic;
-        //private List<Student> students;
+        private IStudentLogic studentsLogic;
         private ISubjectLogic subjectsLogic;
         //private List<Vehicle> vehicles;
 
@@ -22,7 +18,7 @@ namespace ProviderManager
         private Provider()
         {
             this.teachersLogic = new TeacherLogic(new TeacherPersistance());
-            //this.subjects = new List<Subject>();
+            this.studentsLogic = new StudentLogic(new StudentPersistance());
             this.subjectsLogic = new SubjectLogic(new SubjectPersistance());
             //this.vehicles = new List<Vehicle>();
         }
@@ -42,6 +38,11 @@ namespace ProviderManager
         public ISubjectLogic GetSubjectOperations()
         {
             return this.subjectsLogic;
+        }
+
+        public IStudentLogic GetStudentOperations()
+        {
+            return this.studentsLogic;
         }
     }
 }

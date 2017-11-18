@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,36 +23,8 @@ namespace StudentModuleUI.DeleteStudent
         {
             InitializeComponent();
             SetDefaultWindowsSize();
-        }
-
-        private void buttonSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.CleanForm();
-                this.labelSuccess.Text = string.Empty;
-                int studentNumber = 0;
-                if (int.TryParse(this.textBoxStudentNumber.Text, out studentNumber))
-                {
-                    this.StudentToDelete = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(studentNumber);
-                    FillFormWithStudentData();
-                }
-                else
-                {
-                    this.labelError.Text = Constants.ERROR_INVALID_STUDENTNUMBER;
-                }
-            }
-            catch (CoreException ex)
-            {
-                this.StudentToDelete = null;
-                this.labelError.Text = ex.Message;
-            }
-            catch (Exception)
-            {
-                this.StudentToDelete = null;
-                this.labelError.Text = Constants.ERROR_UNEXPECTED;
-            }
-        }
+            FillStudentsComboBox();
+        }        
 
         private void buttonDeleteStudent_Click(object sender, EventArgs e)
         {
@@ -58,7 +32,8 @@ namespace StudentModuleUI.DeleteStudent
             {
                 if (this.StudentToDelete != null)
                 {
-                    ClassFactory.GetOrCreate<StudentLogic>().DeleteStudent(this.StudentToDelete.GetStudentNumber());
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    studentOperations.DeleteStudent(this.StudentToDelete.GetStudentNumber());
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
                 }
@@ -98,6 +73,9 @@ namespace StudentModuleUI.DeleteStudent
             textBoxLatitud.Text = string.Empty;
             textBoxLongitud.Text = string.Empty;
             listBoxStudentSubjects.Items.Clear();
+            comboBoxStudentsNumbers.Items.Clear();
+            FillStudentsComboBox();
+            buttonDeleteStudent.Enabled = false;
         }
         private void FillFormWithStudentData()
         {
@@ -117,16 +95,45 @@ namespace StudentModuleUI.DeleteStudent
         private void LoadStudentSubjects()
         {
             foreach (var subject in this.StudentToDelete.GetSubjects())
-            {
                 this.listBoxStudentSubjects.Items.Add(subject);
-            }
         }
         #endregion
 
-        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        private void FillStudentsComboBox()
         {
-            this.labelError.Text = string.Empty;
-            this.labelSuccess.Text = string.Empty;
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            var systemStudents = studentOperations.GetStudents();
+            foreach (Student student in systemStudents)
+                this.comboBoxStudentsNumbers.Items.Add(student);
+        }
+
+        private void OnStudenNumber_ComboIndexChange(object sender, EventArgs e)
+        {
+            try
+            {
+                this.CleanForm();
+                this.labelSuccess.Text = string.Empty;
+
+                if(this.comboBoxStudentsNumbers.SelectedIndex >= 0)
+                {
+                    this.buttonDeleteStudent.Enabled = true;
+                    var selectedStudent = this.comboBoxStudentsNumbers.SelectedItem as Student;
+
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    this.StudentToDelete = studentOperations.GetStudentByNumber(selectedStudent.StudentNumber);
+                    FillFormWithStudentData();
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.StudentToDelete = null;
+                this.labelError.Text = ex.Message;
+            }
+            catch (Exception)
+            {
+                this.StudentToDelete = null;
+                this.labelError.Text = Constants.ERROR_UNEXPECTED;
+            }
         }
     }
 }

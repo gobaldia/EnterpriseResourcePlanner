@@ -47,6 +47,35 @@ namespace DataAccess.Implementations
             }
         }
 
+        public List<Subject> GetSubjects()
+        {
+            var subjects = new List<Subject>();
+            using (Context context = new Context())
+            {
+                var query = from subject in context.subjects
+                            select subject;
+
+                foreach (var subject in query)
+                    subjects.Add(subject);
+            }
+            return subjects;
+        }
+
+        public Subject GetSubjectByCode(int code)
+        {
+            Subject subjectFound;
+            using (Context context = new Context())
+            {
+                var queryResult = (from subject in context.subjects.Include("Teachers")
+                                   where subject.Code.Equals(code)
+                                   select subject).FirstOrDefault();
+
+                subjectFound = queryResult;
+            }
+            return subjectFound;
+        }
+
+        #region Private Methods
         private List<Teacher> GetDeletedTeachers(Subject subjectOnDB, Subject subjectToModify)
         {
             return (from dbTeacher in subjectOnDB.Teachers
@@ -76,33 +105,6 @@ namespace DataAccess.Implementations
                 subjectOnDB.Teachers.Add(t);
             }
         }
-
-        public List<Subject> GetSubjects()
-        {
-            var subjects = new List<Subject>();
-            using (Context context = new Context())
-            {
-                var query = from subject in context.subjects
-                            select subject;
-
-                foreach (var subject in query)
-                    subjects.Add(subject);
-            }
-            return subjects;
-        }
-
-        public Subject GetSubjectByCode(int code)
-        {
-            Subject subjectFound;
-            using (Context context = new Context())
-            {
-                var queryResult = (from subject in context.subjects.Include("Teachers")
-                                   where subject.Code.Equals(code)
-                                   select subject).FirstOrDefault();
-
-                subjectFound = queryResult;
-            }
-            return subjectFound;
-        }
+        #endregion
     }
 }

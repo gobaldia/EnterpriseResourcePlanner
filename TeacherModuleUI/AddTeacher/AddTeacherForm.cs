@@ -35,14 +35,10 @@ namespace TeacherModuleUI.AddTeacher
             {
                 if (TextboxesNotEmpty())
                 {
-                    string name = textBoxTeacherName.Text;
-                    string lastName = textBoxTeacherLastName.Text;
-                    string document = textBoxTeacherDocument.Text;
-                    Teacher newTeacher = new Teacher(name, lastName, document);
-                    this.AddSubjectsToTeacher(newTeacher);
-
+                    var newTeacher = CreateTeacher();
                     ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
                     teacherOperations.AddTeacher(newTeacher);
+
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHERREGISTRATION; ;
                 }
@@ -117,6 +113,16 @@ namespace TeacherModuleUI.AddTeacher
         {
             this.listBoxSystemSubjects.Items.Clear();
             this.listBoxTeacherSubjects.Items.Clear();
+        }
+        private Teacher CreateTeacher()
+        {
+            string name = textBoxTeacherName.Text;
+            string lastName = textBoxTeacherLastName.Text;
+            string document = textBoxTeacherDocument.Text;
+
+            Teacher newTeacher = new Teacher(name, lastName, document);
+            this.AddSubjectsToTeacher(newTeacher);
+            return newTeacher;
         }
         private void AddSubjectsToTeacher(Teacher aTeacher)
         {

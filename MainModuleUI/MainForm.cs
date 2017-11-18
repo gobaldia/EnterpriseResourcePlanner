@@ -148,94 +148,104 @@ namespace MainModuleUI
             #endregion
 
             #region Add students to the system
-            var inputStudent1 = new AddStudentInput
+            var inputStudent1 = new Student
             {
-                DocumentNumber = "5555555-8",
+                Document = "5555555-8",
                 Name = "Claudia",
                 LastName = "Fernandez",
                 Location = new Location(-42.214568, 1.557),
-                Subjects = packOfSubjects1
+                Subjects = packOfSubjects1,
+                StudentNumber = 1
             };
 
-            var inputStudent2 = new AddStudentInput
+            var inputStudent2 = new Student
             {
-                DocumentNumber = "4444444-3",
+                Document = "4444444-3",
                 Name = "Gaston",
                 LastName = "Silva",
                 Location = new Location(1.214568, -170.123456),
-                Subjects = packOfSubjects2
+                Subjects = packOfSubjects2,
+                StudentNumber = 2
             };
 
-            var inputStudent3 = new AddStudentInput
+            var inputStudent3 = new Student
             {
                 Name = "Gallo",
                 LastName = "Claudio",
-                DocumentNumber = "3333333-8",
+                Document = "3333333-8",
                 Location = new Location(12.214568, -17.123456),
-                Subjects = packOfSubjects1
+                Subjects = packOfSubjects1,
+                StudentNumber = 3
             };
 
-            var inputStudent4 = new AddStudentInput
+            var inputStudent4 = new Student
             {
                 Name = "Elon",
                 LastName = "Musk",
-                DocumentNumber = "4545456-5",
+                Document = "4545456-5",
                 Location = new Location(62.214568, 1.123456),
-                Subjects = packOfSubjects4
+                Subjects = packOfSubjects4,
+                StudentNumber = 4
             };
 
-            var inputStudent5 = new AddStudentInput
+            var inputStudent5 = new Student
             {
                 Name = "Mark",
                 LastName = "Zuckerberg",
-                DocumentNumber = "9999987-1",
+                Document = "9999987-1",
                 Location = new Location(-3.555568, 55.557),
-                Subjects = packOfSubjects3
+                Subjects = packOfSubjects3,
+                StudentNumber = 5
             };
 
-            var inputStudent6 = new AddStudentInput
+            var inputStudent6 = new Student
             {
                 Name = "Bart",
                 LastName = "Simpson",
-                DocumentNumber = "9999987-2",
+                Document = "9999987-2",
                 Location = new Location(-3.473568, 55.557123),
-                Subjects = packOfSubjects1
+                Subjects = packOfSubjects1,
+                StudentNumber = 6
             };
 
-            var inputStudent7 = new AddStudentInput
+            var inputStudent7 = new Student
             {
                 Name = "Lisa",
                 LastName = "Simpson",
-                DocumentNumber = "9999987-3",
+                Document = "9999987-3",
                 Location = new Location(-3.473568, 55.557123),
-                Subjects = packOfSubjects3
+                Subjects = packOfSubjects3,
+                StudentNumber = 7
             };
 
-            var inputStudent8 = new AddStudentInput
+            var inputStudent8 = new Student
             {
                 Name = "Bob",
                 LastName = "Patiño",
-                DocumentNumber = "1999987-1",
+                Document = "1999987-1",
                 Location = new Location(-31.235211, -55.557),
-                Subjects = packOfSubjects2
+                Subjects = packOfSubjects2,
+                StudentNumber = 8
             };
 
-            var inputStudent9 = new AddStudentInput
+            var inputStudent9 = new Student
             {
                 Name = "Helga",
                 LastName = "Pataki",
-                DocumentNumber = "9992387-1",
+                Document = "9992387-1",
                 Location = new Location(-4.180324, -16.123456),
-                Subjects = packOfSubjects2
+                Subjects = packOfSubjects2,
+                StudentNumber = 9
             };
 
-            var inputStudent10 = new AddStudentInput
+            var inputStudent10 = new Student
             {
                 Name = "Bilbo",
                 LastName = "Bolson",
-                DocumentNumber = "1239987-1",
+                Document = "1239987-1",
                 Location = new Location(-19.152412, 72.182342),
-                Subjects = packOfSubjects1
+                Subjects = packOfSubjects1,
+                StudentNumber = 10
             };
 
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(inputStudent1);
