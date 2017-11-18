@@ -14,5 +14,6 @@ namespace DataContracts
         void ModifyActivity(Activity activityToModify);
         List<Activity> GetActivities();
         Activity GetActivityById(int id);
+        int GetNextActivityNumber();
     }
 }

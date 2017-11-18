@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IActivityLogic.cs" />
+    <Compile Include="Interfaces\IStudentLogic.cs" />
     <Compile Include="Interfaces\ISubjectLogic.cs" />
     <Compile Include="Interfaces\ITeacherLogic.cs" />
     <Compile Include="ActivityLogic.cs" />

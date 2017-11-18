@@ -56,8 +56,8 @@ namespace ActivityModuleUI.AddActivity
                 activityToAdd.Cost = (int) this.numericUpDownActivityCost.Value;
                 activityToAdd.Date = dateTimePickerActivityDate.Value;
 
-                //ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activityToAdd);
                 IActivityLogic activitiesOperations = Provider.GetInstance.GetActivityOperations();
+                activityToAdd.Id = activitiesOperations.GetNextActivityNumber();
                 activitiesOperations.AddActivity(activityToAdd);
                 this.CleanForm();
                 this.labelSuccess.Text = Constants.SUCCESS_ACTIVITY_REGISTRATION;

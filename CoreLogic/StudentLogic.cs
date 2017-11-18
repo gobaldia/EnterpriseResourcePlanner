@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
+using CoreLogic.Interfaces;
 using DataAccess;
+using DataContracts;
 using FrameworkCommon.MethodParameters;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,21 @@ using System.Threading.Tasks;
 
 namespace CoreLogic
 {
-    public class StudentLogic
+    public class StudentLogic : IStudentLogic
     {
         private List<Student> systemStudents = SystemData.GetInstance.GetStudents();
+
+        private IStudentPersistance persistanceProvider;
+
+        public StudentLogic(IStudentPersistance provider)
+        {
+            this.persistanceProvider = provider;
+        }
+
+        public void AddStudent(Student newStudent)
+        {
+
+        }
 
         public void AddStudent(AddStudentInput input)
         {
@@ -66,7 +80,7 @@ namespace CoreLogic
 
         public List<Student> GetStudents()
         {
-            return this.systemStudents;
+            return this.persistanceProvider.GetStudents();
         }
 
         public void DeleteStudent(int studentNumber)

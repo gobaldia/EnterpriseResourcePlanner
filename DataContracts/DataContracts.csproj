@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IActivityPersistance.cs" />
+    <Compile Include="IStudentPersistance.cs" />
     <Compile Include="ISubjectPersistance.cs" />
     <Compile Include="ITeacherPersistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

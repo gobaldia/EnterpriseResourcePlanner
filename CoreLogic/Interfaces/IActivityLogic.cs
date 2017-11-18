@@ -14,5 +14,6 @@ namespace CoreLogic.Interfaces
         void ModifyActivityById(int id, Activity activityToModify);
         List<Activity> GetActivities();
         Activity GetActivityById(int id);
+        int GetNextActivityNumber();
     }
 }

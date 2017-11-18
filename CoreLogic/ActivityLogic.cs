@@ -39,10 +39,11 @@ namespace CoreLogic
         {
             var systemActivities = this.persistanceProvider.GetActivities();
             var activityIndexToModify = systemActivities.FindIndex(a => a.Id == id);
-            this.systemActivities[activityIndexToModify].Name = newActivity.Name;
-            this.systemActivities[activityIndexToModify].Date = newActivity.Date;
-            this.systemActivities[activityIndexToModify].Cost = newActivity.Cost;
-            this.systemActivities[activityIndexToModify].Students = newActivity.Students;
+            //this.systemActivities[activityIndexToModify].Name = newActivity.Name;
+            //this.systemActivities[activityIndexToModify].Date = newActivity.Date;
+            //this.systemActivities[activityIndexToModify].Cost = newActivity.Cost;
+            //this.systemActivities[activityIndexToModify].Students = newActivity.Students;
+            this.persistanceProvider.ModifyActivity(newActivity);
         }
 
         public void DeleteActivityById(int id)
@@ -65,6 +66,11 @@ namespace CoreLogic
         public List<Activity> GetActivities()
         {
             return this.persistanceProvider.GetActivities();
+        }
+
+        public int GetNextActivityNumber()
+        {
+            return this.persistanceProvider.GetNextActivityNumber();
         }
 
         //public List<Activity> GetActivities()

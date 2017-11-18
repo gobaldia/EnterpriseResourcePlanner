@@ -15,6 +15,7 @@ namespace CoreEntities.Entities
         public int StudentNumber { get; set; }
         public bool HavePickUpService { get; set; } = false;
         public virtual Location Location { get; set; }
+        public virtual List<Activity> Activities { get; set; }
         #endregion
 
         public Student()
@@ -23,6 +24,7 @@ namespace CoreEntities.Entities
             base.Name = string.Empty;
             base.LastName = string.Empty;
             this.Subjects = new List<Subject>();
+            this.Activities = new List<Activity>();
         }
         public Student(string name, string lastName, string documentNumber)
         {
@@ -31,6 +33,7 @@ namespace CoreEntities.Entities
             this.LastName = lastName;
             this.Document = documentNumber;
             this.Subjects = new List<Subject>();
+            this.Activities = new List<Activity>();
         }
 
         #region Methods

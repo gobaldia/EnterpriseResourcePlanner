@@ -16,6 +16,7 @@ namespace ProviderManager
         private ISubjectLogic subjectsLogic;
         //private List<Vehicle> vehicles;
         private IActivityLogic activitiesLogic;
+        private IStudentLogic studentsLogic;
 
         #region Singleton
         // Variable estática para la instancia, se necesita utilizar una función lambda ya que el constructor es privado.
@@ -49,6 +50,11 @@ namespace ProviderManager
         public IActivityLogic GetActivityOperations()
         {
             return this.activitiesLogic;
+        }
+
+        public IStudentLogic GetStudentOperations()
+        {
+            return this.studentsLogic;
         }
     }
 }
