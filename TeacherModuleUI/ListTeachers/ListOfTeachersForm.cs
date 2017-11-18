@@ -38,10 +38,9 @@ namespace TeacherModuleUI.ListTeachers
         {
             ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
             List<Teacher> systemTeachers = teacherOperations.GetTeachers();
+
             foreach(Teacher teacher in systemTeachers)
-            {
                 this.listBoxSystemTeachers.Items.Add(teacher);
-            }
         }
         private void PopulateSubjectsList(Teacher aTeacher)
         {
@@ -54,9 +53,7 @@ namespace TeacherModuleUI.ListTeachers
             if (subjectsToBeLoaded?.Count > 0)
             {
                 foreach (Subject subject in subjectsToBeLoaded)
-                {
                     this.listBoxTeacherSubjects.Items.Add(subject);
-                }
             }
         }
         private void SetDefaultWindowsSize()

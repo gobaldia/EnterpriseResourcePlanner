@@ -56,12 +56,14 @@ namespace TeacherModuleUI.ModifyTeacher
                     string name = textBoxTeacherName.Text;
                     string lastName = textBoxTeacherLastName.Text;
                     string document = comboBoxTeachersDocuments.SelectedItem.ToString();
-                    
-                    ModifyTeacherInput input = new ModifyTeacherInput();
-                    input.NewName = name;
-                    input.NewLastName = lastName;
-                    input.DocumentNumber = document;
-                    input.NewSubjects = GetSelectedSubjects();
+
+                    var input = new ModifyTeacherInput
+                    {
+                        NewName = name,
+                        NewLastName = lastName,
+                        DocumentNumber = document,
+                        NewSubjects = GetSelectedSubjects()
+                    };
 
                     ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations();
                     teacherOpertions.ModifyTeacher(input);
@@ -153,10 +155,9 @@ namespace TeacherModuleUI.ModifyTeacher
         {
             ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations();
             List<Teacher> systemTeachers = teacherOpertions.GetTeachers();
+
             foreach (Teacher teacher in systemTeachers)
-            {
                 this.comboBoxTeachersDocuments.Items.Add(teacher.GetDocumentNumber());
-            }
         }
         private List<Subject> GetSubjectsThatAreNotInTeacher(List<Subject> teacherSubjects)
         {

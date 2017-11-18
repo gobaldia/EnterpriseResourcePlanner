@@ -27,7 +27,6 @@ namespace CoreLogic
                 throw new CoreException("Subject already exists.");
 
             this.persistanceProvider.AddSubject(newSubject);
-            //this.systemSubjects.Add(newSubject);
         }
 
         public void ModifySubjectByCode(int code, Subject newSubjectValues)
@@ -47,32 +46,33 @@ namespace CoreLogic
         {
             if (!IsSubjectInSystemByCode(code))
                 throw new CoreException("This subject is not in system.");
-            else
-            {
-                var subjectToDelete = this.systemSubjects.Find(s => s.Code == code);
-                this.systemSubjects.Remove(subjectToDelete);
-            }
+            
+            var subjectToDelete = this.GetSubjectByCode(code);
+            this.persistanceProvider.DeleteSubject(subjectToDelete);
         }
 
         public List<Subject> GetSubjects()
         {
-            return this.persistanceProvider.GetSubjects();//systemSubjects;
+            return this.persistanceProvider.GetSubjects();
         }
         
         public Subject GetSubjectByCode(int subjectCode)
         {
-            return this.systemSubjects.Find(item => item.GetCode() == subjectCode);
+            return this.persistanceProvider.GetSubjectByCode(subjectCode);
         }
 
+        #region Private methods
         private bool IsSubjectInSystem(Subject subject)
         {
-            //return this.persistanceProvider.
-            return this.systemSubjects.Exists(item => item.Equals(subject));
+            var systemSubjects = this.persistanceProvider.GetSubjects();
+            return systemSubjects.Exists(item => item.Equals(subject));
         }
 
         private bool IsSubjectInSystemByCode(int code)
         {
-            return this.systemSubjects.Exists(item => item.Code == code);
+            var systemSubjects = this.persistanceProvider.GetSubjects();
+            return systemSubjects.Exists(item => item.Code.Equals(code));
         }
+        #endregion
     }
 }

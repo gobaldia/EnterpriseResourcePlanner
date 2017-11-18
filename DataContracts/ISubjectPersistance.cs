@@ -10,6 +10,9 @@ namespace DataContracts
     public interface ISubjectPersistance
     {
         void AddSubject(Subject newSubject);
+        void DeleteSubject(Subject subjectToDelete);
+        void ModifySubject(Subject subjectToModify);
         List<Subject> GetSubjects();
+        Subject GetSubjectByCode(int code);
     }
 }

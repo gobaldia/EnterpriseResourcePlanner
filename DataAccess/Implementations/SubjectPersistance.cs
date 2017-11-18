@@ -18,7 +18,22 @@ namespace DataAccess.Implementations
                 context.SaveChanges();
             }
         }
-        
+
+        public void DeleteSubject(Subject subjectToDelete)
+        {
+            using (Context context = new Context())
+            {
+                context.subjects.Attach(subjectToDelete);
+                context.subjects.Remove(subjectToDelete);
+                context.SaveChanges();
+            }
+        }
+
+        public void ModifySubject(Subject subjectToModify)
+        {
+
+        }
+
         public List<Subject> GetSubjects()
         {
             var subjects = new List<Subject>();
@@ -31,6 +46,20 @@ namespace DataAccess.Implementations
                     subjects.Add(subject);
             }
             return subjects;
+        }
+
+        public Subject GetSubjectByCode(int code)
+        {
+            Subject subjectFound;
+            using (Context context = new Context())
+            {
+                var queryResult = (from subject in context.subjects
+                                   where subject.GetCode().Equals(code)
+                                   select subject).FirstOrDefault();
+
+                subjectFound = queryResult;
+            }
+            return subjectFound;
         }
     }
 }
