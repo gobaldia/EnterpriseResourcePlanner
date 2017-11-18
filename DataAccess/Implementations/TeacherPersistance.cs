@@ -31,16 +31,24 @@ namespace DataAccess.Implementations
             }
         }
 
-        public List<Teacher> GetTeachers()
+        public List<Teacher> GetTeachers(bool bringSubjects = false)
         {
-            var teachers = new List<Teacher>();
+            List<Teacher> teachers;
             using (Context context = new Context())
             {
-                var query = from teacher in context.people.OfType<Teacher>()
-                            select teacher;
+                if (bringSubjects)
+                {
+                    teachers = (from teacher
+                                in context.people.OfType<Teacher>().Include("Subjects")
+                                select teacher).ToList();
+                }
+                else
+                {
+                    teachers = (from teacher
+                                in context.people.OfType<Teacher>()
+                                select teacher).ToList();
+                }
 
-                foreach (var teacher in query)
-                    teachers.Add(teacher);
             }
             return teachers;
         }

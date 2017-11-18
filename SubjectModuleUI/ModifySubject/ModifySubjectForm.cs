@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,18 +34,21 @@ namespace SubjectModuleUI.ModifySubject
 
         private void FillSubjectsComboBox()
         {
-            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
-            for(int index = 0; index < subjects.Count(); index++)
-            {
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
+
+            for (int index = 0; index < subjects?.Count(); index++)
                 this.comboBoxSelectSubjectToModify.Items.Add(subjects[index]);
-            }
+
             this.comboBoxSelectSubjectToModify.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void CheckIfIsThereAnySubjectInSystem()
         {
-            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
-            if (subjects.Count() == 0)
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
+
+            if (subjects.Count().Equals(0))
             {
                 this.labelError.Text = "Currently there is not any subject in the system.";
                 this.labelError.Visible = true;
@@ -52,8 +57,9 @@ namespace SubjectModuleUI.ModifySubject
 
         private void FillSubjectTeachersListBox(int subjectCode)
         {
-            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
-            var subject = subjects.Find(s => s.Code == subjectCode);
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            Subject subject = subjectOperations.GetSubjectByCode(subjectCode);
+
             var teachersThatTeachThisSubject = subject.Teachers;
             for (int index = 0; index < teachersThatTeachThisSubject.Count; index++)
             {
@@ -63,11 +69,13 @@ namespace SubjectModuleUI.ModifySubject
 
         private void FillSystemTeachersListBox(int subjectCode)
         {
-            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
-            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
-            var subject = subjects.Find(s => s.Code == subjectCode);
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Teacher> systemTeachers = teacherOperations.GetTeachers();
+
+            var subject = subjectOperations.GetSubjectByCode(subjectCode);
             var teachersOfThisSubject = subject.Teachers;
-            var teachersToAddToListBox = systemTeachers.Except(teachersOfThisSubject).ToList();
+            var teachersToAddToListBox = systemTeachers.Where(t => !teachersOfThisSubject.Any(st => st.Document == t.Document)).ToList();
             for (int index = 0; index < teachersToAddToListBox.Count(); index++)
             {
                 this.listBoxSystemTeachers.Items.Add(teachersToAddToListBox[index]);
@@ -101,8 +109,8 @@ namespace SubjectModuleUI.ModifySubject
             try
             {
                 this.labelError.Visible = false;
-                int code;
                 string name;
+                int code;
                 Subject newSubject = new Subject();
                 Subject originalSubject = (Subject)this.comboBoxSelectSubjectToModify.SelectedItem;
                 if (int.TryParse(this.textBoxCodeModifySubject.Text, out code))
@@ -119,9 +127,8 @@ namespace SubjectModuleUI.ModifySubject
                         List<Student> students = this.listBoxSubjectStudents.Items.Cast<Student>().ToList();
                         newSubject.SetStudents(students);
 
-                        ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(originalSubject.Code, newSubject);
-
-                        var materias = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+                        ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+                        subjectOperations.ModifySubjectByCode(originalSubject.Code, newSubject);
 
                         this.labelSuccess.Text = "Subject was succesfully modified.";
                         this.labelSuccess.Visible = true;

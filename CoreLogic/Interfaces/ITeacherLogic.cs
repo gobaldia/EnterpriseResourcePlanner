@@ -14,6 +14,6 @@ namespace CoreLogic.Interfaces
         Teacher GetTeacherByDocumentNumber(string documentNumber);
         void DeleteTeacher(Teacher teacherToDelete);
         void ModifyTeacher(ModifyTeacherInput input);
-        List<Teacher> GetTeachers();
+        List<Teacher> GetTeachers(bool bringSubjects = false);
     }
 }

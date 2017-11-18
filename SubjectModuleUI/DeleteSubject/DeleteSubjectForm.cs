@@ -51,9 +51,8 @@ namespace SubjectModuleUI.DeleteSubject
                     var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
 
                     ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
-                    List<Subject> subjects = subjectOperations.GetSubjects();
+                    subjectOperations.DeleteSubjectByCode(selectedSubject.Code);
 
-                    ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(selectedSubject.Code);
                     this.labelActionResult.Text = "Subject " + selectedSubject + " was succesfully deleted.";
                     this.labelActionResult.Visible = true;
                     this.ReloadComboBoxSelectSubjectToDelete();
@@ -118,11 +117,13 @@ namespace SubjectModuleUI.DeleteSubject
         {
             bool isSubjectAssignedToATeacher = false;
             var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetTeachers();
-            for(int index = 0; index < teachers.Count(); index++)
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            var teachers = teacherOperations.GetTeachers(true);
+
+            for(int index = 0; index < teachers?.Count(); index++)
             {
                 var teacherSubjects = teachers[index].GetSubjects();
-                if(teacherSubjects.Any(s => s.Code == subjectToDelete.Code))
+                if(teacherSubjects.Any(s => s.Code.Equals(subjectToDelete.Code)))
                 {
                     isSubjectAssignedToATeacher = true;
                 }

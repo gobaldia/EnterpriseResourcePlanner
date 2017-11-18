@@ -57,9 +57,9 @@ namespace CoreLogic
             this.persistanceProvider.ModifyTeacher(teacherToModify);
         }
 
-        public List<Teacher> GetTeachers()
+        public List<Teacher> GetTeachers(bool bringSubjects = false)
         {
-            return this.persistanceProvider.GetTeachers();
+            return this.persistanceProvider.GetTeachers(bringSubjects);
         }
 
         #region Utilities

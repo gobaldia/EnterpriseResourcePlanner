@@ -45,7 +45,10 @@ namespace TeacherModuleUI.ListTeachers
         private void PopulateSubjectsList(Teacher aTeacher)
         {
             this.listBoxTeacherSubjects.Items.Clear();
-            List<Subject> teacherSubjects = aTeacher.GetSubjects();
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            Teacher selectedTeacher = teacherOperations.GetTeacherByDocumentNumber(aTeacher.GetDocumentNumber());
+
+            List<Subject> teacherSubjects = selectedTeacher.GetSubjects();
             this.LoadSubjectsIntoListBox(teacherSubjects);
         }
         private void LoadSubjectsIntoListBox(List<Subject> subjectsToBeLoaded)

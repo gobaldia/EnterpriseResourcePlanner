@@ -33,13 +33,11 @@ namespace CoreLogic
         {
             if (newSubjectValues.Code != code && this.IsSubjectInSystemByCode(newSubjectValues.Code))
                 throw new CoreException("Subject already exists.");
-            else
-            {
-                var subjectIndexToModify = this.systemSubjects.FindIndex(s => s.Code == code);
-                this.systemSubjects[subjectIndexToModify].SetCode(newSubjectValues.Code);
-                this.systemSubjects[subjectIndexToModify].SetName(newSubjectValues.Name);
-                this.systemSubjects[subjectIndexToModify].SetTeachers(newSubjectValues.Teachers);
-            }
+
+            var subjectIndexToModify = persistanceProvider.GetSubjectByCode(code);
+            newSubjectValues.SubjectOID = subjectIndexToModify.SubjectOID;
+
+            this.persistanceProvider.ModifySubject(newSubjectValues);
         }
 
         public void DeleteSubjectByCode(int code)
