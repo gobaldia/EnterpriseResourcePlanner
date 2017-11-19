@@ -8,17 +8,16 @@ namespace CoreEntities.Entities
 {
     public class Activity
     {
+        public int ActivityOID { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public int Cost { get; set; }
-        public List<Student> Students { get; set; }
-
-        public static int activitiesCount = 0;
+        public virtual List<Student> Students { get; set; }
 
         public Activity()
         {
-            this.Id = activitiesCount++;
+            this.Id = 0;
             this.Name = string.Empty;
             this.Date = new DateTime(1970, 1, 1);
             this.Cost = 0;
@@ -27,7 +26,7 @@ namespace CoreEntities.Entities
 
         public Activity(string name, DateTime date, int cost)
         {
-            this.Id = activitiesCount++;
+            this.Id = 0;
             this.Name = name;
             this.Date = date;
             this.Cost = cost;

@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,8 +26,10 @@ namespace ActivityModuleUI.DeleteActivity
 
         private void FillActivitiesComboBox()
         {
-            var activities = ClassFactory.GetOrCreate<ActivityLogic>().GetActivities();
-            for(int index = 0; index < activities.Count(); index++)
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            List<Activity> activities = activityOperations.GetActivities();
+
+            for (int index = 0; index < activities.Count(); index++)
             {
                 this.comboBoxSelectActivityToDelete.Items.Add(activities[index]);
             }
@@ -43,7 +47,11 @@ namespace ActivityModuleUI.DeleteActivity
                 if (UserConfirmsThatWantToDeleteSubject())
                 {
                     var selectedActivityToDelete = (Activity)this.comboBoxSelectActivityToDelete.SelectedItem;
-                    ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(selectedActivityToDelete.Id);
+                    //ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(selectedActivityToDelete.Id);
+
+                    IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+                    activityOperations.DeleteActivityById(selectedActivityToDelete.Id);
+
                     this.labelSuccess.Text = Constants.ACTIVITY_SUCCESSFULLY_DELETED;
                     this.ReloadComboBoxSelectActivityToDelete();
                 }

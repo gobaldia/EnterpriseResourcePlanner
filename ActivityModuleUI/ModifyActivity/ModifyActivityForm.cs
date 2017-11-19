@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,8 +26,10 @@ namespace ActivityModuleUI.ModifyActivity
 
         private void FillActivitiesCombo()
         {
-            var activities = ClassFactory.GetOrCreate<ActivityLogic>().GetActivities();
-            for(int index = 0; index < activities.Count(); index++)
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            List<Activity> activities = activityOperations.GetActivities();
+
+            for (int index = 0; index < activities.Count(); index++)
             {
                 this.comboBoxSelectActivityToModify.Items.Add(activities[index]);
             }
@@ -52,12 +56,20 @@ namespace ActivityModuleUI.ModifyActivity
 
         private void FillAvailableStudentsListBox(int activityId)
         {
-            var allStudents = ClassFactory.GetOrCreate<StudentLogic>().GetStudents();
-            var activityStudents = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activityId).Students;
+            //var allStudents = ClassFactory.GetOrCreate<StudentLogic>().GetStudents();
+            //var activityStudents = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activityId).Students;
 
-            var availableStudents = allStudents.Except(activityStudents).ToList();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            List<Student> allStudents = studentOperations.GetStudents();
 
-            for(int index = 0; index < availableStudents.Count(); index++)
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            var activity = activityOperations.GetActivityById(activityId);
+
+            var activityStudents = activity.Students;
+            
+            var availableStudents = allStudents.Where(s => !activityStudents.Any(at => at.Document == s.Document)).ToList();
+
+            for (int index = 0; index < availableStudents.Count(); index++)
             {
                 this.listBoxAvailableStudents.Items.Add(availableStudents[index]);
             }
@@ -66,9 +78,12 @@ namespace ActivityModuleUI.ModifyActivity
 
         private void FillRegisteredStudentsListBox(int activityId)
         {
-            var activityStudents = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activityId).Students;
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            var activity = activityOperations.GetActivityById(activityId);
 
-            for(int index = 0; index < activityStudents.Count(); index++)
+            var activityStudents = activity.Students;
+
+            for (int index = 0; index < activityStudents.Count(); index++)
             {
                 this.listBoxAlreadyRegisteredStudents.Items.Add(activityStudents[index]);
             }
@@ -111,7 +126,8 @@ namespace ActivityModuleUI.ModifyActivity
                 newActivityValues.Date = this.dateTimePickerActivityDate.Value;
                 newActivityValues.Cost = (int) this.numericUpDownActivityCost.Value;
                 newActivityValues.Students = this.listBoxAlreadyRegisteredStudents.Items.Cast<Student>().ToList();
-                ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(originalActivity.Id, newActivityValues);
+                IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+                activityOperations.ModifyActivityById(originalActivity.Id, newActivityValues);
             }
             catch (CoreException ex)
             {

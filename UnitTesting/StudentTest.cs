@@ -383,7 +383,7 @@ namespace UnitTesting
 
                 Assert.Fail();
             }
-            catch(CoreException ex)
+            catch (CoreException ex)
             {
                 Assert.IsTrue(ex.Message.Equals("No modifications have been made."));
             }

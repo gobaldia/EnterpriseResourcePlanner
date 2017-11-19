@@ -49,11 +49,11 @@ namespace UnitTesting
                 Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
                 Assert.Fail();
             }
-            catch(CoreException ex)
+            catch (CoreException ex)
             {
                 Assert.IsTrue(ex.Message.Equals("Vehicle's capacity should be greater than 0."));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail(ex.Message);
             }
@@ -69,11 +69,11 @@ namespace UnitTesting
                 Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
                 Assert.Fail();
             }
-            catch(CoreException ex)
+            catch (CoreException ex)
             {
                 Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format ABC1234."));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail(ex.Message);
             }
@@ -137,7 +137,7 @@ namespace UnitTesting
             string registration = "SBA1234";
             int originalCapacity = 10;
             Vehicle vehicle = new Vehicle(registration, originalCapacity);
-            
+
             string expectedRegistration = "AAA1234";
             int expectedCapacity = 20;
             vehicle.SetCapacity(expectedCapacity);
@@ -182,7 +182,7 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
-            
+
         }
 
         [TestMethod]
@@ -336,12 +336,10 @@ namespace UnitTesting
             studentFour.Document = "1234567-4";
             studentFour.Name = "Ringo";
             studentFour.Location = new Location(20.00000, 20.000000);
-
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
-
             var studentsToAssignToVehicles = SystemData.GetInstance.GetStudentsToAssignToVehicles()
             while (!IsEmpty(studentsToAssignToVehicles))
             {

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="Implementations\ActivityPersistance.cs" />
     <Compile Include="Implementations\StudentPersistance.cs" />
     <Compile Include="Implementations\SubjectPersistance.cs" />
     <Compile Include="Implementations\TeacherPersistance.cs" />

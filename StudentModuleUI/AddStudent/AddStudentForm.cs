@@ -114,7 +114,7 @@ namespace StudentModuleUI.AddStudent
         }
         private bool ValidateFormData()
         {
-            return IsStudentMainDataNotEmpty() && 
+            return IsStudentMainDataNotEmpty() &&
                 HaveSubjectsToStudy() &&
                 IsPickupInformationValid();
         }
@@ -143,7 +143,7 @@ namespace StudentModuleUI.AddStudent
         {
             bool result = radioButtonNoPickUp.Checked;
 
-            if(radioButtonYesPickUp.Checked)
+            if (radioButtonYesPickUp.Checked)
             {
                 result = !string.IsNullOrEmpty(textBoxLatitud.Text) &&
                 !string.IsNullOrEmpty(textBoxLongitud.Text) && CoordenatesHaveValidFormat();
@@ -168,9 +168,9 @@ namespace StudentModuleUI.AddStudent
                 !string.IsNullOrEmpty(textBoxName.Text) &&
                 !string.IsNullOrEmpty(textBoxLastName.Text);
 
-            if (!result)            
+            if (!result)
                 labelError.Text = Constants.ERROR_STUDENT_INFO_REQUIRED;
-            
+
             return result;
         }
         private bool HaveSubjectsToStudy()
@@ -200,7 +200,7 @@ namespace StudentModuleUI.AddStudent
         private List<Subject> GetSelectedSubjects()
         {
             List<Subject> subjectsToBeAdded = new List<Subject>();
-            foreach(Subject subject in this.listBoxStudentSubjects.Items)
+            foreach (Subject subject in this.listBoxStudentSubjects.Items)
             {
                 subjectsToBeAdded.Add(subject);
             }

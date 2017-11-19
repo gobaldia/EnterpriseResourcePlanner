@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,7 +56,9 @@ namespace ActivityModuleUI.AddActivity
                 activityToAdd.Cost = (int) this.numericUpDownActivityCost.Value;
                 activityToAdd.Date = dateTimePickerActivityDate.Value;
 
-                ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activityToAdd);
+                IActivityLogic activitiesOperations = Provider.GetInstance.GetActivityOperations();
+                activityToAdd.Id = activitiesOperations.GetNextActivityNumber();
+                activitiesOperations.AddActivity(activityToAdd);
                 this.CleanForm();
                 this.labelSuccess.Text = Constants.SUCCESS_ACTIVITY_REGISTRATION;
             }
@@ -62,7 +66,7 @@ namespace ActivityModuleUI.AddActivity
             {
                 labelError.Text = ex.Message;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 this.labelError.Text = Constants.ERROR_UNEXPECTED;
             }

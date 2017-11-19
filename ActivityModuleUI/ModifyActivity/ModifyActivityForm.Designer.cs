@@ -71,6 +71,7 @@
             // 
             // comboBoxSelectActivityToModify
             // 
+            this.comboBoxSelectActivityToModify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectActivityToModify.FormattingEnabled = true;
             this.comboBoxSelectActivityToModify.Location = new System.Drawing.Point(60, 66);
             this.comboBoxSelectActivityToModify.Name = "comboBoxSelectActivityToModify";

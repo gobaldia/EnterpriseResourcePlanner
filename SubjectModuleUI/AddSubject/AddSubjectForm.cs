@@ -38,8 +38,9 @@ namespace SubjectModuleUI.AddSubject
             {
                 this.labelError.Visible = false;
                 string name;
+                int code;
                 Subject subject = new Subject();
-                if (int.TryParse(this.textBoxSubjectCode.Text, out int code))
+                if (int.TryParse(this.textBoxSubjectCode.Text, out code))
                 {
                     if (!string.IsNullOrWhiteSpace(this.textBoxSubjectName.Text))
                     {
