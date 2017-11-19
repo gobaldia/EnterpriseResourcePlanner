@@ -13,7 +13,6 @@ namespace CoreLogic
 {
     public class SubjectLogic : ISubjectLogic
     {
-        private List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
         private ISubjectPersistance persistanceProvider;
 
         public SubjectLogic(ISubjectPersistance provider)

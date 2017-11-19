@@ -70,7 +70,7 @@ namespace DataAccess.Implementations
             Subject subjectFound;
             using (Context context = new Context())
             {
-                var queryResult = (from subject in context.subjects.Include("Teachers")
+                var queryResult = (from subject in context.subjects.Include("Teachers").Include("Students")
                                    where subject.Code.Equals(code)
                                    select subject).FirstOrDefault();
 
