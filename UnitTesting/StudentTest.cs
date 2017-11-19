@@ -476,6 +476,29 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void CheckFeesAreFromDifferentMonthAndYear()
+        {
+            try
+            {
+                var newStudent = CreateRandomStudent();
+                newStudent.StudentNumber = 1;
+
+                double fee = 20.5;
+                newStudent.SetMonthlyFeeAmount(fee);
+
+                List<int> monthsOfTheYear = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+                for (int i = 1; i <= 12; i++)
+                {
+                    Assert.IsTrue(newStudent.Fees[i].Date.GetMonth() == monthsOfTheYear[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
