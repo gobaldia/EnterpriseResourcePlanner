@@ -44,6 +44,7 @@
     <Compile Include="Interfaces\ISubjectLogic.cs" />
     <Compile Include="Interfaces\ITeacherLogic.cs" />
     <Compile Include="ActivityLogic.cs" />
+    <Compile Include="Interfaces\IVehicleLogic.cs" />
     <Compile Include="StudentLogic.cs" />
     <Compile Include="SubjectLogic.cs" />
     <Compile Include="TeacherLogic.cs" />

@@ -30,6 +30,20 @@ namespace DataAccess.Implementations
             return foundStudent;
         }
 
+        public Student GetStudentByDocumentNumber(string documentNumber)
+        {
+            Student studentFound;
+            using (Context context = new Context())
+            {
+                var queryResult = (from student in (context.people.OfType<Student>()).Include("Subjects")
+                                   where student.Document.Equals(documentNumber)
+                                   select student).FirstOrDefault();
+
+                studentFound = queryResult;
+            }
+            return studentFound;
+        }
+
         public int GetNextStudentNumber()
         {
             int studentNumber = 0;

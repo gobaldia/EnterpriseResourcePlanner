@@ -14,7 +14,6 @@ namespace CoreLogic
 {
     public class StudentLogic : IStudentLogic
     {
-        private List<Student> systemStudents = SystemData.GetInstance.GetStudents();
         private IStudentPersistance persistanceProvider;
 
         public StudentLogic(IStudentPersistance provider)
@@ -32,7 +31,7 @@ namespace CoreLogic
 
         public Student GetStudentByDocumentNumber(string documentNumber)
         {
-            Student studentFound = this.systemStudents.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            Student studentFound = this.persistanceProvider.GetStudentByDocumentNumber(documentNumber);
             if (studentFound == null)
                 throw new CoreException("Student not found.");
 

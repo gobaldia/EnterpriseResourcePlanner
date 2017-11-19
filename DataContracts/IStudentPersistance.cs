@@ -13,6 +13,7 @@ namespace DataContracts
         bool IsStudentInSystem(string documentNumber);
         int GetNextStudentNumber();
         Student GetStudentByNumber(int studentNumber);
+        Student GetStudentByDocumentNumber(string documentNumber);
         void DeleteStudent(Student studentToDelete);
         List<Student> GetStudents(bool bringSubjects = false);
         void ModifyStudent(Student studentToModify);
