@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +39,8 @@ namespace VehicleModuleUI.AddVehicle
             try
             {
                 Vehicle vehicle = new Vehicle(registration, capacity);
-                ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle);
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                vehicleOperations.AddVehicle(vehicle);
                 this.labelSuccess.Visible = true;
                 this.labelSuccess.Text = "Vehicle " + vehicle + " was successfully added.";
             }

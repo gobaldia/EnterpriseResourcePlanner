@@ -1,8 +1,10 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +27,8 @@ namespace VehicleModuleUI.ModifyVehicle
 
         private void CheckIfIsThereAnyVehicleInSystem()
         {
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+            IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+            var vehicles = vehicleOperations.GetVehicles();
             if (vehicles.Count() == 0)
             {
                 this.labelError.Text = "Currently there is not any subject in the system.";
@@ -37,7 +40,8 @@ namespace VehicleModuleUI.ModifyVehicle
         {
             try
             {
-                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = vehicleOperations.GetVehicles();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
                     this.comboBoxSelectVehicleToModify.Items.Add(vehicles[index]);
@@ -66,10 +70,14 @@ namespace VehicleModuleUI.ModifyVehicle
             {
                 var selectedVehicleToModify = this.comboBoxSelectVehicleToModify.SelectedItem as Vehicle;
                 var newCapacity = (int)this.numericUpDownCapacity.Value;
-                ModifyVehicleInput newVehicleValues = new ModifyVehicleInput();
-                newVehicleValues.Registration = selectedVehicleToModify.Registration;
-                newVehicleValues.NewCapacity = newCapacity;
-                ClassFactory.GetOrCreate<VehicleLogic>().ModifyVehicle(newVehicleValues);
+                ModifyVehicleInput newVehicleValues = new ModifyVehicleInput
+                {
+                    Registration = selectedVehicleToModify.Registration,
+                    NewCapacity = newCapacity
+                };
+
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                vehicleOperations.ModifyVehicle(newVehicleValues);
                 this.labelSuccess.Visible = true;
                 this.labelSuccess.Text = "The vehicle was succesfully modified.";
             }

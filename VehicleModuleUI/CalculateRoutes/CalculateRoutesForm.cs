@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +35,8 @@ namespace VehicleModuleUI.CalculateRoutes
         {
             try
             {
-                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
                     this.listBoxVehiclesOrderedByCapacity.Items.Add(vehicles[index].Item1);
@@ -50,13 +53,15 @@ namespace VehicleModuleUI.CalculateRoutes
         {
             Vehicle vehicle = this.listBoxVehiclesOrderedByCapacity.SelectedItem as Vehicle;
             int position = this.listBoxVehiclesOrderedByCapacity.SelectedIndex;
-            this.FillListBoxStudentsInVehicle(vehicle, position);
+            if(position >= 0)
+                this.FillListBoxStudentsInVehicle(vehicle, position);
         }
 
         private void FillListBoxStudentsInVehicle(Vehicle vehicle, int position)
         {
             this.listBoxStudentsInVehicle.Items.Clear();
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+            IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+            var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
             var students = vehicles[position].Item2;
             for (int index = 0; index < students.Count; index++)
             {

@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,8 +35,9 @@ namespace VehicleModuleUI.DeleteVehicle
         {
             try
             {
-                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
-                for (int index = 0; index < vehicles.Count; index++)
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = vehicleOperations.GetVehicles();
+                for (int index = 0; index < vehicles?.Count; index++)
                 {
                     this.comboBoxSelectVehicleToDelete.Items.Add(vehicles[index]);
                 }
@@ -61,7 +64,8 @@ namespace VehicleModuleUI.DeleteVehicle
                 if (UserConfirmsThatWantToDeleteVehicle())
                 {
                     var selectedVehicle = this.comboBoxSelectVehicleToDelete.SelectedItem as Vehicle;
-                    ClassFactory.GetOrCreate<VehicleLogic>().DeleteVehicle(selectedVehicle);
+                    IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                    vehicleOperations.DeleteVehicle(selectedVehicle);
                     this.ShowMessageVehicleWasDeleted(selectedVehicle);
                     this.ReloadComboBoxSelectVehicleToDelete();
                     this.HideAllResultLabels();

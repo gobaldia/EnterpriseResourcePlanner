@@ -15,5 +15,6 @@ namespace DataContracts
         void ModifyVehicle(Vehicle vehicleToModify);
         Vehicle GetVehicleByRegistration(string registration);
         bool IsVehicleInSystem(Vehicle aVehicle);
+        List<Student> GetStudentsWithPickUpService();
     }
 }

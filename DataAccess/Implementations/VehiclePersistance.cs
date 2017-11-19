@@ -73,5 +73,18 @@ namespace DataAccess.Implementations
                 return context.vehicles.Any(v => v.Registration.Equals(aVehicle.Registration));
             }
         }
+
+        public List<Student> GetStudentsWithPickUpService()
+        {
+            List<Student> studentsWithPickUpService;
+
+            using (Context context = new Context())
+            {
+                studentsWithPickUpService = (from student in context.people.OfType<Student>()
+                                             where student.HavePickUpService select student).ToList();
+            }
+
+            return studentsWithPickUpService;
+        }
     }
 }

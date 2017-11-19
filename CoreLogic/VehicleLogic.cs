@@ -71,9 +71,8 @@ namespace CoreLogic
 
         public List<Tuple<Student, double>> StudentsOrderedByDistanceToSchool()
         {
-            var systemStudents = SystemData.GetInstance.GetStudents();
+            List<Student> studentsThatWillUseVehicles = this.persistanceProvider.GetStudentsWithPickUpService();
             List<Tuple<Student, double>> studentsThatWillUseVehiclesWithDistancesToSchool = new List<Tuple<Student, double>>();
-            List<Student> studentsThatWillUseVehicles = systemStudents.FindAll(s => s.HavePickUpService);
             for (int index = 0; index < studentsThatWillUseVehicles.Count; index++)
             {
                 var student = studentsThatWillUseVehicles[index];
@@ -133,7 +132,7 @@ namespace CoreLogic
         #region Private Methods
         private List<Vehicle> GetVehiclesOrderedByCapacity()
         {
-            var systemVehicles = SystemData.GetInstance.GetVehicles();
+            var systemVehicles = this.persistanceProvider.GetVehicles();
             var sortedVehicles = systemVehicles.OrderByDescending(v => v.Capacity).ToList();
             return sortedVehicles;
         }
