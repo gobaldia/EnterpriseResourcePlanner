@@ -445,7 +445,7 @@ namespace UnitTesting
                 newStudent.StudentNumber = 1;
 
                 double fee = 20.5;
-                newStudent.MonthlyFeeAmount(fee);
+                newStudent.SetMonthlyFeeAmount(fee);
 
                 Assert.AreEqual(newStudent.Fees.Count(), 12);
             }

@@ -13,6 +13,7 @@ namespace CoreEntities.Entities
         public int StudentNumber { get; set; }
         public bool HavePickUpService { get; set; } = false;
         public virtual Location Location { get; set; }
+        public virtual List<Fee> Fees { get; set; }
         #endregion
 
         public Student()
@@ -21,6 +22,7 @@ namespace CoreEntities.Entities
             base.LastName = string.Empty;
             this.Location = new Location();
             this.Subjects = new List<Subject>();
+            this.Fees = new List<Fee>();
         }
         public Student(string name, string lastName, string documentNumber)
         {
@@ -29,6 +31,7 @@ namespace CoreEntities.Entities
             this.Document = documentNumber;
             this.Location = new Location();
             this.Subjects = new List<Subject>();
+            this.Fees = new List<Fee>();
         }
 
         #region Methods
@@ -78,6 +81,13 @@ namespace CoreEntities.Entities
             foreach (Subject subject in newSubjects)
             {
                 this.Subjects.Add(subject);
+            }
+        }
+        public void SetMonthlyFeeAmount(double fee)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                Fees.Add(new Fee());
             }
         }
         #endregion
