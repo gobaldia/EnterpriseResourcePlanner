@@ -487,7 +487,7 @@ namespace UnitTesting
                 double fee = 20.5;
                 newStudent.SetMonthlyFeeAmount(fee);
 
-                List<int> monthsOfTheYear = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+                List<int> monthsOfTheYear = GetMonthsOfTheYear();
                 for (int i = 0; i < 12; i++)
                     Assert.IsTrue(newStudent.Fees[i].Date.Month == monthsOfTheYear[i]);
 
@@ -507,6 +507,10 @@ namespace UnitTesting
         private Student FindStudentOnSystem(string documentNumber)
         {
             return SystemDummyData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+        }
+        private List<int> GetMonthsOfTheYear()
+        {
+            return new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         }
         #endregion
     }
