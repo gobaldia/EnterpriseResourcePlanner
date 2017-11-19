@@ -14,6 +14,7 @@ namespace DataContracts
         int GetNextStudentNumber();
         Student GetStudentByNumber(int studentNumber);
         void DeleteStudent(Student studentToDelete);
-        List<Student> GetStudents();
+        List<Student> GetStudents(bool bringSubjects = false);
+        void ModifyStudent(Student studentToModify);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +36,8 @@ namespace StudentModuleUI.ListStudents
         #region Utility Methods
         private void LoadStudentsListBox()
         {
-            List<Student> systemStudents = ClassFactory.GetOrCreate<StudentLogic>().GetStudents();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            List<Student> systemStudents = studentOperations.GetStudents(true);
             foreach (Student student in systemStudents)
             {
                 this.listBoxSystemStudents.Items.Add(student);

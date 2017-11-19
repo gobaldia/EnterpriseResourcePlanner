@@ -14,7 +14,7 @@ namespace CoreLogic.Interfaces
         Student GetStudentByDocumentNumber(string documentNumber);
         void ModifyStudent(ModifyStudentInput input);
         Student GetStudentByNumber(int studentNumber);
-        List<Student> GetStudents();
+        List<Student> GetStudents(bool bringSubjects = false);
         void DeleteStudent(int studentNumber);
         int GetNextStudentNumber();
     }

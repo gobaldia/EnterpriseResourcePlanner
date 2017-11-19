@@ -235,7 +235,7 @@
             this.textBoxName.Location = new System.Drawing.Point(477, 367);
             this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(598, 38);
+            this.textBoxName.Size = new System.Drawing.Size(430, 38);
             this.textBoxName.TabIndex = 3;
             // 
             // textBoxLastName
@@ -244,7 +244,7 @@
             this.textBoxLastName.Location = new System.Drawing.Point(477, 436);
             this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(598, 38);
+            this.textBoxLastName.Size = new System.Drawing.Size(430, 38);
             this.textBoxLastName.TabIndex = 4;
             // 
             // textBoxDocument
@@ -253,7 +253,7 @@
             this.textBoxDocument.Location = new System.Drawing.Point(477, 295);
             this.textBoxDocument.MaxLength = 9;
             this.textBoxDocument.Name = "textBoxDocument";
-            this.textBoxDocument.Size = new System.Drawing.Size(598, 38);
+            this.textBoxDocument.Size = new System.Drawing.Size(430, 38);
             this.textBoxDocument.TabIndex = 2;
             // 
             // buttonCancel
@@ -283,7 +283,7 @@
             this.comboBoxStudentsNumbers.FormattingEnabled = true;
             this.comboBoxStudentsNumbers.Location = new System.Drawing.Point(477, 223);
             this.comboBoxStudentsNumbers.Name = "comboBoxStudentsNumbers";
-            this.comboBoxStudentsNumbers.Size = new System.Drawing.Size(598, 39);
+            this.comboBoxStudentsNumbers.Size = new System.Drawing.Size(430, 39);
             this.comboBoxStudentsNumbers.TabIndex = 118;
             this.comboBoxStudentsNumbers.SelectedIndexChanged += new System.EventHandler(this.OnStudenNumber_ComboIndexChange);
             // 

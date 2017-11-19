@@ -60,7 +60,7 @@
             // labelTeacherName
             // 
             this.labelTeacherName.AutoSize = true;
-            this.labelTeacherName.Location = new System.Drawing.Point(301, 262);
+            this.labelTeacherName.Location = new System.Drawing.Point(301, 342);
             this.labelTeacherName.Name = "labelTeacherName";
             this.labelTeacherName.Size = new System.Drawing.Size(105, 32);
             this.labelTeacherName.TabIndex = 19;
@@ -69,7 +69,7 @@
             // labelTeacherLastName
             // 
             this.labelTeacherLastName.AutoSize = true;
-            this.labelTeacherLastName.Location = new System.Drawing.Point(240, 352);
+            this.labelTeacherLastName.Location = new System.Drawing.Point(240, 432);
             this.labelTeacherLastName.Name = "labelTeacherLastName";
             this.labelTeacherLastName.Size = new System.Drawing.Size(166, 32);
             this.labelTeacherLastName.TabIndex = 20;
@@ -78,7 +78,7 @@
             // labelDocument
             // 
             this.labelDocument.AutoSize = true;
-            this.labelDocument.Location = new System.Drawing.Point(247, 446);
+            this.labelDocument.Location = new System.Drawing.Point(247, 257);
             this.labelDocument.Name = "labelDocument";
             this.labelDocument.Size = new System.Drawing.Size(159, 32);
             this.labelDocument.TabIndex = 21;
@@ -86,7 +86,7 @@
             // 
             // textBoxTeacherName
             // 
-            this.textBoxTeacherName.Location = new System.Drawing.Point(454, 259);
+            this.textBoxTeacherName.Location = new System.Drawing.Point(454, 339);
             this.textBoxTeacherName.MaxLength = 50;
             this.textBoxTeacherName.Name = "textBoxTeacherName";
             this.textBoxTeacherName.Size = new System.Drawing.Size(380, 38);
@@ -95,7 +95,7 @@
             // 
             // textBoxTeacherLastName
             // 
-            this.textBoxTeacherLastName.Location = new System.Drawing.Point(454, 349);
+            this.textBoxTeacherLastName.Location = new System.Drawing.Point(454, 429);
             this.textBoxTeacherLastName.MaxLength = 50;
             this.textBoxTeacherLastName.Name = "textBoxTeacherLastName";
             this.textBoxTeacherLastName.Size = new System.Drawing.Size(380, 38);
@@ -104,7 +104,7 @@
             // 
             // textBoxTeacherDocument
             // 
-            this.textBoxTeacherDocument.Location = new System.Drawing.Point(454, 443);
+            this.textBoxTeacherDocument.Location = new System.Drawing.Point(454, 254);
             this.textBoxTeacherDocument.MaxLength = 9;
             this.textBoxTeacherDocument.Name = "textBoxTeacherDocument";
             this.textBoxTeacherDocument.Size = new System.Drawing.Size(380, 38);

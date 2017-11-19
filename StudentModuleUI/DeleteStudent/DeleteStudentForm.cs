@@ -110,7 +110,7 @@ namespace StudentModuleUI.DeleteStudent
             var systemStudents = studentOperations.GetStudents();
             foreach (Student student in systemStudents)
             {
-                this.comboBoxStudentsNumbers.Items.Add(student);
+                this.comboBoxStudentsNumbers.Items.Add(student.StudentNumber);
             }
         }
 
@@ -124,10 +124,10 @@ namespace StudentModuleUI.DeleteStudent
                 if(this.comboBoxStudentsNumbers.SelectedIndex >= 0)
                 {
                     this.buttonDeleteStudent.Enabled = true;
-                    var selectedStudent = this.comboBoxStudentsNumbers.SelectedItem as Student;
+                    var studentNumber = Convert.ToInt32(this.comboBoxStudentsNumbers.SelectedItem);
 
                     IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
-                    this.StudentToDelete = studentOperations.GetStudentByNumber(selectedStudent.StudentNumber);
+                    this.StudentToDelete = studentOperations.GetStudentByNumber(studentNumber);
                     FillFormWithStudentData();
                 }
             }

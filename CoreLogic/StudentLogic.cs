@@ -52,6 +52,8 @@ namespace CoreLogic
 
             if (!nameWasModified && !lastNameWasModified && !subjectsWereModified && !locationHaveChange)
                 throw new CoreException("No modifications have been made.");
+
+            this.persistanceProvider.ModifyStudent(studentToModify);
         }
 
         public Student GetStudentByNumber(int studentNumber)
@@ -63,9 +65,9 @@ namespace CoreLogic
             return studentFound;
         }
 
-        public List<Student> GetStudents()
+        public List<Student> GetStudents(bool bringSubjects = false)
         {
-            return this.persistanceProvider.GetStudents();
+            return this.persistanceProvider.GetStudents(bringSubjects);
         }
 
         public void DeleteStudent(int studentNumber)
@@ -133,7 +135,7 @@ namespace CoreLogic
 
             if (LocationsAreDifferent(studentToModify, newLocation))
             {
-                studentToModify.SetLocation(newLocation);
+                studentToModify.SetLocation(newLocation ?? new Location());
                 locationWasModified = true;
             }
 
@@ -141,7 +143,8 @@ namespace CoreLogic
         }
         private bool LocationsAreDifferent(Student studentToModify, Location newLocation)
         {
-            return !newLocation.Equals(studentToModify.GetLocation());
+            if (newLocation == null) return true;
+            else return !newLocation.Equals(studentToModify.GetLocation());
         }
         #endregion
     }

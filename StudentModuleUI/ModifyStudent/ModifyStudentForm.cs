@@ -1,9 +1,11 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using DataAccess;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,7 +51,8 @@ namespace StudentModuleUI.ModifyStudent
                         input.NewLocation = new Location(latitud, longitud);
                     }
 
-                    ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(input);
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    studentOperations.ModifyStudent(input);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_STUDENT_MODIFICATION;
                 }
@@ -99,7 +102,8 @@ namespace StudentModuleUI.ModifyStudent
                     CleanListBoxes();
 
                     int studentNumber = int.Parse(this.comboBoxStudentsNumber.SelectedItem.ToString());
-                    Student studentToModify = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(studentNumber);
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    Student studentToModify = studentOperations.GetStudentByNumber(studentNumber);
                     FillFormWithStudentData(studentToModify);
                 }
                 else
@@ -148,7 +152,8 @@ namespace StudentModuleUI.ModifyStudent
         }
         private void LoadDocumentNumberComboBox()
         {
-            List<Student> systemStudents = SystemData.GetInstance.GetStudents();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            List<Student> systemStudents = studentOperations.GetStudents();
             foreach (Student student in systemStudents)
             {
                 this.comboBoxStudentsNumber.Items.Add(student.GetStudentNumber());
@@ -221,7 +226,8 @@ namespace StudentModuleUI.ModifyStudent
         }
         private List<Subject> GetSubjectsThatAreNotInTeacher(List<Subject> studentSubjects)
         {
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            ISubjectLogic subjectLogic = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> systemSubjects = subjectLogic.GetSubjects();
             return systemSubjects.Where(systemSubject => !studentSubjects.Any(studentSubject => systemSubject.Equals(studentSubject))).ToList();
         }
         private bool ValidateFormData()

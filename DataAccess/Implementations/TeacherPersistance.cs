@@ -37,17 +37,9 @@ namespace DataAccess.Implementations
             using (Context context = new Context())
             {
                 if (bringSubjects)
-                {
-                    teachers = (from teacher
-                                in context.people.OfType<Teacher>().Include("Subjects")
-                                select teacher).ToList();
-                }
+                    teachers = this.GetTeachersWithEagerLoading(context);
                 else
-                {
-                    teachers = (from teacher
-                                in context.people.OfType<Teacher>()
-                                select teacher).ToList();
-                }
+                    teachers = this.GetTeachersWithLazyLoading(context);
 
             }
             return teachers;
@@ -83,6 +75,7 @@ namespace DataAccess.Implementations
             }
         }
 
+        #region Private Methods
         private List<Subject> GetDeletedSubjects(Teacher teacherOnDB, Teacher teacherToModify)
         {
             return (from dbSubject in teacherOnDB.Subjects
@@ -112,5 +105,17 @@ namespace DataAccess.Implementations
                 teacherOnDB.Subjects.Add(c);
             }
         }
+        
+        private List<Teacher> GetTeachersWithEagerLoading(Context context)
+        {
+            return (from teacher in context.people.OfType<Teacher>().Include("Subjects")
+                    select teacher).ToList();
+        }
+        private List<Teacher> GetTeachersWithLazyLoading(Context context)
+        {
+            return (from teacher in context.people.OfType<Teacher>()
+                    select teacher).ToList();
+        }
+        #endregion
     }
 }
