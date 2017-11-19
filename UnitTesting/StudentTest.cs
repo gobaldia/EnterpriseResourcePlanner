@@ -498,6 +498,37 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void PayStudentFees()
+        {
+            try
+            {
+                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+                var newStudent = CreateRandomStudent();
+                newStudent.StudentNumber = 1;
+                double fee = 20.5;
+                newStudent.SetMonthlyFeeAmount(fee);
+
+                studentOperations.AddStudent(newStudent);
+
+                var systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);
+                List<Fee> feesToBePaid = systemStudent.Fees.Take(3).ToList();
+                studentOperations.PayFees(feesToBePaid);
+
+                systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);
+                List<Fee> paidFees = systemStudent.Fees.Take(3).ToList();
+                foreach(Fee f in paidFees)
+                {
+                    Assert.IsTrue(f.IsPaid);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
