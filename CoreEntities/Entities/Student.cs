@@ -87,7 +87,8 @@ namespace CoreEntities.Entities
         {
             for (int i = 1; i <= 12; i++)
             {
-                Fees.Add(new Fee(feeAmount));
+                var feeDate = new DateTime(DateTime.Now.Year, i, 1);
+                Fees.Add(new Fee(feeAmount, feeDate));
             }
         }
         #endregion

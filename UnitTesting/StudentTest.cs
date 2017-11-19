@@ -488,10 +488,9 @@ namespace UnitTesting
                 newStudent.SetMonthlyFeeAmount(fee);
 
                 List<int> monthsOfTheYear = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-                for (int i = 1; i <= 12; i++)
-                {
-                    Assert.IsTrue(newStudent.Fees[i].Date.GetMonth() == monthsOfTheYear[i]);
-                }
+                for (int i = 0; i < 12; i++)
+                    Assert.IsTrue(newStudent.Fees[i].Date.Month == monthsOfTheYear[i]);
+
             }
             catch (Exception ex)
             {
