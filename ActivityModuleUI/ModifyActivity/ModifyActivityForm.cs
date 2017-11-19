@@ -128,6 +128,8 @@ namespace ActivityModuleUI.ModifyActivity
                 newActivityValues.Students = this.listBoxAlreadyRegisteredStudents.Items.Cast<Student>().ToList();
                 IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
                 activityOperations.ModifyActivityById(originalActivity.Id, newActivityValues);
+                this.labelSuccess.Visible = true;
+                this.labelSuccess.Text = Constants.ACTIVITY_SUCCESSFULLY_MODIFIED;
             }
             catch (CoreException ex)
             {

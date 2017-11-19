@@ -28,7 +28,7 @@ namespace FrameworkCommon
         public const string SUCCESS_ACTIVITY_REGISTRATION = "Activity was succesfully registered.";
         public const string ACTIVITY_NAME_EMPTY = "Activity's name should be not empty.";
         public const string ACTIVITY_COST_NEGATIVE = "Activity's cost should be greater or equal than 0.";
-
         public const string ACTIVITY_SUCCESSFULLY_DELETED = "The activity was successfully deleted.";
+        public const string ACTIVITY_SUCCESSFULLY_MODIFIED = "The activity was successfully modified.";
     }
 }
