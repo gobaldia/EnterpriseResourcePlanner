@@ -23,11 +23,13 @@ namespace UnitTesting
         {
             var expectedRegistration = "SBA0122";
             var expectedCapacity = 10;
+            var expectedFuelConsumption = 10;
 
-            Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
+            Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity, expectedFuelConsumption);
 
             Assert.AreEqual(expectedRegistration, vehicle.Registration);
             Assert.AreEqual(expectedCapacity, vehicle.Capacity);
+            Assert.AreEqual(expectedFuelConsumption, vehicle.FuelConsumptionKmsPerLtr);
         }
 
         [TestMethod]
@@ -37,6 +39,7 @@ namespace UnitTesting
 
             Assert.AreEqual("AAA0000", vehicle.Registration);
             Assert.AreEqual(1, vehicle.Capacity);
+            Assert.AreEqual(1, vehicle.FuelConsumptionKmsPerLtr);
         }
 
         [TestMethod]
@@ -52,6 +55,27 @@ namespace UnitTesting
             catch (CoreException ex)
             {
                 Assert.IsTrue(ex.Message.Equals("Vehicle's capacity should be greater than 0."));
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void CreateVehicleFuelConsumptionLessOrEqualThanZero()
+        {
+            var expectedRegistration = "SBA0122";
+            var expectedCapacity = 0;
+            var expectedFuelConsumption = 0;
+            try
+            {
+                Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity, expectedFuelConsumption);
+                Assert.Fail();
+            }
+            catch (CoreException ex)
+            {
+                Assert.IsTrue(ex.Message.Equals("Vehicle's fuel consumption should be greater than 0."));
             }
             catch (Exception ex)
             {
