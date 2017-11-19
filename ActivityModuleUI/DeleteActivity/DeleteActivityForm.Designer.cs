@@ -58,6 +58,7 @@
             // 
             // comboBoxSelectActivityToDelete
             // 
+            this.comboBoxSelectActivityToDelete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectActivityToDelete.FormattingEnabled = true;
             this.comboBoxSelectActivityToDelete.Location = new System.Drawing.Point(63, 79);
             this.comboBoxSelectActivityToDelete.Name = "comboBoxSelectActivityToDelete";

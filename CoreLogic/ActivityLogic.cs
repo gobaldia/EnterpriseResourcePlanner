@@ -37,12 +37,8 @@ namespace CoreLogic
 
         public void ModifyActivityById(int id, Activity newActivity)
         {
-            var systemActivities = this.persistanceProvider.GetActivities();
-            var activityIndexToModify = systemActivities.FindIndex(a => a.Id == id);
-            //this.systemActivities[activityIndexToModify].Name = newActivity.Name;
-            //this.systemActivities[activityIndexToModify].Date = newActivity.Date;
-            //this.systemActivities[activityIndexToModify].Cost = newActivity.Cost;
-            //this.systemActivities[activityIndexToModify].Students = newActivity.Students;
+            var activityToModify = this.persistanceProvider.GetActivityById(id);
+            newActivity.ActivityOID = activityToModify.ActivityOID;
             this.persistanceProvider.ModifyActivity(newActivity);
         }
 
@@ -57,10 +53,11 @@ namespace CoreLogic
 
         public Activity GetActivityById(int id)
         {
-            var activity = this.systemActivities.Where(a => a.Id == id);
+            var activity = this.persistanceProvider.GetActivityById(id);
+            //var activity = this.systemActivities.Where(a => a.Id == id);
             if (activity == null)
                 throw new CoreException("There's no activity with this id.");
-            return activity.First();
+            return activity;
         }
 
         public List<Activity> GetActivities()

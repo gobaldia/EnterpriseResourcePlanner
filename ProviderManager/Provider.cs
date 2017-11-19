@@ -28,6 +28,7 @@ namespace ProviderManager
             this.subjectsLogic = new SubjectLogic(new SubjectPersistance());
             //this.vehicles = new List<Vehicle>();
             this.activitiesLogic = new ActivityLogic(new ActivityPersistance());
+            this.studentsLogic = new StudentLogic(new StudentPersistance());
         }
         public static Provider GetInstance
         {

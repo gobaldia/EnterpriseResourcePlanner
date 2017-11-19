@@ -46,7 +46,16 @@ namespace DataAccess.Implementations
 
         public Activity GetActivityById(int id)
         {
-            throw new NotImplementedException();
+            Activity activityFound;
+            using (Context context = new Context())
+            {
+                var queryResult = (from activity in (context.activities).Include("Students")
+                                   where activity.Id.Equals(id)
+                                   select activity).FirstOrDefault();
+
+                activityFound = queryResult;
+            }
+            return activityFound;
         }
 
         public void ModifyActivity(Activity activityToModify)
@@ -55,9 +64,9 @@ namespace DataAccess.Implementations
             {
                 var activityOnDB = context.activities.OfType<Activity>().Include("Students").Where(a => a.ActivityOID.Equals(activityToModify.ActivityOID)).FirstOrDefault();
 
-                //var deletedStudents = this.GetDeletedStudents(activityOnDB, activityToModify);
-                //var addedStudents = this.GetAddedStudents(activityOnDB, activityToModify);
-                //this.UpdateSubjects(context, activityOnDB, addedStudents, deletedStudents);
+                var deletedStudents = this.GetDeletedStudents(activityOnDB, activityToModify);
+                var addedStudents = this.GetAddedStudents(activityOnDB, activityToModify);
+                this.UpdateSubjects(context, activityOnDB, addedStudents, deletedStudents);
 
                 activityOnDB.Name = activityToModify.Name;
                 activityOnDB.Cost= activityToModify.Cost;
@@ -69,11 +78,16 @@ namespace DataAccess.Implementations
 
         private List<Student> GetDeletedStudents(Activity activityOnDB, Activity activityToModify)
         {
-            return (from dbStudent in activityOnDB.Students
-                    where !(from memoryStudent in activityToModify.Students
-                            select memoryStudent.PersonOID)
-                            .Contains(dbStudent.PersonOID)
-                    select dbStudent).ToList();
+            //return (from dbStudent in activityOnDB.Students
+            //        where !(from memoryStudent in activityToModify.Students
+            //                select memoryStudent.PersonOID)
+            //                .Contains(dbStudent.PersonOID)
+            //        select dbStudent).ToList();
+
+            return activityOnDB.Students
+                .Where(activityStudent => !activityToModify
+                .Students.Any(actToModifyStudent => activityStudent.PersonOID
+                .Equals(actToModifyStudent.PersonOID))).ToList();
         }
 
         private List<Student> GetAddedStudents(Activity activityOnDB, Activity activityToModify)

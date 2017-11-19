@@ -59,13 +59,17 @@ namespace ActivityModuleUI.ModifyActivity
             //var allStudents = ClassFactory.GetOrCreate<StudentLogic>().GetStudents();
             //var activityStudents = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activityId).Students;
 
-            //IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
-            //List<Student> students = studentOperations.GetStudents();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            List<Student> allStudents = studentOperations.GetStudents();
 
-            List<Student> students = new List<Student>();
-            var availableStudents = new List<Student>(); //allStudents.Except(activityStudents).ToList();
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            var activity = activityOperations.GetActivityById(activityId);
 
-            for(int index = 0; index < availableStudents.Count(); index++)
+            var activityStudents = activity.Students;
+            
+            var availableStudents = allStudents.Where(s => !activityStudents.Any(at => at.Document == s.Document)).ToList();
+
+            for (int index = 0; index < availableStudents.Count(); index++)
             {
                 this.listBoxAvailableStudents.Items.Add(availableStudents[index]);
             }
@@ -74,10 +78,12 @@ namespace ActivityModuleUI.ModifyActivity
 
         private void FillRegisteredStudentsListBox(int activityId)
         {
-            //var activityStudents = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activityId).Students;
-            var activityStudents = new List<Student>();
+            IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
+            var activity = activityOperations.GetActivityById(activityId);
 
-            for(int index = 0; index < activityStudents.Count(); index++)
+            var activityStudents = activity.Students;
+
+            for (int index = 0; index < activityStudents.Count(); index++)
             {
                 this.listBoxAlreadyRegisteredStudents.Items.Add(activityStudents[index]);
             }
@@ -120,7 +126,6 @@ namespace ActivityModuleUI.ModifyActivity
                 newActivityValues.Date = this.dateTimePickerActivityDate.Value;
                 newActivityValues.Cost = (int) this.numericUpDownActivityCost.Value;
                 newActivityValues.Students = this.listBoxAlreadyRegisteredStudents.Items.Cast<Student>().ToList();
-                //ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(originalActivity.Id, newActivityValues);
                 IActivityLogic activityOperations = Provider.GetInstance.GetActivityOperations();
                 activityOperations.ModifyActivityById(originalActivity.Id, newActivityValues);
             }
