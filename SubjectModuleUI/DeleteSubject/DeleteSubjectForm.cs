@@ -135,7 +135,8 @@ namespace SubjectModuleUI.DeleteSubject
         {
             bool isSubjectAssignedToAStudent = false;
             var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-            var students = ClassFactory.GetOrCreate<StudentLogic>().GetStudents();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            var students = studentOperations.GetStudents(true);
             for (int index = 0; index < students.Count(); index++)
             {
                 var studentSubjects = students[index].GetSubjects();

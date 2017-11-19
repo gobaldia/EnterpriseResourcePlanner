@@ -40,6 +40,10 @@ namespace DataAccess.Implementations
                 var addedTeachers = this.GetAddedTeachers(subjectOnDB, subjectToModify);
                 this.UpdateTeachers(context, subjectOnDB, addedTeachers, deletedTeachers);
 
+                var deletedStudents = this.GetDeletedStudents(subjectOnDB, subjectToModify);
+                var addedStudents = this.GetAddedStudents(subjectOnDB, subjectToModify);
+                this.UpdateStudents(context, subjectOnDB, addedStudents, deletedStudents);
+
                 subjectOnDB.Name = subjectToModify.Name;
                 subjectOnDB.Code = subjectToModify.Code;
 
@@ -103,6 +107,35 @@ namespace DataAccess.Implementations
                     context.people.Attach(t);
 
                 subjectOnDB.Teachers.Add(t);
+            }
+        }
+
+        private List<Student> GetDeletedStudents(Subject subjectOnDB, Subject subjectToModify)
+        {
+            return (from dbStudent in subjectOnDB.Students
+                    where !(from memoryStudent in subjectToModify.Students
+                            select memoryStudent.PersonOID)
+                            .Contains(dbStudent.PersonOID)
+                    select dbStudent).ToList();
+        }
+
+        private List<Student> GetAddedStudents(Subject subjectOnDB, Subject subjectToModify)
+        {
+            return (from memoryStudent in subjectToModify.Students
+                    where !(from dbStudent in subjectOnDB.Students
+                            select dbStudent.PersonOID)
+                            .Contains(memoryStudent.PersonOID)
+                    select memoryStudent).ToList();
+        }
+        private void UpdateStudents(Context context, Subject subjectOnDB, List<Student >addedStudents, List<Student> deletedStudents)
+        {
+            deletedStudents.ForEach(c => subjectOnDB.Students.Remove(c));
+            foreach (Student t in addedStudents)
+            {
+                if (context.Entry(t).State == EntityState.Detached)
+                    context.people.Attach(t);
+
+                subjectOnDB.Students.Add(t);
             }
         }
         #endregion
