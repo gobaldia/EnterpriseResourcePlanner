@@ -49,11 +49,11 @@ namespace UnitTesting
                 Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
                 Assert.Fail();
             }
-            catch(CoreException ex)
+            catch (CoreException ex)
             {
                 Assert.IsTrue(ex.Message.Equals("Vehicle's capacity should be greater than 0."));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail(ex.Message);
             }
@@ -69,11 +69,11 @@ namespace UnitTesting
                 Vehicle vehicle = new Vehicle(expectedRegistration, expectedCapacity);
                 Assert.Fail();
             }
-            catch(CoreException ex)
+            catch (CoreException ex)
             {
                 Assert.IsTrue(ex.Message.Equals("Vehicle's registration should have the format ABC1234."));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail(ex.Message);
             }
@@ -137,7 +137,7 @@ namespace UnitTesting
             string registration = "SBA1234";
             int originalCapacity = 10;
             Vehicle vehicle = new Vehicle(registration, originalCapacity);
-            
+
             string expectedRegistration = "AAA1234";
             int expectedCapacity = 20;
             vehicle.SetCapacity(expectedCapacity);
@@ -182,7 +182,7 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
-            
+
         }
 
         [TestMethod]
@@ -208,28 +208,32 @@ namespace UnitTesting
         {
             SystemData.GetInstance.Reset();
 
-            AddStudentInput studentOne = new AddStudentInput();
-            studentOne.DocumentNumber = "1234567-1";
+            Student studentOne = new Student();
+            studentOne.Document = "1234567-1";
             studentOne.Name = "John";
             studentOne.Location = new Location(2.00000, 2.000000);
-            studentOne.havePickUpService = true;
+            studentOne.HavePickUpService = true;
+            studentOne.StudentNumber = 1;
 
-            AddStudentInput studentTwo = new AddStudentInput();
-            studentTwo.DocumentNumber = "1234567-2";
+            Student studentTwo = new Student();
+            studentTwo.Document = "1234567-2";
             studentTwo.Name = "George";
             studentTwo.Location = new Location(1.00000, 1.000000);
-            studentTwo.havePickUpService = true;
+            studentTwo.HavePickUpService = true;
+            studentTwo.StudentNumber = 2;
 
-            AddStudentInput studentThree = new AddStudentInput();
-            studentThree.DocumentNumber = "1234567-3";
+            Student studentThree = new Student();
+            studentThree.Document = "1234567-3";
             studentThree.Name = "Paul";
             studentThree.Location = new Location(3.00000, 3.000000);
+            studentThree.StudentNumber = 3;
 
-            AddStudentInput studentFour = new AddStudentInput();
-            studentFour.DocumentNumber = "1234567-4";
+            Student studentFour = new Student();
+            studentFour.Document = "1234567-4";
             studentFour.Name = "Ringo";
             studentFour.Location = new Location(20.00000, 20.000000);
-            studentFour.havePickUpService = true;
+            studentFour.HavePickUpService = true;
+            studentFour.StudentNumber = 4;
 
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
@@ -237,10 +241,10 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
 
 
-            Student studentToCompare1 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentOne.DocumentNumber);
-            Student studentToCompare2 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentTwo.DocumentNumber);
-            Student studentToCompare3 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentThree.DocumentNumber);
-            Student studentToCompare4 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentFour.DocumentNumber);
+            Student studentToCompare1 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentOne.Document);
+            Student studentToCompare2 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentTwo.Document);
+            Student studentToCompare3 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentThree.Document);
+            Student studentToCompare4 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentFour.Document);
 
             var studentsOrderedByDistanceToSchool = ClassFactory.GetOrCreate<VehicleLogic>().StudentsOrderedByDistanceToSchool();
 
@@ -261,36 +265,36 @@ namespace UnitTesting
             ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle1);
             ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle2);
 
-            var input1 = new AddStudentInput
+            var input1 = new Student
             {
-                DocumentNumber = "1234567-5",
+                Document = "1234567-5",
                 Name = Utility.GetRandomName(),
                 LastName = Utility.GetRandomLastName(),
                 Location = new Location(10.00, 15.1)
             };
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input1);
 
-            var input2 = new AddStudentInput
+            var input2 = new Student
             {
-                DocumentNumber = "1235567-8",
+                Document = "1235567-8",
                 Name = Utility.GetRandomName(),
                 LastName = Utility.GetRandomLastName(),
                 Location = new Location(50.00, 22.1)
             };
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input2);
 
-            var input3 = new AddStudentInput
+            var input3 = new Student
             {
-                DocumentNumber = "1266667-8",
+                Document = "1266667-8",
                 Name = Utility.GetRandomName(),
                 LastName = Utility.GetRandomLastName(),
                 Location = new Location(-80.00, 5.1)
             };
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input3);
 
-            var input4 = new AddStudentInput
+            var input4 = new Student
             {
-                DocumentNumber = "1234567-4",
+                Document = "1234567-4",
                 Name = Utility.GetRandomName(),
                 LastName = Utility.GetRandomLastName(),
                 Location = new Location(-10.00, -15.1)
@@ -312,32 +316,26 @@ namespace UnitTesting
         /*public void GetTheStudentThatIsClosestToTheShool()
         {
             SystemData.GetInstance.Reset();
-
-            AddStudentInput studentOne = new AddStudentInput();
-            studentOne.DocumentNumber = "1234567-1";
+            Student studentOne = new Student();
+            studentOne.Document = "1234567-1";
             studentOne.Name = "John";
             studentOne.Location = new Location(1.00000, 1.000000);
-
-            AddStudentInput studentTwo = new AddStudentInput();
-            studentTwo.DocumentNumber = "1234567-2";
+            Student studentTwo = new Student();
+            studentTwo.Document = "1234567-2";
             studentTwo.Name = "George";
             studentTwo.Location = new Location(2.00000, 2.000000);
-
-            AddStudentInput studentThree = new AddStudentInput();
-            studentThree.DocumentNumber = "1234567-3";
+            Student studentThree = new Student();
+            studentThree.Document = "1234567-3";
             studentThree.Name = "Paul";
             studentThree.Location = new Location(3.00000, 3.000000);
-
-            AddStudentInput studentFour = new AddStudentInput();
-            studentFour.DocumentNumber = "1234567-4";
+            Student studentFour = new Student();
+            studentFour.Document = "1234567-4";
             studentFour.Name = "Ringo";
             studentFour.Location = new Location(20.00000, 20.000000);
-
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
             ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
-
             var studentsToAssignToVehicles = SystemData.GetInstance.GetStudentsToAssignToVehicles()
             while (!IsEmpty(studentsToAssignToVehicles))
             {

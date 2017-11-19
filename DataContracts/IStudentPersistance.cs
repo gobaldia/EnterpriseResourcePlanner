@@ -10,8 +10,12 @@ namespace DataContracts
     public interface IStudentPersistance
     {
         void AddStudent(Student newStudent);
-        bool IsStudentInSystem(int studentNumber);
+        bool IsStudentInSystem(string documentNumber);
         int GetNextStudentNumber();
-        List<Student> GetStudents();
+        Student GetStudentByNumber(int studentNumber);
+        Student GetStudentByDocumentNumber(string documentNumber);
+        void DeleteStudent(Student studentToDelete);
+        List<Student> GetStudents(bool bringSubjects = false);
+        void ModifyStudent(Student studentToModify);
     }
 }

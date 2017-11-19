@@ -35,7 +35,7 @@ namespace DataAccess.Implementations
             var activities = new List<Activity>();
             using (Context context = new Context())
             {
-                var query = from activity in context.activities
+                var query = from activity in context.activities.Include("Subjects")
                             select activity;
 
                 foreach (var activity in query)

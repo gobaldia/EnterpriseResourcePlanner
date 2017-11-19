@@ -1,8 +1,10 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,23 +51,11 @@ namespace StudentModuleUI.AddStudent
                 if (ValidateFormData())
                 {
                     labelError.Text = string.Empty;
+                    var newStudent = this.CreateStudent();
 
-                    var input = new AddStudentInput
-                    {
-                        Name = textBoxName.Text,
-                        LastName = textBoxLastName.Text,
-                        DocumentNumber = textBoxDocument.Text,
-                        Subjects = this.GetSelectedSubjects()
-                    };
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    studentOperations.AddStudent(newStudent);
 
-                    if (radioButtonYesPickUp.Checked)
-                    {
-                        double latitud = double.Parse(textBoxLatitud.Text);
-                        double longitud = double.Parse(textBoxLongitud.Text);
-                        input.Location = new Location(latitud, longitud);
-                    }
-
-                    ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_STUDENT_REGISTRATION;
                 }
@@ -99,6 +89,11 @@ namespace StudentModuleUI.AddStudent
                 textBoxLongitud.Enabled = false;
             }
         }
+        private void textBoxes_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.labelSuccess.Text = string.Empty;
+            this.labelError.Text = string.Empty;
+        }
 
         #region Utility methods
         private void SetDefaultWindowsSize()
@@ -106,27 +101,49 @@ namespace StudentModuleUI.AddStudent
             this.AutoScaleMode = AutoScaleMode.None;
             this.Size = new System.Drawing.Size(750, 550);
         }
-
         private void LoadFormInitialData()
         {
-            this.textBoxStudentNumber.Text = Student.GetNextStudentNumber().ToString();
-            List<Subject> subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            this.textBoxStudentNumber.Text = studentOperations.GetNextStudentNumber().ToString();
+
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
+
             foreach (Subject subject in subjects)
-            {
                 this.listBoxSystemSubjects.Items.Add(subject);
-            }
         }
         private bool ValidateFormData()
         {
-            return IsStudentMainDataNotEmpty() && 
+            return IsStudentMainDataNotEmpty() &&
                 HaveSubjectsToStudy() &&
                 IsPickupInformationValid();
+        }
+        private Student CreateStudent()
+        {
+            var newStudent = new Student
+            {
+                Name = textBoxName.Text,
+                LastName = textBoxLastName.Text,
+                Document = textBoxDocument.Text,
+                StudentNumber = Convert.ToInt32(textBoxStudentNumber.Text),
+                Subjects = this.GetSelectedSubjects()
+            };
+
+            if (radioButtonYesPickUp.Checked)
+            {
+                double latitud = double.Parse(textBoxLatitud.Text);
+                double longitud = double.Parse(textBoxLongitud.Text);
+                newStudent.Location = new Location(latitud, longitud);
+                newStudent.SetPickUpService(true);
+            }
+
+            return newStudent;
         }
         private bool IsPickupInformationValid()
         {
             bool result = radioButtonNoPickUp.Checked;
 
-            if(radioButtonYesPickUp.Checked)
+            if (radioButtonYesPickUp.Checked)
             {
                 result = !string.IsNullOrEmpty(textBoxLatitud.Text) &&
                 !string.IsNullOrEmpty(textBoxLongitud.Text) && CoordenatesHaveValidFormat();
@@ -151,9 +168,9 @@ namespace StudentModuleUI.AddStudent
                 !string.IsNullOrEmpty(textBoxName.Text) &&
                 !string.IsNullOrEmpty(textBoxLastName.Text);
 
-            if (!result)            
+            if (!result)
                 labelError.Text = Constants.ERROR_STUDENT_INFO_REQUIRED;
-            
+
             return result;
         }
         private bool HaveSubjectsToStudy()
@@ -183,18 +200,12 @@ namespace StudentModuleUI.AddStudent
         private List<Subject> GetSelectedSubjects()
         {
             List<Subject> subjectsToBeAdded = new List<Subject>();
-            foreach(Subject subject in this.listBoxStudentSubjects.Items)
+            foreach (Subject subject in this.listBoxStudentSubjects.Items)
             {
                 subjectsToBeAdded.Add(subject);
             }
             return subjectsToBeAdded;
         }
         #endregion
-
-        private void textBoxes_KeyDown(object sender, KeyEventArgs e)
-        {
-            this.labelSuccess.Text = string.Empty;
-            this.labelError.Text = string.Empty;
-        }
     }
 }

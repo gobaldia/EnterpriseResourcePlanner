@@ -12,9 +12,14 @@ namespace CoreEntities.Entities
     {
         private Regex latitudRegex = new Regex("^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$");
         private Regex longitudRegex = new Regex("^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$");
-        public int LocationOID { get; set; }
-        public double latitud { get; set; }
-        public double longitud { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
+
+        public Location()
+        {
+            this.Latitud = 0.00;
+            this.Longitud = 0.00;
+        }
 
         public Location(double latitudToBeSet, double longitudToBeSet)
         {
@@ -24,39 +29,39 @@ namespace CoreEntities.Entities
             if (!longitudRegex.IsMatch(longitudToBeSet.ToString().Replace(",", ".")))
                 throw new CoreException("Invalid longitud format.");
 
-            this.latitud = latitudToBeSet;
-            this.longitud = longitudToBeSet;
+            this.Latitud = latitudToBeSet;
+            this.Longitud = longitudToBeSet;
         }
 
         public double GetLatitud()
         {
-            return this.latitud;
+            return this.Latitud;
         }
         public double GetLongitud()
         {
-            return this.longitud;
+            return this.Longitud;
         }
         public void SetLatitud(double latitudToBeSet)
         {
             if (!latitudRegex.IsMatch(latitudToBeSet.ToString()))
                 throw new CoreException("Invalid latitud format.");
 
-            this.latitud = latitudToBeSet;
+            this.Latitud = latitudToBeSet;
         }
         public void SetLongitud(double longitudToBeSet)
         {
             if (!longitudRegex.IsMatch(longitudToBeSet.ToString()))
                 throw new CoreException("Invalid longitud format.");
 
-            this.longitud = longitudToBeSet;
+            this.Longitud = longitudToBeSet;
         }
 
         public override bool Equals(object obj)
         {
             if (obj is Location)
             {
-                return this.latitud.Equals(((Location)obj).GetLatitud()) &&
-                    this.longitud.Equals(((Location)obj).GetLongitud());
+                return this.Latitud.Equals(((Location)obj).GetLatitud()) &&
+                    this.Longitud.Equals(((Location)obj).GetLongitud());
             }
             else
                 return false;
@@ -64,7 +69,7 @@ namespace CoreEntities.Entities
 
         public override string ToString()
         {
-            return string.Format("({0}, {1})", this.latitud, this.longitud);
+            return string.Format("({0}, {1})", this.Latitud, this.Longitud);
         }
     }
 }

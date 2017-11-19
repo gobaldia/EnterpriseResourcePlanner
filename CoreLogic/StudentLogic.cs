@@ -14,8 +14,6 @@ namespace CoreLogic
 {
     public class StudentLogic : IStudentLogic
     {
-        private List<Student> systemStudents = SystemData.GetInstance.GetStudents();
-
         private IStudentPersistance persistanceProvider;
 
         public StudentLogic(IStudentPersistance provider)
@@ -25,29 +23,15 @@ namespace CoreLogic
 
         public void AddStudent(Student newStudent)
         {
-
-        }
-
-        public void AddStudent(AddStudentInput input)
-        {
-            Student newStudent = new Student(input.Name, input.LastName, input.DocumentNumber);
             if (this.IsStudentInSystem(newStudent))
                 throw new CoreException("Student already exists.");
 
-            AddStudentSubjects(newStudent, input.Subjects);
-
-            if (input.Location != null)
-            {
-                newStudent.SetPickUpService(true);
-                newStudent.SetLocation(input.Location);
-            }
-
-            this.systemStudents.Add(newStudent);
+            this.persistanceProvider.AddStudent(newStudent);
         }
 
         public Student GetStudentByDocumentNumber(string documentNumber)
         {
-            Student studentFound = this.systemStudents.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            Student studentFound = this.persistanceProvider.GetStudentByDocumentNumber(documentNumber);
             if (studentFound == null)
                 throw new CoreException("Student not found.");
 
@@ -67,32 +51,39 @@ namespace CoreLogic
 
             if (!nameWasModified && !lastNameWasModified && !subjectsWereModified && !locationHaveChange)
                 throw new CoreException("No modifications have been made.");
+
+            this.persistanceProvider.ModifyStudent(studentToModify);
         }
 
         public Student GetStudentByNumber(int studentNumber)
         {
-            Student studentFound = this.systemStudents.Find(item => item.GetStudentNumber().Equals(studentNumber));
+            Student studentFound = this.persistanceProvider.GetStudentByNumber(studentNumber);
             if (studentFound == null)
                 throw new CoreException("Student not found.");
 
             return studentFound;
         }
 
-        public List<Student> GetStudents()
+        public List<Student> GetStudents(bool bringSubjects = false)
         {
-            return this.persistanceProvider.GetStudents();
+            return this.persistanceProvider.GetStudents(bringSubjects);
         }
 
         public void DeleteStudent(int studentNumber)
         {
             Student studentToRemove = GetStudentByNumber(studentNumber);
-            this.systemStudents.Remove(studentToRemove);
+            this.persistanceProvider.DeleteStudent(studentToRemove);
+        }
+
+        public int GetNextStudentNumber()
+        {
+            return this.persistanceProvider.GetNextStudentNumber();
         }
 
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
-            return this.systemStudents.Exists(item => item.Equals(aStudent));
+            return this.persistanceProvider.IsStudentInSystem(aStudent.Document);
         }
         private void AddStudentSubjects(Student aStudent, List<Subject> subjectsToAdd)
         {
@@ -143,7 +134,7 @@ namespace CoreLogic
 
             if (LocationsAreDifferent(studentToModify, newLocation))
             {
-                studentToModify.SetLocation(newLocation);
+                studentToModify.SetLocation(newLocation ?? new Location());
                 locationWasModified = true;
             }
 
@@ -151,23 +142,8 @@ namespace CoreLogic
         }
         private bool LocationsAreDifferent(Student studentToModify, Location newLocation)
         {
-            bool result = false;
-
-            if (newLocation == null && studentToModify.GetLocation() != null)
-                result = true;
-            else if (newLocation != null && studentToModify.GetLocation() == null)
-                result = true;
-            else if (BothLocationNotNull(studentToModify, newLocation) &&
-                !newLocation.Equals(studentToModify.GetLocation()))
-            {
-                result = true;
-            }
-
-            return result;
-        }
-        private bool BothLocationNotNull(Student studentToModify, Location newLocation)
-        {
-            return newLocation != null && studentToModify.GetLocation() != null;
+            if (newLocation == null) return true;
+            else return !newLocation.Equals(studentToModify.GetLocation());
         }
         #endregion
     }
