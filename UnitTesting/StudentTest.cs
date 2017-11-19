@@ -1,7 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
 using DataAccess;
+using DummyPersistance;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,12 +19,18 @@ namespace UnitTesting
     [TestClass]
     public class StudentTest
     {
+        [TestInitialize]
+        public void TestInitialization()
+        {
+            SystemDummyData.GetInstance.Reset();
+        }
+
         [TestMethod]
         public void CreateStudent()
         {
             string expectedName = string.Empty;
             string expectedLastName = string.Empty;
-            int expectedStudentNumber = 1;
+            int expectedStudentNumber = 0;
 
             Student student = new Student();
             List<Subject> expectedSubjects = new List<Subject>();
@@ -41,7 +49,7 @@ namespace UnitTesting
             string expectedName = "Luis";
             string expectedLastName = "Suarez";
             string expectedDocumentNumber = "1234567-8";
-            int expectedStudentNumber = 1;
+            int expectedStudentNumber = 0;
             List<Subject> expectedSubjects = new List<Subject>();
 
             Student student = new Student(expectedName, expectedLastName, expectedDocumentNumber);
@@ -120,13 +128,13 @@ namespace UnitTesting
         [TestMethod]
         public void AddStudentToSystem()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
             Student newStudent = this.CreateRandomStudent();
             newStudent.Subjects = new List<Subject>();
             newStudent.HavePickUpService = false;
             newStudent.StudentNumber = 1;
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+            studentOperations.AddStudent(newStudent);
 
             Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
@@ -136,7 +144,7 @@ namespace UnitTesting
         {
             try
             {
-                SystemData.GetInstance.Reset();
+                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
                 Student firstStudent = this.CreateRandomStudent();
                 firstStudent.StudentNumber = 1;
@@ -144,8 +152,8 @@ namespace UnitTesting
                 Student secondStudent = new Student(firstStudent.GetName(), firstStudent.GetLastName(), firstStudent.GetDocumentNumber());
                 secondStudent.StudentNumber = 2;              
 
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(secondStudent);
+                studentOperations.AddStudent(firstStudent);
+                studentOperations.AddStudent(secondStudent);
 
                 Assert.Fail();
             }
@@ -162,14 +170,15 @@ namespace UnitTesting
         [TestMethod]
         public void AddSubjectToStudent()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
 
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            List <Subject> systemSubjects = SystemDummyData.GetInstance.GetSubjects();
             Subject aSubject = new Subject(123456, "Math");
             systemSubjects.Add(aSubject);
 
             Student newStudent = this.CreateRandomStudent();
-            Subject subjectToBeAdded = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(123456);
+            Subject subjectToBeAdded = subjectOperations.GetSubjectByCode(123456);
 
             newStudent.AddSubjectToStudent(subjectToBeAdded);
 
@@ -179,27 +188,27 @@ namespace UnitTesting
         [TestMethod]
         public void FindStudentByDocumentNumber()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
             firstStudent.StudentNumber = 1;
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+            studentOperations.AddStudent(firstStudent);
 
-            Student StudentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
+            Student StudentFound = studentOperations.GetStudentByDocumentNumber(documentNumber);
             Assert.IsNotNull(StudentFound);
         }
 
         [TestMethod]
         public void SetStudentForPickUpVehicle()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+            studentOperations.AddStudent(firstStudent);
 
-            Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
+            Student studentFound = studentOperations.GetStudentByDocumentNumber(documentNumber);
             studentFound.SetPickUpService(true);
 
             Assert.IsTrue(studentFound.HavePickUpService);
@@ -208,13 +217,13 @@ namespace UnitTesting
         [TestMethod]
         public void AddStudentCoordinates()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
             string documentNumber = "1234567-8";
             Student firstStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(firstStudent);
+            studentOperations.AddStudent(firstStudent);
 
-            Student studentFound = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(documentNumber);
+            Student studentFound = studentOperations.GetStudentByDocumentNumber(documentNumber);
             double latitud = 1.2;
             double longitud = 2.2;
             Location location = new Location(latitud, longitud);
@@ -226,53 +235,55 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyStudentName()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
             int nextStudentNumber = 1;
 
             var newStudent = new Student();
             newStudent.Name = "Rodigo";
             newStudent.LastName = Utility.GetRandomLastName();
             newStudent.Document = "1234567-8";
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+            newStudent.StudentNumber = nextStudentNumber;
+            studentOperations.AddStudent(newStudent);
 
             ModifyStudentInput modifyInput = new ModifyStudentInput();
             modifyInput.NewName = "Santiago";
             modifyInput.StudentNumber = nextStudentNumber;
-            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+            studentOperations.ModifyStudent(modifyInput);
 
-            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
+            Student modifiedStudent = studentOperations.GetStudentByNumber(modifyInput.StudentNumber);
             Assert.AreEqual(modifiedStudent.GetName(), modifyInput.NewName);
         }
 
         [TestMethod]
         public void ModifyStudentLastName()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
             int nextStudentNumber = 1;
 
             var newStudent = new Student();
             newStudent.Name = Utility.GetRandomName();
             newStudent.LastName = "de Leon";
             newStudent.Document = "1234567-8";
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+            newStudent.StudentNumber = nextStudentNumber;
+            studentOperations.AddStudent(newStudent);
 
             ModifyStudentInput modifyInput = new ModifyStudentInput();
             modifyInput.NewLastName = "Diaz";
             modifyInput.StudentNumber = nextStudentNumber;
-            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+            studentOperations.ModifyStudent(modifyInput);
 
-            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
+            Student modifiedStudent = studentOperations.GetStudentByNumber(modifyInput.StudentNumber);
             Assert.AreEqual(modifiedStudent.GetLastName(), modifyInput.NewLastName);
         }
 
         [TestMethod]
         public void ModifyStudentSubjects()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
             int nextStudentNumber = 1;
 
             #region Add subjects to the system
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            List<Subject> systemSubjects = SystemDummyData.GetInstance.GetSubjects();
             Subject subject1 = new Subject(1234, "Math");
             Subject subject2 = new Subject(3216, "Physics");
             Subject subject3 = new Subject(7418, "Chemistry");
@@ -294,7 +305,8 @@ namespace UnitTesting
             newStudent.Name = Utility.GetRandomName();
             newStudent.LastName = Utility.GetRandomLastName();
             newStudent.Subjects = studentSubjects;
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+            newStudent.StudentNumber = nextStudentNumber;
+            studentOperations.AddStudent(newStudent);
             #endregion
 
             List<Subject> newSubjects = new List<Subject>();
@@ -305,9 +317,9 @@ namespace UnitTesting
             var modifyInput = new ModifyStudentInput();
             modifyInput.NewSubjects = newSubjects;
             modifyInput.StudentNumber = nextStudentNumber;
-            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+            studentOperations.ModifyStudent(modifyInput);
 
-            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
+            Student modifiedStudent = studentOperations.GetStudentByNumber(modifyInput.StudentNumber);
 
             Assert.IsTrue(Utility.CompareLists(modifiedStudent.GetSubjects(), modifyInput.NewSubjects));
         }
@@ -315,7 +327,7 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyStudentLocation()
         {
-            SystemData.GetInstance.Reset();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
             int nextStudentNumber = 1;
 
             #region Add students with subjects to the system
@@ -324,18 +336,19 @@ namespace UnitTesting
                 Document = "1234567-8",
                 Name = Utility.GetRandomName(),
                 LastName = Utility.GetRandomLastName(),
-                Location = new Location(10.00, 15.1)
+                Location = new Location(10.00, 15.1),
+                StudentNumber = nextStudentNumber
             };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+            studentOperations.AddStudent(newStudent);
             #endregion
 
             Location newStudentLocation = new Location(2.1, 5.6);
             var modifyInput = new ModifyStudentInput();
             modifyInput.NewLocation = newStudentLocation;
             modifyInput.StudentNumber = nextStudentNumber;
-            ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+            studentOperations.ModifyStudent(modifyInput);
 
-            Student modifiedStudent = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(modifyInput.StudentNumber);
+            Student modifiedStudent = studentOperations.GetStudentByNumber(modifyInput.StudentNumber);
 
             Assert.IsTrue(modifiedStudent.GetLocation().Equals(newStudentLocation));
         }
@@ -345,11 +358,11 @@ namespace UnitTesting
         {
             try
             {
-                SystemData.GetInstance.Reset();
+                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
                 int nextStudentNumber = 1;
 
                 #region Add subjects to the system
-                List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+                List<Subject> systemSubjects = SystemDummyData.GetInstance.GetSubjects();
                 Subject subject1 = new Subject(1234, "Math");
                 Subject subject2 = new Subject(3216, "Physics");
                 systemSubjects.Add(subject1);
@@ -365,9 +378,10 @@ namespace UnitTesting
                     Document = "1234567-8",
                     Name = Utility.GetRandomName(),
                     LastName = Utility.GetRandomLastName(),
-                    Subjects = studentSubjects
+                    Subjects = studentSubjects,
+                    StudentNumber = nextStudentNumber
                 };
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
+                studentOperations.AddStudent(newStudent);
                 #endregion
 
                 List<Subject> newSubjects = new List<Subject>();
@@ -379,7 +393,8 @@ namespace UnitTesting
                 modifyInput.NewName = newStudent.Name;
                 modifyInput.NewLastName = newStudent.LastName;
                 modifyInput.StudentNumber = nextStudentNumber;
-                ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(modifyInput);
+                modifyInput.NewLocation = new Location();
+                studentOperations.ModifyStudent(modifyInput);
 
                 Assert.Fail();
             }
@@ -398,7 +413,7 @@ namespace UnitTesting
         {
             try
             {
-                SystemData.GetInstance.Reset();
+                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
                 string documentNumber = "1234567-8";
 
                 int nextStudentNumber = 1;
@@ -406,11 +421,12 @@ namespace UnitTesting
                 {
                     Name = Utility.GetRandomName(),
                     LastName = Utility.GetRandomLastName(),
-                    Document = documentNumber
+                    Document = documentNumber,
+                    StudentNumber = nextStudentNumber
                 };
 
-                ClassFactory.GetOrCreate<StudentLogic>().AddStudent(newStudent);
-                ClassFactory.GetOrCreate<StudentLogic>().DeleteStudent(nextStudentNumber);
+                studentOperations.AddStudent(newStudent);
+                studentOperations.DeleteStudent(nextStudentNumber);
 
                 Assert.IsNull(this.FindStudentOnSystem(documentNumber));
             }
@@ -428,7 +444,7 @@ namespace UnitTesting
         }
         private Student FindStudentOnSystem(string documentNumber)
         {
-            return SystemData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+            return SystemDummyData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
         }
         #endregion
     }

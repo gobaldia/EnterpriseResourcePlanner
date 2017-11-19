@@ -11,7 +11,7 @@ namespace DataContracts
     {
         void AddTeacher(Teacher newTeacher);
         void ModifyTeacher(Teacher teacherToModify);
-        void DeleteTeacher(Teacher teacherToModify);
+        void DeleteTeacher(Teacher teacherToDelete);
         List<Teacher> GetTeachers(bool bringSubjects = false);
         Teacher GetTeacherByDocumentNumber(string documentNumber);
     }

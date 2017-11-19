@@ -8,12 +8,20 @@ using FrameworkCommon.MethodParameters;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using UnitTesting.Utilities;
+using CoreLogic.Interfaces;
+using DummyPersistance;
 
 namespace UnitTesting
 {
     [TestClass]
     public class TeacherTest
     {
+        [TestInitialize]
+        public void TestInitialization()
+        {
+            SystemDummyData.GetInstance.Reset();
+        }
+
         [TestMethod]
         public void CreateTeacher()
         {
@@ -113,10 +121,10 @@ namespace UnitTesting
         [TestMethod]
         public void AddTeacherToSystem()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
             Teacher newTeacher = this.CreateRandomTeacher();
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+            teacherOperations.AddTeacher(newTeacher);
 
             Assert.IsNotNull(this.FindTeacherOnSystem(newTeacher.GetDocumentNumber()));
         }
@@ -126,13 +134,13 @@ namespace UnitTesting
         {
             try
             {
-                SystemData.GetInstance.Reset();
+                ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
                 Teacher firstTeacher = this.CreateRandomTeacher();
                 Teacher secondTeacher = new Teacher(firstTeacher.GetName(), firstTeacher.GetLastName(), firstTeacher.GetDocumentNumber());
                 
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firstTeacher);
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(secondTeacher);
+                teacherOperations.AddTeacher(firstTeacher);
+                teacherOperations.AddTeacher(secondTeacher);
 
                 Assert.Fail();
             }
@@ -149,14 +157,15 @@ namespace UnitTesting
         [TestMethod]
         public void AddSubjectToTeacher()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
 
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            List<Subject> systemSubjects = SystemDummyData.GetInstance.GetSubjects();
             Subject aSubject = new Subject(123456, "Math");
             systemSubjects.Add(aSubject);
 
             Teacher newTeacher = this.CreateRandomTeacher();
-            Subject subjectToBeAdded = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(123456);
+            Subject subjectToBeAdded = subjectOperations.GetSubjectByCode(123456);
 
             newTeacher.AddSubjectToTeach(subjectToBeAdded);
 
@@ -166,13 +175,14 @@ namespace UnitTesting
         [TestMethod]
         public void FindTeacherByDocumentNumber()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
             string documentNumber = "1234567-8";
             Teacher firstTeacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(firstTeacher);
+
+            teacherOperations.AddTeacher(firstTeacher);
             
-            Teacher teacherFound = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
+            Teacher teacherFound = teacherOperations.GetTeacherByDocumentNumber(documentNumber);
             Assert.IsNotNull(teacherFound);
         }
 
@@ -181,13 +191,13 @@ namespace UnitTesting
         {
             try
             {
-                SystemData.GetInstance.Reset();
+                ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
                 string documentNumber = "1234567-8";
                 Teacher teacher = new Teacher(Utility.GetRandomName(), Utility.GetRandomLastName(), documentNumber);
 
-                ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(teacher);
-                ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacher);
+                teacherOperations.AddTeacher(teacher);
+                teacherOperations.DeleteTeacher(teacher);
 
                 Assert.IsNull(this.FindTeacherOnSystem(teacher.GetDocumentNumber()));
             }
@@ -200,17 +210,18 @@ namespace UnitTesting
         [TestMethod]
         public void RemoveSubjectFromTeacher()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
 
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            List<Subject> systemSubjects = SystemDummyData.GetInstance.GetSubjects();
             Subject subject1 = new Subject(123456, "Math");
             Subject subject2 = new Subject(654321, "Physics");
             systemSubjects.Add(subject1);
             systemSubjects.Add(subject2);
 
             Teacher newTeacher = this.CreateRandomTeacher();
-            Subject subjectToBeAdded1 = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(123456);
-            Subject subjectToBeAdded2 = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(654321);
+            Subject subjectToBeAdded1 = subjectOperations.GetSubjectByCode(123456);
+            Subject subjectToBeAdded2 = subjectOperations.GetSubjectByCode(654321);
             
             newTeacher.AddSubjectToTeach(subjectToBeAdded1);
             newTeacher.AddSubjectToTeach(subjectToBeAdded2);
@@ -224,17 +235,17 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyTeacherName()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
             Teacher newTeacher = new Teacher("Rodigo", Utility.GetRandomLastName(), "1234567-8");
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+            teacherOperations.AddTeacher(newTeacher);
 
             ModifyTeacherInput input = new ModifyTeacherInput();
             input.NewName = "Santiago";
             input.DocumentNumber = "1234567-8";
-            ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+            teacherOperations.ModifyTeacher(input);
 
-            Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
+            Teacher modifiedTeacher = teacherOperations.GetTeacherByDocumentNumber("1234567-8");
 
             Assert.AreEqual(modifiedTeacher.GetName(), input.NewName);
         }
@@ -242,17 +253,17 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyTeacherLastName()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
             Teacher newTeacher = new Teacher(Utility.GetRandomName(), "de Leon", "1234567-8");
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+            teacherOperations.AddTeacher(newTeacher);
 
             ModifyTeacherInput input = new ModifyTeacherInput();
             input.NewLastName = "Diaz";
             input.DocumentNumber = "1234567-8";
-            ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+            teacherOperations.ModifyTeacher(input);
 
-            Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
+            Teacher modifiedTeacher = teacherOperations.GetTeacherByDocumentNumber("1234567-8");
 
             Assert.AreEqual(modifiedTeacher.GetLastName(), input.NewLastName);
         }
@@ -260,10 +271,10 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyTeacherSubjects()
         {
-            SystemData.GetInstance.Reset();
+            ITeacherLogic teacherOperations = DummyProvider.GetInstance.GetTeacherOperations();
 
             #region Add subjects to the system
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            List<Subject> systemSubjects = SystemDummyData.GetInstance.GetSubjects();
             Subject subject1 = new Subject(1234, "Math");
             Subject subject2 = new Subject(3216, "Physics");
             Subject subject3 = new Subject(7418, "Chemistry");
@@ -279,7 +290,7 @@ namespace UnitTesting
             newTeacher.AddSubjectToTeach(subject1);
             newTeacher.AddSubjectToTeach(subject2);
             newTeacher.AddSubjectToTeach(subject3);
-            ClassFactory.GetOrCreate<TeacherLogic>().AddTeacher(newTeacher);
+             teacherOperations.AddTeacher(newTeacher);
             #endregion
 
             List<Subject> newSubjects = new List<Subject>();
@@ -290,9 +301,9 @@ namespace UnitTesting
             ModifyTeacherInput input = new ModifyTeacherInput();
             input.NewSubjects = newSubjects;
             input.DocumentNumber = "1234567-8";
-            ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+            teacherOperations.ModifyTeacher(input);
 
-            Teacher modifiedTeacher = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber("1234567-8");
+            Teacher modifiedTeacher = teacherOperations.GetTeacherByDocumentNumber("1234567-8");
 
             Assert.IsTrue(Utility.CompareLists(modifiedTeacher.GetSubjects(), input.NewSubjects));
         }
@@ -300,7 +311,7 @@ namespace UnitTesting
         #region Extra Methods
         private Teacher FindTeacherOnSystem(string documentNumber)
         {
-            return SystemData.GetInstance.GetTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+            return SystemDummyData.GetInstance.GetTeachers().Find(x => x.GetDocumentNumber().Equals(documentNumber));
         }
 
         private Teacher CreateRandomTeacher()
