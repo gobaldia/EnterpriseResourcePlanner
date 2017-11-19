@@ -34,7 +34,7 @@ namespace StudentModuleUI.DeleteStudent
                 {
                     IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
                     studentOperations.DeleteStudent(this.StudentToDelete.GetStudentNumber());
-                    this.CleanForm();
+                    this.CleanForm(true);
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
                 }
                 else
@@ -63,7 +63,7 @@ namespace StudentModuleUI.DeleteStudent
             this.AutoScaleMode = AutoScaleMode.None;
             this.Size = new System.Drawing.Size(750, 550);
         }
-        private void CleanForm()
+        private void CleanForm(bool reloadStudentCombo = false)
         {
             textBoxDocument.Text = string.Empty;
             textBoxName.Text = string.Empty;
@@ -73,6 +73,11 @@ namespace StudentModuleUI.DeleteStudent
             textBoxLatitud.Text = string.Empty;
             textBoxLongitud.Text = string.Empty;
             listBoxStudentSubjects.Items.Clear();
+            if (reloadStudentCombo)
+                ReloadStudentsCombo();
+        }
+        private void ReloadStudentsCombo()
+        {
             comboBoxStudentsNumbers.Items.Clear();
             FillStudentsComboBox();
             buttonDeleteStudent.Enabled = false;
@@ -104,7 +109,9 @@ namespace StudentModuleUI.DeleteStudent
             IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
             var systemStudents = studentOperations.GetStudents();
             foreach (Student student in systemStudents)
+            {
                 this.comboBoxStudentsNumbers.Items.Add(student);
+            }
         }
 
         private void OnStudenNumber_ComboIndexChange(object sender, EventArgs e)
