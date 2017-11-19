@@ -455,6 +455,27 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void AddStudentFeeWithAmount()
+        {
+            try
+            {
+                var newStudent = CreateRandomStudent();
+                newStudent.StudentNumber = 1;
+
+                double fee = 20.5;
+                newStudent.SetMonthlyFeeAmount(fee);
+
+                foreach(Fee f in newStudent.Fees)
+                    Assert.AreEqual(f.Amount, fee);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
