@@ -8,9 +8,11 @@ namespace CoreEntities.Entities
 {
     public class Fee
     {
-        public Fee()
-        {
+        public double Amount { get; set; }
 
+        public Fee(double amount)
+        {
+            this.Amount = amount;
         }
     }
 }

@@ -83,11 +83,11 @@ namespace CoreEntities.Entities
                 this.Subjects.Add(subject);
             }
         }
-        public void SetMonthlyFeeAmount(double fee)
+        public void SetMonthlyFeeAmount(double feeAmount)
         {
             for (int i = 1; i <= 12; i++)
             {
-                Fees.Add(new Fee());
+                Fees.Add(new Fee(feeAmount));
             }
         }
         #endregion
