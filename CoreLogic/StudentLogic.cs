@@ -80,6 +80,14 @@ namespace CoreLogic
             return this.persistanceProvider.GetNextStudentNumber();
         }
 
+        public void PayFees(List<Fee> feesToBePaid)
+        {
+            foreach(Fee f in feesToBePaid)
+            {
+                f.IsPaid = true;
+            }
+        }
+
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
