@@ -60,7 +60,12 @@ namespace CoreEntities.Entities
 
         public string GetFullToString()
         {
-            return string.Format("{0} - Capacity: {1}", GetRegistration(), GetCapacity());
+            return string.Format("{0} - Capacity: {1} - Kms/Ltr: {2}", GetRegistration(), GetCapacity(), GetFuelConsumption());
+        }
+
+        private object GetFuelConsumption()
+        {
+            return this.FuelConsumptionKmsPerLtr;
         }
 
         public override bool Equals(object obj)

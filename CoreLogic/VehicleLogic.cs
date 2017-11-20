@@ -157,11 +157,40 @@ namespace CoreLogic
 
             return Math.Sqrt(Math.Pow((studentTwoLatitud - studentOneLatitud), 2) + Math.Pow((studentTwoLongitud - studentOneLongitud), 2));
         }
+        #endregion
+
+        public List<Tuple<Vehicle, List<Student>>> GetVehiclesOrderedByEfficiencyConsideringStudentsNumber()
+        {
+            List<Vehicle> systemVehicles = this.persistanceProvider.GetVehicles();
+            if (systemVehicles.Count == 0)
+                throw new CoreException("Currently there is not any vehicle in the system.");
+
+            List<Tuple<Vehicle, List<Student>>> vehiclesToShow = new List<Tuple<Vehicle, List<Student>>>();
+            var studentsToUseVehicles = this.StudentsOrderedByDistanceToSchool();
+            var vehicles = this.GetVehiclesOrderedByCapacityPerFuelConsumption();
+            var vehiclesQuantity = vehicles.Count;
+            var studentsQuantity = studentsToUseVehicles.Count;
+            var vehicleIndex = 0;
+            while (studentsQuantity > 0)
+            {
+                Vehicle vehicle = vehicles[vehicleIndex];
+                int studentsAlreadyAssignedToAVehicle = studentsToUseVehicles.Count - studentsQuantity;
+                int currentVehicleCapacity = vehicle.Capacity;
+                List<Student> students = studentsToUseVehicles.Skip(studentsAlreadyAssignedToAVehicle).Take(currentVehicleCapacity).Select(x => x.Item1).ToList();
+                Tuple<Vehicle, List<Student>> elementToAdd = new Tuple<Vehicle, List<Student>>(vehicle, students);
+                vehiclesToShow.Add(elementToAdd);
+                studentsQuantity -= vehicles[vehicleIndex].Capacity;
+                if (vehicleIndex == vehiclesQuantity - 1)
+                    vehicleIndex = 0;
+                else
+                    vehicleIndex++;
+            }
+            return vehiclesToShow;
+        }
 
         public List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption()
         {
             return persistanceProvider.GetVehiclesOrderedByCapacityPerFuelConsumption();
         }
-        #endregion
     }
 }

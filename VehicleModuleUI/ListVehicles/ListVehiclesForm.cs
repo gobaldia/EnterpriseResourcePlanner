@@ -51,7 +51,6 @@ namespace VehicleModuleUI.ListVehicles
                 this.labelError.Visible = true;
                 this.labelError.Text = ex.Message;
             }
-            
         }
 
         private void buttonBackToMainMenu_Click(object sender, EventArgs e)
