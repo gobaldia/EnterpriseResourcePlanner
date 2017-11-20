@@ -150,6 +150,11 @@ namespace CoreLogic
 
             return Math.Sqrt(Math.Pow((studentTwoLatitud - studentOneLatitud), 2) + Math.Pow((studentTwoLongitud - studentOneLongitud), 2));
         }
+
+        public List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption()
+        {
+            return persistanceProvider.GetVehiclesOrderedByCapacityPerFuelConsumption();
+        }
         #endregion
     }
 }

@@ -50,5 +50,10 @@ namespace DummyPersistance.Implementations
             systemVehicle.Capacity = vehicleToModify.Capacity;
             systemVehicle.FuelConsumptionKmsPerLtr = vehicleToModify.FuelConsumptionKmsPerLtr;
         }
+
+        public List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption()
+        {
+            return this.GetVehicles().OrderByDescending(v => v.GetVehicleEfficiency()).ToList();
+        }
     }
 }

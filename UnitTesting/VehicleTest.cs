@@ -273,8 +273,8 @@ namespace UnitTesting
         {
             IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
 
-            Vehicle vehicle1 = new Vehicle("SBA0001", 10, 12);
-            Vehicle vehicle2 = new Vehicle("SBA1015", 10, 15);
+            Vehicle vehicle1 = new Vehicle("SBA0001", 10, 10);
+            Vehicle vehicle2 = new Vehicle("SBA1015", 10, 100);
             vehicleOperations.AddVehicle(vehicle1);
             vehicleOperations.AddVehicle(vehicle2);
 

@@ -94,5 +94,10 @@ namespace CoreEntities.Entities
         {
             return this.Registration;
         }
+
+        public double GetVehicleEfficiency()
+        {
+            return this.FuelConsumptionKmsPerLtr / this.Capacity;
+        }
     }
 }

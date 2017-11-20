@@ -17,5 +17,6 @@ namespace CoreLogic.Interfaces
         Vehicle GetVehicleByRegistration(string registration);
         List<Tuple<Student, double>> StudentsOrderedByDistanceToSchool();
         List<Tuple<Vehicle, List<Student>>> GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+        List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption();
     }
 }

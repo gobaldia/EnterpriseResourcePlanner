@@ -86,5 +86,10 @@ namespace DataAccess.Implementations
 
             return studentsWithPickUpService;
         }
+
+        public List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption()
+        {
+            return this.GetVehicles().OrderByDescending(v => v.GetVehicleEfficiency()).ToList();
+        }
     }
 }
