@@ -37,7 +37,10 @@
             this.labelError = new System.Windows.Forms.Label();
             this.labelSuccess = new System.Windows.Forms.Label();
             this.textBoxRegistration = new System.Windows.Forms.TextBox();
+            this.labelFuelConsumption = new System.Windows.Forms.Label();
+            this.numericUpDownFuelConsumption = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFuelConsumption)).BeginInit();
             this.SuspendLayout();
             // 
             // labelAddVehicleTitle
@@ -62,7 +65,7 @@
             // labelCapacity
             // 
             this.labelCapacity.AutoSize = true;
-            this.labelCapacity.Location = new System.Drawing.Point(62, 140);
+            this.labelCapacity.Location = new System.Drawing.Point(59, 130);
             this.labelCapacity.Name = "labelCapacity";
             this.labelCapacity.Size = new System.Drawing.Size(48, 13);
             this.labelCapacity.TabIndex = 2;
@@ -70,7 +73,7 @@
             // 
             // numericUpDownCapacity
             // 
-            this.numericUpDownCapacity.Location = new System.Drawing.Point(62, 157);
+            this.numericUpDownCapacity.Location = new System.Drawing.Point(59, 147);
             this.numericUpDownCapacity.Minimum = new decimal(new int[] {
             1,
             0,
@@ -87,7 +90,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(310, 261);
+            this.buttonAdd.Location = new System.Drawing.Point(310, 299);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 3;
@@ -97,7 +100,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(199, 261);
+            this.buttonCancel.Location = new System.Drawing.Point(199, 299);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -110,7 +113,7 @@
             this.labelError.AutoSize = true;
             this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(17, 203);
+            this.labelError.Location = new System.Drawing.Point(17, 268);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 7;
@@ -121,7 +124,7 @@
             this.labelSuccess.AutoSize = true;
             this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelSuccess.Location = new System.Drawing.Point(17, 202);
+            this.labelSuccess.Location = new System.Drawing.Point(17, 268);
             this.labelSuccess.Name = "labelSuccess";
             this.labelSuccess.Size = new System.Drawing.Size(0, 16);
             this.labelSuccess.TabIndex = 8;
@@ -134,11 +137,29 @@
             this.textBoxRegistration.Size = new System.Drawing.Size(100, 20);
             this.textBoxRegistration.TabIndex = 1;
             // 
+            // labelFuelConsumption
+            // 
+            this.labelFuelConsumption.AutoSize = true;
+            this.labelFuelConsumption.Location = new System.Drawing.Point(56, 190);
+            this.labelFuelConsumption.Name = "labelFuelConsumption";
+            this.labelFuelConsumption.Size = new System.Drawing.Size(157, 13);
+            this.labelFuelConsumption.TabIndex = 9;
+            this.labelFuelConsumption.Text = "Fuel Consumption (Kms per liter)";
+            // 
+            // numericUpDownFuelConsumption
+            // 
+            this.numericUpDownFuelConsumption.Location = new System.Drawing.Point(59, 206);
+            this.numericUpDownFuelConsumption.Name = "numericUpDownFuelConsumption";
+            this.numericUpDownFuelConsumption.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownFuelConsumption.TabIndex = 10;
+            // 
             // AddVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 392);
+            this.Controls.Add(this.numericUpDownFuelConsumption);
+            this.Controls.Add(this.labelFuelConsumption);
             this.Controls.Add(this.textBoxRegistration);
             this.Controls.Add(this.labelSuccess);
             this.Controls.Add(this.labelError);
@@ -151,6 +172,7 @@
             this.Name = "AddVehicleForm";
             this.Text = "AddVehicleForm";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFuelConsumption)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +189,7 @@
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Label labelSuccess;
         private System.Windows.Forms.TextBox textBoxRegistration;
+        private System.Windows.Forms.Label labelFuelConsumption;
+        private System.Windows.Forms.NumericUpDown numericUpDownFuelConsumption;
     }
 }

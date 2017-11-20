@@ -45,13 +45,20 @@ namespace CoreLogic
         {
             Vehicle vehicleToModify = GetVehicleByRegistration(input.Registration);
 
-            if(input.NewCapacity > 0)
+            if (input.NewCapacity <= 0)
             {
-                vehicleToModify.SetCapacity(input.NewCapacity);
-                this.persistanceProvider.ModifyVehicle(vehicleToModify);
+                throw new CoreException("Capacity should be greater than 0.");
+            }
+            else if (input.FuelConsumptionKmsPerLtr <= 0)
+            {
+                throw new CoreException("Fuel consumption should be greater than 0.");
             }
             else
-                throw new CoreException("Capacity should be greater than 0.");
+            {
+                vehicleToModify.SetCapacity(input.NewCapacity);
+                vehicleToModify.FuelConsumptionKmsPerLtr = input.FuelConsumptionKmsPerLtr;
+                this.persistanceProvider.ModifyVehicle(vehicleToModify);
+            }
         }
 
         public Vehicle GetVehicleByRegistration(string registration)

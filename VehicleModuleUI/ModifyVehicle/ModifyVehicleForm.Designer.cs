@@ -37,7 +37,10 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBoxSelectVehicleToModify = new System.Windows.Forms.ComboBox();
             this.labelSelectVehicleToModify = new System.Windows.Forms.Label();
+            this.labelFuelConsumption = new System.Windows.Forms.Label();
+            this.numericUpDownFuelConsumption = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFuelConsumption)).BeginInit();
             this.SuspendLayout();
             // 
             // labelModifyVehicleTitle
@@ -71,7 +74,7 @@
             this.labelSuccess.AutoSize = true;
             this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelSuccess.Location = new System.Drawing.Point(60, 238);
+            this.labelSuccess.Location = new System.Drawing.Point(60, 299);
             this.labelSuccess.Name = "labelSuccess";
             this.labelSuccess.Size = new System.Drawing.Size(0, 16);
             this.labelSuccess.TabIndex = 3;
@@ -82,7 +85,7 @@
             this.labelError.AutoSize = true;
             this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(60, 238);
+            this.labelError.Location = new System.Drawing.Point(60, 299);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 4;
@@ -127,11 +130,29 @@
             this.labelSelectVehicleToModify.TabIndex = 8;
             this.labelSelectVehicleToModify.Text = "Select Vehicle to Modify";
             // 
+            // labelFuelConsumption
+            // 
+            this.labelFuelConsumption.AutoSize = true;
+            this.labelFuelConsumption.Location = new System.Drawing.Point(63, 223);
+            this.labelFuelConsumption.Name = "labelFuelConsumption";
+            this.labelFuelConsumption.Size = new System.Drawing.Size(157, 13);
+            this.labelFuelConsumption.TabIndex = 9;
+            this.labelFuelConsumption.Text = "Fuel Consumption (Kms per liter)";
+            // 
+            // numericUpDownFuelConsumption
+            // 
+            this.numericUpDownFuelConsumption.Location = new System.Drawing.Point(66, 240);
+            this.numericUpDownFuelConsumption.Name = "numericUpDownFuelConsumption";
+            this.numericUpDownFuelConsumption.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownFuelConsumption.TabIndex = 10;
+            // 
             // ModifyVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 418);
+            this.Controls.Add(this.numericUpDownFuelConsumption);
+            this.Controls.Add(this.labelFuelConsumption);
             this.Controls.Add(this.labelSelectVehicleToModify);
             this.Controls.Add(this.comboBoxSelectVehicleToModify);
             this.Controls.Add(this.buttonCancel);
@@ -144,6 +165,7 @@
             this.Name = "ModifyVehicleForm";
             this.Text = "ModifyVehicleForm";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFuelConsumption)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,5 +182,7 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ComboBox comboBoxSelectVehicleToModify;
         private System.Windows.Forms.Label labelSelectVehicleToModify;
+        private System.Windows.Forms.Label labelFuelConsumption;
+        private System.Windows.Forms.NumericUpDown numericUpDownFuelConsumption;
     }
 }
