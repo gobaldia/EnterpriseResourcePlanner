@@ -12,12 +12,20 @@ using FrameworkCommon;
 using CoreLogic;
 using FrameworkCommon.MethodParameters;
 using UnitTesting.Utilities;
+using DummyPersistance;
+using CoreLogic.Interfaces;
 
 namespace UnitTesting
 {
     [TestClass]
     public class VehicleTest
     {
+        [TestInitialize]
+        public void TestInitialization()
+        {
+            SystemDummyData.GetInstance.Reset();
+        }
+
         [TestMethod]
         public void CreateVehicleWithParameters()
         {
@@ -66,7 +74,7 @@ namespace UnitTesting
         public void CreateVehicleFuelConsumptionLessOrEqualThanZero()
         {
             var expectedRegistration = "SBA0122";
-            var expectedCapacity = 0;
+            var expectedCapacity = 10;
             var expectedFuelConsumption = 0;
             try
             {
@@ -133,14 +141,14 @@ namespace UnitTesting
         {
             try
             {
-                SystemData.GetInstance.Reset();
+                IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
 
                 string registration = "SBA1234";
                 int capacity = 10;
                 Vehicle vehicle = new Vehicle(registration, capacity);
 
-                ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle);
-                ClassFactory.GetOrCreate<VehicleLogic>().DeleteVehicle(vehicle);
+                vehicleOperations.AddVehicle(vehicle);
+                vehicleOperations.DeleteVehicle(vehicle);
 
                 Assert.IsNull(this.FindVehicleOnSystem(vehicle.Registration));
             }
@@ -152,7 +160,9 @@ namespace UnitTesting
 
         private object FindVehicleOnSystem(string registration)
         {
-            return SystemData.GetInstance.GetVehicles().Find(v => v.Registration.Equals(registration));
+            IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
+            List<Vehicle> vehicles = vehicleOperations.GetVehicles();
+            return vehicles.Find(x => x.GetRegistration() == registration);
         }
 
         [TestMethod]
@@ -172,65 +182,44 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyVehicleCapacityInSystem()
         {
-            SystemData.GetInstance.Reset();
+            IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
 
             Vehicle newVehicle = new Vehicle("SBA1234", 10);
-            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(newVehicle);
+            vehicleOperations.AddVehicle(newVehicle);
 
             ModifyVehicleInput input = new ModifyVehicleInput();
             input.Registration = "SBA1234";
             input.NewCapacity = 20;
-            ClassFactory.GetOrCreate<VehicleLogic>().ModifyVehicle(input);
+            vehicleOperations.ModifyVehicle(input);
 
-            Vehicle modifiedVehicle = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicleByRegistration("SBA1234");
+            Vehicle modifiedVehicle = vehicleOperations.GetVehicleByRegistration("SBA1234");
 
             Assert.AreEqual(modifiedVehicle.GetCapacity(), input.NewCapacity);
         }
 
         [TestMethod]
-        public void ListVehiclesWhenTheresNoVehiclesInSystem()
-        {
-            try
-            {
-                SystemData.GetInstance.Reset();
-
-                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
-
-                Assert.Fail();
-            }
-            catch (CoreException ex)
-            {
-                Assert.IsTrue(ex.Message.Equals("Currently there is not any vehicle in the system."));
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-
-        }
-
-        [TestMethod]
         public void ListVehicles()
         {
-            SystemData.GetInstance.Reset();
+            IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
 
             Vehicle vehicleOne = new Vehicle("SBA1234", 10);
             Vehicle vehicleTwo = new Vehicle("SBA5678", 15);
             Vehicle vehicleThree = new Vehicle("SBA9012", 20);
 
-            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleOne);
-            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleTwo);
-            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicleThree);
+            vehicleOperations.AddVehicle(vehicleOne);
+            vehicleOperations.AddVehicle(vehicleTwo);
+            vehicleOperations.AddVehicle(vehicleThree);
 
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+            var vehicles = vehicleOperations.GetVehicles();
 
-            Assert.IsTrue(vehicles.Count > 0);
+            Assert.IsTrue(vehicles.Count == 3);
         }
 
         [TestMethod]
         public void TestStudentsOrderedByDistanceToSchool()
         {
-            SystemData.GetInstance.Reset();
+            IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
             Student studentOne = new Student();
             studentOne.Document = "1234567-1";
@@ -250,6 +239,7 @@ namespace UnitTesting
             studentThree.Document = "1234567-3";
             studentThree.Name = "Paul";
             studentThree.Location = new Location(3.00000, 3.000000);
+            studentThree.HavePickUpService = true;
             studentThree.StudentNumber = 3;
 
             Student studentFour = new Student();
@@ -259,18 +249,18 @@ namespace UnitTesting
             studentFour.HavePickUpService = true;
             studentFour.StudentNumber = 4;
 
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
+            studentOperations.AddStudent(studentOne);
+            studentOperations.AddStudent(studentTwo);
+            studentOperations.AddStudent(studentThree);
+            studentOperations.AddStudent(studentFour);
 
 
-            Student studentToCompare1 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentOne.Document);
-            Student studentToCompare2 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentTwo.Document);
-            Student studentToCompare3 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentThree.Document);
-            Student studentToCompare4 = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByDocumentNumber(studentFour.Document);
+            Student studentToCompare1 = studentOperations.GetStudentByDocumentNumber(studentOne.Document);
+            Student studentToCompare2 = studentOperations.GetStudentByDocumentNumber(studentTwo.Document);
+            Student studentToCompare3 = studentOperations.GetStudentByDocumentNumber(studentThree.Document);
+            Student studentToCompare4 = studentOperations.GetStudentByDocumentNumber(studentFour.Document);
 
-            var studentsOrderedByDistanceToSchool = ClassFactory.GetOrCreate<VehicleLogic>().StudentsOrderedByDistanceToSchool();
+            var studentsOrderedByDistanceToSchool = vehicleOperations.StudentsOrderedByDistanceToSchool();
 
             Assert.AreEqual(studentsOrderedByDistanceToSchool[0].Item1, studentToCompare2);
             Assert.AreEqual(studentsOrderedByDistanceToSchool[1].Item1, studentToCompare1);
@@ -279,63 +269,81 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        public void GetVehiclesOrderedByCapacityConsideringStudentsNumber()
+        public void GetVehiclesOrderedByCapacityPerFuelConsumption()
         {
-            SystemData.GetInstance.Reset();
+            IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
 
-            #region Generate test data
-            Vehicle vehicle1 = new Vehicle("SBA0001", 1);
-            Vehicle vehicle2 = new Vehicle("SBA1015", 2);
-            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle1);
-            ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle2);
+            Vehicle vehicle1 = new Vehicle("SBA0001", 10, 12);
+            Vehicle vehicle2 = new Vehicle("SBA1015", 10, 15);
+            vehicleOperations.AddVehicle(vehicle1);
+            vehicleOperations.AddVehicle(vehicle2);
 
-            var input1 = new Student
-            {
-                Document = "1234567-5",
-                Name = Utility.GetRandomName(),
-                LastName = Utility.GetRandomLastName(),
-                Location = new Location(10.00, 15.1)
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input1);
+            var vehiclesOrdered = vehicleOperations.GetVehiclesOrderedByCapacityPerFuelConsumption();
 
-            var input2 = new Student
-            {
-                Document = "1235567-8",
-                Name = Utility.GetRandomName(),
-                LastName = Utility.GetRandomLastName(),
-                Location = new Location(50.00, 22.1)
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input2);
+            Assert.AreEqual(vehiclesOrdered[0], vehicle2);
+            Assert.AreEqual(vehiclesOrdered[1], vehicle1);
 
-            var input3 = new Student
-            {
-                Document = "1266667-8",
-                Name = Utility.GetRandomName(),
-                LastName = Utility.GetRandomLastName(),
-                Location = new Location(-80.00, 5.1)
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input3);
-
-            var input4 = new Student
-            {
-                Document = "1234567-4",
-                Name = Utility.GetRandomName(),
-                LastName = Utility.GetRandomLastName(),
-                Location = new Location(-10.00, -15.1)
-            };
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(input4);
-            #endregion
-
-            List<Tuple<Vehicle, List<Student>>> systemVehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehiclesOrderedByCapacityConsideringStudentsNumber();
-
-            Vehicle firstVehicle = systemVehicles[0].Item1;
-            Vehicle secondVehicle = systemVehicles[1].Item1;
-            Vehicle thirdVehicle = systemVehicles[2].Item1;
-
-            Assert.AreEqual(firstVehicle, vehicle2);
-            Assert.AreEqual(secondVehicle, vehicle1);
-            Assert.AreEqual(thirdVehicle, vehicle2);
         }
+
+        //[TestMethod]
+        //public void GetVehiclesOrderedByCapacityConsideringStudentsNumber()
+        //{
+        //    IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
+        //    IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+
+        //    #region Generate test data
+        //    Vehicle vehicle1 = new Vehicle("SBA0001", 1);
+        //    Vehicle vehicle2 = new Vehicle("SBA1015", 2);
+        //    vehicleOperations.AddVehicle(vehicle1);
+        //    vehicleOperations.AddVehicle(vehicle2);
+
+        //    var input1 = new Student
+        //    {
+        //        Document = "1234567-5",
+        //        Name = Utility.GetRandomName(),
+        //        LastName = Utility.GetRandomLastName(),
+        //        Location = new Location(10.00, 15.1)
+        //    };
+        //    studentOperations.AddStudent(input1);
+
+        //    var input2 = new Student
+        //    {
+        //        Document = "1235567-8",
+        //        Name = Utility.GetRandomName(),
+        //        LastName = Utility.GetRandomLastName(),
+        //        Location = new Location(50.00, 22.1)
+        //    };
+        //    studentOperations.AddStudent(input2);
+
+        //    var input3 = new Student
+        //    {
+        //        Document = "1266667-8",
+        //        Name = Utility.GetRandomName(),
+        //        LastName = Utility.GetRandomLastName(),
+        //        Location = new Location(-80.00, 5.1)
+        //    };
+        //    studentOperations.AddStudent(input3);
+
+        //    var input4 = new Student
+        //    {
+        //        Document = "1234567-4",
+        //        Name = Utility.GetRandomName(),
+        //        LastName = Utility.GetRandomLastName(),
+        //        Location = new Location(-10.00, -15.1)
+        //    };
+        //    studentOperations.AddStudent(input4);
+        //    #endregion
+
+        //    List<Tuple<Vehicle, List<Student>>> systemVehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+
+        //    Vehicle firstVehicle = systemVehicles[0].Item1;
+        //    Vehicle secondVehicle = systemVehicles[1].Item1;
+        //    Vehicle thirdVehicle = systemVehicles[2].Item1;
+
+        //    Assert.AreEqual(firstVehicle, vehicle2);
+        //    Assert.AreEqual(secondVehicle, vehicle1);
+        //    Assert.AreEqual(thirdVehicle, vehicle2);
+        //}
 
         /*public void GetTheStudentThatIsClosestToTheShool()
         {

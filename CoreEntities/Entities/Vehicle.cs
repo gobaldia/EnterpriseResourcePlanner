@@ -36,6 +36,7 @@ namespace CoreEntities.Entities
             }
             this.Registration = registration;
             this.Capacity = capacity;
+            this.FuelConsumptionKmsPerLtr = 1;
         }
 
         public Vehicle(string registration, int capacity, int fuelConsumption)

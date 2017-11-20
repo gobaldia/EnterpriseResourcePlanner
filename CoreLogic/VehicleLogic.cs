@@ -22,13 +22,7 @@ namespace CoreLogic
 
         public List<Vehicle> GetVehicles()
         {
-            List<Vehicle> systemVehicles = persistanceProvider.GetVehicles();
-            if (systemVehicles?.Count == 0)
-                throw new CoreException("Currently there is not any vehicle in the system.");
-            else if (systemVehicles == null)
-                throw new CoreException("Currently there is not any vehicle in the system.");
-
-            return systemVehicles;
+            return persistanceProvider.GetVehicles();
         }
 
         public void AddVehicle(Vehicle newVehicle)
