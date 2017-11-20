@@ -444,10 +444,12 @@ namespace UnitTesting
                 var newStudent = CreateRandomStudent();
                 newStudent.StudentNumber = 1;
 
-                double fee = 20.5;
-                newStudent.SetMonthlyFeeAmount(fee);
+                Fee newFee = new Fee();
+                newFee.Amount = 20.5M;
+                newFee.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee);
 
-                Assert.AreEqual(newStudent.Fees.Count(), 12);
+                Assert.AreEqual(newStudent.Fees.Count(), 1);
             }
             catch (Exception ex)
             {
@@ -462,34 +464,24 @@ namespace UnitTesting
             {
                 var newStudent = CreateRandomStudent();
                 newStudent.StudentNumber = 1;
+                
+                Fee newFee1 = new Fee();
+                newFee1.Amount = 20.5M;
+                newFee1.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee1);
 
-                double fee = 20.5;
-                newStudent.SetMonthlyFeeAmount(fee);
+                Fee newFee2 = new Fee();
+                newFee2.Amount = 11M;
+                newFee2.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee2);
 
-                foreach(Fee f in newStudent.Fees)
-                    Assert.AreEqual(f.Amount, fee);
+                Fee newFee3 = new Fee();
+                newFee3.Amount = 1.5M;
+                newFee3.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee3);
 
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-        }
-
-        [TestMethod]
-        public void CheckFeesAreFromDifferentMonthAndYear()
-        {
-            try
-            {
-                var newStudent = CreateRandomStudent();
-                newStudent.StudentNumber = 1;
-
-                double fee = 20.5;
-                newStudent.SetMonthlyFeeAmount(fee);
-
-                List<int> monthsOfTheYear = GetMonthsOfTheYear();
-                for (int i = 0; i < 12; i++)
-                    Assert.IsTrue(newStudent.Fees[i].Date.Month == monthsOfTheYear[i]);
+                foreach (Fee f in newStudent.Fees)
+                    Assert.AreEqual(f.Amount, 20.5M);
 
             }
             catch (Exception ex)
@@ -506,9 +498,15 @@ namespace UnitTesting
                 IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
                 var newStudent = CreateRandomStudent();
                 newStudent.StudentNumber = 1;
-                double fee = 20.5;
-                newStudent.SetMonthlyFeeAmount(fee);
 
+                for(int index = 0; index < 12; index++)
+                {
+                    Fee newFee = new Fee();
+                    newFee.Amount = (3 * index)/(index/2);
+                    newFee.Date = DateTime.Now;
+                    newFee.IsPaid = false;
+                    newStudent.Fees.Add(newFee);
+                }
                 studentOperations.AddStudent(newStudent);
 
                 var systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);

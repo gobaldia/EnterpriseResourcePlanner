@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBoxPickUpServiceRadioButtons = new System.Windows.Forms.GroupBox();
             this.radioButtonYesPickUp = new System.Windows.Forms.RadioButton();
             this.radioButtonNoPickUp = new System.Windows.Forms.RadioButton();
@@ -56,7 +57,11 @@
             this.buttonModifyStudent = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBoxStudentsNumber = new System.Windows.Forms.ComboBox();
+            this.numericUpDownFeeAmount = new System.Windows.Forms.NumericUpDown();
+            this.labelFeeAmount = new System.Windows.Forms.Label();
+            this.toolTipFeeAmount = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxPickUpServiceRadioButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeeAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxPickUpServiceRadioButtons
@@ -328,11 +333,30 @@
             this.comboBoxStudentsNumber.TabIndex = 1;
             this.comboBoxStudentsNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxStudentsNumber_SelectedIndexChanged);
             // 
+            // numericUpDownFeeAmount
+            // 
+            this.numericUpDownFeeAmount.Location = new System.Drawing.Point(477, 511);
+            this.numericUpDownFeeAmount.Name = "numericUpDownFeeAmount";
+            this.numericUpDownFeeAmount.Size = new System.Drawing.Size(380, 38);
+            this.numericUpDownFeeAmount.TabIndex = 90;
+            this.toolTipFeeAmount.SetToolTip(this.numericUpDownFeeAmount, "New fee amount will apply only for upcoming months");
+            // 
+            // labelFeeAmount
+            // 
+            this.labelFeeAmount.AutoSize = true;
+            this.labelFeeAmount.Location = new System.Drawing.Point(144, 513);
+            this.labelFeeAmount.Name = "labelFeeAmount";
+            this.labelFeeAmount.Size = new System.Drawing.Size(285, 32);
+            this.labelFeeAmount.TabIndex = 91;
+            this.labelFeeAmount.Text = "Current Fee Amount: ";
+            // 
             // ModifyStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.labelFeeAmount);
+            this.Controls.Add(this.numericUpDownFeeAmount);
             this.Controls.Add(this.comboBoxStudentsNumber);
             this.Controls.Add(this.groupBoxPickUpServiceRadioButtons);
             this.Controls.Add(this.labelLongitud);
@@ -363,6 +387,7 @@
             this.Text = "Modify Student";
             this.groupBoxPickUpServiceRadioButtons.ResumeLayout(false);
             this.groupBoxPickUpServiceRadioButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeeAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,5 +423,8 @@
         private System.Windows.Forms.Button buttonModifyStudent;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ComboBox comboBoxStudentsNumber;
+        private System.Windows.Forms.NumericUpDown numericUpDownFeeAmount;
+        private System.Windows.Forms.Label labelFeeAmount;
+        private System.Windows.Forms.ToolTip toolTipFeeAmount;
     }
 }

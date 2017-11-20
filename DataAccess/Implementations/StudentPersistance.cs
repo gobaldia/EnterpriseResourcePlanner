@@ -24,7 +24,7 @@ namespace DataAccess.Implementations
             Student foundStudent;
             using (Context context = new Context())
             {
-                foundStudent = context.people.OfType<Student>().Include("Subjects")
+                foundStudent = context.people.OfType<Student>().Include("Subjects").Include("Fees")
                     .FirstOrDefault(s => s.StudentNumber.Equals(studentNumber));
             }
             return foundStudent;
@@ -63,7 +63,11 @@ namespace DataAccess.Implementations
         {
             using (Context context = new Context())
             {
-                context.people.Attach(newStudent);
+                context.Entry(newStudent).State = EntityState.Added;
+
+                foreach (Subject subject in newStudent.Subjects)
+                    context.subjects.Attach(subject);
+
                 context.people.Add(newStudent);
                 context.SaveChanges();
             }
@@ -102,6 +106,7 @@ namespace DataAccess.Implementations
                 var addedSubjects = this.GetAddedSubjects(studentOnDB, studentToModify);
                 this.UpdateSubjects(context, studentOnDB, addedSubjects, deletedSubjects);
                 this.UpdatePickUpServiceData(studentOnDB, studentToModify);
+                //this.UpdateFeesAmount(studentOnDB, studentToModify);
 
                 studentOnDB.Name = studentToModify.Name;
                 studentOnDB.LastName = studentToModify.LastName;

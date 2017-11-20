@@ -20,6 +20,7 @@ namespace StudentModuleUI.ModifyStudent
 {
     public partial class ModifyStudentForm : Form
     {
+        private decimal NewFeeAmount { get; set; } = 0;
         public ModifyStudentForm()
         {
             InitializeComponent();
@@ -34,14 +35,14 @@ namespace StudentModuleUI.ModifyStudent
                 if (IsStudentNumberSelected() && ValidateFormData())
                 {
                     labelError.Text = string.Empty;
-
                     var input = new ModifyStudentInput
                     {
                         NewName = textBoxName.Text,
                         NewLastName = textBoxLastName.Text,
                         StudentNumber = int.Parse(this.comboBoxStudentsNumber.SelectedItem.ToString()),
                         NewSubjects = this.GetSelectedSubjects(),
-                        HavePickupService = this.radioButtonYesPickUp.Checked 
+                        HavePickupService = this.radioButtonYesPickUp.Checked,
+                        NewFeeAmount = numericUpDownFeeAmount.Value != NewFeeAmount ? NewFeeAmount : 0
                     };
 
                     if (radioButtonYesPickUp.Checked)
@@ -188,7 +189,7 @@ namespace StudentModuleUI.ModifyStudent
             this.textBoxName.Text = studentToModify.GetName();
             this.textBoxLastName.Text = studentToModify.GetLastName();
             this.textBoxDocument.Text = studentToModify.GetDocumentNumber();
-
+            this.numericUpDownFeeAmount.Value = GetCurrentFeeAmount(studentToModify);
             LoadPickupServiceData(studentToModify);
             this.PopulateListBoxes(studentToModify);
         }
@@ -234,7 +235,18 @@ namespace StudentModuleUI.ModifyStudent
         {
             return IsStudentMainDataNotEmpty() &&
                 HaveSubjectsToStudy() &&
-                IsPickupInformationValid();
+                IsPickupInformationValid() && IsValidFeeAmount();
+        }
+        private bool IsValidFeeAmount()
+        {
+            bool result = false;
+
+            if (numericUpDownFeeAmount.Value <= 0)
+                labelError.Text = Constants.ERROR_FEEAMOUNT;
+            else
+                result = true;
+
+            return result;
         }
         private bool IsPickupInformationValid()
         {
@@ -287,6 +299,11 @@ namespace StudentModuleUI.ModifyStudent
                 subjectsToBeAdded.Add(subject);
             }
             return subjectsToBeAdded;
+        }
+        private decimal GetCurrentFeeAmount(Student studentToModify)
+        {
+            NewFeeAmount = studentToModify.Fees.Find(f => f.Date.Month.Equals(DateTime.Now.Month)).Amount;
+            return NewFeeAmount;
         }
         #endregion
     }

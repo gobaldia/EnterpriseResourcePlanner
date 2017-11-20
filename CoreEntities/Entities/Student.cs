@@ -83,14 +83,6 @@ namespace CoreEntities.Entities
                 this.Subjects.Add(subject);
             }
         }
-        public void SetMonthlyFeeAmount(double feeAmount)
-        {
-            for (int i = 1; i <= 12; i++)
-            {
-                var feeDate = new DateTime(DateTime.Now.Year, i, 1);
-                Fees.Add(new Fee(feeAmount, feeDate));
-            }
-        }
         #endregion
 
         public void AddSubjectToStudent(Subject newSubject)

@@ -8,7 +8,8 @@ namespace CoreEntities.Entities
 {
     public class Fee
     {
-        public double Amount { get; set; }
+        public int FeeOID { get; set; }
+        public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public bool IsPaid { get; set; }
 
@@ -19,7 +20,7 @@ namespace CoreEntities.Entities
             this.IsPaid = false;
         }
 
-        public Fee(double amount, DateTime date)
+        public Fee(decimal amount, DateTime date)
         {
             this.Amount = amount;
             this.Date = date;

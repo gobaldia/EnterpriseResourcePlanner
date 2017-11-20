@@ -116,7 +116,8 @@ namespace StudentModuleUI.AddStudent
         {
             return IsStudentMainDataNotEmpty() &&
                 HaveSubjectsToStudy() &&
-                IsPickupInformationValid();
+                IsPickupInformationValid() &&
+                IsValidFeeAmount();
         }
         private Student CreateStudent()
         {
@@ -128,6 +129,7 @@ namespace StudentModuleUI.AddStudent
                 StudentNumber = Convert.ToInt32(textBoxStudentNumber.Text),
                 Subjects = this.GetSelectedSubjects()
             };
+            newStudent.Fees = this.GenerateMonthlyFees(numericUpDownFeeAmount.Value);
 
             if (radioButtonYesPickUp.Checked)
             {
@@ -173,6 +175,17 @@ namespace StudentModuleUI.AddStudent
 
             return result;
         }
+        private bool IsValidFeeAmount()
+        {
+            bool result = false;
+
+            if (numericUpDownFeeAmount.Value <= 0)
+                labelError.Text = Constants.ERROR_FEEAMOUNT;
+            else
+                result = true;
+
+            return result;
+        }
         private bool HaveSubjectsToStudy()
         {
             bool result = listBoxStudentSubjects.Items.Count > 0;
@@ -191,6 +204,7 @@ namespace StudentModuleUI.AddStudent
             textBoxLatitud.Text = string.Empty;
             textBoxLatitud.Enabled = false;
             textBoxLongitud.Text = string.Empty;
+            numericUpDownFeeAmount.ResetText();
             textBoxLongitud.Enabled = false;
             listBoxStudentSubjects.Items.Clear();
             listBoxSystemSubjects.Items.Clear();
@@ -205,6 +219,22 @@ namespace StudentModuleUI.AddStudent
                 subjectsToBeAdded.Add(subject);
             }
             return subjectsToBeAdded;
+        }
+        private List<Fee> GenerateMonthlyFees(decimal feeAmount)
+        {
+            List<Fee> studentMonthlyFees = new List<Fee>();
+            for (int i = 1; i <= 12; i++)
+            {
+                var feeDate = new DateTime(DateTime.Now.Year, i, 1);
+                var newFee = new Fee
+                {
+                    Amount = feeAmount,
+                    Date = feeDate,
+                    IsPaid = false
+                };
+                studentMonthlyFees.Add(newFee);
+            }
+            return studentMonthlyFees;
         }
         #endregion
     }

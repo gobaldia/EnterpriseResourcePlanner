@@ -14,14 +14,16 @@ namespace DataAccess
         public DbSet<Subject> subjects { get; set; }
         public DbSet<Vehicle> vehicles { get; set; }
         public DbSet<Activity> activities { get; set; }
+        public DbSet<Fee> fees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);   
             modelBuilder.Entity<Subject>().HasKey(s => s.SubjectOID);
             modelBuilder.Entity<Person>().HasKey(p => p.PersonOID);
-            modelBuilder.Entity<Vehicle>().HasKey(p => p.VehicleOID);
+            modelBuilder.Entity<Vehicle>().HasKey(v => v.VehicleOID);
             modelBuilder.Entity<Activity>().HasKey(a => a.ActivityOID);
+            modelBuilder.Entity<Fee>().HasKey(f => f.FeeOID);
 
             modelBuilder.Entity<Teacher>().ToTable("Teachers");
             modelBuilder.Entity<Student>().ToTable("Students");
