@@ -36,9 +36,10 @@ namespace VehicleModuleUI.AddVehicle
             this.labelError.Visible = false;
             var registration = this.textBoxRegistration.Text;
             var capacity = (int) this.numericUpDownCapacity.Value;
+            var fuelConsumption = (int)this.numericUpDownFuelConsumption.Value;
             try
             {
-                Vehicle vehicle = new Vehicle(registration, capacity);
+                Vehicle vehicle = new Vehicle(registration, capacity, fuelConsumption);
                 IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
                 vehicleOperations.AddVehicle(vehicle);
                 this.labelSuccess.Visible = true;

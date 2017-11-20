@@ -22,7 +22,25 @@ namespace VehicleModuleUI.CalculateRoutes
         {
             InitializeComponent();
             SetDefaultWindowsSize();
-            FillListBoxVehiclesOrderedByCapacity();
+            FillListBoxVehiclesOrderedByEfficiency();
+        }
+
+        private void FillListBoxVehiclesOrderedByEfficiency()
+        {
+            try
+            {
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
+                for (int index = 0; index < vehicles.Count; index++)
+                {
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index].Item1);
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
         }
 
         private void SetDefaultWindowsSize()
@@ -39,7 +57,7 @@ namespace VehicleModuleUI.CalculateRoutes
                 var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
-                    this.listBoxVehiclesOrderedByCapacity.Items.Add(vehicles[index].Item1);
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index].Item1);
                 }
             }
             catch (CoreException ex)
@@ -51,8 +69,8 @@ namespace VehicleModuleUI.CalculateRoutes
 
         private void listBoxVehiclesOrderedByCapacity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Vehicle vehicle = this.listBoxVehiclesOrderedByCapacity.SelectedItem as Vehicle;
-            int position = this.listBoxVehiclesOrderedByCapacity.SelectedIndex;
+            Vehicle vehicle = this.listBoxVehiclesOrderedByEfficiency.SelectedItem as Vehicle;
+            int position = this.listBoxVehiclesOrderedByEfficiency.SelectedIndex;
             if(position >= 0)
                 this.FillListBoxStudentsInVehicle(vehicle, position);
         }

@@ -16,5 +16,6 @@ namespace DataContracts
         Vehicle GetVehicleByRegistration(string registration);
         bool IsVehicleInSystem(Vehicle aVehicle);
         List<Student> GetStudentsWithPickUpService();
+        List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption();
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="Implementations\StudentDummyPersistance.cs" />
     <Compile Include="Implementations\SubjectDummyPersistance.cs" />
     <Compile Include="Implementations\TeacherDummyPersistance.cs" />
+    <Compile Include="Implementations\VehicleDummyPersistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemDummyData.cs" />
   </ItemGroup>

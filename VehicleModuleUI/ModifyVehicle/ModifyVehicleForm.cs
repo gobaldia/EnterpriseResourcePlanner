@@ -62,6 +62,7 @@ namespace VehicleModuleUI.ModifyVehicle
             this.buttonModify.Enabled = true;
             var selectedVehicleToModify = this.comboBoxSelectVehicleToModify.SelectedItem as Vehicle;
             this.numericUpDownCapacity.Value = selectedVehicleToModify.Capacity;
+            this.numericUpDownFuelConsumption.Value = selectedVehicleToModify.FuelConsumptionKmsPerLtr;
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
@@ -69,17 +70,21 @@ namespace VehicleModuleUI.ModifyVehicle
             try
             {
                 var selectedVehicleToModify = this.comboBoxSelectVehicleToModify.SelectedItem as Vehicle;
-                var newCapacity = (int)this.numericUpDownCapacity.Value;
+                var newCapacity = (int) this.numericUpDownCapacity.Value;
+                var newFuelConsumption = (int)this.numericUpDownFuelConsumption.Value;
                 ModifyVehicleInput newVehicleValues = new ModifyVehicleInput
                 {
                     Registration = selectedVehicleToModify.Registration,
-                    NewCapacity = newCapacity
+                    NewCapacity = newCapacity,
+                    FuelConsumptionKmsPerLtr = newFuelConsumption
                 };
 
                 IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
                 vehicleOperations.ModifyVehicle(newVehicleValues);
                 this.labelSuccess.Visible = true;
                 this.labelSuccess.Text = "The vehicle was succesfully modified.";
+                this.ClearForm();
+                this.ReloadComboBoxSelectVehicleToModify();
             }
             catch (CoreException ex)
             {
@@ -91,6 +96,18 @@ namespace VehicleModuleUI.ModifyVehicle
                 this.labelError.Visible = true;
                 this.labelSuccess.Text = ex.Message;
             }
+        }
+
+        private void ReloadComboBoxSelectVehicleToModify()
+        {
+            this.comboBoxSelectVehicleToModify.Items.Clear();
+            this.FillVehiclesComboBox();
+        }
+
+        private void ClearForm()
+        {
+            this.numericUpDownCapacity.Value = 0;
+            this.numericUpDownFuelConsumption.Value = 0;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

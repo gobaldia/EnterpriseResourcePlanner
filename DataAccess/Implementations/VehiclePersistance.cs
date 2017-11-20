@@ -37,6 +37,7 @@ namespace DataAccess.Implementations
                 var vehicleOnDB = context.vehicles.Where(v => v.VehicleOID.Equals(vehicleToModify.VehicleOID)).FirstOrDefault();
 
                 vehicleOnDB.Capacity = vehicleToModify.Capacity;
+                vehicleOnDB.FuelConsumptionKmsPerLtr = vehicleToModify.FuelConsumptionKmsPerLtr;
 
                 context.SaveChanges();
             }
@@ -85,6 +86,11 @@ namespace DataAccess.Implementations
             }
 
             return studentsWithPickUpService;
+        }
+
+        public List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption()
+        {
+            return this.GetVehicles().OrderByDescending(v => v.GetVehicleEfficiency()).ToList();
         }
     }
 }

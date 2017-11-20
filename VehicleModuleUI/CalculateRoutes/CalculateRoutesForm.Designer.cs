@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.labelCalculateRoutesTitle = new System.Windows.Forms.Label();
-            this.labelExplainListBox = new System.Windows.Forms.Label();
-            this.listBoxVehiclesOrderedByCapacity = new System.Windows.Forms.ListBox();
+            this.labelVehiclesOrderedByEfficiency = new System.Windows.Forms.Label();
+            this.listBoxVehiclesOrderedByEfficiency = new System.Windows.Forms.ListBox();
             this.listBoxStudentsInVehicle = new System.Windows.Forms.ListBox();
             this.labelStudentsInVehicle = new System.Windows.Forms.Label();
             this.buttonBackToMainMenu = new System.Windows.Forms.Button();
@@ -47,23 +47,23 @@
             this.labelCalculateRoutesTitle.TabIndex = 0;
             this.labelCalculateRoutesTitle.Text = "Calculate Routes";
             // 
-            // labelExplainListBox
+            // labelVehiclesOrderedByEfficiency
             // 
-            this.labelExplainListBox.AutoSize = true;
-            this.labelExplainListBox.Location = new System.Drawing.Point(17, 64);
-            this.labelExplainListBox.Name = "labelExplainListBox";
-            this.labelExplainListBox.Size = new System.Drawing.Size(144, 13);
-            this.labelExplainListBox.TabIndex = 1;
-            this.labelExplainListBox.Text = "Vehicles ordered by Capacity";
+            this.labelVehiclesOrderedByEfficiency.AutoSize = true;
+            this.labelVehiclesOrderedByEfficiency.Location = new System.Drawing.Point(17, 64);
+            this.labelVehiclesOrderedByEfficiency.Name = "labelVehiclesOrderedByEfficiency";
+            this.labelVehiclesOrderedByEfficiency.Size = new System.Drawing.Size(149, 13);
+            this.labelVehiclesOrderedByEfficiency.TabIndex = 1;
+            this.labelVehiclesOrderedByEfficiency.Text = "Vehicles ordered by Efficiency";
             // 
-            // listBoxVehiclesOrderedByCapacity
+            // listBoxVehiclesOrderedByEfficiency
             // 
-            this.listBoxVehiclesOrderedByCapacity.FormattingEnabled = true;
-            this.listBoxVehiclesOrderedByCapacity.Location = new System.Drawing.Point(13, 81);
-            this.listBoxVehiclesOrderedByCapacity.Name = "listBoxVehiclesOrderedByCapacity";
-            this.listBoxVehiclesOrderedByCapacity.Size = new System.Drawing.Size(148, 95);
-            this.listBoxVehiclesOrderedByCapacity.TabIndex = 2;
-            this.listBoxVehiclesOrderedByCapacity.SelectedIndexChanged += new System.EventHandler(this.listBoxVehiclesOrderedByCapacity_SelectedIndexChanged);
+            this.listBoxVehiclesOrderedByEfficiency.FormattingEnabled = true;
+            this.listBoxVehiclesOrderedByEfficiency.Location = new System.Drawing.Point(13, 81);
+            this.listBoxVehiclesOrderedByEfficiency.Name = "listBoxVehiclesOrderedByEfficiency";
+            this.listBoxVehiclesOrderedByEfficiency.Size = new System.Drawing.Size(148, 95);
+            this.listBoxVehiclesOrderedByEfficiency.TabIndex = 2;
+            this.listBoxVehiclesOrderedByEfficiency.SelectedIndexChanged += new System.EventHandler(this.listBoxVehiclesOrderedByCapacity_SelectedIndexChanged);
             // 
             // listBoxStudentsInVehicle
             // 
@@ -112,8 +112,8 @@
             this.Controls.Add(this.buttonBackToMainMenu);
             this.Controls.Add(this.labelStudentsInVehicle);
             this.Controls.Add(this.listBoxStudentsInVehicle);
-            this.Controls.Add(this.listBoxVehiclesOrderedByCapacity);
-            this.Controls.Add(this.labelExplainListBox);
+            this.Controls.Add(this.listBoxVehiclesOrderedByEfficiency);
+            this.Controls.Add(this.labelVehiclesOrderedByEfficiency);
             this.Controls.Add(this.labelCalculateRoutesTitle);
             this.Name = "CalculateRoutesForm";
             this.Text = "CalculateRoutesForm";
@@ -125,8 +125,8 @@
         #endregion
 
         private System.Windows.Forms.Label labelCalculateRoutesTitle;
-        private System.Windows.Forms.Label labelExplainListBox;
-        private System.Windows.Forms.ListBox listBoxVehiclesOrderedByCapacity;
+        private System.Windows.Forms.Label labelVehiclesOrderedByEfficiency;
+        private System.Windows.Forms.ListBox listBoxVehiclesOrderedByEfficiency;
         private System.Windows.Forms.ListBox listBoxStudentsInVehicle;
         private System.Windows.Forms.Label labelStudentsInVehicle;
         private System.Windows.Forms.Button buttonBackToMainMenu;
