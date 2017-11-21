@@ -10,5 +10,6 @@ namespace CoreLogic.Interfaces
     public interface IPaymentLogic
     {
         List<Fee> GetCurrentYearFeesByStudentNumber(int studentNumber);
+        Fee GetOldestNotPaidFee(int studentNumber);
     }
 }

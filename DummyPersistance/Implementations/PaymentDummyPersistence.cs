@@ -18,5 +18,10 @@ namespace DummyPersistance.Implementations
                 .Find(s => s.StudentNumber.Equals(studentNumber)).Fees
                 .Where(f => f.Date.Year.Equals(DateTime.Now.Year)).ToList();
         }
+
+        public Fee GetOldestNotPaidFee(int studentNumber)
+        {
+            return this.dummySystemStudents.Find(s => s.StudentNumber.Equals(studentNumber)).Fees.FirstOrDefault(f => !f.IsPaid);
+        }
     }
 }

@@ -21,5 +21,10 @@ namespace CoreLogic
         {
             return this.persistenceProvider.GetCurrentYearFeesByStudentNumber(studentNumber);
         }
+
+        public Fee GetOldestNotPaidFee(int studentNumber)
+        {
+            return this.persistenceProvider.GetOldestNotPaidFee(studentNumber);
+        }
     }
 }

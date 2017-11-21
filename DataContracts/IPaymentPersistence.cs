@@ -10,5 +10,6 @@ namespace DataContracts
     public interface IPaymentPersistence
     {
         List<Fee> GetCurrentYearFeesByStudentNumber(int studentNumber);
+        Fee GetOldestNotPaidFee(int studentNumber);
     }
 }
