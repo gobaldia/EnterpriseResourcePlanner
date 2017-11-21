@@ -70,5 +70,31 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
+
+        [TestMethod]
+        public void PayFee()
+        {
+            try
+            {
+                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+                IPaymentLogic paymentOperations = DummyProvider.GetInstance.GetPaymentOperations();
+
+                var newStudent = Utility.CreateRandomStudent();
+                newStudent.Fees = Utility.GenerateYearFees();
+                newStudent.StudentNumber = 1;
+
+                studentOperations.AddStudent(newStudent);
+
+                Fee feeToBePaid = newStudent.Fees[3];
+                paymentOperations.PayFee(feeToBePaid);
+
+                List<Fee> studentFees = paymentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
+                Assert.IsTrue(studentFees[3].IsPaid);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
     }
 }

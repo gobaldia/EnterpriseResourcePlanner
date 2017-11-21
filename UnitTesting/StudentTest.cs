@@ -489,42 +489,5 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
-
-        [TestMethod]
-        public void PayStudentFees()
-        {
-            try
-            {
-                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
-                var newStudent = Utility.CreateRandomStudent();
-                newStudent.StudentNumber = 1;
-
-                for(int index = 0; index < 12; index++)
-                {
-                    Fee newFee = new Fee();
-                    newFee.Amount = (3 * index)/(index/2);
-                    newFee.Date = DateTime.Now;
-                    newFee.IsPaid = false;
-                    newStudent.Fees.Add(newFee);
-                }
-                studentOperations.AddStudent(newStudent);
-
-                var systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);
-                List<Fee> feesToBePaid = systemStudent.Fees.Take(3).ToList();
-                studentOperations.PayFees(feesToBePaid);
-
-                systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);
-                List<Fee> paidFees = systemStudent.Fees.Take(3).ToList();
-                foreach(Fee f in paidFees)
-                {
-                    Assert.IsTrue(f.IsPaid);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-        }
     }
 }

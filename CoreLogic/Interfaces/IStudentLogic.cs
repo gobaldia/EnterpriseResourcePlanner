@@ -17,6 +17,5 @@ namespace CoreLogic.Interfaces
         List<Student> GetStudents(bool bringSubjects = false);
         void DeleteStudent(int studentNumber);
         int GetNextStudentNumber();
-        void PayFees(List<Fee> feesToBePaid);
     }
 }

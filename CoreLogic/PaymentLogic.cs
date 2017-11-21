@@ -26,5 +26,6 @@ namespace CoreLogic
         {
             return this.persistenceProvider.GetOldestNotPaidFee(studentNumber);
         }
+
     }
 }
