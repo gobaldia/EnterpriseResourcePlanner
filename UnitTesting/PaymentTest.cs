@@ -36,7 +36,7 @@ namespace UnitTesting
 
                 List<Fee> studentFees = paymentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
                 Assert.IsNotNull(studentFees);
-                Assert.Equals(studentFees.Count, 12);
+                Assert.AreEqual(studentFees.Count, 12);
             }
             catch (Exception ex)
             {

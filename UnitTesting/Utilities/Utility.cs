@@ -75,7 +75,7 @@ namespace UnitTesting.Utilities
             {
                 var newFee = new Fee
                 {
-                    Amount = (3 * index) / (index / 2),
+                    Amount = (0.6M + index * 2) / 3,
                     Date = new DateTime(DateTime.Now.Year, index, 1),
                     IsPaid = false
                 };

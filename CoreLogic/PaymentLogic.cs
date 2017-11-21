@@ -19,7 +19,7 @@ namespace CoreLogic
 
         public List<Fee> GetCurrentYearFeesByStudentNumber(int studentNumber)
         {
-            throw new NotImplementedException();
+            return this.persistenceProvider.GetCurrentYearFeesByStudentNumber(studentNumber);
         }
     }
 }
