@@ -204,7 +204,7 @@ namespace StudentModuleUI.AddStudent
             textBoxLatitud.Text = string.Empty;
             textBoxLatitud.Enabled = false;
             textBoxLongitud.Text = string.Empty;
-            numericUpDownFeeAmount.ResetText();
+            numericUpDownFeeAmount.Value = 0;
             textBoxLongitud.Enabled = false;
             listBoxStudentSubjects.Items.Clear();
             listBoxSystemSubjects.Items.Clear();

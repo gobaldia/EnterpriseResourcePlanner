@@ -4,6 +4,8 @@ using ActivityModuleUI.DeleteActivity;
 using ActivityModuleUI.ModifyActivity;
 using CoreGeneralization;
 using MainComponents;
+using PaymentModuleUI;
+using PaymentModuleUI.PayFee;
 using StudentModuleUI;
 using StudentModuleUI.AddStudent;
 using StudentModuleUI.DeleteStudent;
@@ -51,6 +53,7 @@ namespace MainModuleUI
             mainModule.AddModule(CreateSubjectModule());
             mainModule.AddModule(CreateVehicleModule());
             mainModule.AddModule(CreateActivityModule());
+            mainModule.AddModule(CreatePaymentModule());
 
             Application.Run(new MainForm(mainModule));
         }
@@ -132,6 +135,17 @@ namespace MainModuleUI
             ActivityActions.Add(deleteAction);
 
             return new ActivityModule(ActivityActions);
+        }
+
+        private static Module CreatePaymentModule()
+        {
+            List<IAction> PaymentActions = new List<IAction>();
+
+            IAction payAction = new PayFeeAction();
+
+            PaymentActions.Add(payAction);
+
+            return new PaymentModule(PaymentActions);
         }
     }
 }
