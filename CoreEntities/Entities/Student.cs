@@ -13,6 +13,7 @@ namespace CoreEntities.Entities
         public int StudentNumber { get; set; }
         public bool HavePickUpService { get; set; } = false;
         public virtual Location Location { get; set; }
+        public virtual List<Fee> Fees { get; set; }
         public virtual List<Activity> Activities { get; set; }
         #endregion
 
@@ -22,6 +23,7 @@ namespace CoreEntities.Entities
             base.LastName = string.Empty;
             this.Location = new Location();
             this.Subjects = new List<Subject>();
+            this.Fees = new List<Fee>();
             this.Activities = new List<Activity>();
         }
         public Student(string name, string lastName, string documentNumber)
@@ -31,6 +33,7 @@ namespace CoreEntities.Entities
             this.Document = documentNumber;
             this.Location = new Location();
             this.Subjects = new List<Subject>();
+            this.Fees = new List<Fee>();
             this.Activities = new List<Activity>();
         }
 

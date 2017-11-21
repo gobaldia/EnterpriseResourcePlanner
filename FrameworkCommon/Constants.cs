@@ -18,6 +18,7 @@ namespace FrameworkCommon
         public const string SUCCESS_TEACHER_MODIFICATION = "Teacher modification succcess.";
 
         public const string ERROR_STUDENT_INFO_REQUIRED = "Student information required.";
+        public const string ERROR_FEEAMOUNT = "Fee amount must be greater than 0.";
         public const string ERROR_SUBJECTS_REQUIRED = "At least one subject required.";
         public const string ERROR_VALIDCOORDENATES_REQUIRED = "Valid coordenates are required.";
         public const string SUCCESS_STUDENT_REGISTRATION = "Student registered with success.";

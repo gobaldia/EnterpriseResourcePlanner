@@ -48,8 +48,10 @@ namespace CoreLogic
 
             studentToModify.SetPickUpService(input.HavePickupService);
             bool locationHaveChange = ModifyLocation(studentToModify, input.NewLocation);
+            bool feeHasChange = ModifyFee(studentToModify, input.NewFeeAmount);
 
-            if (!nameWasModified && !lastNameWasModified && !subjectsWereModified && !locationHaveChange)
+            if (!nameWasModified && !lastNameWasModified &&
+                !subjectsWereModified && !locationHaveChange && !feeHasChange)
                 throw new CoreException("No modifications have been made.");
 
             this.persistanceProvider.ModifyStudent(studentToModify);
@@ -78,6 +80,14 @@ namespace CoreLogic
         public int GetNextStudentNumber()
         {
             return this.persistanceProvider.GetNextStudentNumber();
+        }
+
+        public void PayFees(List<Fee> feesToBePaid)
+        {
+            foreach(Fee f in feesToBePaid)
+            {
+                f.IsPaid = true;
+            }
         }
 
         #region Utility methods
@@ -144,6 +154,26 @@ namespace CoreLogic
         {
             if (newLocation == null) return true;
             else return !newLocation.Equals(studentToModify.GetLocation());
+        }
+        private bool ModifyFee(Student studentToModify, decimal newFeeAmoun)
+        {
+            bool result = false;
+            if(newFeeAmoun > 0)
+            {
+                this.UpdateFeesAmount(studentToModify.Fees, newFeeAmoun);
+                result = true;
+            }
+            return result;
+        }
+        private void UpdateFeesAmount(List<Fee> studentFees, decimal newAmount)
+        {
+            foreach (Fee fee in studentFees)
+            {
+                if (!fee.IsPaid && fee.Date.Month >= DateTime.Today.Month)
+                {
+                    fee.Amount = newAmount;
+                }
+            }
         }
         #endregion
     }

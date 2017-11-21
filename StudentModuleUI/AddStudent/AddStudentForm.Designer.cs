@@ -56,7 +56,10 @@
             this.labelLatitud = new System.Windows.Forms.Label();
             this.labelLongitud = new System.Windows.Forms.Label();
             this.groupBoxPickUpServiceRadioButtons = new System.Windows.Forms.GroupBox();
+            this.labelFeeAmount = new System.Windows.Forms.Label();
+            this.numericUpDownFeeAmount = new System.Windows.Forms.NumericUpDown();
             this.groupBoxPickUpServiceRadioButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeeAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // listBoxSystemSubjects
@@ -331,11 +334,35 @@
             this.groupBoxPickUpServiceRadioButtons.TabIndex = 63;
             this.groupBoxPickUpServiceRadioButtons.TabStop = false;
             // 
+            // labelFeeAmount
+            // 
+            this.labelFeeAmount.AutoSize = true;
+            this.labelFeeAmount.Location = new System.Drawing.Point(245, 527);
+            this.labelFeeAmount.Name = "labelFeeAmount";
+            this.labelFeeAmount.Size = new System.Drawing.Size(184, 32);
+            this.labelFeeAmount.TabIndex = 64;
+            this.labelFeeAmount.Text = "Fee Amount: ";
+            // 
+            // numericUpDownFeeAmount
+            // 
+            this.numericUpDownFeeAmount.DecimalPlaces = 2;
+            this.numericUpDownFeeAmount.Location = new System.Drawing.Point(477, 527);
+            this.numericUpDownFeeAmount.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDownFeeAmount.Name = "numericUpDownFeeAmount";
+            this.numericUpDownFeeAmount.Size = new System.Drawing.Size(380, 38);
+            this.numericUpDownFeeAmount.TabIndex = 66;
+            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.numericUpDownFeeAmount);
+            this.Controls.Add(this.labelFeeAmount);
             this.Controls.Add(this.groupBoxPickUpServiceRadioButtons);
             this.Controls.Add(this.labelLongitud);
             this.Controls.Add(this.labelLatitud);
@@ -366,6 +393,7 @@
             this.Text = "Add Student";
             this.groupBoxPickUpServiceRadioButtons.ResumeLayout(false);
             this.groupBoxPickUpServiceRadioButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeeAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,5 +429,7 @@
         private System.Windows.Forms.Label labelLatitud;
         private System.Windows.Forms.Label labelLongitud;
         private System.Windows.Forms.GroupBox groupBoxPickUpServiceRadioButtons;
+        private System.Windows.Forms.Label labelFeeAmount;
+        private System.Windows.Forms.NumericUpDown numericUpDownFeeAmount;
     }
 }

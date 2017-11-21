@@ -436,6 +436,97 @@ namespace UnitTesting
             }
         }
 
+        [TestMethod]
+        public void AddStudentFees()
+        {
+            try
+            {
+                var newStudent = CreateRandomStudent();
+                newStudent.StudentNumber = 1;
+
+                Fee newFee = new Fee();
+                newFee.Amount = 20.5M;
+                newFee.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee);
+
+                Assert.AreEqual(newStudent.Fees.Count(), 1);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void AddStudentFeeWithAmount()
+        {
+            try
+            {
+                var newStudent = CreateRandomStudent();
+                newStudent.StudentNumber = 1;
+                
+                Fee newFee1 = new Fee();
+                newFee1.Amount = 20.5M;
+                newFee1.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee1);
+
+                Fee newFee2 = new Fee();
+                newFee2.Amount = 11M;
+                newFee2.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee2);
+
+                Fee newFee3 = new Fee();
+                newFee3.Amount = 1.5M;
+                newFee3.Date = DateTime.Now;
+                newStudent.Fees.Add(newFee3);
+
+                foreach (Fee f in newStudent.Fees)
+                    Assert.AreEqual(f.Amount, 20.5M);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void PayStudentFees()
+        {
+            try
+            {
+                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+                var newStudent = CreateRandomStudent();
+                newStudent.StudentNumber = 1;
+
+                for(int index = 0; index < 12; index++)
+                {
+                    Fee newFee = new Fee();
+                    newFee.Amount = (3 * index)/(index/2);
+                    newFee.Date = DateTime.Now;
+                    newFee.IsPaid = false;
+                    newStudent.Fees.Add(newFee);
+                }
+                studentOperations.AddStudent(newStudent);
+
+                var systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);
+                List<Fee> feesToBePaid = systemStudent.Fees.Take(3).ToList();
+                studentOperations.PayFees(feesToBePaid);
+
+                systemStudent = studentOperations.GetStudentByDocumentNumber(newStudent.Document);
+                List<Fee> paidFees = systemStudent.Fees.Take(3).ToList();
+                foreach(Fee f in paidFees)
+                {
+                    Assert.IsTrue(f.IsPaid);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
         #region Extra methods
         private Student CreateRandomStudent()
         {
@@ -445,6 +536,10 @@ namespace UnitTesting
         private Student FindStudentOnSystem(string documentNumber)
         {
             return SystemDummyData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+        }
+        private List<int> GetMonthsOfTheYear()
+        {
+            return new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         }
         #endregion
     }
