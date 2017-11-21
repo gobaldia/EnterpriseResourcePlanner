@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DummyProvider.cs" />
+    <Compile Include="Implementations\PaymentDummyPersistence.cs" />
     <Compile Include="Implementations\StudentDummyPersistance.cs" />
     <Compile Include="Implementations\SubjectDummyPersistance.cs" />
     <Compile Include="Implementations\TeacherDummyPersistance.cs" />

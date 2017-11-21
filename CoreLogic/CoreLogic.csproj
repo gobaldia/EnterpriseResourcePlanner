@@ -41,11 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IActivityLogic.cs" />
+    <Compile Include="Interfaces\IPaymentLogic.cs" />
     <Compile Include="Interfaces\IStudentLogic.cs" />
     <Compile Include="Interfaces\ISubjectLogic.cs" />
     <Compile Include="Interfaces\ITeacherLogic.cs" />
     <Compile Include="ActivityLogic.cs" />
     <Compile Include="Interfaces\IVehicleLogic.cs" />
+    <Compile Include="PaymentLogic.cs" />
     <Compile Include="StudentLogic.cs" />
     <Compile Include="SubjectLogic.cs" />
     <Compile Include="TeacherLogic.cs" />

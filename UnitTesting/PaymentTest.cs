@@ -34,7 +34,7 @@ namespace UnitTesting
 
                 studentOperations.AddStudent(newStudent);
 
-                List<Fee> studentFees = studentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
+                List<Fee> studentFees = paymentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
                 Assert.IsNotNull(studentFees);
                 Assert.Equals(studentFees.Count, 12);
             }

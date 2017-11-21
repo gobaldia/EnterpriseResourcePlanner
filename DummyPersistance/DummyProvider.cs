@@ -15,6 +15,7 @@ namespace DummyPersistance
         private IStudentLogic studentsLogic;
         private ISubjectLogic subjectsLogic;
         private IVehicleLogic vehiclesLogic;
+        private IPaymentLogic paymentsLogic;
 
         #region Singleton
         // Variable estática para la instancia, se necesita utilizar una función lambda ya que el constructor es privado.
@@ -25,6 +26,7 @@ namespace DummyPersistance
             this.studentsLogic = new StudentLogic(new StudentDummyPersistance());
             this.subjectsLogic = new SubjectLogic(new SubjectDummyPersistance());
             this.vehiclesLogic = new VehicleLogic(new VehicleDummyPersistance());
+            this.paymentsLogic = new PaymentLogic(new PaymentDummyPersistence());
         }
         public static DummyProvider GetInstance
         {
@@ -53,6 +55,11 @@ namespace DummyPersistance
         public IVehicleLogic GetVehicleOperations()
         {
             return this.vehiclesLogic;
+        }
+
+        public IPaymentLogic GetPaymentOperations()
+        {
+            return this.paymentsLogic;
         }
     }
 }
