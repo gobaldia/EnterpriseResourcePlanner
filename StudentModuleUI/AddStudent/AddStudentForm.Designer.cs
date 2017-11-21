@@ -345,7 +345,13 @@
             // 
             // numericUpDownFeeAmount
             // 
+            this.numericUpDownFeeAmount.DecimalPlaces = 2;
             this.numericUpDownFeeAmount.Location = new System.Drawing.Point(477, 527);
+            this.numericUpDownFeeAmount.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             this.numericUpDownFeeAmount.Name = "numericUpDownFeeAmount";
             this.numericUpDownFeeAmount.Size = new System.Drawing.Size(380, 38);
             this.numericUpDownFeeAmount.TabIndex = 66;

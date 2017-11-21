@@ -106,7 +106,9 @@ namespace DataAccess.Implementations
                 var addedSubjects = this.GetAddedSubjects(studentOnDB, studentToModify);
                 this.UpdateSubjects(context, studentOnDB, addedSubjects, deletedSubjects);
                 this.UpdatePickUpServiceData(studentOnDB, studentToModify);
-                //this.UpdateFeesAmount(studentOnDB, studentToModify);
+
+                foreach(Fee f in studentToModify.Fees)
+                    context.Entry(f).State = EntityState.Modified;
 
                 studentOnDB.Name = studentToModify.Name;
                 studentOnDB.LastName = studentToModify.LastName;

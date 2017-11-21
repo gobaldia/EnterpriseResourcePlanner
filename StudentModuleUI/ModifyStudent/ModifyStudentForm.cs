@@ -42,7 +42,7 @@ namespace StudentModuleUI.ModifyStudent
                         StudentNumber = int.Parse(this.comboBoxStudentsNumber.SelectedItem.ToString()),
                         NewSubjects = this.GetSelectedSubjects(),
                         HavePickupService = this.radioButtonYesPickUp.Checked,
-                        NewFeeAmount = numericUpDownFeeAmount.Value != NewFeeAmount ? NewFeeAmount : 0
+                        NewFeeAmount = numericUpDownFeeAmount.Value != NewFeeAmount ? numericUpDownFeeAmount.Value : 0
                     };
 
                     if (radioButtonYesPickUp.Checked)
@@ -180,6 +180,7 @@ namespace StudentModuleUI.ModifyStudent
             this.textBoxLatitud.Enabled = false;
             this.textBoxLongitud.Enabled = false;
             this.comboBoxStudentsNumber.SelectedIndex = -1;
+            this.numericUpDownFeeAmount.Value = 0;
             CleanListBoxes();
 
             this.labelError.Text = string.Empty;
