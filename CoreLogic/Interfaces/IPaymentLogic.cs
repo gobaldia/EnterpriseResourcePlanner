@@ -11,6 +11,6 @@ namespace CoreLogic.Interfaces
     {
         List<Fee> GetCurrentYearFeesByStudentNumber(int studentNumber);
         Fee GetOldestNotPaidFee(int studentNumber);
-
+        void PayFee(Fee feeToBePaid);
     }
 }

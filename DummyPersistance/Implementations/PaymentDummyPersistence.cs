@@ -24,5 +24,9 @@ namespace DummyPersistance.Implementations
             return this.dummySystemStudents.Find(s => s.StudentNumber.Equals(studentNumber)).Fees.FirstOrDefault(f => !f.IsPaid);
         }
 
+        public void PayFee(Fee feeToBePaid)
+        {
+            feeToBePaid.IsPaid = true;
+        }
     }
 }
