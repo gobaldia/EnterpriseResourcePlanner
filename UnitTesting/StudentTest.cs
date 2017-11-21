@@ -130,13 +130,13 @@ namespace UnitTesting
         {
             IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
-            Student newStudent = this.CreateRandomStudent();
+            Student newStudent = Utility.CreateRandomStudent();
             newStudent.Subjects = new List<Subject>();
             newStudent.HavePickUpService = false;
             newStudent.StudentNumber = 1;
             studentOperations.AddStudent(newStudent);
 
-            Assert.IsNotNull(this.FindStudentOnSystem(newStudent.GetDocumentNumber()));
+            Assert.IsNotNull(Utility.FindStudentOnSystem(newStudent.GetDocumentNumber()));
         }
 
         [TestMethod]
@@ -146,7 +146,7 @@ namespace UnitTesting
             {
                 IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
-                Student firstStudent = this.CreateRandomStudent();
+                Student firstStudent = Utility.CreateRandomStudent();
                 firstStudent.StudentNumber = 1;
 
                 Student secondStudent = new Student(firstStudent.GetName(), firstStudent.GetLastName(), firstStudent.GetDocumentNumber());
@@ -177,7 +177,7 @@ namespace UnitTesting
             Subject aSubject = new Subject(123456, "Math");
             systemSubjects.Add(aSubject);
 
-            Student newStudent = this.CreateRandomStudent();
+            Student newStudent = Utility.CreateRandomStudent();
             Subject subjectToBeAdded = subjectOperations.GetSubjectByCode(123456);
 
             newStudent.AddSubjectToStudent(subjectToBeAdded);
@@ -428,7 +428,7 @@ namespace UnitTesting
                 studentOperations.AddStudent(newStudent);
                 studentOperations.DeleteStudent(nextStudentNumber);
 
-                Assert.IsNull(this.FindStudentOnSystem(documentNumber));
+                Assert.IsNull(Utility.FindStudentOnSystem(documentNumber));
             }
             catch (Exception ex)
             {
@@ -441,7 +441,7 @@ namespace UnitTesting
         {
             try
             {
-                var newStudent = CreateRandomStudent();
+                var newStudent = Utility.CreateRandomStudent();
                 newStudent.StudentNumber = 1;
 
                 Fee newFee = new Fee();
@@ -462,7 +462,7 @@ namespace UnitTesting
         {
             try
             {
-                var newStudent = CreateRandomStudent();
+                var newStudent = Utility.CreateRandomStudent();
                 newStudent.StudentNumber = 1;
                 
                 Fee newFee1 = new Fee();
@@ -496,7 +496,7 @@ namespace UnitTesting
             try
             {
                 IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
-                var newStudent = CreateRandomStudent();
+                var newStudent = Utility.CreateRandomStudent();
                 newStudent.StudentNumber = 1;
 
                 for(int index = 0; index < 12; index++)
@@ -526,21 +526,5 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
-
-        #region Extra methods
-        private Student CreateRandomStudent()
-        {
-            Student newStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), Utility.GetRandomDocument());
-            return newStudent;
-        }
-        private Student FindStudentOnSystem(string documentNumber)
-        {
-            return SystemDummyData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
-        }
-        private List<int> GetMonthsOfTheYear()
-        {
-            return new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-        }
-        #endregion
     }
 }
