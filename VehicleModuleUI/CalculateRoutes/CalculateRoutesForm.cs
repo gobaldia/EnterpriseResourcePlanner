@@ -34,6 +34,7 @@ namespace VehicleModuleUI.CalculateRoutes
                 for (int index = 0; index < vehicles.Count; index++)
                 {
                     this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index]);
+                    this.listBoxVehiclesOrderedByEfficiency.DisplayMember = "Item1";
                 }
             }
             catch (CoreException ex)
@@ -69,7 +70,6 @@ namespace VehicleModuleUI.CalculateRoutes
 
         private void listBoxVehiclesOrderedByCapacity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Vehicle vehicle = this.listBoxVehiclesOrderedByEfficiency.SelectedItem as Vehicle;
             int position = this.listBoxVehiclesOrderedByEfficiency.SelectedIndex;
             if(position >= 0)
                 this.FillListBoxStudentsInVehicle(position);
@@ -78,9 +78,6 @@ namespace VehicleModuleUI.CalculateRoutes
         private void FillListBoxStudentsInVehicle(int position)
         {
             this.listBoxStudentsInVehicle.Items.Clear();
-            //IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
-            //var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
-            //var students = vehicles[position].Item2;
             var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
             var students = vehicles[position].Item2;
             for (int index = 0; index < students.Count; index++)
@@ -96,12 +93,28 @@ namespace VehicleModuleUI.CalculateRoutes
 
         private void buttonOrderByDistanceDesc_Click(object sender, EventArgs e)
         {
+            this.orderByDistance("DESC");
+        }
+
+        private void buttonOrderByDistanceAsc_Click(object sender, EventArgs e)
+        {
+            this.orderByDistance("ASC");
+        }
+
+        private void orderByDistance(string direction)
+        {
             try
             {
                 IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
-                //var vehicles = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
                 var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
-                var orderedVehicles = vehicles.OrderByDescending(v => vehicleOperations.CalculateDistanceToCoverByVehicle(v)).ToList();
+
+                var orderedVehicles = new List<Tuple<Vehicle, List<Student>>>();
+
+                if (direction.Equals("ASC"))
+                    orderedVehicles = vehicles.OrderBy(v => vehicleOperations.CalculateDistanceToCoverByVehicle(v)).ToList();
+                else
+                    orderedVehicles = vehicles.OrderByDescending(v => vehicleOperations.CalculateDistanceToCoverByVehicle(v)).ToList();
+
                 this.listBoxVehiclesOrderedByEfficiency.Items.Clear();
                 for (int index = 0; index < orderedVehicles.Count; index++)
                 {
@@ -113,6 +126,11 @@ namespace VehicleModuleUI.CalculateRoutes
                 this.labelError.Text = ex.Message;
                 this.labelError.Visible = true;
             }
-        }
+            catch (Exception ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+        } 
     }
 }

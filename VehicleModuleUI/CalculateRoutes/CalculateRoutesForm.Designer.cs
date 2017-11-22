@@ -136,6 +136,7 @@
             this.buttonOrderByDistanceAsc.TabIndex = 9;
             this.buttonOrderByDistanceAsc.Text = "\t▲";
             this.buttonOrderByDistanceAsc.UseVisualStyleBackColor = true;
+            this.buttonOrderByDistanceAsc.Click += new System.EventHandler(this.buttonOrderByDistanceAsc_Click);
             // 
             // labelOrderByNumberOfTravels
             // 
