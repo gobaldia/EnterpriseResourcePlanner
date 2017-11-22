@@ -33,7 +33,7 @@ namespace VehicleModuleUI.CalculateRoutes
                 var vehicles = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
-                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index].Item1);
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index]);
                 }
             }
             catch (CoreException ex)
@@ -57,7 +57,7 @@ namespace VehicleModuleUI.CalculateRoutes
                 var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
-                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index].Item1);
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index]);
                 }
             }
             catch (CoreException ex)
@@ -69,17 +69,19 @@ namespace VehicleModuleUI.CalculateRoutes
 
         private void listBoxVehiclesOrderedByCapacity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Vehicle vehicle = this.listBoxVehiclesOrderedByEfficiency.SelectedItem as Vehicle;
+            //Vehicle vehicle = this.listBoxVehiclesOrderedByEfficiency.SelectedItem as Vehicle;
             int position = this.listBoxVehiclesOrderedByEfficiency.SelectedIndex;
             if(position >= 0)
-                this.FillListBoxStudentsInVehicle(vehicle, position);
+                this.FillListBoxStudentsInVehicle(position);
         }
 
-        private void FillListBoxStudentsInVehicle(Vehicle vehicle, int position)
+        private void FillListBoxStudentsInVehicle(int position)
         {
             this.listBoxStudentsInVehicle.Items.Clear();
-            IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
-            var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+            //IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+            //var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+            //var students = vehicles[position].Item2;
+            var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
             var students = vehicles[position].Item2;
             for (int index = 0; index < students.Count; index++)
             {
@@ -90,6 +92,49 @@ namespace VehicleModuleUI.CalculateRoutes
         private void buttonBackToMainMenu_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void buttonOrderByDistanceDesc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                //var vehicles = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
+                var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
+                var orderedVehicles = vehicles.OrderByDescending(v => this.CalculateDistanceToCoverByVehicle(v)).ToList();
+                this.listBoxVehiclesOrderedByEfficiency.Items.Clear();
+                for (int index = 0; index < orderedVehicles.Count; index++)
+                {
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(orderedVehicles[index]);
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+        }
+
+        private double CalculateDistanceToCoverByVehicle(Tuple<Vehicle, List<Student>> vehiclesWithStudents)
+        {
+            var students = vehiclesWithStudents.Item2;
+            var school = new Student();
+            school.SetLocation(new Location());
+            students.Insert(0, school);
+            students.Add(school);
+            var distance = 0.0;
+            for (int index = 1; index < students.Count(); index ++)
+            {
+                var studentLocation = students[index].Location;
+                distance += Distance(students[index].Location, students[index - 1].Location);
+            }
+            students.RemoveAll(s => s.Location.Equals(new Location()));
+            return distance;
+        }
+
+        private double Distance(Location from, Location to)
+        {
+            return Math.Sqrt(Math.Pow(from.Latitud - to.Latitud, 2) + Math.Pow(from.Longitud - to.Longitud, 2));
         }
     }
 }

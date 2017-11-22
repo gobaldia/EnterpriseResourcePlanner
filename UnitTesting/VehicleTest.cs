@@ -285,6 +285,60 @@ namespace UnitTesting
 
         }
 
+        [TestMethod]
+        public void CalculateDistanceToCoverByVehicle()
+        {
+            IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+
+            Vehicle vehicle1 = new Vehicle("SBA0001", 10, 10);
+
+            Student studentOne = new Student();
+            studentOne.Document = "1234567-1";
+            studentOne.Name = "John";
+            studentOne.Location = new Location(2.00000, 2.000000);
+            studentOne.HavePickUpService = true;
+            studentOne.StudentNumber = 1;
+
+            Student studentTwo = new Student();
+            studentTwo.Document = "1234567-2";
+            studentTwo.Name = "George";
+            studentTwo.Location = new Location(1.00000, 1.000000);
+            studentTwo.HavePickUpService = true;
+            studentTwo.StudentNumber = 2;
+
+            Student studentThree = new Student();
+            studentThree.Document = "1234567-3";
+            studentThree.Name = "Paul";
+            studentThree.Location = new Location(3.00000, 3.000000);
+            studentThree.HavePickUpService = true;
+            studentThree.StudentNumber = 3;
+
+            Student studentFour = new Student();
+            studentFour.Document = "1234567-4";
+            studentFour.Name = "Ringo";
+            studentFour.Location = new Location(20.00000, 20.000000);
+            studentFour.HavePickUpService = true;
+            studentFour.StudentNumber = 4;
+
+            studentOperations.AddStudent(studentOne);
+            studentOperations.AddStudent(studentTwo);
+            studentOperations.AddStudent(studentThree);
+            studentOperations.AddStudent(studentFour);
+
+            var vehiclesWithStudents = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
+
+            var expectedDistance = 0;
+            expectedDistance += Distance(new Location(), studentTwo.Location);
+            expectedDistance += Distance(studentTwo.Location, studentOne.Location);
+            expectedDistance += Distance(studentOne.Location, studentThree.Location);
+            expectedDistance += Distance(studentThree.Location, studentFour.Location);
+
+            var distance = CalculateDistanceToCoverByVehicle(vehiclesWithStudents);
+
+            Assert.IsTrue(distance == expectedDistance);
+        }
+
         //[TestMethod]
         //public void GetVehiclesOrderedByCapacityConsideringStudentsNumber()
         //{
