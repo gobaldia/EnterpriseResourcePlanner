@@ -39,8 +39,8 @@
             this.buttonOrderByDistanceDesc = new System.Windows.Forms.Button();
             this.buttonOrderByDistanceAsc = new System.Windows.Forms.Button();
             this.labelOrderByNumberOfTravels = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonOrderByNumberOfTripsDesc = new System.Windows.Forms.Button();
+            this.buttonOrderByNumberOfTripsAsc = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelCalculateRoutesTitle
@@ -147,31 +147,33 @@
             this.labelOrderByNumberOfTravels.TabIndex = 10;
             this.labelOrderByNumberOfTravels.Text = "Order by Number of Travels";
             // 
-            // button1
+            // buttonOrderByNumberOfTripsDesc
             // 
-            this.button1.Location = new System.Drawing.Point(13, 269);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "\t▼";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonOrderByNumberOfTripsDesc.Location = new System.Drawing.Point(13, 269);
+            this.buttonOrderByNumberOfTripsDesc.Name = "buttonOrderByNumberOfTripsDesc";
+            this.buttonOrderByNumberOfTripsDesc.Size = new System.Drawing.Size(50, 23);
+            this.buttonOrderByNumberOfTripsDesc.TabIndex = 11;
+            this.buttonOrderByNumberOfTripsDesc.Text = "\t▼";
+            this.buttonOrderByNumberOfTripsDesc.UseVisualStyleBackColor = true;
+            this.buttonOrderByNumberOfTripsDesc.Click += new System.EventHandler(this.buttonOrderByNumberOfTripsDesc_Click);
             // 
-            // button2
+            // buttonOrderByNumberOfTripsAsc
             // 
-            this.button2.Location = new System.Drawing.Point(69, 268);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "▲";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonOrderByNumberOfTripsAsc.Location = new System.Drawing.Point(69, 269);
+            this.buttonOrderByNumberOfTripsAsc.Name = "buttonOrderByNumberOfTripsAsc";
+            this.buttonOrderByNumberOfTripsAsc.Size = new System.Drawing.Size(50, 23);
+            this.buttonOrderByNumberOfTripsAsc.TabIndex = 12;
+            this.buttonOrderByNumberOfTripsAsc.Text = "\t▲";
+            this.buttonOrderByNumberOfTripsAsc.UseVisualStyleBackColor = true;
+            this.buttonOrderByNumberOfTripsAsc.Click += new System.EventHandler(this.buttonOrderByNumberOfTripsAsc_Click);
             // 
             // CalculateRoutesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 497);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonOrderByNumberOfTripsAsc);
+            this.Controls.Add(this.buttonOrderByNumberOfTripsDesc);
             this.Controls.Add(this.labelOrderByNumberOfTravels);
             this.Controls.Add(this.buttonOrderByDistanceAsc);
             this.Controls.Add(this.buttonOrderByDistanceDesc);
@@ -203,7 +205,7 @@
         private System.Windows.Forms.Button buttonOrderByDistanceDesc;
         private System.Windows.Forms.Button buttonOrderByDistanceAsc;
         private System.Windows.Forms.Label labelOrderByNumberOfTravels;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonOrderByNumberOfTripsDesc;
+        private System.Windows.Forms.Button buttonOrderByNumberOfTripsAsc;
     }
 }

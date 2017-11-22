@@ -131,6 +131,59 @@ namespace VehicleModuleUI.CalculateRoutes
                 this.labelError.Text = ex.Message;
                 this.labelError.Visible = true;
             }
-        } 
+        }
+
+        private void buttonOrderByNumberOfTripsDesc_Click(object sender, EventArgs e)
+        {
+            this.OrderByNumberOfTrips("DESC");
+        }
+
+        private void buttonOrderByNumberOfTripsAsc_Click(object sender, EventArgs e)
+        {
+            this.OrderByNumberOfTrips("ASC");
+        }
+
+        private void OrderByNumberOfTrips(string direction)
+        {
+            try
+            {
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
+
+                var orderedVehicles = new List<Tuple<Vehicle, List<Student>>>();
+
+                if (direction.Equals("ASC"))
+                    orderedVehicles = vehicles.OrderBy(v => this.occurrences(v, vehicles)).ToList();
+                else
+                    orderedVehicles = vehicles.OrderByDescending(v => this.occurrences(v, vehicles)).ToList();
+
+                this.listBoxVehiclesOrderedByEfficiency.Items.Clear();
+                for (int index = 0; index < orderedVehicles.Count; index++)
+                {
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(orderedVehicles[index]);
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+        }
+
+        private int occurrences(Tuple<Vehicle, List<Student>> vehicle, List<Tuple<Vehicle, List<Student>>> vehicles)
+        {
+            var occurrences = 0;
+            foreach (var v in vehicles)
+            {
+                if (v.Item1.Equals(vehicle.Item1))
+                    occurrences++;
+            }
+            return occurrences;
+        }
     }
 }
