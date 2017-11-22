@@ -291,7 +291,9 @@ namespace UnitTesting
             IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
             IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
 
-            Vehicle vehicle1 = new Vehicle("SBA0001", 10, 10);
+            Vehicle vehicle = new Vehicle("SBA0001", 10, 10);
+
+            vehicleOperations.AddVehicle(vehicle);
 
             Student studentOne = new Student();
             studentOne.Document = "1234567-1";
@@ -326,15 +328,17 @@ namespace UnitTesting
             studentOperations.AddStudent(studentThree);
             studentOperations.AddStudent(studentFour);
 
-            var vehiclesWithStudents = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
+            List<Tuple<Vehicle, List<Student>>> vehiclesWithStudents = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
 
-            var expectedDistance = 0;
-            expectedDistance += Distance(new Location(), studentTwo.Location);
-            expectedDistance += Distance(studentTwo.Location, studentOne.Location);
-            expectedDistance += Distance(studentOne.Location, studentThree.Location);
-            expectedDistance += Distance(studentThree.Location, studentFour.Location);
+            var expectedDistance = 0.0;
+            expectedDistance += Utils.Distance(new Location(), studentTwo.Location);
+            expectedDistance += Utils.Distance(studentTwo.Location, studentOne.Location);
+            expectedDistance += Utils.Distance(studentOne.Location, studentThree.Location);
+            expectedDistance += Utils.Distance(studentThree.Location, studentFour.Location);
+            expectedDistance += Utils.Distance(studentFour.Location, new Location());
 
-            var distance = CalculateDistanceToCoverByVehicle(vehiclesWithStudents);
+
+            var distance = vehicleOperations.CalculateDistanceToCoverByVehicle(vehiclesWithStudents[0]);
 
             Assert.IsTrue(distance == expectedDistance);
         }

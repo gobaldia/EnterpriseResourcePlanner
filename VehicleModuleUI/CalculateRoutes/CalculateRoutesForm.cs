@@ -101,7 +101,7 @@ namespace VehicleModuleUI.CalculateRoutes
                 IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
                 //var vehicles = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
                 var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
-                var orderedVehicles = vehicles.OrderByDescending(v => this.CalculateDistanceToCoverByVehicle(v)).ToList();
+                var orderedVehicles = vehicles.OrderByDescending(v => vehicleOperations.CalculateDistanceToCoverByVehicle(v)).ToList();
                 this.listBoxVehiclesOrderedByEfficiency.Items.Clear();
                 for (int index = 0; index < orderedVehicles.Count; index++)
                 {
@@ -113,28 +113,6 @@ namespace VehicleModuleUI.CalculateRoutes
                 this.labelError.Text = ex.Message;
                 this.labelError.Visible = true;
             }
-        }
-
-        private double CalculateDistanceToCoverByVehicle(Tuple<Vehicle, List<Student>> vehiclesWithStudents)
-        {
-            var students = vehiclesWithStudents.Item2;
-            var school = new Student();
-            school.SetLocation(new Location());
-            students.Insert(0, school);
-            students.Add(school);
-            var distance = 0.0;
-            for (int index = 1; index < students.Count(); index ++)
-            {
-                var studentLocation = students[index].Location;
-                distance += Distance(students[index].Location, students[index - 1].Location);
-            }
-            students.RemoveAll(s => s.Location.Equals(new Location()));
-            return distance;
-        }
-
-        private double Distance(Location from, Location to)
-        {
-            return Math.Sqrt(Math.Pow(from.Latitud - to.Latitud, 2) + Math.Pow(from.Longitud - to.Longitud, 2));
         }
     }
 }
