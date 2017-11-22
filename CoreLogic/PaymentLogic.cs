@@ -22,14 +22,9 @@ namespace CoreLogic
             return this.persistenceProvider.GetCurrentYearFeesByStudentNumber(studentNumber);
         }
 
-        public Fee GetOldestNotPaidFee(int studentNumber)
+        public void PayFees(List<Fee> feesToBePaid)
         {
-            return this.persistenceProvider.GetOldestNotPaidFee(studentNumber);
-        }
-
-        public void PayFee(Fee feeToBePaid)
-        {
-            this.persistenceProvider.PayFee(feeToBePaid);
+            this.persistenceProvider.PayFees(feesToBePaid);
         }
     }
 }

@@ -31,5 +31,8 @@ namespace FrameworkCommon
         public const string ACTIVITY_COST_NEGATIVE = "Activity's cost should be greater or equal than 0.";
         public const string ACTIVITY_SUCCESSFULLY_DELETED = "The activity was successfully deleted.";
         public const string ACTIVITY_SUCCESSFULLY_MODIFIED = "The activity was successfully modified.";
+        public const string NOFEES_TOBEPAID = "There no fees to be paid.";
+        public const string ERROR_MUST_PAY_OLDESTS_FEES_FIRST = "Oldest fees must be paid first.";
+        public const string FEES_WHERE_SUCCESSFULLY_PAID = "Fees where successfuly paid.";
     }
 }

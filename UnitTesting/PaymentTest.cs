@@ -43,36 +43,9 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
-
+        
         [TestMethod]
-        public void GetOldestNotPaidFee()
-        {
-            try
-            {
-                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
-                IPaymentLogic paymentOperations = DummyProvider.GetInstance.GetPaymentOperations();
-
-                var newStudent = Utility.CreateRandomStudent();
-                newStudent.Fees = Utility.GenerateYearFees();
-                newStudent.Fees[0].IsPaid = true;
-                newStudent.Fees[1].IsPaid = true;
-                newStudent.Fees[2].IsPaid = true;
-                newStudent.StudentNumber = 1;
-                
-                studentOperations.AddStudent(newStudent);
-
-                Fee studentOldesNotPaidFee = paymentOperations.GetOldestNotPaidFee(newStudent.StudentNumber);
-                Assert.IsNotNull(studentOldesNotPaidFee);
-                Assert.AreEqual(studentOldesNotPaidFee.Date, newStudent.Fees[3].Date);
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-        }
-
-        [TestMethod]
-        public void PayFee()
+        public void PayFees()
         {
             try
             {
@@ -85,11 +58,13 @@ namespace UnitTesting
 
                 studentOperations.AddStudent(newStudent);
 
-                Fee feeToBePaid = newStudent.Fees[3];
-                paymentOperations.PayFee(feeToBePaid);
+                List<Fee> feesToBePaid = newStudent.Fees.Take(3).ToList();
+                paymentOperations.PayFees(feesToBePaid);
 
                 List<Fee> studentFees = paymentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
-                Assert.IsTrue(studentFees[3].IsPaid);
+                List<Fee> checkFeesPaid = studentFees.Take(3).ToList();
+                foreach(var fee in checkFeesPaid)
+                    Assert.IsTrue(fee.IsPaid);
             }
             catch (Exception ex)
             {

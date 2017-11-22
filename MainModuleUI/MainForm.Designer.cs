@@ -30,7 +30,6 @@
         {
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.labelMainModuleTitle = new System.Windows.Forms.Label();
-            this.buttonInitialiceData = new System.Windows.Forms.Button();
             this.labelDataGenerated = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -53,16 +52,6 @@
             this.labelMainModuleTitle.TabIndex = 1;
             this.labelMainModuleTitle.Text = "Enterprise Resource Planner";
             // 
-            // buttonInitialiceData
-            // 
-            this.buttonInitialiceData.Location = new System.Drawing.Point(1277, 856);
-            this.buttonInitialiceData.Name = "buttonInitialiceData";
-            this.buttonInitialiceData.Size = new System.Drawing.Size(477, 61);
-            this.buttonInitialiceData.TabIndex = 2;
-            this.buttonInitialiceData.Text = "Initialize random generated data";
-            this.buttonInitialiceData.UseVisualStyleBackColor = true;
-            this.buttonInitialiceData.Click += new System.EventHandler(this.buttonInitialiceData_Click);
-            // 
             // labelDataGenerated
             // 
             this.labelDataGenerated.AutoSize = true;
@@ -81,7 +70,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1900, 1000);
             this.Controls.Add(this.labelDataGenerated);
-            this.Controls.Add(this.buttonInitialiceData);
             this.Controls.Add(this.labelMainModuleTitle);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
@@ -96,7 +84,6 @@
 
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.Label labelMainModuleTitle;
-        private System.Windows.Forms.Button buttonInitialiceData;
         private System.Windows.Forms.Label labelDataGenerated;
     }
 }

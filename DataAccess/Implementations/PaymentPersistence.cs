@@ -22,14 +22,18 @@ namespace DataAccess.Implementations
             return studentFees;
         }
 
-        public Fee GetOldestNotPaidFee(int studentNumber)
+        public void PayFees(List<Fee> feesToBePaid)
         {
-            throw new NotImplementedException();
-        }
+            using (Context context = new Context())
+            {
+                foreach (var fee in feesToBePaid)
+                {
+                    fee.IsPaid = true;
+                    context.Entry(fee).State = EntityState.Modified;
+                }
+                context.SaveChanges();
+            }
 
-        public void PayFee(Fee feeToBePaid)
-        {
-            throw new NotImplementedException();
         }
     }
 }
