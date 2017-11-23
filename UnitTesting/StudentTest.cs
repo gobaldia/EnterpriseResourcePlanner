@@ -487,5 +487,28 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
+
+        [TestMethod]
+        public void ToString()
+        {
+            var student = new Student();
+            student.StudentNumber = 10;
+            student.SetName("John");
+            student.SetLastName("Lennon");
+            var expectedToString = "Number: 10, Name: John Lennon";
+            Assert.AreEqual(expectedToString, student.ToString());
+        }
+
+        [TestMethod]
+        public void GetFullNameAndLocation()
+        {
+            var student = new Student();
+            student.StudentNumber = 10;
+            student.SetName("John");
+            student.SetLastName("Lennon");
+            student.SetLocation(new Location());
+            var expectedString = "John Lennon: (0, 0)";
+            Assert.AreEqual(expectedString, student.GetFullNameAndLocation());
+        }
     }
 }
