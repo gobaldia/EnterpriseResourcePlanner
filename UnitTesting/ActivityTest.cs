@@ -9,8 +9,8 @@ using DataAccess;
 using FrameworkCommon;
 using CoreEntities.Exceptions;
 using CoreLogic;
-using CoreLogic.Interfaces;
 using DummyPersistance;
+using CoreLogic.Interfaces;
 using UnitTesting.Utilities;
 
 namespace UnitTesting
@@ -18,6 +18,12 @@ namespace UnitTesting
     [TestClass]
     public class ActivityTest
     {
+        [TestInitialize]
+        public void TestInitialization()
+        {
+            SystemDummyData.GetInstance.Reset();
+        }
+
         [TestMethod]
         public void CreateActivity()
         {
@@ -68,31 +74,33 @@ namespace UnitTesting
         [TestMethod]
         public void AddActivityToSystem()
         {
-            SystemData.GetInstance.Reset();
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
 
             Activity newActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
 
-            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(newActivity);
+            activityOperations.AddActivity(newActivity);
 
             Assert.IsNotNull(this.FindActivityOnSystem(newActivity.Id));
         }
 
         private object FindActivityOnSystem(int id)
         {
-            List<Activity> activities = ClassFactory.GetOrCreate<ActivityLogic>().GetActivities();
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
+            List<Activity> activities = activityOperations.GetActivities();
             return activities.Find(x => x.Id == id);
         }
 
         [TestMethod]
         public void TryToAddActivityThatAlreadyExistsToSystem()
         {
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
             try
             {
                 Activity firstActivity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
                 Activity secondActivity = firstActivity;
 
-                ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(firstActivity);
-                ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(secondActivity);
+                activityOperations.AddActivity(firstActivity);
+                activityOperations.AddActivity(secondActivity);
 
                 Assert.Fail();
             }
@@ -109,25 +117,25 @@ namespace UnitTesting
         [TestMethod]
         public void ModifyActivity()
         {
-            SystemData.GetInstance.Reset();
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
 
             var activity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
-            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activity);
+            activityOperations.AddActivity(activity);
 
             activity.Name = "Yoga Reloaded";
-            ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(activity.Id, activity);
+            activityOperations.ModifyActivityById(activity.Id, activity);
 
-            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activity.Id);
+            var modifiedActivity = activityOperations.GetActivityById(activity.Id);
             Assert.AreEqual(modifiedActivity.Name, "Yoga Reloaded");
         }
 
         [TestMethod]
         public void AssignStudentsToActivity()
         {
-            SystemData.GetInstance.Reset();
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
 
             var activity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
-            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activity);
+            activityOperations.AddActivity(activity);
 
             var firstStudent = new Student("Jon", "Bon Jovi", "1234567-8");
             var secondStudent = new Student("Jim Morrison", "Varela", "1234567-9");
@@ -139,9 +147,9 @@ namespace UnitTesting
             var newActivity = new Activity(activity.Name, activity.Date, activity.Cost);
             newActivity.Students = students;
 
-            ClassFactory.GetOrCreate<ActivityLogic>().ModifyActivityById(activity.Id, newActivity);
+            activityOperations.ModifyActivityById(activity.Id, newActivity);
 
-            var modifiedActivity = ClassFactory.GetOrCreate<ActivityLogic>().GetActivityById(activity.Id);
+            var modifiedActivity = activityOperations.GetActivityById(activity.Id);
 
             Assert.AreEqual(modifiedActivity.Students, students);
         }
@@ -149,14 +157,14 @@ namespace UnitTesting
         [TestMethod]
         public void DeleteActivity()
         {
-            SystemData.GetInstance.Reset();
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
 
             var activity = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
-            ClassFactory.GetOrCreate<ActivityLogic>().AddActivity(activity);
+            activityOperations.AddActivity(activity);
 
-            ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(activity.Id);
+            activityOperations.DeleteActivityById(activity.Id);
 
-            var quantityOfActivities = ClassFactory.GetOrCreate<ActivityLogic>().GetActivities().Count();
+            var quantityOfActivities = activityOperations.GetActivities().Count();
 
             Assert.IsTrue(quantityOfActivities == 0);
         }
@@ -164,11 +172,11 @@ namespace UnitTesting
         [TestMethod]
         public void TryToDeleteActivityThatDoesntExists()
         {
-            SystemData.GetInstance.Reset();
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
 
             try
             {
-                ClassFactory.GetOrCreate<ActivityLogic>().DeleteActivityById(1);
+                activityOperations.DeleteActivityById(1);
                 Assert.Fail();
             }
             catch (CoreException ex)
@@ -179,6 +187,27 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void ListActivities()
+        {
+            IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
+
+            var activityOne = new Activity("Yoga", new DateTime(2017, 11, 22), 150);
+            var activityTwo = new Activity("Guitar class", new DateTime(2017, 11, 25), 100);
+
+            activityOne.Id = 1;
+            activityTwo.Id = 2;
+
+            activityOperations.AddActivity(activityOne);
+            activityOperations.AddActivity(activityTwo);
+
+            var activities = activityOperations.GetActivities();
+
+            Assert.IsTrue(activities.Count() == 2);
+            Assert.AreEqual(activities[0], activityOne);
+            Assert.AreEqual(activities[1], activityTwo);
         }
     }
 }

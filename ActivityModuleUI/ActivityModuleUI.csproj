@@ -68,6 +68,13 @@
     <Compile Include="DeleteActivity\DeleteActivityForm.Designer.cs">
       <DependentUpon>DeleteActivityForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListActivities\ListActivitiesAction.cs" />
+    <Compile Include="ListActivities\ListActivitiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListActivities\ListActivitiesForm.Designer.cs">
+      <DependentUpon>ListActivitiesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifyActivity\ModifyActivityAction.cs" />
     <Compile Include="ModifyActivity\ModifyActivityForm.cs">
       <SubType>Form</SubType>
@@ -87,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteActivity\DeleteActivityForm.resx">
       <DependentUpon>DeleteActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListActivities\ListActivitiesForm.resx">
+      <DependentUpon>ListActivitiesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyActivity\ModifyActivityForm.resx">
       <DependentUpon>ModifyActivityForm.cs</DependentUpon>

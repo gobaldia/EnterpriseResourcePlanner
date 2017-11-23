@@ -14,12 +14,12 @@ namespace DummyPersistance.Implementations
 
         public void AddActivity(Activity newActivity)
         {
-            this.dummySystemActivities.Add(newActivity);
+            dummySystemActivities.Add(newActivity);
         }
 
         public void DeleteActivity(Activity activityToDelete)
         {
-            throw new NotImplementedException();
+            dummySystemActivities.Remove(activityToDelete);
         }
 
         public List<Activity> GetActivities()
@@ -29,17 +29,21 @@ namespace DummyPersistance.Implementations
 
         public Activity GetActivityById(int id)
         {
-            throw new NotImplementedException();
+            return this.dummySystemActivities.Find(a => a.Id == id);
         }
 
         public int GetNextActivityNumber()
         {
-            throw new NotImplementedException();
+            return this.dummySystemActivities.OrderByDescending(a => a.Id).FirstOrDefault().Id;
         }
 
         public void ModifyActivity(Activity activityToModify)
         {
-            throw new NotImplementedException();
+            var systemActivity = this.GetActivityById(activityToModify.Id);
+            systemActivity.Name = activityToModify.Name;
+            systemActivity.Date = activityToModify.Date;
+            systemActivity.Cost = activityToModify.Cost;
+            systemActivity.Students = activityToModify.Students;
         }
     }
 }

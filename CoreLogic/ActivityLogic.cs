@@ -23,9 +23,9 @@ namespace CoreLogic
 
         public void AddActivity(Activity newActivity)
         {
-            //if (this.IsActivityInSystem(newActivity))
-            //    throw new CoreException("Activity already exists.");
-            //else
+            if (this.IsActivityInSystem(newActivity))
+                throw new CoreException("Activity already exists.");
+            else
                 this.persistanceProvider.AddActivity(newActivity);
         }
 
