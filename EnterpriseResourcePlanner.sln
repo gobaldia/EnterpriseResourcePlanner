@@ -1,7 +1,7 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1_UserInterface", "1_UserInterface", "{C8F69CC4-05C7-4043-8FC2-A2006A84AEA0}"
 EndProject
@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentModuleUI", "StudentM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleModuleUI", "VehicleModuleUI\VehicleModuleUI.csproj", "{47FBB223-2BE4-4288-8E20-5B00C0314B33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataContracts", "DataContracts\DataContracts.csproj", "{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityModuleUI", "ActivityModuleUI\ActivityModuleUI.csproj", "{D0E9B6EA-A5E0-42ED-B9D3-A86D8B95655F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProviderManager", "ProviderManager\ProviderManager.csproj", "{FE0A814E-CF32-41E0-961E-9F7A5A3780D5}"
 EndProject

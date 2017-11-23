@@ -33,7 +33,8 @@ namespace VehicleModuleUI.CalculateRoutes
                 var vehicles = vehicleOperations.GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
-                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index].Item1);
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index]);
+                    this.listBoxVehiclesOrderedByEfficiency.DisplayMember = "Item1";
                 }
             }
             catch (CoreException ex)
@@ -57,7 +58,7 @@ namespace VehicleModuleUI.CalculateRoutes
                 var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
-                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index].Item1);
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(vehicles[index]);
                 }
             }
             catch (CoreException ex)
@@ -69,17 +70,15 @@ namespace VehicleModuleUI.CalculateRoutes
 
         private void listBoxVehiclesOrderedByCapacity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Vehicle vehicle = this.listBoxVehiclesOrderedByEfficiency.SelectedItem as Vehicle;
             int position = this.listBoxVehiclesOrderedByEfficiency.SelectedIndex;
             if(position >= 0)
-                this.FillListBoxStudentsInVehicle(vehicle, position);
+                this.FillListBoxStudentsInVehicle(position);
         }
 
-        private void FillListBoxStudentsInVehicle(Vehicle vehicle, int position)
+        private void FillListBoxStudentsInVehicle(int position)
         {
             this.listBoxStudentsInVehicle.Items.Clear();
-            IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
-            var vehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
+            var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
             var students = vehicles[position].Item2;
             for (int index = 0; index < students.Count; index++)
             {
@@ -90,6 +89,101 @@ namespace VehicleModuleUI.CalculateRoutes
         private void buttonBackToMainMenu_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void buttonOrderByDistanceDesc_Click(object sender, EventArgs e)
+        {
+            this.orderByDistance("DESC");
+        }
+
+        private void buttonOrderByDistanceAsc_Click(object sender, EventArgs e)
+        {
+            this.orderByDistance("ASC");
+        }
+
+        private void orderByDistance(string direction)
+        {
+            try
+            {
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
+
+                var orderedVehicles = new List<Tuple<Vehicle, List<Student>>>();
+
+                if (direction.Equals("ASC"))
+                    orderedVehicles = vehicles.OrderBy(v => vehicleOperations.CalculateDistanceToCoverByVehicle(v)).ToList();
+                else
+                    orderedVehicles = vehicles.OrderByDescending(v => vehicleOperations.CalculateDistanceToCoverByVehicle(v)).ToList();
+
+                this.listBoxVehiclesOrderedByEfficiency.Items.Clear();
+                for (int index = 0; index < orderedVehicles.Count; index++)
+                {
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(orderedVehicles[index]);
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+        }
+
+        private void buttonOrderByNumberOfTripsDesc_Click(object sender, EventArgs e)
+        {
+            this.OrderByNumberOfTrips("DESC");
+        }
+
+        private void buttonOrderByNumberOfTripsAsc_Click(object sender, EventArgs e)
+        {
+            this.OrderByNumberOfTrips("ASC");
+        }
+
+        private void OrderByNumberOfTrips(string direction)
+        {
+            try
+            {
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = this.listBoxVehiclesOrderedByEfficiency.Items.Cast<Tuple<Vehicle, List<Student>>>().ToList();
+
+                var orderedVehicles = new List<Tuple<Vehicle, List<Student>>>();
+
+                if (direction.Equals("ASC"))
+                    orderedVehicles = vehicles.OrderBy(v => this.occurrences(v, vehicles)).ToList();
+                else
+                    orderedVehicles = vehicles.OrderByDescending(v => this.occurrences(v, vehicles)).ToList();
+
+                this.listBoxVehiclesOrderedByEfficiency.Items.Clear();
+                for (int index = 0; index < orderedVehicles.Count; index++)
+                {
+                    this.listBoxVehiclesOrderedByEfficiency.Items.Add(orderedVehicles[index]);
+                }
+            }
+            catch (CoreException ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                this.labelError.Text = ex.Message;
+                this.labelError.Visible = true;
+            }
+        }
+
+        private int occurrences(Tuple<Vehicle, List<Student>> vehicle, List<Tuple<Vehicle, List<Student>>> vehicles)
+        {
+            var occurrences = 0;
+            foreach (var v in vehicles)
+            {
+                if (v.Item1.Equals(vehicle.Item1))
+                    occurrences++;
+            }
+            return occurrences;
         }
     }
 }

@@ -19,5 +19,6 @@ namespace CoreLogic.Interfaces
         List<Tuple<Vehicle, List<Student>>> GetVehiclesOrderedByCapacityConsideringStudentsNumber();
         List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption();
         List<Tuple<Vehicle, List<Student>>> GetVehiclesOrderedByEfficiencyConsideringStudentsNumber();
+        double CalculateDistanceToCoverByVehicle(Tuple<Vehicle, List<Student>> vehiclesWithStudents);
     }
 }

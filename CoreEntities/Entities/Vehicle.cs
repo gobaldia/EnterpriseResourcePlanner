@@ -102,7 +102,7 @@ namespace CoreEntities.Entities
 
         public double GetVehicleEfficiency()
         {
-            return this.FuelConsumptionKmsPerLtr / this.Capacity;
+            return this.FuelConsumptionKmsPerLtr + this.Capacity;
         }
     }
 }

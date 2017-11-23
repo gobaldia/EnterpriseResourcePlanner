@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using FrameworkCommon.MethodParameters;
 using CoreLogic.Interfaces;
 using DataContracts;
+using FrameworkCommon;
 
 namespace CoreLogic
 {
@@ -191,6 +192,23 @@ namespace CoreLogic
         public List<Vehicle> GetVehiclesOrderedByCapacityPerFuelConsumption()
         {
             return persistanceProvider.GetVehiclesOrderedByCapacityPerFuelConsumption();
+        }
+
+        public double CalculateDistanceToCoverByVehicle(Tuple<Vehicle, List<Student>> vehiclesWithStudents)
+        {
+            var students = vehiclesWithStudents.Item2;
+            var school = new Student();
+            school.SetLocation(new Location());
+            students.Insert(0, school);
+            students.Add(school);
+            var distance = 0.0;
+            for (int index = 1; index < students.Count(); index++)
+            {
+                var studentLocation = students[index].Location;
+                distance += Utils.Distance(students[index].Location, students[index - 1].Location);
+            }
+            students.RemoveAll(s => s.Location.Equals(new Location()));
+            return distance;
         }
     }
 }
