@@ -39,12 +39,12 @@ namespace DataAccess.Implementations
         {
             using (Context context = new Context())
             {
+                var studentOnDB = context.people.OfType<Student>().Include("Activities").Where(s => s.PersonOID.Equals(student.PersonOID)).FirstOrDefault();
                 foreach (var activity in activitiesToBePaid)
                 {
-                    activity.IsPaid = true;
-                    context.people.Attach(student);
-                    activity.Students.Add(student);
-                    context.Entry(activity).State = EntityState.Modified;
+                    var activityOnDB = context.activities.Include("Students").Where(a => a.ActivityOID.Equals(activity.ActivityOID)).FirstOrDefault();
+                    activityOnDB.IsPaid = true;
+                    activityOnDB.Students.Add(studentOnDB);
                 }
                 context.SaveChanges();
             }
