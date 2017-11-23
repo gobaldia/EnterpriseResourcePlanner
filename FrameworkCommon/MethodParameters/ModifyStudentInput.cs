@@ -15,5 +15,6 @@ namespace FrameworkCommon.MethodParameters
         public List<Subject> NewSubjects { get; set; }
         public Location NewLocation { get; set; }
         public bool HavePickupService { get; set; } = false;
+        public decimal NewFeeAmount { get; set; } = -1;
     }
 }

@@ -56,7 +56,10 @@
             this.labelLatitud = new System.Windows.Forms.Label();
             this.labelLongitud = new System.Windows.Forms.Label();
             this.groupBoxPickUpServiceRadioButtons = new System.Windows.Forms.GroupBox();
+            this.labelFeeAmount = new System.Windows.Forms.Label();
+            this.numericUpDownFeeAmount = new System.Windows.Forms.NumericUpDown();
             this.groupBoxPickUpServiceRadioButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeeAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // listBoxSystemSubjects
@@ -182,7 +185,7 @@
             this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxName.TabIndex = 2;
+            this.textBoxName.TabIndex = 3;
             this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxLastName
@@ -191,7 +194,7 @@
             this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxLastName.TabIndex = 3;
+            this.textBoxLastName.TabIndex = 4;
             this.textBoxLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxDocument
@@ -200,7 +203,7 @@
             this.textBoxDocument.MaxLength = 9;
             this.textBoxDocument.Name = "textBoxDocument";
             this.textBoxDocument.Size = new System.Drawing.Size(380, 38);
-            this.textBoxDocument.TabIndex = 1;
+            this.textBoxDocument.TabIndex = 2;
             this.textBoxDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // buttonAddStudent
@@ -208,7 +211,7 @@
             this.buttonAddStudent.Location = new System.Drawing.Point(1496, 1041);
             this.buttonAddStudent.Name = "buttonAddStudent";
             this.buttonAddStudent.Size = new System.Drawing.Size(265, 60);
-            this.buttonAddStudent.TabIndex = 43;
+            this.buttonAddStudent.TabIndex = 9;
             this.buttonAddStudent.Text = "Add";
             this.buttonAddStudent.UseVisualStyleBackColor = true;
             this.buttonAddStudent.Click += new System.EventHandler(this.buttonAddStudent_Click);
@@ -239,7 +242,7 @@
             this.textBoxStudentNumber.MaxLength = 50;
             this.textBoxStudentNumber.Name = "textBoxStudentNumber";
             this.textBoxStudentNumber.Size = new System.Drawing.Size(380, 38);
-            this.textBoxStudentNumber.TabIndex = 54;
+            this.textBoxStudentNumber.TabIndex = 1;
             // 
             // radioButtonYesPickUp
             // 
@@ -247,7 +250,7 @@
             this.radioButtonYesPickUp.Location = new System.Drawing.Point(45, 26);
             this.radioButtonYesPickUp.Name = "radioButtonYesPickUp";
             this.radioButtonYesPickUp.Size = new System.Drawing.Size(101, 36);
-            this.radioButtonYesPickUp.TabIndex = 55;
+            this.radioButtonYesPickUp.TabIndex = 6;
             this.radioButtonYesPickUp.Text = "Yes";
             this.radioButtonYesPickUp.UseVisualStyleBackColor = true;
             this.radioButtonYesPickUp.CheckedChanged += new System.EventHandler(this.radioButtonPickUp_CheckedChanged);
@@ -290,7 +293,7 @@
             this.textBoxLatitud.MaxLength = 10;
             this.textBoxLatitud.Name = "textBoxLatitud";
             this.textBoxLatitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLatitud.TabIndex = 4;
+            this.textBoxLatitud.TabIndex = 7;
             this.textBoxLatitud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxLongitud
@@ -300,7 +303,7 @@
             this.textBoxLongitud.MaxLength = 11;
             this.textBoxLongitud.Name = "textBoxLongitud";
             this.textBoxLongitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLongitud.TabIndex = 5;
+            this.textBoxLongitud.TabIndex = 8;
             this.textBoxLongitud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // labelLatitud
@@ -331,11 +334,35 @@
             this.groupBoxPickUpServiceRadioButtons.TabIndex = 63;
             this.groupBoxPickUpServiceRadioButtons.TabStop = false;
             // 
+            // labelFeeAmount
+            // 
+            this.labelFeeAmount.AutoSize = true;
+            this.labelFeeAmount.Location = new System.Drawing.Point(245, 527);
+            this.labelFeeAmount.Name = "labelFeeAmount";
+            this.labelFeeAmount.Size = new System.Drawing.Size(184, 32);
+            this.labelFeeAmount.TabIndex = 64;
+            this.labelFeeAmount.Text = "Fee Amount: ";
+            // 
+            // numericUpDownFeeAmount
+            // 
+            this.numericUpDownFeeAmount.DecimalPlaces = 2;
+            this.numericUpDownFeeAmount.Location = new System.Drawing.Point(477, 527);
+            this.numericUpDownFeeAmount.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDownFeeAmount.Name = "numericUpDownFeeAmount";
+            this.numericUpDownFeeAmount.Size = new System.Drawing.Size(380, 38);
+            this.numericUpDownFeeAmount.TabIndex = 5;
+            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.numericUpDownFeeAmount);
+            this.Controls.Add(this.labelFeeAmount);
             this.Controls.Add(this.groupBoxPickUpServiceRadioButtons);
             this.Controls.Add(this.labelLongitud);
             this.Controls.Add(this.labelLatitud);
@@ -366,6 +393,7 @@
             this.Text = "Add Student";
             this.groupBoxPickUpServiceRadioButtons.ResumeLayout(false);
             this.groupBoxPickUpServiceRadioButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeeAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,5 +429,7 @@
         private System.Windows.Forms.Label labelLatitud;
         private System.Windows.Forms.Label labelLongitud;
         private System.Windows.Forms.GroupBox groupBoxPickUpServiceRadioButtons;
+        private System.Windows.Forms.Label labelFeeAmount;
+        private System.Windows.Forms.NumericUpDown numericUpDownFeeAmount;
     }
 }

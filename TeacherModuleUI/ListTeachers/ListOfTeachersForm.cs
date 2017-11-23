@@ -1,6 +1,6 @@
 ﻿using CoreEntities.Entities;
-using CoreLogic;
-using FrameworkCommon;
+using CoreLogic.Interfaces;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,18 +34,27 @@ namespace TeacherModuleUI.ListTeachers
         #region Utility methods
         private void LoadTeacherListBox()
         {
-            List<Teacher> systemTeachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            List<Teacher> systemTeachers = teacherOperations.GetTeachers();
+
             foreach(Teacher teacher in systemTeachers)
-            {
                 this.listBoxSystemTeachers.Items.Add(teacher);
-            }
         }
         private void PopulateSubjectsList(Teacher aTeacher)
         {
             this.listBoxTeacherSubjects.Items.Clear();
-            foreach (Subject subject in aTeacher.GetSubjects())
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            Teacher selectedTeacher = teacherOperations.GetTeacherByDocumentNumber(aTeacher.GetDocumentNumber());
+
+            List<Subject> teacherSubjects = selectedTeacher.GetSubjects();
+            this.LoadSubjectsIntoListBox(teacherSubjects);
+        }
+        private void LoadSubjectsIntoListBox(List<Subject> subjectsToBeLoaded)
+        {
+            if (subjectsToBeLoaded?.Count > 0)
             {
-                this.listBoxTeacherSubjects.Items.Add(subject);
+                foreach (Subject subject in subjectsToBeLoaded)
+                    this.listBoxTeacherSubjects.Items.Add(subject);
             }
         }
         private void SetDefaultWindowsSize()

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D0E9B6EA-A5E0-42ED-B9D3-A86D8B95655F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ActivityModuleUI</RootNamespace>
+    <AssemblyName>ActivityModuleUI</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CoreEntities">
+      <HintPath>..\CoreEntities\bin\Debug\CoreEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreGeneralization">
+      <HintPath>..\CoreGeneralization\bin\Debug\CoreGeneralization.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityModule.cs" />
+    <Compile Include="AddActivity\AddActivityAction.cs" />
+    <Compile Include="AddActivity\AddActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddActivity\AddActivityForm.Designer.cs">
+      <DependentUpon>AddActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteActivity\DeleteActivityAction.cs" />
+    <Compile Include="DeleteActivity\DeleteActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteActivity\DeleteActivityForm.Designer.cs">
+      <DependentUpon>DeleteActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListActivities\ListActivitiesAction.cs" />
+    <Compile Include="ListActivities\ListActivitiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListActivities\ListActivitiesForm.Designer.cs">
+      <DependentUpon>ListActivitiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModifyActivity\ModifyActivityAction.cs" />
+    <Compile Include="ModifyActivity\ModifyActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyActivity\ModifyActivityForm.Designer.cs">
+      <DependentUpon>ModifyActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AddActivity\AddActivityForm.resx">
+      <DependentUpon>AddActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteActivity\DeleteActivityForm.resx">
+      <DependentUpon>DeleteActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListActivities\ListActivitiesForm.resx">
+      <DependentUpon>ListActivitiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyActivity\ModifyActivityForm.resx">
+      <DependentUpon>ModifyActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreLogic\CoreLogic.csproj">
+      <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
+      <Name>CoreLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{02C77B64-E35F-4FC6-9BC9-337AC9E73420}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
+      <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
+      <Name>FrameworkCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProviderManager\ProviderManager.csproj">
+      <Project>{FE0A814E-CF32-41E0-961E-9F7A5A3780D5}</Project>
+      <Name>ProviderManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

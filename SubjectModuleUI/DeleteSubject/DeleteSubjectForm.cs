@@ -1,7 +1,7 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
-using FrameworkCommon;
+using CoreLogic.Interfaces;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace SubjectModuleUI.DeleteSubject
 {
     public partial class DeleteSubjectForm : Form
-    {
+    {   
         public DeleteSubjectForm()
         {
             InitializeComponent();
@@ -31,11 +31,12 @@ namespace SubjectModuleUI.DeleteSubject
 
         private void FillSubjectsComboBox()
         {
-            var subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
+            
             for(int index = 0; index < subjects.Count; index++)
-            {
                 this.comboBoxSelectSubjectToDelete.Items.Add(subjects[index]);
-            }
+
             this.comboBoxSelectSubjectToDelete.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -46,7 +47,10 @@ namespace SubjectModuleUI.DeleteSubject
                 if(UserConfirmsThatWantToDeleteSubject())
                 {
                     var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-                    ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(selectedSubject.Code);
+
+                    ISubjectLogic subjectOperations = Provider.GetInstance.GetSubjectOperations();
+                    subjectOperations.DeleteSubjectByCode(selectedSubject.Code);
+
                     this.labelActionResult.Text = "Subject " + selectedSubject + " was succesfully deleted.";
                     this.labelActionResult.Visible = true;
                     this.ReloadComboBoxSelectSubjectToDelete();
@@ -111,11 +115,13 @@ namespace SubjectModuleUI.DeleteSubject
         {
             bool isSubjectAssignedToATeacher = false;
             var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-            var teachers = ClassFactory.GetOrCreate<TeacherLogic>().GetAllTeachers();
-            for(int index = 0; index < teachers.Count(); index++)
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            var teachers = teacherOperations.GetTeachers(true);
+
+            for(int index = 0; index < teachers?.Count(); index++)
             {
                 var teacherSubjects = teachers[index].GetSubjects();
-                if(teacherSubjects.Any(s => s.Code == subjectToDelete.Code))
+                if(teacherSubjects.Any(s => s.Code.Equals(subjectToDelete.Code)))
                 {
                     isSubjectAssignedToATeacher = true;
                 }
@@ -127,7 +133,8 @@ namespace SubjectModuleUI.DeleteSubject
         {
             bool isSubjectAssignedToAStudent = false;
             var selectedSubject = this.comboBoxSelectSubjectToDelete.SelectedItem as Subject;
-            var students = ClassFactory.GetOrCreate<StudentLogic>().GetStudents();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            var students = studentOperations.GetStudents(true);
             for (int index = 0; index < students.Count(); index++)
             {
                 var studentSubjects = students[index].GetSubjects();

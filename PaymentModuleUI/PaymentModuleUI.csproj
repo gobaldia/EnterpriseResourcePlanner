@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52BAB61F-5761-437B-9FE4-219FCBC36771}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PaymentModuleUI</RootNamespace>
+    <AssemblyName>PaymentModuleUI</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PayActivity\PayActivityAction.cs" />
+    <Compile Include="PayActivity\PayActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayActivity\PayActivityForm.Designer.cs">
+      <DependentUpon>PayActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PayFee\PayFeeAction.cs" />
+    <Compile Include="PayFee\PayFeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayFee\PayFeeForm.Designer.cs">
+      <DependentUpon>PayFeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentModule.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PayActivity\PayActivityForm.resx">
+      <DependentUpon>PayActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PayFee\PayFeeForm.resx">
+      <DependentUpon>PayFeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CoreEntities\CoreEntities.csproj">
+      <Project>{A1601F7B-A76E-4047-92C2-187D0DDB58D6}</Project>
+      <Name>CoreEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreGeneralization\CoreGeneralization.csproj">
+      <Project>{902D16BE-9EE7-4B6A-A522-5D25DA2D638B}</Project>
+      <Name>CoreGeneralization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreLogic\CoreLogic.csproj">
+      <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
+      <Name>CoreLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
+      <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
+      <Name>FrameworkCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProviderManager\ProviderManager.csproj">
+      <Project>{FE0A814E-CF32-41E0-961E-9F7A5A3780D5}</Project>
+      <Name>ProviderManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

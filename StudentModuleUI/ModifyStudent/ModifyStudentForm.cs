@@ -1,9 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
-using DataAccess;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +18,7 @@ namespace StudentModuleUI.ModifyStudent
 {
     public partial class ModifyStudentForm : Form
     {
+        private decimal NewFeeAmount { get; set; } = 0;
         public ModifyStudentForm()
         {
             InitializeComponent();
@@ -32,14 +33,14 @@ namespace StudentModuleUI.ModifyStudent
                 if (IsStudentNumberSelected() && ValidateFormData())
                 {
                     labelError.Text = string.Empty;
-
                     var input = new ModifyStudentInput
                     {
                         NewName = textBoxName.Text,
                         NewLastName = textBoxLastName.Text,
                         StudentNumber = int.Parse(this.comboBoxStudentsNumber.SelectedItem.ToString()),
                         NewSubjects = this.GetSelectedSubjects(),
-                        HavePickupService = this.radioButtonYesPickUp.Checked 
+                        HavePickupService = this.radioButtonYesPickUp.Checked,
+                        NewFeeAmount = numericUpDownFeeAmount.Value != NewFeeAmount ? numericUpDownFeeAmount.Value : 0
                     };
 
                     if (radioButtonYesPickUp.Checked)
@@ -49,7 +50,8 @@ namespace StudentModuleUI.ModifyStudent
                         input.NewLocation = new Location(latitud, longitud);
                     }
 
-                    ClassFactory.GetOrCreate<StudentLogic>().ModifyStudent(input);
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    studentOperations.ModifyStudent(input);
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_STUDENT_MODIFICATION;
                 }
@@ -99,7 +101,8 @@ namespace StudentModuleUI.ModifyStudent
                     CleanListBoxes();
 
                     int studentNumber = int.Parse(this.comboBoxStudentsNumber.SelectedItem.ToString());
-                    Student studentToModify = ClassFactory.GetOrCreate<StudentLogic>().GetStudentByNumber(studentNumber);
+                    IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+                    Student studentToModify = studentOperations.GetStudentByNumber(studentNumber);
                     FillFormWithStudentData(studentToModify);
                 }
                 else
@@ -148,7 +151,8 @@ namespace StudentModuleUI.ModifyStudent
         }
         private void LoadDocumentNumberComboBox()
         {
-            List<Student> systemStudents = SystemData.GetInstance.GetStudents();
+            IStudentLogic studentOperations = Provider.GetInstance.GetStudentOperations();
+            List<Student> systemStudents = studentOperations.GetStudents();
             foreach (Student student in systemStudents)
             {
                 this.comboBoxStudentsNumber.Items.Add(student.GetStudentNumber());
@@ -174,6 +178,7 @@ namespace StudentModuleUI.ModifyStudent
             this.textBoxLatitud.Enabled = false;
             this.textBoxLongitud.Enabled = false;
             this.comboBoxStudentsNumber.SelectedIndex = -1;
+            this.numericUpDownFeeAmount.Value = 0;
             CleanListBoxes();
 
             this.labelError.Text = string.Empty;
@@ -183,13 +188,13 @@ namespace StudentModuleUI.ModifyStudent
             this.textBoxName.Text = studentToModify.GetName();
             this.textBoxLastName.Text = studentToModify.GetLastName();
             this.textBoxDocument.Text = studentToModify.GetDocumentNumber();
-
+            this.numericUpDownFeeAmount.Value = GetCurrentFeeAmount(studentToModify);
             LoadPickupServiceData(studentToModify);
             this.PopulateListBoxes(studentToModify);
         }
         private void LoadPickupServiceData(Student studentToModify)
         {
-            if (studentToModify.HavePickUpService())
+            if (studentToModify.HavePickUpService)
             {
                 this.radioButtonYesPickUp.Checked = true;
                 this.textBoxLatitud.Enabled = true;
@@ -221,14 +226,26 @@ namespace StudentModuleUI.ModifyStudent
         }
         private List<Subject> GetSubjectsThatAreNotInTeacher(List<Subject> studentSubjects)
         {
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
+            ISubjectLogic subjectLogic = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> systemSubjects = subjectLogic.GetSubjects();
             return systemSubjects.Where(systemSubject => !studentSubjects.Any(studentSubject => systemSubject.Equals(studentSubject))).ToList();
         }
         private bool ValidateFormData()
         {
             return IsStudentMainDataNotEmpty() &&
                 HaveSubjectsToStudy() &&
-                IsPickupInformationValid();
+                IsPickupInformationValid() && IsValidFeeAmount();
+        }
+        private bool IsValidFeeAmount()
+        {
+            bool result = false;
+
+            if (numericUpDownFeeAmount.Value <= 0)
+                labelError.Text = Constants.ERROR_FEEAMOUNT;
+            else
+                result = true;
+
+            return result;
         }
         private bool IsPickupInformationValid()
         {
@@ -281,6 +298,11 @@ namespace StudentModuleUI.ModifyStudent
                 subjectsToBeAdded.Add(subject);
             }
             return subjectsToBeAdded;
+        }
+        private decimal GetCurrentFeeAmount(Student studentToModify)
+        {
+            NewFeeAmount = studentToModify.Fees.Find(f => f.Date.Month.Equals(DateTime.Now.Month)).Amount;
+            return NewFeeAmount;
         }
         #endregion
     }

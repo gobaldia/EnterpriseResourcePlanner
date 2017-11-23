@@ -40,6 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IActivityLogic.cs" />
+    <Compile Include="Interfaces\IPaymentLogic.cs" />
+    <Compile Include="Interfaces\IStudentLogic.cs" />
+    <Compile Include="Interfaces\ISubjectLogic.cs" />
+    <Compile Include="Interfaces\ITeacherLogic.cs" />
+    <Compile Include="ActivityLogic.cs" />
+    <Compile Include="Interfaces\IVehicleLogic.cs" />
+    <Compile Include="PaymentLogic.cs" />
     <Compile Include="StudentLogic.cs" />
     <Compile Include="SubjectLogic.cs" />
     <Compile Include="TeacherLogic.cs" />
@@ -51,9 +59,9 @@
       <Project>{A1601F7B-A76E-4047-92C2-187D0DDB58D6}</Project>
       <Name>CoreEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{02C77B64-E35F-4FC6-9BC9-337AC9E73420}</Project>
-      <Name>DataAccess</Name>
+    <ProjectReference Include="..\DataContracts\DataContracts.csproj">
+      <Project>{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}</Project>
+      <Name>DataContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>

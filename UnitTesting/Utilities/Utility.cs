@@ -1,5 +1,5 @@
 ﻿using CoreEntities.Entities;
-using DataAccess;
+using DummyPersistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace UnitTesting.Utilities
             bool result = real.Count == toBeCompareWith.Count;
             for (var index = 0; (index < real.Count || !result); index++)
             {
-                result = real[index].Equals(toBeCompareWith[index]);
+                result = real.ElementAt(index).Equals(toBeCompareWith.ElementAt(index));
             }
             return result;
         }
@@ -51,5 +51,36 @@ namespace UnitTesting.Utilities
             return documents[randomNumber.Next(0, documents.Length - 1)];
         }
 
+        public static Student CreateRandomStudent()
+        {
+            Student newStudent = new Student(Utility.GetRandomName(), Utility.GetRandomLastName(), Utility.GetRandomDocument());
+            return newStudent;
+        }
+
+        public static Student FindStudentOnSystem(string documentNumber)
+        {
+            return SystemDummyData.GetInstance.GetStudents().Find(x => x.GetDocumentNumber().Equals(documentNumber));
+        }
+
+        public static List<int> GetMonthsOfTheYear()
+        {
+            return new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        }
+
+        public static List<Fee> GenerateYearFees()
+        {
+            var yearFees = new List<Fee>();
+            for(int index = 1; index < 13; index++)
+            {
+                var newFee = new Fee
+                {
+                    Amount = (0.6M + index * 2) / 3,
+                    Date = new DateTime(DateTime.Now.Year, index, 1),
+                    IsPaid = false
+                };
+                yearFees.Add(newFee);
+            }
+            return yearFees;
+        }
     }
 }

@@ -32,7 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,6 +72,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -79,6 +87,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActivityModuleUI\ActivityModuleUI.csproj">
+      <Project>{AFC26F55-9EBB-4614-A4D1-BC2348AB3585}</Project>
+      <Name>ActivityModuleUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoreEntities\CoreEntities.csproj">
       <Project>{A1601F7B-A76E-4047-92C2-187D0DDB58D6}</Project>
       <Name>CoreEntities</Name>
@@ -98,6 +110,10 @@
     <ProjectReference Include="..\MainComponents\MainComponents.csproj">
       <Project>{A99F88CA-AFF1-4F83-A0A0-615DC157FDFC}</Project>
       <Name>MainComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentModuleUI\PaymentModuleUI.csproj">
+      <Project>{52BAB61F-5761-437B-9FE4-219FCBC36771}</Project>
+      <Name>PaymentModuleUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentModuleUI\StudentModuleUI.csproj">
       <Project>{A04FA460-E035-40AD-B796-B886705180A1}</Project>

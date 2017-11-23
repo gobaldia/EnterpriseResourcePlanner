@@ -39,9 +39,8 @@
             this.textBoxTeacherLastName = new System.Windows.Forms.TextBox();
             this.buttonDeleteTeacher = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonSearch = new System.Windows.Forms.Button();
             this.labelDocument = new System.Windows.Forms.Label();
-            this.textBoxTeacherDocument = new System.Windows.Forms.TextBox();
+            this.comboBoxTeachersDocuments = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // labelSuccess
@@ -68,7 +67,7 @@
             // 
             this.labelTeacherSubjects.AutoSize = true;
             this.labelTeacherSubjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTeacherSubjects.Location = new System.Drawing.Point(160, 565);
+            this.labelTeacherSubjects.Location = new System.Drawing.Point(241, 558);
             this.labelTeacherSubjects.Name = "labelTeacherSubjects";
             this.labelTeacherSubjects.Size = new System.Drawing.Size(257, 36);
             this.labelTeacherSubjects.TabIndex = 48;
@@ -79,7 +78,7 @@
             this.listBoxTeacherSubjects.Enabled = false;
             this.listBoxTeacherSubjects.FormattingEnabled = true;
             this.listBoxTeacherSubjects.ItemHeight = 31;
-            this.listBoxTeacherSubjects.Location = new System.Drawing.Point(163, 611);
+            this.listBoxTeacherSubjects.Location = new System.Drawing.Point(244, 604);
             this.listBoxTeacherSubjects.Name = "listBoxTeacherSubjects";
             this.listBoxTeacherSubjects.Size = new System.Drawing.Size(694, 252);
             this.listBoxTeacherSubjects.TabIndex = 44;
@@ -118,7 +117,7 @@
             this.textBoxTeacherName.Location = new System.Drawing.Point(477, 325);
             this.textBoxTeacherName.MaxLength = 50;
             this.textBoxTeacherName.Name = "textBoxTeacherName";
-            this.textBoxTeacherName.Size = new System.Drawing.Size(380, 38);
+            this.textBoxTeacherName.Size = new System.Drawing.Size(461, 38);
             this.textBoxTeacherName.TabIndex = 39;
             // 
             // textBoxTeacherLastName
@@ -127,11 +126,12 @@
             this.textBoxTeacherLastName.Location = new System.Drawing.Point(477, 415);
             this.textBoxTeacherLastName.MaxLength = 50;
             this.textBoxTeacherLastName.Name = "textBoxTeacherLastName";
-            this.textBoxTeacherLastName.Size = new System.Drawing.Size(380, 38);
+            this.textBoxTeacherLastName.Size = new System.Drawing.Size(461, 38);
             this.textBoxTeacherLastName.TabIndex = 40;
             // 
             // buttonDeleteTeacher
             // 
+            this.buttonDeleteTeacher.Enabled = false;
             this.buttonDeleteTeacher.Location = new System.Drawing.Point(1496, 1041);
             this.buttonDeleteTeacher.Name = "buttonDeleteTeacher";
             this.buttonDeleteTeacher.Size = new System.Drawing.Size(265, 60);
@@ -150,16 +150,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Location = new System.Drawing.Point(918, 224);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(265, 53);
-            this.buttonSearch.TabIndex = 52;
-            this.buttonSearch.Text = "Search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-            // 
             // labelDocument
             // 
             this.labelDocument.AutoSize = true;
@@ -169,23 +159,23 @@
             this.labelDocument.TabIndex = 53;
             this.labelDocument.Text = "Document: ";
             // 
-            // textBoxTeacherDocument
+            // comboBoxTeachersDocuments
             // 
-            this.textBoxTeacherDocument.Location = new System.Drawing.Point(477, 235);
-            this.textBoxTeacherDocument.MaxLength = 9;
-            this.textBoxTeacherDocument.Name = "textBoxTeacherDocument";
-            this.textBoxTeacherDocument.Size = new System.Drawing.Size(380, 38);
-            this.textBoxTeacherDocument.TabIndex = 1;
-            this.textBoxTeacherDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxTeacherDocument_KeyDown);
+            this.comboBoxTeachersDocuments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTeachersDocuments.FormattingEnabled = true;
+            this.comboBoxTeachersDocuments.Location = new System.Drawing.Point(477, 226);
+            this.comboBoxTeachersDocuments.Name = "comboBoxTeachersDocuments";
+            this.comboBoxTeachersDocuments.Size = new System.Drawing.Size(461, 39);
+            this.comboBoxTeachersDocuments.TabIndex = 54;
+            this.comboBoxTeachersDocuments.SelectedIndexChanged += new System.EventHandler(this.OnTeacherDocument_ComboIndexChange);
             // 
             // DeleteTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1868, 1192);
+            this.Controls.Add(this.comboBoxTeachersDocuments);
             this.Controls.Add(this.labelDocument);
-            this.Controls.Add(this.textBoxTeacherDocument);
-            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.labelSuccess);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.labelTeacherSubjects);
@@ -217,8 +207,7 @@
         private System.Windows.Forms.TextBox textBoxTeacherLastName;
         private System.Windows.Forms.Button buttonDeleteTeacher;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Label labelDocument;
-        private System.Windows.Forms.TextBox textBoxTeacherDocument;
+        private System.Windows.Forms.ComboBox comboBoxTeachersDocuments;
     }
 }

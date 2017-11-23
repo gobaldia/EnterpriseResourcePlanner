@@ -1,9 +1,9 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
-using DataAccess;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,14 +54,17 @@ namespace TeacherModuleUI.ModifyTeacher
                     string name = textBoxTeacherName.Text;
                     string lastName = textBoxTeacherLastName.Text;
                     string document = comboBoxTeachersDocuments.SelectedItem.ToString();
-                    
-                    ModifyTeacherInput input = new ModifyTeacherInput();
-                    input.NewName = name;
-                    input.NewLastName = lastName;
-                    input.DocumentNumber = document;
-                    input.NewSubjects = GetSelectedSubjects();
 
-                    ClassFactory.GetOrCreate<TeacherLogic>().ModifyTeacher(input);
+                    var input = new ModifyTeacherInput
+                    {
+                        NewName = name,
+                        NewLastName = lastName,
+                        DocumentNumber = document,
+                        NewSubjects = GetSelectedSubjects()
+                    };
+
+                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations();
+                    teacherOpertions.ModifyTeacher(input);
 
                     this.CleanForm();
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_MODIFICATION;
@@ -96,7 +99,9 @@ namespace TeacherModuleUI.ModifyTeacher
                     CleanListBoxes();
 
                     string documentNumber = this.comboBoxTeachersDocuments.SelectedItem.ToString();
-                    Teacher teacherToModify = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
+
+                    ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations(); 
+                    Teacher teacherToModify = teacherOpertions.GetTeacherByDocumentNumber(documentNumber);
                     this.textBoxTeacherName.Text = teacherToModify.GetName();
                     this.textBoxTeacherLastName.Text = teacherToModify.GetLastName();
 
@@ -146,16 +151,17 @@ namespace TeacherModuleUI.ModifyTeacher
         }
         private void LoadDocumentNumberComboBox()
         {
-            List<Teacher> systemTeachers = SystemData.GetInstance.GetTeachers();
+            ITeacherLogic teacherOpertions = Provider.GetInstance.GetTeacherOperations();
+            List<Teacher> systemTeachers = teacherOpertions.GetTeachers();
+
             foreach (Teacher teacher in systemTeachers)
-            {
                 this.comboBoxTeachersDocuments.Items.Add(teacher.GetDocumentNumber());
-            }
         }
         private List<Subject> GetSubjectsThatAreNotInTeacher(List<Subject> teacherSubjects)
         {
-            List<Subject> systemSubjects = SystemData.GetInstance.GetSubjects();
-            return systemSubjects.Where(systemSubject => !teacherSubjects.Any(teacherSubject => systemSubject.Equals(teacherSubject))).ToList();
+            ISubjectLogic subjectsOperations = Provider.GetInstance.GetSubjectOperations();
+            List<Subject> systemSubjects = subjectsOperations.GetSubjects();
+            return systemSubjects?.Where(systemSubject => !teacherSubjects.Any(teacherSubject => systemSubject.Equals(teacherSubject))).ToList();
         }
         private List<Subject> GetSelectedSubjects()
         {

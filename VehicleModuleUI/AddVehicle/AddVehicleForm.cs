@@ -1,7 +1,7 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
-using FrameworkCommon;
+using CoreLogic.Interfaces;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +25,7 @@ namespace VehicleModuleUI.AddVehicle
         private void SetDefaultWindowsSize()
         {
             this.AutoScaleMode = AutoScaleMode.None;
-            this.Size = new System.Drawing.Size(500, 350);
+            this.Size = new System.Drawing.Size(650, 450);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -34,10 +34,12 @@ namespace VehicleModuleUI.AddVehicle
             this.labelError.Visible = false;
             var registration = this.textBoxRegistration.Text;
             var capacity = (int) this.numericUpDownCapacity.Value;
+            var fuelConsumption = (int)this.numericUpDownFuelConsumption.Value;
             try
             {
-                Vehicle vehicle = new Vehicle(registration, capacity);
-                ClassFactory.GetOrCreate<VehicleLogic>().AddVehicle(vehicle);
+                Vehicle vehicle = new Vehicle(registration, capacity, fuelConsumption);
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                vehicleOperations.AddVehicle(vehicle);
                 this.labelSuccess.Visible = true;
                 this.labelSuccess.Text = "Vehicle " + vehicle + " was successfully added.";
             }

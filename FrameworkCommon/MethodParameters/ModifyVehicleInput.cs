@@ -10,5 +10,6 @@ namespace FrameworkCommon.MethodParameters
     {
         public int NewCapacity { get; set; }
         public string Registration { get; set; }
+        public int FuelConsumptionKmsPerLtr { get; set; }
     }
 }

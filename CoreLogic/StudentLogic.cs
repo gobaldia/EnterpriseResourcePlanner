@@ -1,39 +1,34 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using DataAccess;
+using CoreLogic.Interfaces;
+using DataContracts;
 using FrameworkCommon.MethodParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoreLogic
 {
-    public class StudentLogic
+    public class StudentLogic : IStudentLogic
     {
-        private List<Student> systemStudents = SystemData.GetInstance.GetStudents();
+        private IStudentPersistance persistanceProvider;
 
-        public void AddStudent(AddStudentInput input)
+        public StudentLogic(IStudentPersistance provider)
         {
-            Student newStudent = new Student(input.Name, input.LastName, input.DocumentNumber);
+            this.persistanceProvider = provider;
+        }
+
+        public void AddStudent(Student newStudent)
+        {
             if (this.IsStudentInSystem(newStudent))
                 throw new CoreException("Student already exists.");
 
-            AddStudentSubjects(newStudent, input.Subjects);
-
-            if (input.Location != null)
-            {
-                newStudent.SetPickUpService(true);
-                newStudent.SetLocation(input.Location);
-            }
-
-            this.systemStudents.Add(newStudent);
+            this.persistanceProvider.AddStudent(newStudent);
         }
 
         public Student GetStudentByDocumentNumber(string documentNumber)
         {
-            Student studentFound = this.systemStudents.Find(item => item.GetDocumentNumber().Equals(documentNumber));
+            Student studentFound = this.persistanceProvider.GetStudentByDocumentNumber(documentNumber);
             if (studentFound == null)
                 throw new CoreException("Student not found.");
 
@@ -50,35 +45,44 @@ namespace CoreLogic
 
             studentToModify.SetPickUpService(input.HavePickupService);
             bool locationHaveChange = ModifyLocation(studentToModify, input.NewLocation);
+            bool feeHasChange = ModifyFee(studentToModify, input.NewFeeAmount);
 
-            if (!nameWasModified && !lastNameWasModified && !subjectsWereModified && !locationHaveChange)
+            if (!nameWasModified && !lastNameWasModified &&
+                !subjectsWereModified && !locationHaveChange && !feeHasChange)
                 throw new CoreException("No modifications have been made.");
+
+            this.persistanceProvider.ModifyStudent(studentToModify);
         }
 
         public Student GetStudentByNumber(int studentNumber)
         {
-            Student studentFound = this.systemStudents.Find(item => item.GetStudentNumber().Equals(studentNumber));
+            Student studentFound = this.persistanceProvider.GetStudentByNumber(studentNumber);
             if (studentFound == null)
                 throw new CoreException("Student not found.");
 
             return studentFound;
         }
 
-        public List<Student> GetStudents()
+        public List<Student> GetStudents(bool bringSubjects = false)
         {
-            return this.systemStudents;
+            return this.persistanceProvider.GetStudents(bringSubjects);
         }
 
         public void DeleteStudent(int studentNumber)
         {
             Student studentToRemove = GetStudentByNumber(studentNumber);
-            this.systemStudents.Remove(studentToRemove);
+            this.persistanceProvider.DeleteStudent(studentToRemove);
+        }
+
+        public int GetNextStudentNumber()
+        {
+            return this.persistanceProvider.GetNextStudentNumber();
         }
 
         #region Utility methods
         private bool IsStudentInSystem(Student aStudent)
         {
-            return this.systemStudents.Exists(item => item.Equals(aStudent));
+            return this.persistanceProvider.IsStudentInSystem(aStudent.Document);
         }
         private void AddStudentSubjects(Student aStudent, List<Subject> subjectsToAdd)
         {
@@ -129,7 +133,7 @@ namespace CoreLogic
 
             if (LocationsAreDifferent(studentToModify, newLocation))
             {
-                studentToModify.SetLocation(newLocation);
+                studentToModify.SetLocation(newLocation ?? new Location());
                 locationWasModified = true;
             }
 
@@ -137,23 +141,28 @@ namespace CoreLogic
         }
         private bool LocationsAreDifferent(Student studentToModify, Location newLocation)
         {
+            if (newLocation == null) return true;
+            else return !newLocation.Equals(studentToModify.GetLocation());
+        }
+        private bool ModifyFee(Student studentToModify, decimal newFeeAmoun)
+        {
             bool result = false;
-
-            if (newLocation == null && studentToModify.GetLocation() != null)
-                result = true;
-            else if (newLocation != null && studentToModify.GetLocation() == null)
-                result = true;
-            else if (BothLocationNotNull(studentToModify, newLocation) &&
-                !newLocation.Equals(studentToModify.GetLocation()))
+            if(newFeeAmoun > 0)
             {
+                this.UpdateFeesAmount(studentToModify.Fees, newFeeAmoun);
                 result = true;
             }
-
             return result;
         }
-        private bool BothLocationNotNull(Student studentToModify, Location newLocation)
+        private void UpdateFeesAmount(List<Fee> studentFees, decimal newAmount)
         {
-            return newLocation != null && studentToModify.GetLocation() != null;
+            foreach (Fee fee in studentFees)
+            {
+                if (!fee.IsPaid && fee.Date.Month >= DateTime.Today.Month)
+                {
+                    fee.Amount = newAmount;
+                }
+            }
         }
         #endregion
     }

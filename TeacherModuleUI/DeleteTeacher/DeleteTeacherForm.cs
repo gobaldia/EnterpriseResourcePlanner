@@ -1,7 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
+using CoreLogic.Interfaces;
 using FrameworkCommon;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace TeacherModuleUI.DeleteTeacher
         {
             InitializeComponent();
             SetDefaultWindowsSize();
+            FillTeachersCombo();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -33,8 +35,9 @@ namespace TeacherModuleUI.DeleteTeacher
             {
                 if (teacherToDelete != null)
                 {
-                    ClassFactory.GetOrCreate<TeacherLogic>().DeleteTeacher(teacherToDelete);
-                    this.CleanForm();
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+                    teacherOperations.DeleteTeacher(teacherToDelete);
+                    this.CleanForm(true);
                     this.labelSuccess.Text = Constants.SUCCESS_TEACHER_DELETED;
                 }
                 else
@@ -51,16 +54,18 @@ namespace TeacherModuleUI.DeleteTeacher
                 this.labelError.Text = Constants.ERROR_UNEXPECTED;
             }
         }
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void OnTeacherDocument_ComboIndexChange(object sender, EventArgs e)
         {
             try
             {
                 this.CleanForm();
                 this.labelSuccess.Text = string.Empty;
-                string documentNumber = this.textBoxTeacherDocument.Text;
-                if (!string.IsNullOrEmpty(documentNumber))
+                if (comboBoxTeachersDocuments.SelectedIndex >= 0)
                 {
-                    this.teacherToDelete = ClassFactory.GetOrCreate<TeacherLogic>().GetTeacherByDocumentNumber(documentNumber);
+                    buttonDeleteTeacher.Enabled = true;
+                    var documentNumber = comboBoxTeachersDocuments.SelectedItem as string;
+                    ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+                    this.teacherToDelete = teacherOperations.GetTeacherByDocumentNumber(documentNumber);
                     this.FillFormWithTeacherData();
                 }
                 else
@@ -79,32 +84,49 @@ namespace TeacherModuleUI.DeleteTeacher
                 this.labelError.Text = Constants.ERROR_UNEXPECTED;
             }
         }
-        private void textBoxTeacherDocument_KeyDown(object sender, KeyEventArgs e)
-        {
-            this.labelSuccess.Text = string.Empty;
-            this.labelError.Text = string.Empty;
-        }
 
         #region Utility methods
         private void FillFormWithTeacherData()
         {
             this.textBoxTeacherName.Text = this.teacherToDelete.GetName();
             this.textBoxTeacherLastName.Text = this.teacherToDelete.GetLastName();
-            foreach (var subject in this.teacherToDelete.GetSubjects())
+            List<Subject> teacherSubjects = this.teacherToDelete.GetSubjects();
+            this.LoadSubjects(teacherSubjects);
+            
+        }
+        private void FillTeachersCombo()
+        {
+            ITeacherLogic teacherOperations = Provider.GetInstance.GetTeacherOperations();
+            var systemTeachers = teacherOperations.GetTeachers();
+            foreach (Teacher teacher in systemTeachers)
             {
-                this.listBoxTeacherSubjects.Items.Add(subject);
+                this.comboBoxTeachersDocuments.Items.Add(teacher.Document);
+            }  
+        }
+        private void LoadSubjects(List<Subject> subjectsToBeLoaded)
+        {
+            if(subjectsToBeLoaded?.Count > 0)
+            {
+                foreach (var subject in subjectsToBeLoaded)
+                {
+                    this.listBoxTeacherSubjects.Items.Add(subject);
+                }
             }
         }
-        private void CleanForm(bool cleanTeacherDocumentNumber = false)
+        private void CleanForm(bool reloadTeacherCombo = false)
         {
             this.textBoxTeacherName.Text = string.Empty;
-            this.textBoxTeacherLastName.Text = string.Empty;
-
-            if (cleanTeacherDocumentNumber)
-                this.textBoxTeacherDocument.Text = string.Empty;
-
+            this.textBoxTeacherLastName.Text = string.Empty;            
             this.listBoxTeacherSubjects.Items.Clear();
             this.labelError.Text = string.Empty;
+            if (reloadTeacherCombo)
+                this.ReloadTeacherCombo();
+        }
+        private void ReloadTeacherCombo()
+        {
+            this.buttonDeleteTeacher.Enabled = false;
+            comboBoxTeachersDocuments.Items.Clear();
+            this.FillTeachersCombo();
         }
         private void SetDefaultWindowsSize()
         {

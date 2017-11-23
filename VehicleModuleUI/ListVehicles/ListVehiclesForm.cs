@@ -1,6 +1,6 @@
 ﻿using CoreEntities.Exceptions;
-using CoreLogic;
-using FrameworkCommon;
+using CoreLogic.Interfaces;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +32,8 @@ namespace VehicleModuleUI.ListVehicles
         {
             try
             {
-                var availableVehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var availableVehicles = vehicleOperations.GetVehicles();
                 for (int index = 0; index < availableVehicles.Count; index++)
                 {
                     this.listBoxAvailableVehicles.Items.Add(availableVehicles[index].GetFullToString());
@@ -48,7 +49,6 @@ namespace VehicleModuleUI.ListVehicles
                 this.labelError.Visible = true;
                 this.labelError.Text = ex.Message;
             }
-            
         }
 
         private void buttonBackToMainMenu_Click(object sender, EventArgs e)

@@ -1,17 +1,22 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using DataAccess;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using FrameworkCommon;
-using CoreLogic;
+using DummyPersistance;
+using CoreLogic.Interfaces;
 
 namespace UnitTesting
 {
     [TestClass]
     public class SubjectTest
     {
+        [TestInitialize]
+        public void TestInitialization()
+        {
+            SystemDummyData.GetInstance.Reset();
+        }
+
         [TestMethod]
         public void CreateSubjectWithoutParameters()
         {
@@ -61,8 +66,9 @@ namespace UnitTesting
         [TestMethod]
         public void AddSubjectToSystem()
         {
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
             Subject newSubject = new Subject(1, "Logic");
-            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(newSubject);
+            subjectOperations.AddSubject(newSubject);
 
             Assert.IsNotNull(this.FindSubjectOnSystem(newSubject.GetCode()));
         }
@@ -72,10 +78,12 @@ namespace UnitTesting
         {
             try
             {
+                ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
+
                 Subject firstTeacher = new Subject(1, "Logic");
                 Subject secondTeacher = new Subject(1, "Logic");
-                ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(firstTeacher);
-                ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(secondTeacher);
+                subjectOperations.AddSubject(firstTeacher);
+                subjectOperations.AddSubject(secondTeacher);
 
                 Assert.Fail();
             }
@@ -92,22 +100,23 @@ namespace UnitTesting
         [TestMethod]
         public void DeleteSubject()
         {
-            SystemData.GetInstance.Reset();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
+
             Subject subject = new Subject(1000, "Logic");
-            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
-            ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(1000);
+            subjectOperations.AddSubject(subject);
+            subjectOperations.DeleteSubjectByCode(1000);
             Assert.IsNull(this.FindSubjectOnSystem(1000));
         }
 
         [TestMethod]
         public void AfterDeleteSubjectCodeIsAvailableToCreateNewSubject()
         {
-            SystemData.GetInstance.Reset();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
             Subject subject = new Subject(1000, "Logic");
-            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
-            ClassFactory.GetOrCreate<SubjectLogic>().DeleteSubjectByCode(subject.GetCode());
+            subjectOperations.AddSubject(subject);
+            subjectOperations.DeleteSubjectByCode(subject.GetCode());
             Subject anotherSubject = new Subject(1000, "Logic");
-            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(anotherSubject);
+            subjectOperations.AddSubject(anotherSubject);
             Assert.IsNotNull(this.FindSubjectOnSystem(anotherSubject.GetCode()));
         }
 
@@ -134,16 +143,16 @@ namespace UnitTesting
         [TestMethod]
         public void ModifySubject()
         {
-            SystemData.GetInstance.Reset();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
 
             int subjectCode = 1;
             Subject subject = new Subject(subjectCode, "Logic");
-            ClassFactory.GetOrCreate<SubjectLogic>().AddSubject(subject);
+            subjectOperations.AddSubject(subject);
 
             subject.SetName("LogicModified");
-            ClassFactory.GetOrCreate<SubjectLogic>().ModifySubjectByCode(subjectCode, subject);
+            subjectOperations.ModifySubjectByCode(subjectCode, subject);
 
-            Subject modifiedSubject = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjectByCode(subjectCode);
+            Subject modifiedSubject = subjectOperations.GetSubjectByCode(subjectCode);
             Assert.AreEqual(modifiedSubject.GetName(), "LogicModified");
         }
         
@@ -154,7 +163,43 @@ namespace UnitTesting
             Student student = new Student("Jose", "Lopez", "1234567-8");
             subject.AddStudent(student);
             Assert.IsNotNull(FindStudentByDocument(subject.Students, student.GetDocumentNumber()));
+        }
 
+        [TestMethod]
+        public void AddStudentsRange()
+        {
+            Subject subject = new Subject(1, "Logic");
+            Student student1 = new Student("Jose", "Lopez", "1234567-8");
+            Student student2 = new Student("Juan", "Perez", "1234567-9");
+            List<Student> listOfStudents = new List<Student>();
+            listOfStudents.Add(student1);
+            listOfStudents.Add(student2);
+
+            subject.SetStudents(listOfStudents);
+            Assert.AreEqual(subject.Students.Count, 2);
+        }
+
+        [TestMethod]
+        public void AddTeachersRange()
+        {
+            Subject subject = new Subject(1, "Logic");
+            Teacher teacher1 = new Teacher("Jose", "Lopez", "1234567-8");
+            Teacher teacher2 = new Teacher("Juan", "Perez", "1234567-9");
+            List<Teacher> listOfTeachers = new List<Teacher>();
+            listOfTeachers.Add(teacher1);
+            listOfTeachers.Add(teacher2);
+
+            subject.SetTeachers(listOfTeachers);
+            Assert.AreEqual(subject.Teachers.Count, 2);
+        }
+
+        [TestMethod]
+        public void StudentsToString()
+        {
+            Subject subject = new Subject(1, "Logic");
+            string expectedString = string.Format("{0} - {1}", subject.Code, subject.Name);
+
+            Assert.AreEqual(subject.ToString(), expectedString);
         }
 
         [TestMethod]
@@ -216,15 +261,10 @@ namespace UnitTesting
             }
         }
 
-        private SystemData GetNewSystemData()
-        {
-            SystemData.GetInstance.Reset();
-            return SystemData.GetInstance;
-        }
-
         private Subject FindSubjectOnSystem(int code)
         {
-            List<Subject> subjects = ClassFactory.GetOrCreate<SubjectLogic>().GetSubjects();
+            ISubjectLogic subjectOperations = DummyProvider.GetInstance.GetSubjectOperations();
+            List<Subject> subjects = subjectOperations.GetSubjects();
             return subjects.Find(x => x.GetCode() == code);
         }
 

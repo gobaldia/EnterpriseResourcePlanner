@@ -48,7 +48,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityTest.cs" />
     <Compile Include="LocationTest.cs" />
+    <Compile Include="PaymentTest.cs" />
     <Compile Include="StudentTest.cs" />
     <Compile Include="SubjectTest.cs" />
     <Compile Include="TeacherTest.cs" />
@@ -68,9 +70,9 @@
       <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
       <Name>CoreLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{02c77b64-e35f-4fc6-9bc9-337ac9e73420}</Project>
-      <Name>DataAccess</Name>
+    <ProjectReference Include="..\DummyPersistance\DummyPersistance.csproj">
+      <Project>{64B644B0-B801-4AC8-AAD1-934B29C8EF67}</Project>
+      <Name>DummyPersistance</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>

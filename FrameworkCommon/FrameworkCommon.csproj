@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassFactory.cs" />
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="MethodParameters\AddStudentInput.cs" />
     <Compile Include="MethodParameters\MenuMethodInput.cs" />
     <Compile Include="MethodParameters\ModifyStudentInput.cs" />
     <Compile Include="MethodParameters\ModifyTeacherInput.cs" />
     <Compile Include="MethodParameters\ModifyVehicleInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreEntities\CoreEntities.csproj">

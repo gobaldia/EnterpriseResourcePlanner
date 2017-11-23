@@ -1,8 +1,8 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
-using FrameworkCommon;
+using CoreLogic.Interfaces;
 using FrameworkCommon.MethodParameters;
+using ProviderManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,12 +20,20 @@ namespace VehicleModuleUI.ModifyVehicle
         public ModifyVehicleForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
             FillVehiclesComboBox();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(650, 450);
         }
 
         private void CheckIfIsThereAnyVehicleInSystem()
         {
-            var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+            IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+            var vehicles = vehicleOperations.GetVehicles();
             if (vehicles.Count() == 0)
             {
                 this.labelError.Text = "Currently there is not any subject in the system.";
@@ -37,7 +45,8 @@ namespace VehicleModuleUI.ModifyVehicle
         {
             try
             {
-                var vehicles = ClassFactory.GetOrCreate<VehicleLogic>().GetVehicles();
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                var vehicles = vehicleOperations.GetVehicles();
                 for (int index = 0; index < vehicles.Count; index++)
                 {
                     this.comboBoxSelectVehicleToModify.Items.Add(vehicles[index]);
@@ -58,6 +67,7 @@ namespace VehicleModuleUI.ModifyVehicle
             this.buttonModify.Enabled = true;
             var selectedVehicleToModify = this.comboBoxSelectVehicleToModify.SelectedItem as Vehicle;
             this.numericUpDownCapacity.Value = selectedVehicleToModify.Capacity;
+            this.numericUpDownFuelConsumption.Value = selectedVehicleToModify.FuelConsumptionKmsPerLtr;
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
@@ -65,13 +75,21 @@ namespace VehicleModuleUI.ModifyVehicle
             try
             {
                 var selectedVehicleToModify = this.comboBoxSelectVehicleToModify.SelectedItem as Vehicle;
-                var newCapacity = (int)this.numericUpDownCapacity.Value;
-                ModifyVehicleInput newVehicleValues = new ModifyVehicleInput();
-                newVehicleValues.Registration = selectedVehicleToModify.Registration;
-                newVehicleValues.NewCapacity = newCapacity;
-                ClassFactory.GetOrCreate<VehicleLogic>().ModifyVehicle(newVehicleValues);
+                var newCapacity = (int) this.numericUpDownCapacity.Value;
+                var newFuelConsumption = (int)this.numericUpDownFuelConsumption.Value;
+                ModifyVehicleInput newVehicleValues = new ModifyVehicleInput
+                {
+                    Registration = selectedVehicleToModify.Registration,
+                    NewCapacity = newCapacity,
+                    FuelConsumptionKmsPerLtr = newFuelConsumption
+                };
+
+                IVehicleLogic vehicleOperations = Provider.GetInstance.GetVehicleOperations();
+                vehicleOperations.ModifyVehicle(newVehicleValues);
                 this.labelSuccess.Visible = true;
                 this.labelSuccess.Text = "The vehicle was succesfully modified.";
+                this.ClearForm();
+                this.ReloadComboBoxSelectVehicleToModify();
             }
             catch (CoreException ex)
             {
@@ -83,6 +101,18 @@ namespace VehicleModuleUI.ModifyVehicle
                 this.labelError.Visible = true;
                 this.labelSuccess.Text = ex.Message;
             }
+        }
+
+        private void ReloadComboBoxSelectVehicleToModify()
+        {
+            this.comboBoxSelectVehicleToModify.Items.Clear();
+            this.FillVehiclesComboBox();
+        }
+
+        private void ClearForm()
+        {
+            this.numericUpDownCapacity.Value = 0;
+            this.numericUpDownFuelConsumption.Value = 0;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

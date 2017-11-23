@@ -138,6 +138,10 @@
       <Project>{0d34b3c6-4f5a-469f-a793-77d5de2c9e5e}</Project>
       <Name>FrameworkCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProviderManager\ProviderManager.csproj">
+      <Project>{FE0A814E-CF32-41E0-961E-9F7A5A3780D5}</Project>
+      <Name>ProviderManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

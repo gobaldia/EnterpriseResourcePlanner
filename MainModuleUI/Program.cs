@@ -1,5 +1,13 @@
-﻿using CoreGeneralization;
+﻿using ActivityModuleUI;
+using ActivityModuleUI.AddActivity;
+using ActivityModuleUI.DeleteActivity;
+using ActivityModuleUI.ListActivities;
+using ActivityModuleUI.ModifyActivity;
+using CoreGeneralization;
 using MainComponents;
+using PaymentModuleUI;
+using PaymentModuleUI.PayActivity;
+using PaymentModuleUI.PayFee;
 using StudentModuleUI;
 using StudentModuleUI.AddStudent;
 using StudentModuleUI.DeleteStudent;
@@ -46,6 +54,8 @@ namespace MainModuleUI
             mainModule.AddModule(CreateStudentModule());
             mainModule.AddModule(CreateSubjectModule());
             mainModule.AddModule(CreateVehicleModule());
+            mainModule.AddModule(CreateActivityModule());
+            mainModule.AddModule(CreatePaymentModule());
 
             Application.Run(new MainForm(mainModule));
         }
@@ -112,6 +122,36 @@ namespace MainModuleUI
             VehicleActions.Add(calculateRoutesAction);
 
             return new VehicleModule(VehicleActions);
+        }
+
+        private static Module CreateActivityModule()
+        {
+            List<IAction> ActivityActions = new List<IAction>();
+
+            IAction addAction = new AddActivityAction();
+            IAction modifyAction = new ModifyActivityAction();
+            IAction deleteAction = new DeleteActivityAction();
+            IAction listAction = new ListActivitiesAction();
+
+            ActivityActions.Add(addAction);
+            ActivityActions.Add(modifyAction);
+            ActivityActions.Add(deleteAction);
+            ActivityActions.Add(listAction);
+
+            return new ActivityModule(ActivityActions);
+        }
+
+        private static Module CreatePaymentModule()
+        {
+            List<IAction> PaymentActions = new List<IAction>();
+
+            IAction payFeeAction = new PayFeeAction();
+            IAction payActivityAction = new PayActivityAction();
+
+            PaymentActions.Add(payFeeAction);
+            PaymentActions.Add(payActivityAction);
+
+            return new PaymentModule(PaymentActions);
         }
     }
 }
