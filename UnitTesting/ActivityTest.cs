@@ -5,13 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataAccess;
-using FrameworkCommon;
 using CoreEntities.Exceptions;
-using CoreLogic;
 using DummyPersistance;
 using CoreLogic.Interfaces;
-using UnitTesting.Utilities;
 
 namespace UnitTesting
 {
@@ -69,6 +65,20 @@ namespace UnitTesting
             Activity secondActivity = firstActivity;
 
             Assert.AreEqual(firstActivity, secondActivity);
+        }
+
+        [TestMethod]
+        public void ActivityToString()
+        {
+            var activityOneName = "Yoga";
+            var activityOneDate = new DateTime(2017, 11, 14);
+            var activityOneCost = 100;
+
+            Activity firstActivity = new Activity(activityOneName, activityOneDate, activityOneCost);
+
+            string expectedString = string.Format("{0} - {1} - ${2}", activityOneName, activityOneDate.ToShortDateString(), activityOneCost);
+            string actualString = firstActivity.ToString();
+            Assert.AreEqual(actualString, expectedString);
         }
 
         [TestMethod]

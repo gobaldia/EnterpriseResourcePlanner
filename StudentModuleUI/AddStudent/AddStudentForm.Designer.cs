@@ -185,7 +185,7 @@
             this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxName.TabIndex = 2;
+            this.textBoxName.TabIndex = 3;
             this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxLastName
@@ -194,7 +194,7 @@
             this.textBoxLastName.MaxLength = 50;
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(380, 38);
-            this.textBoxLastName.TabIndex = 3;
+            this.textBoxLastName.TabIndex = 4;
             this.textBoxLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxDocument
@@ -203,7 +203,7 @@
             this.textBoxDocument.MaxLength = 9;
             this.textBoxDocument.Name = "textBoxDocument";
             this.textBoxDocument.Size = new System.Drawing.Size(380, 38);
-            this.textBoxDocument.TabIndex = 1;
+            this.textBoxDocument.TabIndex = 2;
             this.textBoxDocument.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // buttonAddStudent
@@ -211,7 +211,7 @@
             this.buttonAddStudent.Location = new System.Drawing.Point(1496, 1041);
             this.buttonAddStudent.Name = "buttonAddStudent";
             this.buttonAddStudent.Size = new System.Drawing.Size(265, 60);
-            this.buttonAddStudent.TabIndex = 43;
+            this.buttonAddStudent.TabIndex = 9;
             this.buttonAddStudent.Text = "Add";
             this.buttonAddStudent.UseVisualStyleBackColor = true;
             this.buttonAddStudent.Click += new System.EventHandler(this.buttonAddStudent_Click);
@@ -242,7 +242,7 @@
             this.textBoxStudentNumber.MaxLength = 50;
             this.textBoxStudentNumber.Name = "textBoxStudentNumber";
             this.textBoxStudentNumber.Size = new System.Drawing.Size(380, 38);
-            this.textBoxStudentNumber.TabIndex = 54;
+            this.textBoxStudentNumber.TabIndex = 1;
             // 
             // radioButtonYesPickUp
             // 
@@ -250,7 +250,7 @@
             this.radioButtonYesPickUp.Location = new System.Drawing.Point(45, 26);
             this.radioButtonYesPickUp.Name = "radioButtonYesPickUp";
             this.radioButtonYesPickUp.Size = new System.Drawing.Size(101, 36);
-            this.radioButtonYesPickUp.TabIndex = 55;
+            this.radioButtonYesPickUp.TabIndex = 6;
             this.radioButtonYesPickUp.Text = "Yes";
             this.radioButtonYesPickUp.UseVisualStyleBackColor = true;
             this.radioButtonYesPickUp.CheckedChanged += new System.EventHandler(this.radioButtonPickUp_CheckedChanged);
@@ -293,7 +293,7 @@
             this.textBoxLatitud.MaxLength = 10;
             this.textBoxLatitud.Name = "textBoxLatitud";
             this.textBoxLatitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLatitud.TabIndex = 4;
+            this.textBoxLatitud.TabIndex = 7;
             this.textBoxLatitud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // textBoxLongitud
@@ -303,7 +303,7 @@
             this.textBoxLongitud.MaxLength = 11;
             this.textBoxLongitud.Name = "textBoxLongitud";
             this.textBoxLongitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLongitud.TabIndex = 5;
+            this.textBoxLongitud.TabIndex = 8;
             this.textBoxLongitud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxes_KeyDown);
             // 
             // labelLatitud
@@ -354,7 +354,7 @@
             0});
             this.numericUpDownFeeAmount.Name = "numericUpDownFeeAmount";
             this.numericUpDownFeeAmount.Size = new System.Drawing.Size(380, 38);
-            this.numericUpDownFeeAmount.TabIndex = 66;
+            this.numericUpDownFeeAmount.TabIndex = 5;
             // 
             // AddStudentForm
             // 

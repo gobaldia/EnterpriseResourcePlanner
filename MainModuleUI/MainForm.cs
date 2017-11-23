@@ -1,7 +1,4 @@
-﻿using CoreEntities.Entities;
-using CoreLogic;
-using FrameworkCommon;
-using FrameworkCommon.MethodParameters;
+﻿using FrameworkCommon.MethodParameters;
 using MainComponents;
 using System;
 using System.Collections.Generic;

@@ -60,7 +60,6 @@
     <Compile Include="AddActivity\AddActivityForm.Designer.cs">
       <DependentUpon>AddActivityForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="DeleteActivity\DeleteActivityAction.cs" />
     <Compile Include="DeleteActivity\DeleteActivityForm.cs">
       <SubType>Form</SubType>

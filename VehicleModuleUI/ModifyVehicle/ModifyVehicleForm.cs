@@ -1,8 +1,6 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
 using CoreLogic.Interfaces;
-using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
 using ProviderManager;
 using System;
@@ -22,7 +20,14 @@ namespace VehicleModuleUI.ModifyVehicle
         public ModifyVehicleForm()
         {
             InitializeComponent();
+            SetDefaultWindowsSize();
             FillVehiclesComboBox();
+        }
+
+        private void SetDefaultWindowsSize()
+        {
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.Size = new System.Drawing.Size(650, 450);
         }
 
         private void CheckIfIsThereAnyVehicleInSystem()

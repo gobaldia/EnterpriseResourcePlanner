@@ -1,8 +1,6 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
 using CoreLogic.Interfaces;
-using FrameworkCommon;
 using ProviderManager;
 using System;
 using System.Collections.Generic;
@@ -27,7 +25,7 @@ namespace VehicleModuleUI.AddVehicle
         private void SetDefaultWindowsSize()
         {
             this.AutoScaleMode = AutoScaleMode.None;
-            this.Size = new System.Drawing.Size(500, 350);
+            this.Size = new System.Drawing.Size(650, 450);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

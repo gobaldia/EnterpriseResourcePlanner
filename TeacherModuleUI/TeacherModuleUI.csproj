@@ -123,10 +123,6 @@
       <Project>{3C985488-C876-43BF-BEDC-9C150AE718C9}</Project>
       <Name>CoreLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{02C77B64-E35F-4FC6-9BC9-337AC9E73420}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FrameworkCommon\FrameworkCommon.csproj">
       <Project>{0D34B3C6-4F5A-469F-A793-77D5DE2C9E5E}</Project>
       <Name>FrameworkCommon</Name>

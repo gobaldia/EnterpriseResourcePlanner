@@ -1,9 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using DataAccess;
-using FrameworkCommon;
-using CoreLogic;
 using FrameworkCommon.MethodParameters;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;

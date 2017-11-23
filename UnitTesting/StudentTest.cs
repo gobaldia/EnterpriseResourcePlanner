@@ -1,10 +1,7 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
 using CoreLogic.Interfaces;
-using DataAccess;
 using DummyPersistance;
-using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
