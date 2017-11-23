@@ -5,6 +5,7 @@ using ActivityModuleUI.ModifyActivity;
 using CoreGeneralization;
 using MainComponents;
 using PaymentModuleUI;
+using PaymentModuleUI.PayActivity;
 using PaymentModuleUI.PayFee;
 using StudentModuleUI;
 using StudentModuleUI.AddStudent;
@@ -141,9 +142,11 @@ namespace MainModuleUI
         {
             List<IAction> PaymentActions = new List<IAction>();
 
-            IAction payAction = new PayFeeAction();
+            IAction payFeeAction = new PayFeeAction();
+            IAction payActivityAction = new PayActivityAction();
 
-            PaymentActions.Add(payAction);
+            PaymentActions.Add(payFeeAction);
+            PaymentActions.Add(payActivityAction);
 
             return new PaymentModule(PaymentActions);
         }

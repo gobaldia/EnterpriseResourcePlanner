@@ -45,6 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PayActivity\PayActivityAction.cs" />
+    <Compile Include="PayActivity\PayActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PayActivity\PayActivityForm.Designer.cs">
+      <DependentUpon>PayActivityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PayFee\PayFeeAction.cs" />
     <Compile Include="PayFee\PayFeeForm.cs">
       <SubType>Form</SubType>
@@ -55,6 +62,9 @@
     <Compile Include="PaymentModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PayActivity\PayActivityForm.resx">
+      <DependentUpon>PayActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PayFee\PayFeeForm.resx">
       <DependentUpon>PayFeeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -80,9 +90,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PayActivity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CoreEntities\CoreEntities.csproj">
       <Project>{A1601F7B-A76E-4047-92C2-187D0DDB58D6}</Project>

@@ -24,7 +24,7 @@ namespace DataAccess.Implementations
             Student foundStudent;
             using (Context context = new Context())
             {
-                foundStudent = context.people.OfType<Student>().Include("Subjects").Include("Fees")
+                foundStudent = context.people.OfType<Student>().Include("Subjects").Include("Fees").Include("Activities")
                     .FirstOrDefault(s => s.StudentNumber.Equals(studentNumber));
             }
             return foundStudent;

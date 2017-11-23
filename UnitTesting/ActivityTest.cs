@@ -9,6 +9,9 @@ using DataAccess;
 using FrameworkCommon;
 using CoreEntities.Exceptions;
 using CoreLogic;
+using CoreLogic.Interfaces;
+using DummyPersistance;
+using UnitTesting.Utilities;
 
 namespace UnitTesting
 {
@@ -177,6 +180,5 @@ namespace UnitTesting
                 Assert.Fail(ex.Message);
             }
         }
-
     }
 }

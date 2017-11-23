@@ -34,5 +34,8 @@ namespace FrameworkCommon
         public const string NOFEES_TOBEPAID = "There no fees to be paid.";
         public const string ERROR_MUST_PAY_OLDESTS_FEES_FIRST = "Oldest fees must be paid first.";
         public const string FEES_WHERE_SUCCESSFULLY_PAID = "Fees where successfuly paid.";
+        public const string SUCCESS_ACTIVITY_REGISTRATION_AND_PAYMENT = "Activities where successsfuly paid and assign to the student.";
+        public const string NO_AVAILABLE_ACTIVITIES = "There are no available activities to assign for this student.";
+        public const string SELECT_ONE_ACTIVITY = "You must select at least one activity.";
     }
 }

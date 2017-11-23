@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassFactory.cs" />
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="MethodParameters\MenuMethodInput.cs" />
     <Compile Include="MethodParameters\ModifyStudentInput.cs" />

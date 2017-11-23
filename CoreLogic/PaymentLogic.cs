@@ -26,5 +26,10 @@ namespace CoreLogic
         {
             this.persistenceProvider.PayFees(feesToBePaid);
         }
+
+        public void PayAndAddStudentActivities(List<Activity> activitiesToBePaid, Student student)
+        {
+            this.persistenceProvider.PayAndAddStudentActivities(activitiesToBePaid, student);
+        }
     }
 }
