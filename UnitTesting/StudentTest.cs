@@ -480,8 +480,9 @@ namespace UnitTesting
                 newFee3.Date = DateTime.Now;
                 newStudent.Fees.Add(newFee3);
 
-                foreach (Fee f in newStudent.Fees)
-                    Assert.AreEqual(f.Amount, 20.5M);
+                Assert.AreEqual(newStudent.Fees[0].Amount, 20.5M);
+                Assert.AreEqual(newStudent.Fees[1].Amount, 11M);
+                Assert.AreEqual(newStudent.Fees[2].Amount, 1.5M);
 
             }
             catch (Exception ex)

@@ -43,7 +43,6 @@ namespace DataAccess.Implementations
                 foreach (var activity in activitiesToBePaid)
                 {
                     var activityOnDB = context.activities.Include("Students").Where(a => a.ActivityOID.Equals(activity.ActivityOID)).FirstOrDefault();
-                    activityOnDB.IsPaid = true;
                     activityOnDB.Students.Add(studentOnDB);
                 }
                 context.SaveChanges();

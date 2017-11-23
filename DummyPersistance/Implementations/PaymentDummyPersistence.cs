@@ -28,7 +28,6 @@ namespace DummyPersistance.Implementations
         {
             activitiesToBePaid.ForEach(a => 
                 {
-                    a.IsPaid = true;
                     a.Students.Add(student);
                 });
             student.Activities.AddRange(activitiesToBePaid);

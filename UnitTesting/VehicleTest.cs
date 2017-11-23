@@ -184,12 +184,13 @@ namespace UnitTesting
         {
             IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
 
-            Vehicle newVehicle = new Vehicle("SBA1234", 10);
+            Vehicle newVehicle = new Vehicle("SBA1234", 10, 10);
             vehicleOperations.AddVehicle(newVehicle);
 
             ModifyVehicleInput input = new ModifyVehicleInput();
             input.Registration = "SBA1234";
             input.NewCapacity = 20;
+            input.FuelConsumptionKmsPerLtr = 10;
             vehicleOperations.ModifyVehicle(input);
 
             Vehicle modifiedVehicle = vehicleOperations.GetVehicleByRegistration("SBA1234");
