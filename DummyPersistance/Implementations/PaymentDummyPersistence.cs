@@ -19,6 +19,11 @@ namespace DummyPersistance.Implementations
                 .Where(f => f.Date.Year.Equals(DateTime.Now.Year)).ToList();
         }
 
+        public void PayAndAddStudentActivities(List<Activity> activitiesToBePaid, Student student)
+        {
+            throw new NotImplementedException();
+        }
+
         public void PayFees(List<Fee> feesToBePaid)
         {
             feesToBePaid.ForEach(f => f.IsPaid = true);

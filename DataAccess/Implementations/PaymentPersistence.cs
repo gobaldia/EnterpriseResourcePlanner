@@ -22,6 +22,11 @@ namespace DataAccess.Implementations
             return studentFees;
         }
 
+        public void PayAndAddStudentActivities(List<Activity> activitiesToBePaid, Student student)
+        {
+            throw new NotImplementedException();
+        }
+
         public void PayFees(List<Fee> feesToBePaid)
         {
             using (Context context = new Context())
