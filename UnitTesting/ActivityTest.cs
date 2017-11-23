@@ -10,6 +10,7 @@ using FrameworkCommon;
 using CoreEntities.Exceptions;
 using CoreLogic;
 using DummyPersistance;
+using CoreLogic.Interfaces;
 
 namespace UnitTesting
 {
@@ -195,10 +196,13 @@ namespace UnitTesting
             var activityOne = new Activity("Yoga", new DateTime(2017, 11, 22), 150);
             var activityTwo = new Activity("Guitar class", new DateTime(2017, 11, 25), 100);
 
+            activityOne.Id = 1;
+            activityTwo.Id = 2;
+
             activityOperations.AddActivity(activityOne);
             activityOperations.AddActivity(activityTwo);
 
-            var activities = activityOperations.GetActities();
+            var activities = activityOperations.GetActivities();
 
             Assert.IsTrue(activities.Count() == 2);
             Assert.AreEqual(activities[0], activityOne);
