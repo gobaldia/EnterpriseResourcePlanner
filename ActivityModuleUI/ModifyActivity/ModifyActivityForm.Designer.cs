@@ -34,15 +34,9 @@
             this.labelActivityName = new System.Windows.Forms.Label();
             this.labelActivityDate = new System.Windows.Forms.Label();
             this.labelActivityCost = new System.Windows.Forms.Label();
-            this.labelAvailableStudents = new System.Windows.Forms.Label();
-            this.labelEnrolledStudents = new System.Windows.Forms.Label();
             this.textBoxActivityName = new System.Windows.Forms.TextBox();
             this.dateTimePickerActivityDate = new System.Windows.Forms.DateTimePicker();
             this.numericUpDownActivityCost = new System.Windows.Forms.NumericUpDown();
-            this.listBoxAvailableStudents = new System.Windows.Forms.ListBox();
-            this.listBoxAlreadyRegisteredStudents = new System.Windows.Forms.ListBox();
-            this.buttonAddStudentToActivity = new System.Windows.Forms.Button();
-            this.buttonDeleteStudentFromActivity = new System.Windows.Forms.Button();
             this.buttonModify = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
@@ -106,24 +100,6 @@
             this.labelActivityCost.TabIndex = 5;
             this.labelActivityCost.Text = "Cost";
             // 
-            // labelAvailableStudents
-            // 
-            this.labelAvailableStudents.AutoSize = true;
-            this.labelAvailableStudents.Location = new System.Drawing.Point(63, 268);
-            this.labelAvailableStudents.Name = "labelAvailableStudents";
-            this.labelAvailableStudents.Size = new System.Drawing.Size(95, 13);
-            this.labelAvailableStudents.TabIndex = 6;
-            this.labelAvailableStudents.Text = "Available Students";
-            // 
-            // labelEnrolledStudents
-            // 
-            this.labelEnrolledStudents.AutoSize = true;
-            this.labelEnrolledStudents.Location = new System.Drawing.Point(374, 268);
-            this.labelEnrolledStudents.Name = "labelEnrolledStudents";
-            this.labelEnrolledStudents.Size = new System.Drawing.Size(136, 13);
-            this.labelEnrolledStudents.TabIndex = 7;
-            this.labelEnrolledStudents.Text = "Already registered Students";
-            // 
             // textBoxActivityName
             // 
             this.textBoxActivityName.Location = new System.Drawing.Point(60, 120);
@@ -150,46 +126,10 @@
             this.numericUpDownActivityCost.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownActivityCost.TabIndex = 10;
             // 
-            // listBoxAvailableStudents
-            // 
-            this.listBoxAvailableStudents.FormattingEnabled = true;
-            this.listBoxAvailableStudents.Location = new System.Drawing.Point(60, 285);
-            this.listBoxAvailableStudents.Name = "listBoxAvailableStudents";
-            this.listBoxAvailableStudents.Size = new System.Drawing.Size(200, 95);
-            this.listBoxAvailableStudents.TabIndex = 11;
-            // 
-            // listBoxAlreadyRegisteredStudents
-            // 
-            this.listBoxAlreadyRegisteredStudents.FormattingEnabled = true;
-            this.listBoxAlreadyRegisteredStudents.Location = new System.Drawing.Point(377, 285);
-            this.listBoxAlreadyRegisteredStudents.Name = "listBoxAlreadyRegisteredStudents";
-            this.listBoxAlreadyRegisteredStudents.Size = new System.Drawing.Size(200, 95);
-            this.listBoxAlreadyRegisteredStudents.TabIndex = 12;
-            // 
-            // buttonAddStudentToActivity
-            // 
-            this.buttonAddStudentToActivity.Location = new System.Drawing.Point(297, 308);
-            this.buttonAddStudentToActivity.Name = "buttonAddStudentToActivity";
-            this.buttonAddStudentToActivity.Size = new System.Drawing.Size(38, 21);
-            this.buttonAddStudentToActivity.TabIndex = 13;
-            this.buttonAddStudentToActivity.Text = ">>";
-            this.buttonAddStudentToActivity.UseVisualStyleBackColor = true;
-            this.buttonAddStudentToActivity.Click += new System.EventHandler(this.buttonAddStudentToActivity_Click);
-            // 
-            // buttonDeleteStudentFromActivity
-            // 
-            this.buttonDeleteStudentFromActivity.Location = new System.Drawing.Point(297, 336);
-            this.buttonDeleteStudentFromActivity.Name = "buttonDeleteStudentFromActivity";
-            this.buttonDeleteStudentFromActivity.Size = new System.Drawing.Size(38, 21);
-            this.buttonDeleteStudentFromActivity.TabIndex = 14;
-            this.buttonDeleteStudentFromActivity.Text = "<<";
-            this.buttonDeleteStudentFromActivity.UseVisualStyleBackColor = true;
-            this.buttonDeleteStudentFromActivity.Click += new System.EventHandler(this.buttonDeleteStudentFromActivity_Click);
-            // 
             // buttonModify
             // 
             this.buttonModify.Enabled = false;
-            this.buttonModify.Location = new System.Drawing.Point(502, 430);
+            this.buttonModify.Location = new System.Drawing.Point(497, 350);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(75, 23);
             this.buttonModify.TabIndex = 15;
@@ -199,7 +139,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(377, 430);
+            this.buttonCancel.Location = new System.Drawing.Point(368, 350);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 16;
@@ -212,7 +152,7 @@
             this.labelError.AutoSize = true;
             this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(60, 401);
+            this.labelError.Location = new System.Drawing.Point(60, 294);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 16);
             this.labelError.TabIndex = 17;
@@ -222,7 +162,7 @@
             this.labelSuccess.AutoSize = true;
             this.labelSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.labelSuccess.Location = new System.Drawing.Point(60, 400);
+            this.labelSuccess.Location = new System.Drawing.Point(60, 294);
             this.labelSuccess.Name = "labelSuccess";
             this.labelSuccess.Size = new System.Drawing.Size(0, 16);
             this.labelSuccess.TabIndex = 18;
@@ -236,15 +176,9 @@
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonModify);
-            this.Controls.Add(this.buttonDeleteStudentFromActivity);
-            this.Controls.Add(this.buttonAddStudentToActivity);
-            this.Controls.Add(this.listBoxAlreadyRegisteredStudents);
-            this.Controls.Add(this.listBoxAvailableStudents);
             this.Controls.Add(this.numericUpDownActivityCost);
             this.Controls.Add(this.dateTimePickerActivityDate);
             this.Controls.Add(this.textBoxActivityName);
-            this.Controls.Add(this.labelEnrolledStudents);
-            this.Controls.Add(this.labelAvailableStudents);
             this.Controls.Add(this.labelActivityCost);
             this.Controls.Add(this.labelActivityDate);
             this.Controls.Add(this.labelActivityName);
@@ -267,15 +201,9 @@
         private System.Windows.Forms.Label labelActivityName;
         private System.Windows.Forms.Label labelActivityDate;
         private System.Windows.Forms.Label labelActivityCost;
-        private System.Windows.Forms.Label labelAvailableStudents;
-        private System.Windows.Forms.Label labelEnrolledStudents;
         private System.Windows.Forms.TextBox textBoxActivityName;
         private System.Windows.Forms.DateTimePicker dateTimePickerActivityDate;
         private System.Windows.Forms.NumericUpDown numericUpDownActivityCost;
-        private System.Windows.Forms.ListBox listBoxAvailableStudents;
-        private System.Windows.Forms.ListBox listBoxAlreadyRegisteredStudents;
-        private System.Windows.Forms.Button buttonAddStudentToActivity;
-        private System.Windows.Forms.Button buttonDeleteStudentFromActivity;
         private System.Windows.Forms.Button buttonModify;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelError;

@@ -13,7 +13,7 @@ namespace CoreEntities.Entities
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public int Cost { get; set; }
-        public bool IsPaid { get; set; } = false;
+        //public bool IsPaid { get; set; } = false;
         public virtual List<Student> Students { get; set; }
 
         public Activity()

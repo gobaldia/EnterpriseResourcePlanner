@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyPersistance", "DummyPe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentModuleUI", "PaymentModuleUI\PaymentModuleUI.csproj", "{52BAB61F-5761-437B-9FE4-219FCBC36771}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataContracts", "DataContracts\DataContracts.csproj", "{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,10 @@ Global
 		{52BAB61F-5761-437B-9FE4-219FCBC36771}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52BAB61F-5761-437B-9FE4-219FCBC36771}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52BAB61F-5761-437B-9FE4-219FCBC36771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{FE0A814E-CF32-41E0-961E-9F7A5A3780D5} = {D003561D-E1FB-4654-806D-082AC1E16F7B}
 		{64B644B0-B801-4AC8-AAD1-934B29C8EF67} = {690B3F52-0579-4C90-93E0-0966EA7CEF8C}
 		{52BAB61F-5761-437B-9FE4-219FCBC36771} = {68C6E4C5-2CD6-4602-A066-D15F00712907}
+		{09DAD7E9-F13B-40A6-92AF-54ED9AB6E482} = {398DDF36-5310-4E4C-9F69-730F6BFBDD23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5757A2D8-A6E4-4135-98D2-8F23BA4843CE}

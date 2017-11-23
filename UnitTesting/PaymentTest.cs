@@ -86,7 +86,9 @@ namespace UnitTesting
             studentOperations.AddStudent(newStudent);
 
             var activityOne = new Activity("Yoga", new DateTime(2017, 11, 14), 100);
+            activityOne.Id = 1;
             var activityTwo = new Activity("Karate", new DateTime(2017, 10, 22), 150);
+            activityTwo.Id = 2;
             activityOperations.AddActivity(activityOne);
             activityOperations.AddActivity(activityTwo);
 
@@ -96,10 +98,6 @@ namespace UnitTesting
             List<Activity> studentActivities = newStudent.Activities;
             Assert.IsNotNull(studentActivities);// Si no se agregaron
             Assert.AreNotEqual(studentActivities.Count, 0);
-            foreach (var activity in studentActivities)
-            {
-                Assert.IsTrue(activity.IsPaid);//Si no fueron pagas
-            }
         }
     }
 }
