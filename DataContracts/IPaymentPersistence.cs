@@ -11,5 +11,6 @@ namespace DataContracts
     {
         List<Fee> GetCurrentYearFeesByStudentNumber(int studentNumber);
         void PayFees(List<Fee> feesToBePaid);
+        void PayAndAddStudentActivities(List<Activity> activitiesToBePaid, Student student);
     }
 }

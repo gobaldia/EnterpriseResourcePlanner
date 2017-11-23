@@ -23,5 +23,15 @@ namespace DummyPersistance.Implementations
         {
             feesToBePaid.ForEach(f => f.IsPaid = true);
         }
+
+        public void PayAndAddStudentActivities(List<Activity> activitiesToBePaid, Student student)
+        {
+            activitiesToBePaid.ForEach(a => 
+                {
+                    a.IsPaid = true;
+                    a.Students.Add(student);
+                });
+            student.Activities.AddRange(activitiesToBePaid);
+        }
     }
 }

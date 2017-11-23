@@ -34,5 +34,20 @@ namespace DataAccess.Implementations
                 context.SaveChanges();
             }
         }
+
+        public void PayAndAddStudentActivities(List<Activity> activitiesToBePaid, Student student)
+        {
+            using (Context context = new Context())
+            {
+                foreach (var activity in activitiesToBePaid)
+                {
+                    activity.IsPaid = true;
+                    context.people.Attach(student);
+                    activity.Students.Add(student);
+                    context.Entry(activity).State = EntityState.Modified;
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }

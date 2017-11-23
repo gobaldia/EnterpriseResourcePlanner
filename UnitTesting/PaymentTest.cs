@@ -94,11 +94,11 @@ namespace UnitTesting
             paymentOperations.PayAndAddStudentActivities(activitiesToBePaid, newStudent);
 
             List<Activity> studentActivities = newStudent.Activities;
-            Assert.IsNull(studentActivities);// Si no se agregaron
-            Assert.AreEqual(studentActivities.Count, 0);
+            Assert.IsNotNull(studentActivities);// Si no se agregaron
+            Assert.AreNotEqual(studentActivities.Count, 0);
             foreach (var activity in studentActivities)
             {
-                Assert.IsFalse(activity.IsPaid);//Si no fueron pagas
+                Assert.IsTrue(activity.IsPaid);//Si no fueron pagas
             }
         }
     }
