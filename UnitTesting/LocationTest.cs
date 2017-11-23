@@ -50,7 +50,9 @@ namespace UnitTesting
             {
                 double latitud = 22;
                 double longitud = -222.25556;
-                Location location = new Location(latitud, longitud);
+                Location location = new Location();
+                location.SetLatitud(latitud);
+                location.SetLongitud(longitud);
 
                 Assert.Fail();
             }
@@ -62,6 +64,18 @@ namespace UnitTesting
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void LocationToString()
+        {
+            double latitud = 22;
+            double longitud = -1.25556;
+            Location location = new Location(latitud, longitud);
+
+            string expectedString = string.Format("({0}, {1})", latitud, longitud);
+            string actualString = location.ToString();
+            Assert.AreEqual(actualString, expectedString);
         }
     }
 }

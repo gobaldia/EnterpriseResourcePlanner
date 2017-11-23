@@ -54,7 +54,6 @@
     <Compile Include="Implementations\SubjectPersistance.cs" />
     <Compile Include="Implementations\TeacherPersistance.cs" />
     <Compile Include="Implementations\VehiclePersistance.cs" />
-    <Compile Include="SystemData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

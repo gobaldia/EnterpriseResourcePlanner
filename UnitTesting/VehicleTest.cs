@@ -7,9 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using DataAccess;
 using FrameworkCommon;
-using CoreLogic;
 using FrameworkCommon.MethodParameters;
 using UnitTesting.Utilities;
 using DummyPersistance;
@@ -343,101 +341,38 @@ namespace UnitTesting
 
             Assert.IsTrue(distance == expectedDistance);
         }
-
-        //[TestMethod]
-        //public void GetVehiclesOrderedByCapacityConsideringStudentsNumber()
-        //{
-        //    IVehicleLogic vehicleOperations = DummyProvider.GetInstance.GetVehicleOperations();
-        //    IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
-
-        //    #region Generate test data
-        //    Vehicle vehicle1 = new Vehicle("SBA0001", 1);
-        //    Vehicle vehicle2 = new Vehicle("SBA1015", 2);
-        //    vehicleOperations.AddVehicle(vehicle1);
-        //    vehicleOperations.AddVehicle(vehicle2);
-
-        //    var input1 = new Student
-        //    {
-        //        Document = "1234567-5",
-        //        Name = Utility.GetRandomName(),
-        //        LastName = Utility.GetRandomLastName(),
-        //        Location = new Location(10.00, 15.1)
-        //    };
-        //    studentOperations.AddStudent(input1);
-
-        //    var input2 = new Student
-        //    {
-        //        Document = "1235567-8",
-        //        Name = Utility.GetRandomName(),
-        //        LastName = Utility.GetRandomLastName(),
-        //        Location = new Location(50.00, 22.1)
-        //    };
-        //    studentOperations.AddStudent(input2);
-
-        //    var input3 = new Student
-        //    {
-        //        Document = "1266667-8",
-        //        Name = Utility.GetRandomName(),
-        //        LastName = Utility.GetRandomLastName(),
-        //        Location = new Location(-80.00, 5.1)
-        //    };
-        //    studentOperations.AddStudent(input3);
-
-        //    var input4 = new Student
-        //    {
-        //        Document = "1234567-4",
-        //        Name = Utility.GetRandomName(),
-        //        LastName = Utility.GetRandomLastName(),
-        //        Location = new Location(-10.00, -15.1)
-        //    };
-        //    studentOperations.AddStudent(input4);
-        //    #endregion
-
-        //    List<Tuple<Vehicle, List<Student>>> systemVehicles = vehicleOperations.GetVehiclesOrderedByCapacityConsideringStudentsNumber();
-
-        //    Vehicle firstVehicle = systemVehicles[0].Item1;
-        //    Vehicle secondVehicle = systemVehicles[1].Item1;
-        //    Vehicle thirdVehicle = systemVehicles[2].Item1;
-
-        //    Assert.AreEqual(firstVehicle, vehicle2);
-        //    Assert.AreEqual(secondVehicle, vehicle1);
-        //    Assert.AreEqual(thirdVehicle, vehicle2);
-        //}
-
-        /*public void GetTheStudentThatIsClosestToTheShool()
+        
+        [TestMethod]
+        public void SetOid()
         {
-            SystemData.GetInstance.Reset();
+            var vehicle = new Vehicle();
+            var expectedOid = 10;
+            vehicle.VehicleOID = expectedOid;
+            Assert.AreEqual(vehicle.VehicleOID, expectedOid);
+        }
 
-            Student studentOne = new Student();
-            studentOne.Document = "1234567-1";
-            studentOne.Name = "John";
-            studentOne.Location = new Location(1.00000, 1.000000);
+        [TestMethod]
+        public void ToString()
+        {
+            var vehicle = new Vehicle();
+            var expectedToString = "AAA0000";
+            Assert.AreEqual(expectedToString, vehicle.ToString());
+        }
 
-            Student studentTwo = new Student();
-            studentTwo.Document = "1234567-2";
-            studentTwo.Name = "George";
-            studentTwo.Location = new Location(2.00000, 2.000000);
+        [TestMethod]
+        public void GetRegistration()
+        {
+            var vehicle = new Vehicle();
+            var expectedRegistration = "AAA0000";
+            Assert.AreEqual(expectedRegistration, vehicle.GetRegistration());
+        }
 
-            Student studentThree = new Student();
-            studentThree.Document = "1234567-3";
-            studentThree.Name = "Paul";
-            studentThree.Location = new Location(3.00000, 3.000000);
-
-            Student studentFour = new Student();
-            studentFour.Document = "1234567-4";
-            studentFour.Name = "Ringo";
-            studentFour.Location = new Location(20.00000, 20.000000);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentOne);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentTwo);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentThree);
-            ClassFactory.GetOrCreate<StudentLogic>().AddStudent(studentFour);
-            var studentsToAssignToVehicles = SystemData.GetInstance.GetStudentsToAssignToVehicles()
-            while (!IsEmpty(studentsToAssignToVehicles))
-            {
-                var nextStudentToAssign = studentsToAssignToVehicles.Head();
-                Assert.AreEqual(studentOne, nextStudentToAssign);
-                studentsToAssignToVehicles.Dequeue();
-            }
-        }*/
+        [TestMethod]
+        public void GetFullToString()
+        {
+            var vehicle = new Vehicle();
+            var expectedToString = "AAA0000 - Capacity: 1 - Kms/Ltr: 1";
+            Assert.AreEqual(expectedToString, vehicle.GetFullToString());
+        }
     }
 }

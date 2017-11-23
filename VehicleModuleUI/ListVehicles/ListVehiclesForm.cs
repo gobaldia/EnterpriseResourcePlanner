@@ -1,7 +1,5 @@
 ﻿using CoreEntities.Exceptions;
-using CoreLogic;
 using CoreLogic.Interfaces;
-using FrameworkCommon;
 using ProviderManager;
 using System;
 using System.Collections.Generic;

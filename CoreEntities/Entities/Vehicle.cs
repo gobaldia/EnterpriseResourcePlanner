@@ -63,7 +63,7 @@ namespace CoreEntities.Entities
             return string.Format("{0} - Capacity: {1} - Kms/Ltr: {2}", GetRegistration(), GetCapacity(), GetFuelConsumption());
         }
 
-        private object GetFuelConsumption()
+        private int GetFuelConsumption()
         {
             return this.FuelConsumptionKmsPerLtr;
         }

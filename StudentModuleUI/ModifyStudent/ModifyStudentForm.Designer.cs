@@ -80,7 +80,7 @@
             this.radioButtonYesPickUp.Location = new System.Drawing.Point(45, 26);
             this.radioButtonYesPickUp.Name = "radioButtonYesPickUp";
             this.radioButtonYesPickUp.Size = new System.Drawing.Size(101, 36);
-            this.radioButtonYesPickUp.TabIndex = 55;
+            this.radioButtonYesPickUp.TabIndex = 6;
             this.radioButtonYesPickUp.Text = "Yes";
             this.radioButtonYesPickUp.UseVisualStyleBackColor = true;
             this.radioButtonYesPickUp.CheckedChanged += new System.EventHandler(this.radioButtonPickUp_CheckedChanged);
@@ -123,7 +123,7 @@
             this.textBoxLongitud.MaxLength = 11;
             this.textBoxLongitud.Name = "textBoxLongitud";
             this.textBoxLongitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLongitud.TabIndex = 7;
+            this.textBoxLongitud.TabIndex = 8;
             // 
             // textBoxLatitud
             // 
@@ -132,7 +132,7 @@
             this.textBoxLatitud.MaxLength = 10;
             this.textBoxLatitud.Name = "textBoxLatitud";
             this.textBoxLatitud.Size = new System.Drawing.Size(253, 38);
-            this.textBoxLatitud.TabIndex = 6;
+            this.textBoxLatitud.TabIndex = 7;
             // 
             // labelLocation
             // 
@@ -308,7 +308,7 @@
             this.buttonModifyStudent.Location = new System.Drawing.Point(1496, 1041);
             this.buttonModifyStudent.Name = "buttonModifyStudent";
             this.buttonModifyStudent.Size = new System.Drawing.Size(265, 60);
-            this.buttonModifyStudent.TabIndex = 73;
+            this.buttonModifyStudent.TabIndex = 9;
             this.buttonModifyStudent.Text = "Modify";
             this.buttonModifyStudent.UseVisualStyleBackColor = true;
             this.buttonModifyStudent.Click += new System.EventHandler(this.buttonModifyStudent_Click);
@@ -344,7 +344,7 @@
             0});
             this.numericUpDownFeeAmount.Name = "numericUpDownFeeAmount";
             this.numericUpDownFeeAmount.Size = new System.Drawing.Size(380, 38);
-            this.numericUpDownFeeAmount.TabIndex = 90;
+            this.numericUpDownFeeAmount.TabIndex = 5;
             this.toolTipFeeAmount.SetToolTip(this.numericUpDownFeeAmount, "New fee amount will apply only for upcoming months");
             // 
             // labelFeeAmount

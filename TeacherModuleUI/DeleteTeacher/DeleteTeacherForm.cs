@@ -1,6 +1,5 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
 using CoreLogic.Interfaces;
 using FrameworkCommon;
 using ProviderManager;

@@ -1,9 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using DataAccess;
-using FrameworkCommon;
-using CoreLogic;
 using FrameworkCommon.MethodParameters;
 using CoreEntities.Entities;
 using CoreEntities.Exceptions;
@@ -306,6 +303,17 @@ namespace UnitTesting
             Teacher modifiedTeacher = teacherOperations.GetTeacherByDocumentNumber("1234567-8");
 
             Assert.IsTrue(Utility.CompareLists(modifiedTeacher.GetSubjects(), input.NewSubjects));
+        }
+
+        [TestMethod]
+        public void ToString()
+        {
+            var teacher = new Teacher();
+            teacher.SetName("George");
+            teacher.SetLastName("Harrison");
+            teacher.Document = "1234567-8";
+            var expectedToString = "Full name: George Harrison, Document number: 1234567-8";
+            Assert.AreEqual(expectedToString, teacher.ToString());
         }
 
         #region Extra Methods

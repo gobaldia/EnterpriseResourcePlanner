@@ -1,8 +1,6 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
-using CoreLogic;
 using CoreLogic.Interfaces;
-using DataAccess;
 using FrameworkCommon;
 using FrameworkCommon.MethodParameters;
 using ProviderManager;

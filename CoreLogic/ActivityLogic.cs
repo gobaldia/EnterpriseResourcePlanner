@@ -1,19 +1,13 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic.Interfaces;
-using DataAccess;
 using DataContracts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoreLogic
 {
     public class ActivityLogic : IActivityLogic
     {
-        private List<Activity> systemActivities = SystemData.GetInstance.GetActivities();
         private IActivityPersistance persistanceProvider;
 
         public ActivityLogic(IActivityPersistance provider)

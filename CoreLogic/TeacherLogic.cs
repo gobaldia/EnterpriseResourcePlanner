@@ -1,7 +1,6 @@
 ﻿using CoreEntities.Entities;
 using CoreEntities.Exceptions;
 using CoreLogic.Interfaces;
-using DataAccess;
 using DataContracts;
 using FrameworkCommon.MethodParameters;
 using System;

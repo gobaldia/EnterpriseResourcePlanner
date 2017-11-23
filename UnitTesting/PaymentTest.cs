@@ -4,6 +4,7 @@ using DummyPersistance;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,27 +22,56 @@ namespace UnitTesting
         }
 
         [TestMethod]
-        public void GetStudentFees()
+        public void CreateFeeWithParameters()
         {
             try
             {
-                IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
-                IPaymentLogic paymentOperations = DummyProvider.GetInstance.GetPaymentOperations();
-
-                var newStudent = Utility.CreateRandomStudent();
-                newStudent.Fees = Utility.GenerateYearFees();
-                newStudent.StudentNumber = 1;
-
-                studentOperations.AddStudent(newStudent);
-
-                List<Fee> studentFees = paymentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
-                Assert.IsNotNull(studentFees);
-                Assert.AreEqual(studentFees.Count, 12);
+                Fee aFee = new Fee(50M, DateTime.Now);
+                Assert.IsTrue(true);
             }
             catch (Exception ex)
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void FeeToString()
+        {
+            Fee aFee = new Fee();
+            var feeAmount = 15M;
+            var feeDate = new DateTime(2017,11,15);
+            var feeIsPaid = false;
+
+            aFee.Amount = feeAmount;
+            aFee.Date = feeDate;
+            aFee.IsPaid = feeIsPaid;
+
+            DateTimeFormatInfo dateFormatInfo = new CultureInfo("en-US", false).DateTimeFormat;
+            string monthName = dateFormatInfo.GetMonthName(feeDate.Month);
+            string isTheFeePaid = feeIsPaid ? "Yes" : "No";
+
+            string expectedString = string.Format("Date: {0}/{1} -- Amount: $ {2} -- Is paid: {3}", monthName, aFee.Date.Year, aFee.Amount, isTheFeePaid);
+            string actualString = aFee.ToString();
+            
+            Assert.AreEqual(actualString, expectedString);
+        }
+
+        [TestMethod]
+        public void GetStudentFees()
+        {
+            IStudentLogic studentOperations = DummyProvider.GetInstance.GetStudentOperations();
+            IPaymentLogic paymentOperations = DummyProvider.GetInstance.GetPaymentOperations();
+
+            var newStudent = Utility.CreateRandomStudent();
+            newStudent.Fees = Utility.GenerateYearFees();
+            newStudent.StudentNumber = 1;
+
+            studentOperations.AddStudent(newStudent);
+
+            List<Fee> studentFees = paymentOperations.GetCurrentYearFeesByStudentNumber(newStudent.StudentNumber);
+            Assert.IsNotNull(studentFees);
+            Assert.AreEqual(studentFees.Count, 12);
         }
         
         [TestMethod]
