@@ -79,7 +79,6 @@ namespace UnitTesting
             IPaymentLogic paymentOperations = DummyProvider.GetInstance.GetPaymentOperations();
             IActivityLogic activityOperations = DummyProvider.GetInstance.GetActivityOperations();
 
-
             var newStudent = Utility.CreateRandomStudent();
             newStudent.Fees = Utility.GenerateYearFees();
             newStudent.StudentNumber = 1;
@@ -90,8 +89,9 @@ namespace UnitTesting
             var activityTwo = new Activity("Karate", new DateTime(2017, 10, 22), 150);
             activityOperations.AddActivity(activityOne);
             activityOperations.AddActivity(activityTwo);
-            
-            paymentOperations.PayAndAddStudentActivities(activitiesToBePaid, student);
+
+            List<Activity> activitiesToBePaid = activityOperations.GetActivities();
+            paymentOperations.PayAndAddStudentActivities(activitiesToBePaid, newStudent);
 
             List<Activity> studentActivities = newStudent.Activities;
             Assert.IsNull(studentActivities);// Si no se agregaron
